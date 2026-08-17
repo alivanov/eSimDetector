@@ -12,6 +12,16 @@ import {
   buildAliasIndex,
   lookupAlias,
   lookupModelCode,
+  rejectCandidate,
+  computeBrandSimilarity,
+  DEFAULT_SCORING_WEIGHTS,
+  scoreCandidate,
+  buildComparableQueryText,
+  rankCandidates,
+  DEFAULT_DECISION_THRESHOLDS,
+  decide,
+  buildMatchIndex,
+  matchQuery,
 } from './index';
 
 function buildDevice(overrides: Partial<MatcherDevice> = {}): MatcherDevice {
@@ -64,5 +74,86 @@ describe('index — публичная поверхность пакета fuzzy
     };
 
     expect(slots.modifiers).toEqual([]);
+  });
+
+  it('экспортирует жёсткие ограничения (constraints.ts)', () => {
+    const device = buildDevice();
+    const slots: QuerySlots = {
+      brand: 'apple',
+      family: 'iphone',
+      generation: 15,
+      modifiers: ['pro'],
+      attributes: {},
+      unparsed: [],
+    };
+
+    expect(rejectCandidate(slots, device)).toBeNull();
+    expect(computeBrandSimilarity(slots, device)).toBeGreaterThan(0.9);
+  });
+
+  it('экспортирует оценку кандидата (scoring.ts)', () => {
+    const device = buildDevice();
+    const slots: QuerySlots = {
+      brand: 'apple',
+      family: 'iphone',
+      generation: 15,
+      modifiers: ['pro'],
+      attributes: {},
+      unparsed: [],
+    };
+
+    expect(buildComparableQueryText(slots)).toBe('apple iphone');
+    const scored = scoreCandidate(slots, device, DEFAULT_SCORING_WEIGHTS);
+    expect(scored.device).toEqual(device);
+    expect(scored.score).toBeGreaterThan(0);
+  });
+
+  it('экспортирует ранжирование кандидатов (ranking.ts)', () => {
+    const device = buildDevice();
+    const slots: QuerySlots = {
+      brand: 'apple',
+      family: 'iphone',
+      generation: 15,
+      modifiers: ['pro'],
+      attributes: {},
+      unparsed: [],
+    };
+    const scored = scoreCandidate(slots, device);
+
+    expect(rankCandidates([scored])).toEqual([scored]);
+  });
+
+  it('экспортирует правило принятия решения (decision.ts)', () => {
+    const device = buildDevice();
+    const slots: QuerySlots = {
+      brand: 'apple',
+      family: 'iphone',
+      generation: 15,
+      modifiers: ['pro'],
+      attributes: {},
+      unparsed: [],
+    };
+    const scored = scoreCandidate(slots, device);
+
+    const decision = decide([scored], DEFAULT_DECISION_THRESHOLDS);
+    expect(decision.status).toBe('determined');
+  });
+
+  it('экспортирует полный конвейер сопоставления (match.ts)', () => {
+    const device = buildDevice();
+    const index = buildMatchIndex([device]);
+    const slots: QuerySlots = {
+      brand: 'apple',
+      family: 'iphone',
+      generation: 15,
+      modifiers: ['pro'],
+      attributes: {},
+      unparsed: [],
+    };
+
+    const result = matchQuery(slots, index, { queryText: 'iphone 15 pro' });
+
+    expect(result.status).toBe('determined');
+    expect(result.candidates[0]?.device.id).toBe(device.id);
   });
 });

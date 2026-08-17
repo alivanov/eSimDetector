@@ -16,3 +16,39 @@ export {
 
 export type { AliasIndex, AliasCollision, ModelCodeCollision } from './exact-index';
 export { buildAliasIndex, lookupAlias, lookupModelCode } from './exact-index';
+
+export type {
+  ConstraintRejectionCode,
+  ConstraintRejection,
+  ConstraintOptions,
+} from './constraints';
+export { rejectCandidate, computeBrandSimilarity } from './constraints';
+
+export type {
+  ScoringWeights,
+  MatchScoreBreakdown,
+  ScoredCandidate,
+  ScoreCandidateOptions,
+} from './scoring';
+export { DEFAULT_SCORING_WEIGHTS, scoreCandidate, buildComparableQueryText } from './scoring';
+
+export { rankCandidates } from './ranking';
+
+export type {
+  DecisionStatus,
+  DecisionReasonCode,
+  DecisionThresholds,
+  DecisionOptions,
+  Decision,
+} from './decision';
+export { DEFAULT_DECISION_THRESHOLDS, decide } from './decision';
+
+export type {
+  RetrievalReasonCode,
+  MatchReasonCode,
+  MatchIndex,
+  RejectedCandidate,
+  MatchDecision,
+  MatchOptions,
+} from './match';
+export { buildMatchIndex, matchQuery } from './match';
