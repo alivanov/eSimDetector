@@ -3,7 +3,7 @@
 # рабочий каталог монорепозитория. Разделение на слои для кэша сборки и
 # отсечение dev-зависимостей в рантайм-образе — задача одного из следующих этапов.
 
-FROM node:22-alpine AS build
+FROM node:24-alpine AS build
 RUN corepack enable
 WORKDIR /workspace
 
@@ -11,7 +11,7 @@ COPY . .
 RUN pnpm install --frozen-lockfile
 RUN pnpm --filter @esim-detector/api build
 
-FROM node:22-alpine AS runtime
+FROM node:24-alpine AS runtime
 RUN corepack enable
 ENV NODE_ENV=production
 WORKDIR /workspace

@@ -11,19 +11,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Получение кода
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Установка pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
 
       - name: Установка Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: 24
           cache: 'pnpm'
 
       - name: Кэш бинарных файлов mongodb-memory-server
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           # mongodb-memory-server 11.x по умолчанию (PREFER_GLOBAL_PATH=true) скачивает
           # бинарник в "~/.cache/mongodb-binaries", а не в "~/.cache/mongodb-memory-server" —
@@ -52,7 +52,7 @@ jobs:
     needs: lint-and-test
     steps:
       - name: Получение кода
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Сборка образа api
         run: docker build -f apps/api/Dockerfile -t esim-detector-api:ci .
