@@ -1,0 +1,6250 @@
+[
+  {
+    "id": "canonical-001",
+    "query": "iPhone 15 Pro Max",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-15-pro-max",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 15,
+      "modifiers": [
+        "pro",
+        "max"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-002",
+    "query": "iPhone 15 Pro",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-15-pro",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 15,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-003",
+    "query": "iPhone 15",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-15",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 15,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-004",
+    "query": "iPhone 14 Pro Max",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-14-pro-max",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 14,
+      "modifiers": [
+        "pro",
+        "max"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-005",
+    "query": "iPhone 14",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-14",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 14,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-006",
+    "query": "iPhone 13 Pro Max",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-13-pro-max",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 13,
+      "modifiers": [
+        "pro",
+        "max"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-007",
+    "query": "iPhone 13 mini",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-13-mini",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 13,
+      "modifiers": [
+        "mini"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-008",
+    "query": "iPhone 12 Pro",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-12-pro",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 12,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-009",
+    "query": "iPhone SE 2022",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-se-2022",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "se",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {
+        "year": 2022
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-010",
+    "query": "iPhone XR",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-xr",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "xr",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-011",
+    "query": "Samsung Galaxy S24 Ultra",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s24-ultra",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-s",
+      "generation": 24,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-012",
+    "query": "Samsung Galaxy S23 Plus",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s23-plus",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-s",
+      "generation": 23,
+      "modifiers": [
+        "plus"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-013",
+    "query": "Samsung Galaxy Z Fold5",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-z-fold5",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-z",
+      "generation": 5,
+      "modifiers": [
+        "fold"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-014",
+    "query": "Samsung Galaxy Z Flip5",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-z-flip5",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-z",
+      "generation": 5,
+      "modifiers": [
+        "flip"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-015",
+    "query": "Samsung Galaxy A54",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-a54",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy",
+      "generation": 54,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-016",
+    "query": "Samsung Galaxy Note 20 Ultra",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-note-20-ultra",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-note",
+      "generation": 20,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-017",
+    "query": "Xiaomi Redmi Note 12 Pro",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-12-pro",
+    "expectedSlots": {
+      "brand": "xiaomi",
+      "family": "redmi-note",
+      "generation": 12,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-018",
+    "query": "Xiaomi Redmi Note 13 Pro Plus",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-13-pro-plus",
+    "expectedSlots": {
+      "brand": "xiaomi",
+      "family": "redmi-note",
+      "generation": 13,
+      "modifiers": [
+        "pro",
+        "plus"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-019",
+    "query": "Xiaomi Poco X5 Pro",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-poco-x5-pro",
+    "expectedSlots": {
+      "brand": "xiaomi",
+      "family": "poco-x",
+      "generation": 5,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-020",
+    "query": "Google Pixel 8 Pro",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "google-pixel-8-pro",
+    "expectedSlots": {
+      "brand": "google",
+      "family": "pixel",
+      "generation": 8,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-021",
+    "query": "Google Pixel 8",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "google-pixel-8",
+    "expectedSlots": {
+      "brand": "google",
+      "family": "pixel",
+      "generation": 8,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-022",
+    "query": "Google Pixel 7a",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "google-pixel-7a",
+    "expectedSlots": {
+      "brand": "google",
+      "family": "pixel",
+      "generation": 7,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-023",
+    "query": "Honor 90",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "honor-90",
+    "expectedSlots": {
+      "brand": "honor",
+      "family": "honor",
+      "generation": 90,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-024",
+    "query": "Honor Magic 5 Pro",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "honor-magic-5-pro",
+    "expectedSlots": {
+      "brand": "honor",
+      "family": "magic",
+      "generation": 5,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-025",
+    "query": "Huawei P60 Pro",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "huawei-p60-pro",
+    "expectedSlots": {
+      "brand": "huawei",
+      "family": "p",
+      "generation": 60,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-026",
+    "query": "Huawei Nova 11",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "huawei-nova-11",
+    "expectedSlots": {
+      "brand": "huawei",
+      "family": "nova",
+      "generation": 11,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-027",
+    "query": "OnePlus 11",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oneplus-11",
+    "expectedSlots": {
+      "brand": "oneplus",
+      "family": "oneplus",
+      "generation": 11,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-028",
+    "query": "realme 11 Pro",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "realme-11-pro",
+    "expectedSlots": {
+      "brand": "realme",
+      "family": "realme",
+      "generation": 11,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-029",
+    "query": "Oppo Reno 10 Pro",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oppo-reno-10-pro",
+    "expectedSlots": {
+      "brand": "oppo",
+      "family": "reno",
+      "generation": 10,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-030",
+    "query": "vivo Y36",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "vivo-y36",
+    "expectedSlots": {
+      "brand": "vivo",
+      "family": "y",
+      "generation": 36,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-031",
+    "query": "iPhone 12",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-12",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 12,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-032",
+    "query": "Samsung Galaxy S22 Ultra",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s22-ultra",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-s",
+      "generation": 22,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "canonical-033",
+    "query": "Xiaomi Redmi 12",
+    "category": "canonical",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-12",
+    "expectedSlots": {
+      "brand": "xiaomi",
+      "family": "redmi",
+      "generation": 12,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-001",
+    "query": "IPHONE15PRO",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-15-pro",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 15,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-002",
+    "query": "iphone-15-pro",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-15-pro",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 15,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-003",
+    "query": "iphone_15_pro",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-15-pro",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 15,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-004",
+    "query": "IPhOnE 15 PRO",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-15-pro",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 15,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-005",
+    "query": "iPhone.15.Pro",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-15-pro",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 15,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-006",
+    "query": "IPHONE 14",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-14",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 14,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-007",
+    "query": "iphone-14-pro-max",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-14-pro-max",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 14,
+      "modifiers": [
+        "pro",
+        "max"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-008",
+    "query": "SAMSUNG GALAXY S24 ULTRA",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s24-ultra",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-s",
+      "generation": 24,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-009",
+    "query": "samsung-galaxy-s24-ultra",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s24-ultra",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-s",
+      "generation": 24,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-010",
+    "query": "Samsung_Galaxy_S23",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s23",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-s",
+      "generation": 23,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-011",
+    "query": "GALAXY.S23.FE",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s23-fe",
+    "expectedSlots": {
+      "brand": "galaxy",
+      "family": "s",
+      "generation": 23,
+      "modifiers": [
+        "fe"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-012",
+    "query": "galaxy s23 ultra",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s23-ultra",
+    "expectedSlots": {
+      "brand": "galaxy",
+      "family": "s",
+      "generation": 23,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-013",
+    "query": "XIAOMI REDMI NOTE 12 PRO",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-12-pro",
+    "expectedSlots": {
+      "brand": "xiaomi",
+      "family": "redmi-note",
+      "generation": 12,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-014",
+    "query": "redmi-note-12-pro",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-12-pro",
+    "expectedSlots": {
+      "brand": "redmi",
+      "family": "note",
+      "generation": 12,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-015",
+    "query": "Redmi_Note_12_Pro",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-12-pro",
+    "expectedSlots": {
+      "brand": "redmi",
+      "family": "note",
+      "generation": 12,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-016",
+    "query": "GOOGLE PIXEL 8 PRO",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "google-pixel-8-pro",
+    "expectedSlots": {
+      "brand": "google",
+      "family": "pixel",
+      "generation": 8,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-017",
+    "query": "google.pixel.8",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "google-pixel-8",
+    "expectedSlots": {
+      "brand": "google",
+      "family": "pixel",
+      "generation": 8,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-018",
+    "query": "HONOR90",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "honor-90",
+    "expectedSlots": {
+      "brand": "honor",
+      "family": "honor",
+      "generation": 90,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-019",
+    "query": "honor-90",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "honor-90",
+    "expectedSlots": {
+      "brand": "honor",
+      "family": "honor",
+      "generation": 90,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-020",
+    "query": "HUAWEI-P60-PRO",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "huawei-p60-pro",
+    "expectedSlots": {
+      "brand": "huawei",
+      "family": "p",
+      "generation": 60,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-021",
+    "query": "huawei_nova_11",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "huawei-nova-11",
+    "expectedSlots": {
+      "brand": "huawei",
+      "family": "nova",
+      "generation": 11,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-022",
+    "query": "ONEPLUS11",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oneplus-11",
+    "expectedSlots": {
+      "brand": "oneplus",
+      "family": "oneplus",
+      "generation": 11,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-023",
+    "query": "OnePlus_11",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oneplus-11",
+    "expectedSlots": {
+      "brand": "oneplus",
+      "family": "oneplus",
+      "generation": 11,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-024",
+    "query": "REALME 11 PRO",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "realme-11-pro",
+    "expectedSlots": {
+      "brand": "realme",
+      "family": "realme",
+      "generation": 11,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-025",
+    "query": "realme.11.pro",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "realme-11-pro",
+    "expectedSlots": {
+      "brand": "realme",
+      "family": "realme",
+      "generation": 11,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-026",
+    "query": "OPPO RENO 10 PRO",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oppo-reno-10-pro",
+    "expectedSlots": {
+      "brand": "oppo",
+      "family": "reno",
+      "generation": 10,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-027",
+    "query": "oppo-reno-10-pro",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oppo-reno-10-pro",
+    "expectedSlots": {
+      "brand": "oppo",
+      "family": "reno",
+      "generation": 10,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-028",
+    "query": "VIVO Y36",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "vivo-y36",
+    "expectedSlots": {
+      "brand": "vivo",
+      "family": "y",
+      "generation": 36,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-029",
+    "query": "vivo_y36",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "vivo-y36",
+    "expectedSlots": {
+      "brand": "vivo",
+      "family": "y",
+      "generation": 36,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-030",
+    "query": "IPHONE 13 MINI",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-13-mini",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 13,
+      "modifiers": [
+        "mini"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-031",
+    "query": "IPHONE 12",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-12",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 12,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-032",
+    "query": "samsung.galaxy.s22.ultra",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s22-ultra",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-s",
+      "generation": 22,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "case-and-separators-033",
+    "query": "XIAOMI_REDMI_12",
+    "category": "case-and-separators",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-12",
+    "expectedSlots": {
+      "brand": "xiaomi",
+      "family": "redmi",
+      "generation": 12,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-001",
+    "query": "айфон 15 про",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-15-pro",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 15,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-002",
+    "query": "айфон 15 про макс",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-15-pro-max",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 15,
+      "modifiers": [
+        "pro",
+        "max"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-003",
+    "query": "айфон 14",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-14",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 14,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-004",
+    "query": "айфон 13 мини",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-13-mini",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 13,
+      "modifiers": [
+        "mini"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-005",
+    "query": "айфон 12",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-12",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 12,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-006",
+    "query": "эпл айфон 15",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-15",
+    "expectedSlots": {
+      "brand": "apple",
+      "family": "iphone",
+      "generation": 15,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-007",
+    "query": "самсунг галакси с24 ультра",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s24-ultra",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-s",
+      "generation": 24,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-008",
+    "query": "самсунг галакси с23 ультра",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s23-ultra",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-s",
+      "generation": 23,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-009",
+    "query": "самсунг галакси с23 плюс",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s23-plus",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-s",
+      "generation": 23,
+      "modifiers": [
+        "plus"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-010",
+    "query": "самсунг галакси а54",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-a54",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy",
+      "generation": 54,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-011",
+    "query": "самсунг галакси зет флип 5",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-z-flip5",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-zet",
+      "generation": 5,
+      "modifiers": [
+        "flip"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-012",
+    "query": "самсунг галакси зет фолд 5",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-z-fold5",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-zet",
+      "generation": 5,
+      "modifiers": [
+        "fold"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-013",
+    "query": "редми нот 12 про",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-12-pro",
+    "expectedSlots": {
+      "brand": "redmi",
+      "family": "note",
+      "generation": 12,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-014",
+    "query": "редми нот 13 про плюс",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-13-pro-plus",
+    "expectedSlots": {
+      "brand": "redmi",
+      "family": "note",
+      "generation": 13,
+      "modifiers": [
+        "pro",
+        "plus"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-015",
+    "query": "сяоми 13",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-13",
+    "expectedSlots": {
+      "brand": "xiaomi",
+      "family": "xiaomi",
+      "generation": 13,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-016",
+    "query": "хонор 90",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "honor-90",
+    "expectedSlots": {
+      "brand": "honor",
+      "family": "honor",
+      "generation": 90,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-017",
+    "query": "хуавей нова 11",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "huawei-nova-11",
+    "expectedSlots": {
+      "brand": "huawei",
+      "family": "nova",
+      "generation": 11,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-018",
+    "query": "хуавей п60 про",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "huawei-p60-pro",
+    "expectedSlots": {
+      "brand": "huawei",
+      "family": "p",
+      "generation": 60,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-019",
+    "query": "пиксель 8 про",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "google-pixel-8-pro",
+    "expectedSlots": {
+      "brand": "pixel",
+      "family": "pixel",
+      "generation": 8,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-020",
+    "query": "пиксель 7 а",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "google-pixel-7a",
+    "expectedSlots": {
+      "brand": "pixel",
+      "family": "pixel",
+      "generation": 7,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-021",
+    "query": "ванплюс 11",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oneplus-11",
+    "expectedSlots": {
+      "brand": "oneplus",
+      "family": "oneplus",
+      "generation": 11,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-022",
+    "query": "риалми 11 про",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "realme-11-pro",
+    "expectedSlots": {
+      "brand": "realme",
+      "family": "realme",
+      "generation": 11,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-023",
+    "query": "оппо рино 10 про",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oppo-reno-10-pro",
+    "expectedSlots": {
+      "brand": "oppo",
+      "family": "rino",
+      "generation": 10,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-024",
+    "query": "виво y36",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "vivo-y36",
+    "expectedSlots": {
+      "brand": "vivo",
+      "family": "y",
+      "generation": 36,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-025",
+    "query": "гугл пиксель 8",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "google-pixel-8",
+    "expectedSlots": {
+      "brand": "google",
+      "family": "pixel",
+      "generation": 8,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-026",
+    "query": "эппл айфон 13 про макс",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-13-pro-max",
+    "expectedSlots": {
+      "brand": "apple",
+      "family": "iphone",
+      "generation": 13,
+      "modifiers": [
+        "pro",
+        "max"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-027",
+    "query": "самсунг note 20 ультра",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-note-20-ultra",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "note",
+      "generation": 20,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-028",
+    "query": "самсунг галакси с24",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s24",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-s",
+      "generation": 24,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-029",
+    "query": "поко x5 про",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-poco-x5-pro",
+    "expectedSlots": {
+      "brand": "poco",
+      "family": "x",
+      "generation": 5,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-030",
+    "query": "самсунг галакси зет флип 4",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-z-flip4",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-zet",
+      "generation": 4,
+      "modifiers": [
+        "flip"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-031",
+    "query": "самсунг галакси с22 ультра",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s22-ultra",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-s",
+      "generation": 22,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "cyrillic-032",
+    "query": "сяоми редми 12",
+    "category": "cyrillic",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-12",
+    "expectedSlots": {
+      "brand": "xiaomi",
+      "family": "redmi",
+      "generation": 12,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-001",
+    "query": "s24u",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s24-ultra",
+    "expectedSlots": {
+      "brand": "s",
+      "family": "u",
+      "generation": 24,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-002",
+    "query": "s23u",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s23-ultra",
+    "expectedSlots": {
+      "brand": "s",
+      "family": "u",
+      "generation": 23,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-003",
+    "query": "s22u",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s22-ultra",
+    "expectedSlots": {
+      "brand": "s",
+      "family": "u",
+      "generation": 22,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-004",
+    "query": "s21u",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s21-ultra",
+    "expectedSlots": {
+      "brand": "s",
+      "family": "u",
+      "generation": 21,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-005",
+    "query": "s25u",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s25-ultra",
+    "expectedSlots": {
+      "brand": "s",
+      "family": "u",
+      "generation": 25,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-006",
+    "query": "ipx",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-x",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "x",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-007",
+    "query": "ipxs",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-xs",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "xs",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-008",
+    "query": "13 pm",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-13-pro-max",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": 13,
+      "modifiers": [
+        "pro",
+        "max"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-009",
+    "query": "14pm",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-14-pro-max",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": 14,
+      "modifiers": [
+        "pro",
+        "max"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-010",
+    "query": "promax 15",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-15-pro-max",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": 15,
+      "modifiers": [
+        "pro",
+        "max"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-011",
+    "query": "нот 12",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-12",
+    "expectedSlots": {
+      "brand": "note",
+      "family": "note",
+      "generation": 12,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-012",
+    "query": "нот 13 про",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-13-pro",
+    "expectedSlots": {
+      "brand": "note",
+      "family": "note",
+      "generation": 13,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-013",
+    "query": "redmi note12pro",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-12-pro",
+    "expectedSlots": {
+      "brand": "redmi",
+      "family": "note",
+      "generation": 12,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-014",
+    "query": "z flip5",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-z-flip5",
+    "expectedSlots": {
+      "brand": "z",
+      "family": "z",
+      "generation": 5,
+      "modifiers": [
+        "flip"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-015",
+    "query": "z fold5",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-z-fold5",
+    "expectedSlots": {
+      "brand": "z",
+      "family": "z",
+      "generation": 5,
+      "modifiers": [
+        "fold"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-016",
+    "query": "note 20 ultra",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-note-20-ultra",
+    "expectedSlots": {
+      "brand": "note",
+      "family": "note",
+      "generation": 20,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-017",
+    "query": "poco x5 pro",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-poco-x5-pro",
+    "expectedSlots": {
+      "brand": "poco",
+      "family": "x",
+      "generation": 5,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-018",
+    "query": "12 pro max",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-12-pro-max",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": 12,
+      "modifiers": [
+        "pro",
+        "max"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-019",
+    "query": "13 pro max",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-13-pro-max",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": 13,
+      "modifiers": [
+        "pro",
+        "max"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-020",
+    "query": "note 12 pro plus",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-12-pro-plus",
+    "expectedSlots": {
+      "brand": "note",
+      "family": "note",
+      "generation": 12,
+      "modifiers": [
+        "pro",
+        "plus"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-021",
+    "query": "s23 fe",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s23-fe",
+    "expectedSlots": {
+      "brand": "s",
+      "family": "s",
+      "generation": 23,
+      "modifiers": [
+        "fe"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-022",
+    "query": "galaxy s24",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s24",
+    "expectedSlots": {
+      "brand": "galaxy",
+      "family": "s",
+      "generation": 24,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-023",
+    "query": "a54",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-a54",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": 54,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-024",
+    "query": "y36",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "vivo-y36",
+    "expectedSlots": {
+      "brand": "y",
+      "family": "y",
+      "generation": 36,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-025",
+    "query": "p60 pro",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "huawei-p60-pro",
+    "expectedSlots": {
+      "brand": "p",
+      "family": "p",
+      "generation": 60,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-026",
+    "query": "nova 11",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "huawei-nova-11",
+    "expectedSlots": {
+      "brand": "nova",
+      "family": "nova",
+      "generation": 11,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-027",
+    "query": "pixel8pro",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "google-pixel-8-pro",
+    "expectedSlots": {
+      "brand": "pixel",
+      "family": "pixel",
+      "generation": 8,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-028",
+    "query": "reno10pro",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oppo-reno-10-pro",
+    "expectedSlots": {
+      "brand": "reno",
+      "family": "reno",
+      "generation": 10,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-029",
+    "query": "xr",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-xr",
+    "expectedSlots": {
+      "brand": "xr",
+      "family": "xr",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-030",
+    "query": "8 plus",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-8-plus",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": 8,
+      "modifiers": [
+        "plus"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-031",
+    "query": "13pm",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-13-pro-max",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": 13,
+      "modifiers": [
+        "pro",
+        "max"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-032",
+    "query": "iphonex",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-x",
+    "expectedSlots": {
+      "brand": "iphonex",
+      "family": "iphonex",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "abbreviations-033",
+    "query": "s24ultra",
+    "category": "abbreviations",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s24-ultra",
+    "expectedSlots": {
+      "brand": "s",
+      "family": "s",
+      "generation": 24,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-001",
+    "query": "iphne 15",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-15",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 15,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-002",
+    "query": "iphon 13 pro",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-13-pro",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 13,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-003",
+    "query": "ipone 14",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-14",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 14,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-004",
+    "query": "самсунк галакси с23 ультра",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s23-ultra",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-s",
+      "generation": 23,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-005",
+    "query": "xiomi 13",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-13",
+    "expectedSlots": {
+      "brand": "xiaomi",
+      "family": "xiaomi",
+      "generation": 13,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-006",
+    "query": "xiaomy redmi note 12 pro",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-12-pro",
+    "expectedSlots": {
+      "brand": "xiaomi",
+      "family": "redmi-note",
+      "generation": 12,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-007",
+    "query": "huawey nova 11",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "huawei-nova-11",
+    "expectedSlots": {
+      "brand": "huawei",
+      "family": "nova",
+      "generation": 11,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-008",
+    "query": "huaway p60 pro",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "huawei-p60-pro",
+    "expectedSlots": {
+      "brand": "huawei",
+      "family": "p",
+      "generation": 60,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-009",
+    "query": "samsng galaxy s24",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s24",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-s",
+      "generation": 24,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-010",
+    "query": "samsumg galaxy s24 ultra",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s24-ultra",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-s",
+      "generation": 24,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-011",
+    "query": "iphione 13",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-13",
+    "expectedSlots": {
+      "brand": "iphione",
+      "family": "iphione",
+      "generation": 13,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-012",
+    "query": "samsung glaxy s23 ultra",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s23-ultra",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "glaxy-s",
+      "generation": 23,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-013",
+    "query": "xiaomi redmi noet 12 pro",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-12-pro",
+    "expectedSlots": {
+      "brand": "xiaomi",
+      "family": "redmi-noet",
+      "generation": 12,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-014",
+    "query": "honr 90",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "honor-90",
+    "expectedSlots": {
+      "brand": "honr",
+      "family": "honr",
+      "generation": 90,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-015",
+    "query": "gogle pixel 8",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "google-pixel-8",
+    "expectedSlots": {
+      "brand": "gogle",
+      "family": "pixel",
+      "generation": 8,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-016",
+    "query": "reame 11 pro",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "realme-11-pro",
+    "expectedSlots": {
+      "brand": "reame",
+      "family": "reame",
+      "generation": 11,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-017",
+    "query": "opoo reno 10 pro",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oppo-reno-10-pro",
+    "expectedSlots": {
+      "brand": "opoo",
+      "family": "reno",
+      "generation": 10,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-018",
+    "query": "oneplu 11",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oneplus-11",
+    "expectedSlots": {
+      "brand": "oneplu",
+      "family": "oneplu",
+      "generation": 11,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-019",
+    "query": "vivi y36",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "vivo-y36",
+    "expectedSlots": {
+      "brand": "vivi",
+      "family": "y",
+      "generation": 36,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-020",
+    "query": "huawei nvoa 11",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "huawei-nova-11",
+    "expectedSlots": {
+      "brand": "huawei",
+      "family": "nvoa",
+      "generation": 11,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-021",
+    "query": "xiaomi 13 ultr",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-13-ultra",
+    "expectedSlots": {
+      "brand": "xiaomi",
+      "family": "ultr",
+      "generation": 13,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-022",
+    "query": "iphone 15 pro amx",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-15-pro-max",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "amx",
+      "generation": 15,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-023",
+    "query": "galexy s24 ultra",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s24-ultra",
+    "expectedSlots": {
+      "brand": "galexy",
+      "family": "s",
+      "generation": 24,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-024",
+    "query": "pixle 7a",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "google-pixel-7a",
+    "expectedSlots": {
+      "brand": "pixle",
+      "family": "pixle",
+      "generation": 7,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-025",
+    "query": "poko x5 pro",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-poco-x5-pro",
+    "expectedSlots": {
+      "brand": "poko",
+      "family": "x",
+      "generation": 5,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-026",
+    "query": "honor magik 5 pro",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "honor-magic-5-pro",
+    "expectedSlots": {
+      "brand": "honor",
+      "family": "magik",
+      "generation": 5,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-027",
+    "query": "ihpone se 2022",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-se-2022",
+    "expectedSlots": {
+      "brand": "ihpone",
+      "family": "se",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {
+        "year": 2022
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-028",
+    "query": "samsung noet 20 ultra",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-note-20-ultra",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "noet",
+      "generation": 20,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-029",
+    "query": "huawei p60 por",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "huawei-p60-pro",
+    "expectedSlots": {
+      "brand": "huawei",
+      "family": "p-por",
+      "generation": 60,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-030",
+    "query": "oneplus 1l",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oneplus-11",
+    "expectedSlots": {
+      "brand": "oneplus",
+      "family": "oneplus",
+      "generation": 1,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": [
+        "1"
+      ]
+    }
+  },
+  {
+    "id": "typos-031",
+    "query": "vico y36",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "vivo-y36",
+    "expectedSlots": {
+      "brand": "vico",
+      "family": "y",
+      "generation": 36,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-032",
+    "query": "honor magic 5 rpo",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "honor-magic-5-pro",
+    "expectedSlots": {
+      "brand": "honor",
+      "family": "magic-rpo",
+      "generation": 5,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "typos-033",
+    "query": "gooogle pixel 7a",
+    "category": "typos",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "google-pixel-7a",
+    "expectedSlots": {
+      "brand": "gooogle",
+      "family": "pixel",
+      "generation": 7,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-001",
+    "query": "шзрщту 15 pro",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-15-pro",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 15,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-002",
+    "query": "шзрщту 13",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-13",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 13,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-003",
+    "query": "фззду iphone 14",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-14",
+    "expectedSlots": {
+      "brand": "apple",
+      "family": "iphone",
+      "generation": 14,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-004",
+    "query": "ыфьыгтп galaxy s23 ultra",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s23-ultra",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-s",
+      "generation": 23,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-005",
+    "query": "ыфьыгтп galaxy s24",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s24",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-s",
+      "generation": 24,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-006",
+    "query": "чшфщьш redmi note 12 pro",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-12-pro",
+    "expectedSlots": {
+      "brand": "xiaomi",
+      "family": "redmi-note",
+      "generation": 12,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-007",
+    "query": "чшфщьш 13",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-13",
+    "expectedSlots": {
+      "brand": "xiaomi",
+      "family": "xiaomi",
+      "generation": 13,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-008",
+    "query": "ргфцуш nova 11",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "huawei-nova-11",
+    "expectedSlots": {
+      "brand": "huawei",
+      "family": "nova",
+      "generation": 11,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-009",
+    "query": "ргфцуш p60 pro",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "huawei-p60-pro",
+    "expectedSlots": {
+      "brand": "huawei",
+      "family": "p",
+      "generation": 60,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-010",
+    "query": "рщтщк 90",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "honor-90",
+    "expectedSlots": {
+      "brand": "honor",
+      "family": "honor",
+      "generation": 90,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-011",
+    "query": "куфдьу 11 pro",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "realme-11-pro",
+    "expectedSlots": {
+      "brand": "realme",
+      "family": "realme",
+      "generation": 11,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-012",
+    "query": "зшчуд 8 pro",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "google-pixel-8-pro",
+    "expectedSlots": {
+      "brand": "pixel",
+      "family": "pixel",
+      "generation": 8,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-013",
+    "query": "пщщпду pixel 8",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "google-pixel-8",
+    "expectedSlots": {
+      "brand": "google",
+      "family": "pixel",
+      "generation": 8,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-014",
+    "query": "щтуздгы 11",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oneplus-11",
+    "expectedSlots": {
+      "brand": "oneplus",
+      "family": "oneplus",
+      "generation": 11,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-015",
+    "query": "щззщ reno 10 pro",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oppo-reno-10-pro",
+    "expectedSlots": {
+      "brand": "oppo",
+      "family": "reno",
+      "generation": 10,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-016",
+    "query": "мшмщ y36",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "vivo-y36",
+    "expectedSlots": {
+      "brand": "vivo",
+      "family": "y",
+      "generation": 36,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-017",
+    "query": "зщсщ x5 pro",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-poco-x5-pro",
+    "expectedSlots": {
+      "brand": "poco",
+      "family": "x",
+      "generation": 5,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-018",
+    "query": "iphone 13 зкщ",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-13-pro",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 13,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-019",
+    "query": "iphone 14 здгы",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-14-plus",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 14,
+      "modifiers": [
+        "plus"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-020",
+    "query": "galaxy s24 гдекф",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s24-ultra",
+    "expectedSlots": {
+      "brand": "galaxy",
+      "family": "s",
+      "generation": 24,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-021",
+    "query": "iphone 13 ьштш",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-13-mini",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 13,
+      "modifiers": [
+        "mini"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-022",
+    "query": "galaxy z ащдв 5",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-z-fold5",
+    "expectedSlots": {
+      "brand": "galaxy",
+      "family": "z",
+      "generation": 5,
+      "modifiers": [
+        "fold"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-023",
+    "query": "galaxy z адшз 5",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-z-flip5",
+    "expectedSlots": {
+      "brand": "galaxy",
+      "family": "z",
+      "generation": 5,
+      "modifiers": [
+        "flip"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-024",
+    "query": "redmi тщеу 12",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-12",
+    "expectedSlots": {
+      "brand": "redmi",
+      "family": "note",
+      "generation": 12,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-025",
+    "query": "самсунг пфдфчн s24",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s24",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-s",
+      "generation": 24,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-026",
+    "query": "кувьш note 12 pro",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-12-pro",
+    "expectedSlots": {
+      "brand": "redmi",
+      "family": "note",
+      "generation": 12,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-027",
+    "query": "чы",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-xs",
+    "expectedSlots": {
+      "brand": "xs",
+      "family": "xs",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-028",
+    "query": "ч",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-x",
+    "expectedSlots": {
+      "brand": "x",
+      "family": "x",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-029",
+    "query": "здгы 15",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-15-plus",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": 15,
+      "modifiers": [
+        "plus"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-030",
+    "query": "шзрщту se 2022",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-se-2022",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "se",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {
+        "year": 2022
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-031",
+    "query": "фззду iphone 15",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-15",
+    "expectedSlots": {
+      "brand": "apple",
+      "family": "iphone",
+      "generation": 15,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-032",
+    "query": "чшфщьш 13 ultra",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-13-ultra",
+    "expectedSlots": {
+      "brand": "xiaomi",
+      "family": "xiaomi",
+      "generation": 13,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-033",
+    "query": "ыфьыгтп note 20 ultra",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-note-20-ultra",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "note",
+      "generation": 20,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "wrong-layout-034",
+    "query": "iphone фшк",
+    "category": "wrong-layout",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-air",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": null,
+      "modifiers": [
+        "air"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-001",
+    "query": "SM-S928B",
+    "category": "model-codes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s24-ultra",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "SM-S928B",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-002",
+    "query": "SM-S921B",
+    "category": "model-codes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s24",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "SM-S921B",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-003",
+    "query": "SM-S926B",
+    "category": "model-codes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s24-plus",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "SM-S926B",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-004",
+    "query": "SM-S918B",
+    "category": "model-codes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s23-ultra",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "SM-S918B",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-005",
+    "query": "sm-s918b",
+    "category": "model-codes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s23-ultra",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "SM-S918B",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-006",
+    "query": "SM-S911B",
+    "category": "model-codes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s23",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "SM-S911B",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-007",
+    "query": "SM-F731B",
+    "category": "model-codes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-z-flip5",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "SM-F731B",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-008",
+    "query": "SM-F946B",
+    "category": "model-codes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-z-fold5",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "SM-F946B",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-009",
+    "query": "SM-A546B",
+    "category": "model-codes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-a54",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "SM-A546B",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-010",
+    "query": "SM-A346E",
+    "category": "model-codes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-a34",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "SM-A346E",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-011",
+    "query": "SM-N986B",
+    "category": "model-codes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-note-20-ultra",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "SM-N986B",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-012",
+    "query": "CPH2451",
+    "category": "model-codes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oppo-reno-10-pro",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "CPH2451",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-013",
+    "query": "CPH2469",
+    "category": "model-codes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oneplus-11",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "CPH2469",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-014",
+    "query": "CPH2185",
+    "category": "model-codes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "realme-11-pro",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "CPH2185",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-015",
+    "query": "CPH2173",
+    "category": "model-codes",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "CPH2173",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-016",
+    "query": "CPH2409",
+    "category": "model-codes",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "CPH2409",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-017",
+    "query": "CPH2477",
+    "category": "model-codes",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "CPH2477",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-018",
+    "query": "23090RA98G",
+    "category": "model-codes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-poco-x5-pro",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "23090RA98G",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-019",
+    "query": "2201116SG",
+    "category": "model-codes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-12-pro",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "2201116SG",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-020",
+    "query": "2205223SG",
+    "category": "model-codes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-13-pro",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "2205223SG",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-021",
+    "query": "2207132RG",
+    "category": "model-codes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-13",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "2207132RG",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-022",
+    "query": "2212345TG",
+    "category": "model-codes",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "2212345TG",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-023",
+    "query": "SM-X716B",
+    "category": "model-codes",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "SM-X716B",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-024",
+    "query": "SM-M336B",
+    "category": "model-codes",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "SM-M336B",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-025",
+    "query": "CPH2513",
+    "category": "model-codes",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "CPH2513",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-026",
+    "query": "2301118SG",
+    "category": "model-codes",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "2301118SG",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-027",
+    "query": "SM-A047F",
+    "category": "model-codes",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "SM-A047F",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-028",
+    "query": "SM-A536B",
+    "category": "model-codes",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "SM-A536B",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-029",
+    "query": "CPH2371",
+    "category": "model-codes",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "CPH2371",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-030",
+    "query": "CPH2333",
+    "category": "model-codes",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "CPH2333",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-031",
+    "query": "SM-S711B",
+    "category": "model-codes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s23-fe",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "SM-S711B",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-032",
+    "query": "CPH2525",
+    "category": "model-codes",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "CPH2525",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "model-codes-033",
+    "query": "2301118RG",
+    "category": "model-codes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-13",
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": "2301118RG",
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-001",
+    "query": "galaxy s23",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "galaxy",
+      "family": "s",
+      "generation": 23,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-002",
+    "query": "iphone",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-003",
+    "query": "redmi note",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "redmi",
+      "family": "note",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-004",
+    "query": "самсунг",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "samsung",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-005",
+    "query": "айфон",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-006",
+    "query": "samsung galaxy",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-007",
+    "query": "redmi note 12",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "redmi",
+      "family": "note",
+      "generation": 12,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-008",
+    "query": "хонор",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "honor",
+      "family": "honor",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-009",
+    "query": "пиксель",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "pixel",
+      "family": "pixel",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-010",
+    "query": "redmi",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "redmi",
+      "family": "redmi",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-011",
+    "query": "galaxy",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "galaxy",
+      "family": "galaxy",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-012",
+    "query": "xiaomi",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "xiaomi",
+      "family": "xiaomi",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-013",
+    "query": "honor",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "honor",
+      "family": "honor",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-014",
+    "query": "huawei",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "huawei",
+      "family": "huawei",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-015",
+    "query": "oppo",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "oppo",
+      "family": "oppo",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-016",
+    "query": "смартфон самсунг",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "samsung",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-017",
+    "query": "новый айфон",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-018",
+    "query": "самсунг галакси",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-019",
+    "query": "iphone pro",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": null,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-020",
+    "query": "galaxy note",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "galaxy",
+      "family": "note",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-021",
+    "query": "iphone se",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "se",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-022",
+    "query": "galaxy a",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "galaxy",
+      "family": "galaxy",
+      "generation": null,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-023",
+    "query": "redmi note 13",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "redmi",
+      "family": "note",
+      "generation": 13,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-024",
+    "query": "pixel",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "pixel",
+      "family": "pixel",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-025",
+    "query": "realme",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "realme",
+      "family": "realme",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-026",
+    "query": "vivo",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "vivo",
+      "family": "vivo",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-027",
+    "query": "oneplus",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "oneplus",
+      "family": "oneplus",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-028",
+    "query": "хочу телефон samsung",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "samsung",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-029",
+    "query": "iphone plus",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": null,
+      "modifiers": [
+        "plus"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-030",
+    "query": "galaxy z",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "galaxy",
+      "family": "z",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-031",
+    "query": "note 13",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "note",
+      "family": "note",
+      "generation": 13,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-032",
+    "query": "13 pro",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": 13,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "ambiguous-033",
+    "query": "s24",
+    "category": "ambiguous",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "s",
+      "family": "s",
+      "generation": 24,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-001",
+    "query": "iPhone 15 Pro 256Gb черный",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-15-pro",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 15,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {
+        "storage": "256gb",
+        "color": "chernyj"
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-002",
+    "query": "Galaxy S24 Ultra 5G Dual SIM",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s24-ultra",
+    "expectedSlots": {
+      "brand": "galaxy",
+      "family": "s",
+      "generation": 24,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {
+        "network": "5g",
+        "dualSim": true
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-003",
+    "query": "Samsung Galaxy S23 128GB черный",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s23",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-s",
+      "generation": 23,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {
+        "storage": "128gb",
+        "color": "chernyj"
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-004",
+    "query": "iPhone 13 128gb white купить",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-13",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 13,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {
+        "storage": "128gb",
+        "color": "white"
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-005",
+    "query": "Honor 90 512GB Dual SIM",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "honor-90",
+    "expectedSlots": {
+      "brand": "honor",
+      "family": "honor",
+      "generation": 90,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {
+        "storage": "512gb",
+        "dualSim": true
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-006",
+    "query": "Pixel 8 Pro 256GB titanium",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "google-pixel-8-pro",
+    "expectedSlots": {
+      "brand": "pixel",
+      "family": "pixel",
+      "generation": 8,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {
+        "storage": "256gb",
+        "color": "titanium"
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-007",
+    "query": "Redmi Note 12 Pro 256gb черный новый",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-12-pro",
+    "expectedSlots": {
+      "brand": "redmi",
+      "family": "note",
+      "generation": 12,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {
+        "storage": "256gb",
+        "color": "chernyj"
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-008",
+    "query": "iPhone 14 Pro Max 1TB graphite",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-14-pro-max",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 14,
+      "modifiers": [
+        "pro",
+        "max"
+      ],
+      "modelCode": null,
+      "attributes": {
+        "storage": "1tb",
+        "color": "graphite"
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-009",
+    "query": "iPhone 15 256gb 2023",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-15",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 15,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {
+        "storage": "256gb",
+        "year": 2023
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-010",
+    "query": "хочу iPhone 13 Pro",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-13-pro",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 13,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-011",
+    "query": "нужен samsung galaxy s23 ultra",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s23-ultra",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-s",
+      "generation": 23,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-012",
+    "query": "купить redmi note 12 pro черный",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-12-pro",
+    "expectedSlots": {
+      "brand": "redmi",
+      "family": "note",
+      "generation": 12,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {
+        "color": "chernyj"
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-013",
+    "query": "iPhone 15 Pro Max Dual Sim 512GB titanium",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-15-pro-max",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 15,
+      "modifiers": [
+        "pro",
+        "max"
+      ],
+      "modelCode": null,
+      "attributes": {
+        "storage": "512gb",
+        "color": "titanium",
+        "dualSim": true
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-014",
+    "query": "Samsung Galaxy Z Flip5 256GB зеленый",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-z-flip5",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-z",
+      "generation": 5,
+      "modifiers": [
+        "flip"
+      ],
+      "modelCode": null,
+      "attributes": {
+        "storage": "256gb",
+        "color": "zelenyj"
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-015",
+    "query": "Huawei P60 Pro 512gb черный",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "huawei-p60-pro",
+    "expectedSlots": {
+      "brand": "huawei",
+      "family": "p",
+      "generation": 60,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {
+        "storage": "512gb",
+        "color": "chernyj"
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-016",
+    "query": "OnePlus 11 256GB 5G",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oneplus-11",
+    "expectedSlots": {
+      "brand": "oneplus",
+      "family": "oneplus",
+      "generation": 11,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {
+        "storage": "256gb",
+        "network": "5g"
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-017",
+    "query": "realme 11 Pro 128GB синий",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "realme-11-pro",
+    "expectedSlots": {
+      "brand": "realme",
+      "family": "realme",
+      "generation": 11,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {
+        "storage": "128gb",
+        "color": "sinij"
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-018",
+    "query": "Oppo Reno 10 Pro 256GB золотой",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oppo-reno-10-pro",
+    "expectedSlots": {
+      "brand": "oppo",
+      "family": "reno",
+      "generation": 10,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {
+        "storage": "256gb",
+        "color": "zolotoj"
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-019",
+    "query": "vivo Y36 128GB Dual SIM",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "vivo-y36",
+    "expectedSlots": {
+      "brand": "vivo",
+      "family": "y",
+      "generation": 36,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {
+        "storage": "128gb",
+        "dualSim": true
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-020",
+    "query": "Xiaomi 13 512GB белый",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-13",
+    "expectedSlots": {
+      "brand": "xiaomi",
+      "family": "xiaomi",
+      "generation": 13,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {
+        "storage": "512gb",
+        "color": "belyj"
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-021",
+    "query": "iPhone 12 mini 64gb новый оригинал",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-12-mini",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 12,
+      "modifiers": [
+        "mini"
+      ],
+      "modelCode": null,
+      "attributes": {
+        "storage": "64gb"
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-022",
+    "query": "Google Pixel 7a 128GB 5G",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "google-pixel-7a",
+    "expectedSlots": {
+      "brand": "google",
+      "family": "pixel",
+      "generation": 7,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {
+        "storage": "128gb",
+        "network": "5g"
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-023",
+    "query": "Samsung Galaxy A54 256GB черный новая",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-a54",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy",
+      "generation": 54,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {
+        "storage": "256gb",
+        "color": "chernyj"
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-024",
+    "query": "iPhone SE 2022 128GB красный",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-se-2022",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "se",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {
+        "storage": "128gb",
+        "color": "krasnyj",
+        "year": 2022
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-025",
+    "query": "какой Redmi Note 13 Pro Plus 256GB",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-note-13-pro-plus",
+    "expectedSlots": {
+      "brand": "redmi",
+      "family": "note",
+      "generation": 13,
+      "modifiers": [
+        "pro",
+        "plus"
+      ],
+      "modelCode": null,
+      "attributes": {
+        "storage": "256gb"
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-026",
+    "query": "Honor Magic 5 Pro 512GB черный",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "honor-magic-5-pro",
+    "expectedSlots": {
+      "brand": "honor",
+      "family": "magic",
+      "generation": 5,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {
+        "storage": "512gb",
+        "color": "chernyj"
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-027",
+    "query": "iPhone 14 128gb red",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-14",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 14,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {
+        "storage": "128gb",
+        "color": "red"
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-028",
+    "query": "Samsung Galaxy Note 20 Ultra 256gb Dual Sim черный",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-note-20-ultra",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-note",
+      "generation": 20,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {
+        "storage": "256gb",
+        "color": "chernyj",
+        "dualSim": true
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-029",
+    "query": "iPhone 13 mini 2021 128gb",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-13-mini",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 13,
+      "modifiers": [
+        "mini"
+      ],
+      "modelCode": null,
+      "attributes": {
+        "storage": "128gb",
+        "year": 2021
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-030",
+    "query": "Xiaomi Poco X5 Pro 8/256 черный",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-poco-x5-pro",
+    "expectedSlots": {
+      "brand": "xiaomi",
+      "family": "poco-x",
+      "generation": 5,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {
+        "color": "chernyj"
+      },
+      "unparsed": [
+        "8",
+        "256"
+      ]
+    }
+  },
+  {
+    "id": "extra-attributes-031",
+    "query": "Samsung Galaxy S24 128GB 5G Dual Sim",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-s24",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-s",
+      "generation": 24,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {
+        "storage": "128gb",
+        "network": "5g",
+        "dualSim": true
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-032",
+    "query": "iPhone 15 Pro 512gb natural titanium",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-15-pro",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "natural",
+      "generation": 15,
+      "modifiers": [
+        "pro"
+      ],
+      "modelCode": null,
+      "attributes": {
+        "storage": "512gb",
+        "color": "titanium"
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "extra-attributes-033",
+    "query": "Xiaomi 13 Ultra 256GB черный 5G",
+    "category": "extra-attributes",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-13-ultra",
+    "expectedSlots": {
+      "brand": "xiaomi",
+      "family": "xiaomi",
+      "generation": 13,
+      "modifiers": [
+        "ultra"
+      ],
+      "modelCode": null,
+      "attributes": {
+        "storage": "256gb",
+        "color": "chernyj",
+        "network": "5g"
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-001",
+    "query": "iPhone 8",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-8",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 8,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-002",
+    "query": "iPhone 8 Plus",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-8-plus",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 8,
+      "modifiers": [
+        "plus"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-003",
+    "query": "iPhone 7",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-7",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 7,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-004",
+    "query": "iPhone 7 Plus",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-7-plus",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 7,
+      "modifiers": [
+        "plus"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-005",
+    "query": "iPhone 6s",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-6s",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "s",
+      "generation": 6,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-006",
+    "query": "iPhone SE 2016",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-se-2016",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "se",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {
+        "year": 2016
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-007",
+    "query": "Redmi 9A",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-9a",
+    "expectedSlots": {
+      "brand": "redmi",
+      "family": "redmi",
+      "generation": 9,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-008",
+    "query": "Redmi 10A",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-10a",
+    "expectedSlots": {
+      "brand": "redmi",
+      "family": "redmi",
+      "generation": 10,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-009",
+    "query": "Redmi 9C",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-9c",
+    "expectedSlots": {
+      "brand": "redmi",
+      "family": "c",
+      "generation": 9,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-010",
+    "query": "Redmi 12C",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-12c",
+    "expectedSlots": {
+      "brand": "redmi",
+      "family": "c",
+      "generation": 12,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-011",
+    "query": "Honor 8A",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "honor-8a",
+    "expectedSlots": {
+      "brand": "honor",
+      "family": "honor",
+      "generation": 8,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-012",
+    "query": "Honor 9A",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "honor-9a",
+    "expectedSlots": {
+      "brand": "honor",
+      "family": "honor",
+      "generation": 9,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-013",
+    "query": "Honor X6",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "honor-x6",
+    "expectedSlots": {
+      "brand": "honor",
+      "family": "x",
+      "generation": 6,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-014",
+    "query": "Huawei Y6 2019",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "huawei-y6-2019",
+    "expectedSlots": {
+      "brand": "huawei",
+      "family": "y",
+      "generation": 6,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {
+        "year": 2019
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-015",
+    "query": "Huawei Y7 2019",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "huawei-y7-2019",
+    "expectedSlots": {
+      "brand": "huawei",
+      "family": "y",
+      "generation": 7,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {
+        "year": 2019
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-016",
+    "query": "Huawei P Smart 2021",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "huawei-p-smart-2021",
+    "expectedSlots": {
+      "brand": "huawei",
+      "family": "p-smart",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {
+        "year": 2021
+      },
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-017",
+    "query": "Samsung Galaxy A03",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-a03",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy",
+      "generation": 3,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-018",
+    "query": "Samsung Galaxy A04",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-a04",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy",
+      "generation": 4,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-019",
+    "query": "Samsung Galaxy A03 Core",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-a03-core",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-core",
+      "generation": 3,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-020",
+    "query": "Tecno Spark 10",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "tecno-spark-10",
+    "expectedSlots": {
+      "brand": "tecno",
+      "family": "spark",
+      "generation": 10,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-021",
+    "query": "Infinix Hot 30",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "infinix-hot-30",
+    "expectedSlots": {
+      "brand": "infinix",
+      "family": "hot",
+      "generation": 30,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-022",
+    "query": "ZTE Blade A53",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "zte-blade-a53",
+    "expectedSlots": {
+      "brand": "zte",
+      "family": "blade",
+      "generation": 53,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-023",
+    "query": "редми 9а",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-9a",
+    "expectedSlots": {
+      "brand": "redmi",
+      "family": "redmi",
+      "generation": 9,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-024",
+    "query": "хонор 8а",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "honor-8a",
+    "expectedSlots": {
+      "brand": "honor",
+      "family": "honor",
+      "generation": 8,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-025",
+    "query": "айфон 8",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "apple-iphone-8",
+    "expectedSlots": {
+      "brand": "iphone",
+      "family": "iphone",
+      "generation": 8,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-026",
+    "query": "Nokia 2.4",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "nokia-2-4",
+    "expectedSlots": {
+      "brand": "nokia",
+      "family": "nokia",
+      "generation": 2,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": [
+        "4"
+      ]
+    }
+  },
+  {
+    "id": "no-esim-devices-027",
+    "query": "Realme C33",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "realme-c33",
+    "expectedSlots": {
+      "brand": "realme",
+      "family": "c",
+      "generation": 33,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-028",
+    "query": "Samsung Galaxy M04",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-m04",
+    "expectedSlots": {
+      "brand": "samsung",
+      "family": "galaxy-m",
+      "generation": 4,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-029",
+    "query": "Itel A60",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "itel-a60",
+    "expectedSlots": {
+      "brand": "itel",
+      "family": "itel",
+      "generation": 60,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-030",
+    "query": "Xiaomi Redmi A2",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-redmi-a2",
+    "expectedSlots": {
+      "brand": "xiaomi",
+      "family": "redmi",
+      "generation": 2,
+      "modifiers": [
+        "a"
+      ],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-031",
+    "query": "Realme Note 50",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "realme-note-50",
+    "expectedSlots": {
+      "brand": "realme",
+      "family": "note",
+      "generation": 50,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-032",
+    "query": "POCO C65",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "xiaomi-poco-c65",
+    "expectedSlots": {
+      "brand": "poco",
+      "family": "c",
+      "generation": 65,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "no-esim-devices-033",
+    "query": "Infinix Smart 8",
+    "category": "no-esim-devices",
+    "expectedOutcome": "match",
+    "expectedDeviceId": "infinix-smart-8",
+    "expectedSlots": {
+      "brand": "infinix",
+      "family": "smart",
+      "generation": 8,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-001",
+    "query": "привет",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "privet",
+      "family": "privet",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-002",
+    "query": "qqq",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "qqq",
+      "family": "qqq",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-003",
+    "query": "12345",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": 12345,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-004",
+    "query": "",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-005",
+    "query": "спасибо",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "spasibo",
+      "family": "spasibo",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-006",
+    "query": "здравствуйте",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "zdravstvujte",
+      "family": "zdravstvujte",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-007",
+    "query": "test123",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "test",
+      "family": "test",
+      "generation": 123,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-008",
+    "query": "хочу купить телефон",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-009",
+    "query": "сколько стоит",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "skolko",
+      "family": "stoit",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-010",
+    "query": "abcdefg",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "abcdefg",
+      "family": "abcdefg",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-011",
+    "query": "88005553535",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": 88005553535,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-012",
+    "query": "asdfghjkl",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "asdfghjkl",
+      "family": "asdfghjkl",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-013",
+    "query": "погода в москве",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "pogoda",
+      "family": "v-moskve",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-014",
+    "query": "111",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": 111,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-015",
+    "query": "   ",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-016",
+    "query": "телефон",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-017",
+    "query": "смартфон",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-018",
+    "query": "новый",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-019",
+    "query": "холодильник самсунг",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "kholodilnik",
+      "family": "samsung",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-020",
+    "query": "стиральная машина lg",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "stiralnaya",
+      "family": "mashina-lg",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-021",
+    "query": "ноутбук apple",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "noutbuk",
+      "family": "apple",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-022",
+    "query": "где купить чехол",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "gde",
+      "family": "chekhol",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-023",
+    "query": "how much is it",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "how",
+      "family": "much-is-it",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-024",
+    "query": "@@@###",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-025",
+    "query": "просто текст без смысла",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "prosto",
+      "family": "tekst-bez-smysla",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-026",
+    "query": "тест теста тестович",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "test",
+      "family": "testa-testovich",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-027",
+    "query": "мой телефон сломался",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "moj",
+      "family": "slomalsya",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-028",
+    "query": "нужна помощь",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "pomoshch",
+      "family": "pomoshch",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-029",
+    "query": "999999999999",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": 999999999999,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-030",
+    "query": "ывapfmql",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "yvapfmql",
+      "family": "yvapfmql",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-031",
+    "query": "рандомный текст",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": "randomnyj",
+      "family": "tekst",
+      "generation": null,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": []
+    }
+  },
+  {
+    "id": "foreign-input-032",
+    "query": "12 34 56",
+    "category": "foreign-input",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
+    "expectedSlots": {
+      "brand": null,
+      "family": null,
+      "generation": 12,
+      "modifiers": [],
+      "modelCode": null,
+      "attributes": {},
+      "unparsed": [
+        "34",
+        "56"
+      ]
+    }
+  }
+]

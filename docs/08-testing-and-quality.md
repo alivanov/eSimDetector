@@ -60,21 +60,59 @@
 
 ### `queries.golden.json` — текстовые запросы
 
-Не менее 300 записей с ожидаемым результатом, размеченных по категориям, соответствующим пунктам критерия К2:
+Не менее 300 записей с ожидаемым результатом, размеченных по категориям, соответствующим пунктам критерия К2. Фактическое состояние (агент 2.5): файл содержит 362 записи, от 32 до 34 на категорию, все 11 категорий непусты, идентификаторы записей уникальны.
 
-| Категория              | Примеры                                                      |
-| ---------------------- | ------------------------------------------------------------ |
-| Каноническое написание | `iPhone 15 Pro`, `Samsung Galaxy S24`                        |
-| Регистр и разделители  | `IPHONE15PRO`, `iphone-15-pro`, `iphone_15_pro`              |
-| Кириллица              | `айфон 15 про`, `самсунг галакси с24`                        |
-| Сокращения             | `s24u`, `нот 12`, `ipx`, `13 pm`                             |
-| Опечатки               | `iphne 15`, `самсунк`, `xiomi`, `хуавей`                     |
-| Неверная раскладка     | `Ыфьыгте`, `шзрещте 15`                                      |
-| Сервисные коды         | `SM-S928B`, `CPH2451`, `23090RA98G`                          |
-| Неоднозначные          | `galaxy s23`, `iphone`, `redmi note`, `самсунг`              |
-| Лишние атрибуты        | `iPhone 15 Pro 256Gb черный`, `Galaxy S24 Ultra 5G Dual SIM` |
-| Посторонний ввод       | `привет`, `qqq`, `12345`, пустая строка                      |
-| Устройства без eSIM    | `iPhone 8`, `Redmi 9A`, `Honor 8A`                           |
+| Категория              | Строковый код `category` | Примеры                                                      |
+| ---------------------- | ------------------------ | ------------------------------------------------------------ |
+| Каноническое написание | `canonical`              | `iPhone 15 Pro`, `Samsung Galaxy S24`                        |
+| Регистр и разделители  | `case-and-separators`    | `IPHONE15PRO`, `iphone-15-pro`, `iphone_15_pro`              |
+| Кириллица              | `cyrillic`               | `айфон 15 про`, `самсунг галакси с24`                        |
+| Сокращения             | `abbreviations`          | `s24u`, `нот 12`, `ipx`, `13 pm`                             |
+| Опечатки               | `typos`                  | `iphne 15`, `самсунк`, `xiomi`, `хуавей`                     |
+| Неверная раскладка     | `wrong-layout`           | `Ыфьыгте`, `шзрещте 15`                                      |
+| Сервисные коды         | `model-codes`            | `SM-S928B`, `CPH2451`, `23090RA98G`                          |
+| Неоднозначные          | `ambiguous`              | `galaxy s23`, `iphone`, `redmi note`, `самсунг`              |
+| Лишние атрибуты        | `extra-attributes`       | `iPhone 15 Pro 256Gb черный`, `Galaxy S24 Ultra 5G Dual SIM` |
+| Посторонний ввод       | `foreign-input`          | `привет`, `qqq`, `12345`, пустая строка                      |
+| Устройства без eSIM    | `no-esim-devices`        | `iPhone 8`, `Redmi 9A`, `Honor 8A`                           |
+
+**Схема одной записи.** `expectedSlots` — сериализованный в JSON результат `normalizeQuery(query, dict).slots` (`QuerySlots`, `packages/text-normalizer/src/types.ts`), с одной поправкой: поля, отсутствующие в `QuerySlots` (`exactOptionalPropertyTypes` запрещает там `undefined`, см. docs/04 §4.5.1), в JSON записаны явным `null`, а не опущены — JSON не различает эти два случая так строго, как TypeScript, а явный `null` читается человеком лучше отсутствующего ключа. Тест обязан выполнить обратное преобразование (`undefined` → `null`) перед сравнением, а не полагаться на `toEqual` напрямую.
+
+```ts
+interface GoldenQueryEntry {
+  readonly id: string; // уникален по всему файлу, формат "<category>-NNN"
+  readonly query: string; // сырой пользовательский ввод, как он есть
+  readonly category:
+    | 'canonical'
+    | 'case-and-separators'
+    | 'cyrillic'
+    | 'abbreviations'
+    | 'typos'
+    | 'wrong-layout'
+    | 'model-codes'
+    | 'ambiguous'
+    | 'extra-attributes'
+    | 'no-esim-devices'
+    | 'foreign-input';
+  readonly expectedOutcome: 'match' | 'clarification' | 'not_found'; // ожидание полного пайплайна matching (агент 3+), сейчас не проверяется
+  readonly expectedDeviceId: string | null; // см. примечание о статусе aspirational ниже
+  readonly expectedSlots: {
+    readonly brand: string | null;
+    readonly family: string | null;
+    readonly generation: number | null;
+    readonly modifiers: readonly string[];
+    readonly modelCode: string | null;
+    readonly attributes: QueryAttributes; // как есть, без null-заглушек — поля просто отсутствуют
+    readonly unparsed: readonly string[];
+  };
+}
+```
+
+**Что проверяется сейчас и чем.** `tools/eval/src/data-files.spec.ts` (агент 2.5) — модульный тест, а не стенд оценки качества: он прогоняет каждую запись через настоящий `normalizeQuery(query, dict)` на настоящем `data/catalog/aliases.json` и сравнивает `slots` с `expectedSlots`. Дополнительно проверяются структурная валидность файла без утверждений `as` (ADR-016), объём (≥ 300), непустота всех 11 категорий, уникальность `id` и отсутствие `expectedDeviceId` у категорий `ambiguous`/`foreign-input`.
+
+**Что не проверяется сейчас (aspirational-поля).** `expectedOutcome` и `expectedDeviceId` описывают ожидание ПОЛНОГО конвейера сопоставления (отбор кандидатов по справочнику + правило принятия решения, §4.6—4.7), которого на момент составления выборки ещё не существует (модули `matching`/`esim-rules`/`CatalogModule` — объём агента 3 и далее). Эти два поля пока не проверяются никаким тестом; для части записей (`model-codes`, где часть кодов при отсутствии реального справочника не может быть подтверждена) `expectedDeviceId` — целевое, а не текущее наблюдаемое значение. Стенд `pnpm eval:matching` (§8.6) начнёт по-настоящему сверять эти поля, когда появится справочник устройств и полный конвейер сопоставления; до этого момента расхождение между `expectedDeviceId` и будущим поведением сопоставления не является ошибкой этой выборки — это следующий шаг работы, а не текущий недостаток.
+
+**Проверка файлов данных живёт в `tools/eval`, а не в `packages/text-normalizer`.** `data/catalog/aliases.json` тоже проверяется на разбор `parseNormalizationDictionary` внутри `packages/text-normalizer` (`aliases-data.spec.ts` — там это нужно, чтобы пакет был тестируем независимо), но полная проверка ФАЙЛОВ ДАННЫХ как артефакта (оба файла разом, соответствие эталонной выборки реальному словарю) — в `tools/eval`, поскольку именно этот инструмент их вместе использует и должен упасть первым при рассинхронизации.
 
 ### `catalog.reference.json` — контрольные факты по устройствам
 

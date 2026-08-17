@@ -138,7 +138,14 @@ importers:
 
   packages/text-normalizer: {}
 
-  tools/eval: {}
+  tools/eval:
+    dependencies:
+      '@esim-detector/fuzzy-matcher':
+        specifier: workspace:*
+        version: link:../../packages/fuzzy-matcher
+      '@esim-detector/text-normalizer':
+        specifier: workspace:*
+        version: link:../../packages/text-normalizer
 
   tools/seed: {}
 

@@ -4,6 +4,11 @@
   "private": true,
   "description": "Стенд оценки качества автоопределения и обработки ввода на эталонных выборках (docs/08-testing-and-quality.md, раздел 8.6)",
   "scripts": {
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@esim-detector/text-normalizer": "workspace:*",
+    "@esim-detector/fuzzy-matcher": "workspace:*"
   }
 }
