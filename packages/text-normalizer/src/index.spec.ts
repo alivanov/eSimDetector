@@ -12,6 +12,10 @@ import {
   transliterateCyrillic,
   expandSynonyms,
   tokenize,
+  extractAttributes,
+  detectModelCode,
+  parseSlots,
+  normalizeQuery,
 } from './index';
 
 describe('index — публичная поверхность пакета', () => {
@@ -42,6 +46,13 @@ describe('index — публичная поверхность пакета', () 
       stopWords: [],
     });
     expect(parsed.ok).toBe(true);
+  });
+
+  it('экспортирует слотовый разбор и конвейер нормализации (детально проверены в собственных спек-файлах)', () => {
+    expect(extractAttributes(['iphone'], emptyDictionary()).remainingTokens).toEqual(['iphone']);
+    expect(detectModelCode('SM-S928B')).toBe('SM-S928B');
+    expect(parseSlots(['iphone', '13'], emptyDictionary()).generation).toBe(13);
+    expect(normalizeQuery('iphone 13', emptyDictionary()).slots.generation).toBe(13);
   });
 });
 

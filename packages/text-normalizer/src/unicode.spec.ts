@@ -12,6 +12,25 @@ describe('foldCase + normalizeUnicode', () => {
     expect(normalizeUnicode('iphone 13')).toBe('iphone 13');
   });
 
+  it('регресс: normalizeUnicode не разбивает "й" на "и" + комбинирующий диакритик (NFKD vs NFKC)', () => {
+    // NFKD канонически декомпозирует "й" в "и" (U+0438) + U+0306 ДО словарных
+    // сопоставлений в конвейере — строка перестаёт быть равна себе по числу
+    // code point'ов, и словарь синонимов не находит в ней ключ "айфон".
+    const input = 'айфон';
+    const result = normalizeUnicode(input);
+
+    expect(result).toBe(input);
+    expect(Array.from(result).length).toBe(Array.from(input).length);
+  });
+
+  it('регресс: normalizeUnicode не разбивает "ё" на "е" + комбинирующий диакритик (NFKD vs NFKC)', () => {
+    const input = 'жёлтый';
+    const result = normalizeUnicode(input);
+
+    expect(result).toBe(input);
+    expect(Array.from(result).length).toBe(Array.from(input).length);
+  });
+
   it('foldCase приводит кириллицу и латиницу к нижнему регистру', () => {
     expect(foldCase('САМСУНГ Galaxy')).toBe('самсунг galaxy');
   });

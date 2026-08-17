@@ -7,6 +7,8 @@ export type {
   NormalizationStepId,
   NormalizationTraceStep,
   NormalizationTrace,
+  QuerySlots,
+  NormalizeQueryOptions,
   NormalizedQuery,
 } from './types';
 
@@ -23,3 +25,9 @@ export { mapCyrillicToLatinLayout, correctKeyboardLayout } from './keyboard-layo
 export { transliterateCyrillic } from './transliterate';
 export { expandSynonyms } from './synonyms';
 export { tokenize } from './tokenize';
+
+export type { AttributeExtractionResult } from './attributes';
+export { extractAttributes } from './attributes';
+export { detectModelCode } from './model-code';
+export { parseSlots } from './slots';
+export { normalizeQuery } from './normalize-query';
