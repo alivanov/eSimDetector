@@ -1331,7 +1331,7 @@
     "expectedDeviceId": "samsung-galaxy-z-flip5",
     "expectedSlots": {
       "brand": "samsung",
-      "family": "galaxy-zet",
+      "family": "galaxy-z",
       "generation": 5,
       "modifiers": [
         "flip"
@@ -1349,7 +1349,7 @@
     "expectedDeviceId": "samsung-galaxy-z-fold5",
     "expectedSlots": {
       "brand": "samsung",
-      "family": "galaxy-zet",
+      "family": "galaxy-z",
       "generation": 5,
       "modifiers": [
         "fold"
@@ -1540,7 +1540,7 @@
     "expectedDeviceId": "oppo-reno-10-pro",
     "expectedSlots": {
       "brand": "oppo",
-      "family": "rino",
+      "family": "reno",
       "generation": 10,
       "modifiers": [
         "pro"
@@ -1661,7 +1661,7 @@
     "expectedDeviceId": "samsung-galaxy-z-flip4",
     "expectedSlots": {
       "brand": "samsung",
-      "family": "galaxy-zet",
+      "family": "galaxy-z",
       "generation": 4,
       "modifiers": [
         "flip"
@@ -1712,10 +1712,12 @@
     "expectedOutcome": "match",
     "expectedDeviceId": "samsung-galaxy-s24-ultra",
     "expectedSlots": {
-      "brand": "s",
-      "family": "u",
+      "brand": "galaxy",
+      "family": "s",
       "generation": 24,
-      "modifiers": [],
+      "modifiers": [
+        "ultra"
+      ],
       "modelCode": null,
       "attributes": {},
       "unparsed": []
@@ -1728,10 +1730,12 @@
     "expectedOutcome": "match",
     "expectedDeviceId": "samsung-galaxy-s23-ultra",
     "expectedSlots": {
-      "brand": "s",
-      "family": "u",
+      "brand": "galaxy",
+      "family": "s",
       "generation": 23,
-      "modifiers": [],
+      "modifiers": [
+        "ultra"
+      ],
       "modelCode": null,
       "attributes": {},
       "unparsed": []
@@ -1744,10 +1748,12 @@
     "expectedOutcome": "match",
     "expectedDeviceId": "samsung-galaxy-s22-ultra",
     "expectedSlots": {
-      "brand": "s",
-      "family": "u",
+      "brand": "galaxy",
+      "family": "s",
       "generation": 22,
-      "modifiers": [],
+      "modifiers": [
+        "ultra"
+      ],
       "modelCode": null,
       "attributes": {},
       "unparsed": []
@@ -1760,10 +1766,12 @@
     "expectedOutcome": "match",
     "expectedDeviceId": "samsung-galaxy-s21-ultra",
     "expectedSlots": {
-      "brand": "s",
-      "family": "u",
+      "brand": "galaxy",
+      "family": "s",
       "generation": 21,
-      "modifiers": [],
+      "modifiers": [
+        "ultra"
+      ],
       "modelCode": null,
       "attributes": {},
       "unparsed": []
@@ -1776,10 +1784,12 @@
     "expectedOutcome": "match",
     "expectedDeviceId": "samsung-galaxy-s25-ultra",
     "expectedSlots": {
-      "brand": "s",
-      "family": "u",
+      "brand": "galaxy",
+      "family": "s",
       "generation": 25,
-      "modifiers": [],
+      "modifiers": [
+        "ultra"
+      ],
       "modelCode": null,
       "attributes": {},
       "unparsed": []
@@ -2622,34 +2632,38 @@
     "id": "typos-021",
     "query": "xiaomi 13 ultr",
     "category": "typos",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "xiaomi-13-ultra",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "xiaomi",
-      "family": "ultr",
+      "family": "xiaomi",
       "generation": 13,
       "modifiers": [],
       "modelCode": null,
       "attributes": {},
-      "unparsed": []
+      "unparsed": [
+        "ultr"
+      ]
     }
   },
   {
     "id": "typos-022",
     "query": "iphone 15 pro amx",
     "category": "typos",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "apple-iphone-15-pro-max",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "iphone",
-      "family": "amx",
+      "family": "iphone",
       "generation": 15,
       "modifiers": [
         "pro"
       ],
       "modelCode": null,
       "attributes": {},
-      "unparsed": []
+      "unparsed": [
+        "amx"
+      ]
     }
   },
   {
@@ -2764,24 +2778,26 @@
     "id": "typos-029",
     "query": "huawei p60 por",
     "category": "typos",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "huawei-p60-pro",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "huawei",
-      "family": "p-por",
+      "family": "p",
       "generation": 60,
       "modifiers": [],
       "modelCode": null,
       "attributes": {},
-      "unparsed": []
+      "unparsed": [
+        "por"
+      ]
     }
   },
   {
     "id": "typos-030",
     "query": "oneplus 1l",
     "category": "typos",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "oneplus-11",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "oneplus",
       "family": "oneplus",
@@ -2814,16 +2830,18 @@
     "id": "typos-032",
     "query": "honor magic 5 rpo",
     "category": "typos",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "honor-magic-5-pro",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "honor",
-      "family": "magic-rpo",
+      "family": "magic",
       "generation": 5,
       "modifiers": [],
       "modelCode": null,
       "attributes": {},
-      "unparsed": []
+      "unparsed": [
+        "rpo"
+      ]
     }
   },
   {
@@ -3294,8 +3312,8 @@
     "id": "wrong-layout-027",
     "query": "чы",
     "category": "wrong-layout",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "apple-iphone-xs",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "xs",
       "family": "xs",
@@ -3310,8 +3328,8 @@
     "id": "wrong-layout-028",
     "query": "ч",
     "category": "wrong-layout",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "apple-iphone-x",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "x",
       "family": "x",

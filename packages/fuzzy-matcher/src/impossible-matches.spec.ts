@@ -278,3 +278,157 @@ describe('ЗАПРЕЩЕНО: ограничение действует неза
     }
   });
 });
+
+/**
+ * ЗАПРЕЩЕНО: испорченный модификатор (дефект 1, docs/04 §4.10.1) не даёт ложного "determined".
+ *
+ * До исправления `text-normalizer` (`looksLikeCorruptedModifier`, `slots.ts`) токен вида `amx`
+ * молча становился частью `family` ("iphone amx"), и для запроса "iphone 15 pro amx" это
+ * ЭМПИРИЧЕСКИ давало `matchQuery` результат `determined`/`apple-iphone-15-pro` (0.755 — выше
+ * порога уверенности `0.72`), хотя пользователь явно набрал что-то, чего нет ни у одной модели
+ * (ни `pro`, ни `pro max`). Причина: `computeTokenCoverage` (`scoring.ts`) считала мусорный токен
+ * распознанным, раз он был частью `family`, а не `unparsed`.
+ *
+ * После исправления `text-normalizer` испорченный токен остаётся в `slots.unparsed`, снижает
+ * `tokenCoverage`, и `matchQuery` возвращает `clarification_required` (не хватает уверенности)
+ * либо `not_found` — но НИКОГДА `determined` с "угаданным" устройством. Это ПРОВЕРЕНО фактическим
+ * прогоном `matchQuery` (не предположением) — слоты ниже воспроизводят реальный вывод
+ * `normalizeQuery` на словаре `data/catalog/aliases.json` для каждого из четырёх запросов.
+ *
+ * Тест намеренно НЕ меняет `constraints.ts` (checkModifierSet единообразно сравнивает множества
+ * независимо от `unparsed`) — гипотеза "нужно смягчение сравнения модификаторов при unparsed
+ * непустом" проверена и ОПРОВЕРГНУТА для этих четырёх случаев: `tokenCoverage` уже достаточно,
+ * чтобы не пропустить ложное определение, и никакого дополнительного предиката не требуется.
+ */
+describe('ЗАПРЕЩЕНО: испорченный модификатор в unparsed не даёт ложного "determined" (дефект 1)', () => {
+  it('"iphone 15 pro amx" — не определяет ни iPhone 15 Pro, ни iPhone 15 Pro Max', () => {
+    const slots = buildSlots({
+      brand: 'iphone',
+      family: 'iphone',
+      generation: 15,
+      modifiers: ['pro'],
+      unparsed: ['amx'],
+    });
+    const devices = [
+      buildDevice({
+        id: 'apple-iphone-15',
+        brand: 'apple',
+        family: 'iphone',
+        generation: 15,
+        modifiers: [],
+      }),
+      buildDevice({
+        id: 'apple-iphone-15-pro',
+        brand: 'apple',
+        family: 'iphone',
+        generation: 15,
+        modifiers: ['pro'],
+      }),
+      buildDevice({
+        id: 'apple-iphone-15-pro-max',
+        brand: 'apple',
+        family: 'iphone',
+        generation: 15,
+        modifiers: ['pro', 'max'],
+      }),
+    ];
+    const index = buildMatchIndex(devices);
+
+    const result = matchQuery(slots, index);
+
+    expect(result.status).not.toBe('determined');
+  });
+
+  it('"honor magic 5 rpo" — не определяет ни Honor Magic 5, ни Honor Magic 5 Pro', () => {
+    const slots = buildSlots({
+      brand: 'honor',
+      family: 'magic',
+      generation: 5,
+      modifiers: [],
+      unparsed: ['rpo'],
+    });
+    const devices = [
+      buildDevice({
+        id: 'honor-magic-5',
+        brand: 'honor',
+        family: 'magic',
+        generation: 5,
+        modifiers: [],
+      }),
+      buildDevice({
+        id: 'honor-magic-5-pro',
+        brand: 'honor',
+        family: 'magic',
+        generation: 5,
+        modifiers: ['pro'],
+      }),
+    ];
+    const index = buildMatchIndex(devices);
+
+    const result = matchQuery(slots, index);
+
+    expect(result.status).not.toBe('determined');
+  });
+
+  it('"huawei p60 por" — не определяет ни Huawei P60, ни Huawei P60 Pro', () => {
+    const slots = buildSlots({
+      brand: 'huawei',
+      family: 'p',
+      generation: 60,
+      modifiers: [],
+      unparsed: ['por'],
+    });
+    const devices = [
+      buildDevice({
+        id: 'huawei-p60',
+        brand: 'huawei',
+        family: 'p',
+        generation: 60,
+        modifiers: [],
+      }),
+      buildDevice({
+        id: 'huawei-p60-pro',
+        brand: 'huawei',
+        family: 'p',
+        generation: 60,
+        modifiers: ['pro'],
+      }),
+    ];
+    const index = buildMatchIndex(devices);
+
+    const result = matchQuery(slots, index);
+
+    expect(result.status).not.toBe('determined');
+  });
+
+  it('"xiaomi 13 ultr" — не определяет ни Xiaomi 13, ни Xiaomi 13 Ultra', () => {
+    const slots = buildSlots({
+      brand: 'xiaomi',
+      family: 'xiaomi',
+      generation: 13,
+      modifiers: [],
+      unparsed: ['ultr'],
+    });
+    const devices = [
+      buildDevice({
+        id: 'xiaomi-13',
+        brand: 'xiaomi',
+        family: 'xiaomi',
+        generation: 13,
+        modifiers: [],
+      }),
+      buildDevice({
+        id: 'xiaomi-13-ultra',
+        brand: 'xiaomi',
+        family: 'xiaomi',
+        generation: 13,
+        modifiers: ['ultra'],
+      }),
+    ];
+    const index = buildMatchIndex(devices);
+
+    const result = matchQuery(slots, index);
+
+    expect(result.status).not.toBe('determined');
+  });
+});

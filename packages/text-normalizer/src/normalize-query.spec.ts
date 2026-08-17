@@ -89,6 +89,7 @@ describe('normalizeQuery — трассировка (ADR-010)', () => {
     expect(result.trace.map((step) => step.step)).toEqual([
       'unicode',
       'separators',
+      'compoundSynonyms',
       'splitLettersAndDigits',
       'lookalikes',
       'keyboardLayout',
@@ -112,7 +113,7 @@ describe('normalizeQuery — трассировка (ADR-010)', () => {
   it('трассировка формируется даже когда запрос распознан как сервисный код', () => {
     const result = normalizeQuery('SM-S928B', realDictionary());
 
-    expect(result.trace.length).toBe(8);
+    expect(result.trace.length).toBe(9);
   });
 });
 

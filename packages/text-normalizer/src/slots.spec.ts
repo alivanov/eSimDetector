@@ -132,6 +132,60 @@ describe('parseSlots — стоп-слова', () => {
   });
 });
 
+describe('parseSlots — испорченный модификатор (isSingleEditAway/looksLikeCorruptedModifier, дефект 1)', () => {
+  it('транспозиция двух соседних символов ("por" от "pro") уводит токен в unparsed, а не в family', () => {
+    const slots = parseSlots(['huawei', 'p', '60', 'por'], buildDictionary());
+
+    expect(slots.brand).toBe('huawei');
+    expect(slots.family).toBe('p');
+    expect(slots.unparsed).toEqual(['por']);
+  });
+
+  it('замена одного символа ("aip" от "air") тоже распознаётся как испорченный модификатор', () => {
+    const slots = parseSlots(['iphone', '15', 'aip'], buildDictionary());
+
+    expect(slots.family).toBe('iphone');
+    expect(slots.unparsed).toEqual(['aip']);
+  });
+
+  it('удаление символа ("ultr" от "ultra") распознаётся как испорченный модификатор', () => {
+    const slots = parseSlots(['xiaomi', '13', 'ultr'], buildDictionary());
+
+    expect(slots.family).toBe('xiaomi');
+    expect(slots.unparsed).toEqual(['ultr']);
+  });
+
+  it('вставка символа ("litex" от "lite") распознаётся как испорченный модификатор', () => {
+    const slots = parseSlots(['brand', '5', 'litex'], buildDictionary());
+
+    expect(slots.family).toBe('brand');
+    expect(slots.unparsed).toEqual(['litex']);
+  });
+
+  it('токен на расстоянии двух и более правок от любого модификатора остаётся частью family', () => {
+    const slots = parseSlots(['brand', '5', 'folxx'], buildDictionary());
+
+    expect(slots.family).toBe('folxx');
+    expect(slots.unparsed).toEqual([]);
+  });
+
+  it('короткий токен (< 3 символов) не проверяется, даже если он рядом с "pro" по расстоянию', () => {
+    const slots = parseSlots(['iphone', 'po'], buildDictionary());
+
+    expect(slots.family).toBe('po');
+    expect(slots.unparsed).toEqual([]);
+  });
+
+  it('первый словесный токен (позиция 0) никогда не проверяется на испорченный модификатор', () => {
+    const slots = parseSlots(['pxo', '15', 'ultra'], buildDictionary());
+
+    expect(slots.brand).toBe('pxo');
+    expect(slots.family).toBe('pxo');
+    expect(slots.modifiers).toEqual(['ultra']);
+    expect(slots.unparsed).toEqual([]);
+  });
+});
+
 describe('parseSlots — unparsed', () => {
   it('нераспознанный числовой токен без единицы измерения уходит в unparsed, а не в атрибуты', () => {
     const slots = parseSlots(['iphone', '13', '999'], buildDictionary());

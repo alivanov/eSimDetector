@@ -47,6 +47,7 @@ export interface QueryAttributes {
 export type NormalizationStepId =
   | 'unicode'
   | 'separators'
+  | 'compoundSynonyms'
   | 'splitLettersAndDigits'
   | 'lookalikes'
   | 'keyboardLayout'

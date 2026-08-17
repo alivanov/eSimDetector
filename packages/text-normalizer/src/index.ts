@@ -23,7 +23,7 @@ export { unifySeparators, collapseWhitespace, stripPunctuation } from './separat
 export { splitLettersAndDigits } from './split-letters-digits';
 export { mapCyrillicToLatinLayout, correctKeyboardLayout } from './keyboard-layout';
 export { transliterateCyrillic } from './transliterate';
-export { expandSynonyms } from './synonyms';
+export { expandSynonyms, expandCompoundSynonyms } from './synonyms';
 export { tokenize } from './tokenize';
 
 export type { AttributeExtractionResult } from './attributes';

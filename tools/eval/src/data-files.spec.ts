@@ -5,7 +5,11 @@ import type {
   QueryAttributes,
   QuerySlots,
 } from '@esim-detector/text-normalizer';
-import { parseNormalizationDictionary, normalizeQuery } from '@esim-detector/text-normalizer';
+import {
+  parseNormalizationDictionary,
+  normalizeQuery,
+  expandCompoundSynonyms,
+} from '@esim-detector/text-normalizer';
 
 /**
  * Проверяет файлы данных `data/catalog/aliases.json` и `data/fixtures/queries.golden.json`
@@ -307,6 +311,42 @@ describe('data/catalog/aliases.json', () => {
 
     expect(result.ok).toBe(true);
   });
+});
+
+/**
+ * Ни один ключ словаря синонимов не должен быть мёртвым грузом (docs/04 §4.10.1): находка
+ * агента 2.5 показала, что смешанные буквенно-цифровые сокращения (`s23u`, `с23`) были
+ * недостижимы при обычном порядке конвейера, поскольку `splitLettersAndDigits` разбивал такой
+ * токен на части раньше, чем словарь успевал его увидеть целиком. `expandCompoundSynonyms`
+ * (`normalize-query.ts`, ранний проход ДО `splitLettersAndDigits`) устраняет эту проблему —
+ * этот тест проверяет по НАСТОЯЩЕМУ словарю `data/catalog/aliases.json`, что КАЖДЫЙ такой ключ
+ * действительно раскрывается, а не просто "теоретически должен".
+ */
+describe('словарь синонимов: смешанные буквенно-цифровые ключи достижимы (docs/04 §4.10.1)', () => {
+  const dict = dictionary();
+  const mixedAlphanumericKeys = Object.keys(dict.synonyms).filter(
+    (key) => /\p{L}/u.test(key) && /\p{Nd}/u.test(key),
+  );
+
+  it('в словаре есть хотя бы один смешанный буквенно-цифровой ключ (иначе тест ничего не проверяет)', () => {
+    expect(mixedAlphanumericKeys.length).toBeGreaterThan(0);
+  });
+
+  it.each(mixedAlphanumericKeys)(
+    'expandCompoundSynonyms раскрывает ключ "%s" целиком, ДО splitLettersAndDigits',
+    (key) => {
+      const expansion = dict.synonyms[key];
+      expect(expandCompoundSynonyms([key], dict)).toEqual(expansion);
+    },
+  );
+
+  it.each(mixedAlphanumericKeys)(
+    'normalizeQuery на ключе "%s" не оставляет исходный смешанный токен в unparsed',
+    (key) => {
+      const result = normalizeQuery(key, dict);
+      expect(result.slots.unparsed).not.toContain(key);
+    },
+  );
 });
 
 describe('data/fixtures/queries.golden.json', () => {

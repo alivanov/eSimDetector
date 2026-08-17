@@ -34,6 +34,99 @@ const GENERATION_PATTERN = /^\d+$/;
 const WORD_PATTERN = /^[a-z]+$/;
 
 /**
+ * Модификаторы, для которых имеет смысл проверять "испорченное" (на одну правку) написание —
+ * ИСКЛЮЧАЯ короткие `a` и `fe`: у однобуквенных и двухбуквенных строк слишком много соседей на
+ * расстоянии одной правки (например, `s` от `a` — обычный второй словесный токен запроса вида
+ * `galaxy s23`, а не опечатка в модификаторе), поэтому проверка по ним даёт ложные срабатывания
+ * на самых обычных запросах, а не на опечатках (см. AGENTS.md, предметное правило 1: нельзя
+ * "чинить" неуверенность выдумыванием структуры, которой не было).
+ */
+const TYPO_CHECKABLE_MODIFIERS: readonly string[] = [...LINE_MODIFIERS].filter(
+  (modifier) => modifier.length >= 3,
+);
+
+/**
+ * Правда ли, что `token` отличается от `modifier` РОВНО на одну правку — вставку, удаление,
+ * замену символа или транспозицию двух соседних символов (тот же набор операций, что и
+ * OSA-вариант расстояния Дамерау—Левенштейна в `fuzzy-matcher`, ADR-018 относит этот примитив
+ * сразу к обоим пакетам). Реализован здесь заново, а не импортирован из `fuzzy-matcher`:
+ * обратная зависимость недопустима (`fuzzy-matcher` уже зависит от `text-normalizer` ради
+ * `QuerySlots`, ADR-019) — и не нужна: этому пакету достаточно ответа "да/нет" на короткой
+ * фиксированной строке модификатора, а не полной матрицы расстояний ради ранжирования.
+ */
+function isSingleEditAway(token: string, modifier: string): boolean {
+  const lengthDiff = token.length - modifier.length;
+  if (lengthDiff < -1 || lengthDiff > 1) {
+    return false;
+  }
+
+  if (lengthDiff === 0) {
+    let firstMismatch = -1;
+    let secondMismatch = -1;
+    for (let index = 0; index < token.length; index += 1) {
+      if (token.charAt(index) === modifier.charAt(index)) {
+        continue;
+      }
+      if (firstMismatch === -1) {
+        firstMismatch = index;
+      } else if (secondMismatch === -1) {
+        secondMismatch = index;
+      } else {
+        return false;
+      }
+    }
+    if (firstMismatch === -1) {
+      return false; // строки совпадают целиком — это не опечатка, а точное совпадение
+    }
+    if (secondMismatch === -1) {
+      return true; // ровно одна замена символа
+    }
+    return (
+      secondMismatch === firstMismatch + 1 &&
+      token.charAt(firstMismatch) === modifier.charAt(secondMismatch) &&
+      token.charAt(secondMismatch) === modifier.charAt(firstMismatch)
+    );
+  }
+
+  const longer = lengthDiff > 0 ? token : modifier;
+  const shorter = lengthDiff > 0 ? modifier : token;
+  let longerIndex = 0;
+  let shorterIndex = 0;
+  let usedSkip = false;
+  while (longerIndex < longer.length && shorterIndex < shorter.length) {
+    if (longer.charAt(longerIndex) === shorter.charAt(shorterIndex)) {
+      longerIndex += 1;
+      shorterIndex += 1;
+      continue;
+    }
+    if (usedSkip) {
+      return false;
+    }
+    usedSkip = true;
+    longerIndex += 1;
+  }
+  return true; // остаток (не более одного символа) — это и есть допустимая вставка/удаление
+}
+
+/**
+ * Похож ли словесный токен на модификатор с опечаткой (`amx` на `max`, `rpo`/`por` на `pro`,
+ * `ultr` на `ultra`) — AGENTS.md, предметное правило 1: испорченный токен, недостаточно похожий
+ * ни на что известное, не должен молча стать частью `family`. Короткие токены (< 3 символов)
+ * не проверяются по той же причине, что и короткие модификаторы в `TYPO_CHECKABLE_MODIFIERS`.
+ *
+ * ВАЖНО: это НЕ попытка исправить опечатку и признать модификатор распознанным — наоборот,
+ * найденное совпадение исключает токен из `family` (см. `parseSlots`) и он остаётся видимым
+ * поводом для уточнения в `unparsed`, а не тихо превращается в подтверждённый модификатор.
+ * Уверенность вместо неуверенности здесь не создаётся ни в одну, ни в другую сторону.
+ */
+function looksLikeCorruptedModifier(token: string): boolean {
+  if (token.length < 3) {
+    return false;
+  }
+  return TYPO_CHECKABLE_MODIFIERS.some((modifier) => isSingleEditAway(token, modifier));
+}
+
+/**
  * Множество стоп-слов в обеих формах (как есть и транслитерированной) — та же причина, что
  * и в attributes.ts: словарь хранит стоп-слова кириллицей, а к моменту слотового разбора
  * токены конвейера `normalizeQuery` уже транслитерированы.
@@ -102,14 +195,27 @@ export function parseSlots(
     }
   }
 
+  // Индекс словесного токена (а не индекс в `withoutGeneration`) — испорченный модификатор
+  // проверяется только СРЕДИ словесных токенов, начиная со второго: первый словесный токен —
+  // всегда кандидат в бренд (см. `splitBrandAndFamily`), и его не с чем спутать с
+  // модификатором линейки, который по построению запроса идёт позже (docs/04 §4.2, §4.5).
   const wordTokens: string[] = [];
   const unparsed: string[] = [];
+  let wordTokenPosition = 0;
   for (const token of withoutGeneration) {
-    if (WORD_PATTERN.test(token)) {
-      wordTokens.push(token);
-    } else {
+    if (!WORD_PATTERN.test(token)) {
       unparsed.push(token);
+      continue;
     }
+    if (wordTokenPosition > 0 && looksLikeCorruptedModifier(token)) {
+      // Не модификатор (иначе он совпал бы точно и ушёл бы в `modifiers` выше) и не часть
+      // семейства — испорченный токен обязан остаться видимым поводом для уточнения, а не
+      // молча раствориться в `family` (AGENTS.md, предметное правило 1; дефект "amx").
+      unparsed.push(token);
+    } else {
+      wordTokens.push(token);
+    }
+    wordTokenPosition += 1;
   }
 
   const { brand, family } = splitBrandAndFamily(wordTokens);

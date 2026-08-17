@@ -1,5 +1,5 @@
 import type { NormalizationDictionary } from './types';
-import { expandSynonyms } from './synonyms';
+import { expandSynonyms, expandCompoundSynonyms } from './synonyms';
 
 function buildDictionary(
   synonyms: NormalizationDictionary['synonyms'] = {},
@@ -55,5 +55,29 @@ describe('expandSynonyms', () => {
 
   it('на пустом списке токенов возвращает пустой список', () => {
     expect(expandSynonyms([], buildDictionary())).toEqual([]);
+  });
+});
+
+describe('expandCompoundSynonyms — docs/04 §4.10.1, ранний проход ДО splitLettersAndDigits', () => {
+  it('раскрывает смешанный буквенно-цифровой токен, найденный в словаре ("s23u" → "galaxy s23 ultra")', () => {
+    const dictionary = buildDictionary({ s23u: ['galaxy', 's23', 'ultra'] });
+
+    expect(expandCompoundSynonyms(['s23u'], dictionary)).toEqual(['galaxy', 's23', 'ultra']);
+  });
+
+  it('оставляет смешанный токен без изменений, если для него нет записи в словаре', () => {
+    const dictionary = buildDictionary({ s23u: ['galaxy', 's23', 'ultra'] });
+
+    expect(expandCompoundSynonyms(['a1b2'], dictionary)).toEqual(['a1b2']);
+  });
+
+  it('не трогает токен без цифр или без букв — им занимается основной проход expandSynonyms', () => {
+    const dictionary = buildDictionary({ нот: ['note'], s23u: ['galaxy', 's23', 'ultra'] });
+
+    expect(expandCompoundSynonyms(['нот', '23', 'iphone'], dictionary)).toEqual([
+      'нот',
+      '23',
+      'iphone',
+    ]);
   });
 });
