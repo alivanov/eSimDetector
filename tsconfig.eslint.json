@@ -4,5 +4,10 @@
   "compilerOptions": {
     "types": ["node", "jest"]
   },
-  "include": ["eslint.config.ts", "apps/api/jest.config.ts", "packages/test-utils/jest.config.ts"]
+  "include": [
+    "eslint.config.ts",
+    "apps/api/jest.config.ts",
+    "packages/test-utils/jest.config.ts",
+    "packages/text-normalizer/jest.config.ts"
+  ]
 }

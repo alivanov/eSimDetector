@@ -28,6 +28,7 @@ export default tseslint.config(
             'eslint.config.ts',
             'apps/api/jest.config.ts',
             'packages/test-utils/jest.config.ts',
+            'packages/text-normalizer/jest.config.ts',
           ],
           defaultProject: 'tsconfig.eslint.json',
         },
