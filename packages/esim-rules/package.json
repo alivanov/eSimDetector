@@ -1,0 +1,12 @@
+{
+  "name": "@esim-detector/esim-rules",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Правила вывода статуса поддержки eSIM и формирования объяснения",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  }
+}

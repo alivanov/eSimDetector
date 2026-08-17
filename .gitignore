@@ -1,0 +1,31 @@
+# Зависимости
+node_modules/
+.pnpm-store/
+
+# Сборки
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# Переменные окружения
+.env
+.env.*
+!.env.example
+
+# Отчёты стенда оценки качества
+reports/
+
+# Логи
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# IDE и ОС
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# mongodb-memory-server кэш бинарников
+.cache/

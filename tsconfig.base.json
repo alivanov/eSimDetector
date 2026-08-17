@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "CommonJS",
+    "paths": {
+      "@esim-detector/contracts": ["./packages/contracts/src/index.ts"],
+      "@esim-detector/text-normalizer": ["./packages/text-normalizer/src/index.ts"],
+      "@esim-detector/fuzzy-matcher": ["./packages/fuzzy-matcher/src/index.ts"],
+      "@esim-detector/esim-rules": ["./packages/esim-rules/src/index.ts"],
+      "@esim-detector/signals-collector": ["./packages/signals-collector/src/index.ts"],
+      "@esim-detector/test-utils": ["./packages/test-utils/src/index.ts"]
+    },
+
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "verbatimModuleSyntax": false,
+
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "declaration": false,
+    "sourceMap": true,
+
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "useDefineForClassFields": false
+  }
+}

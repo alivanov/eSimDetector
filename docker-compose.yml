@@ -1,0 +1,41 @@
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - '27017:27017'
+    healthcheck:
+      test: ['CMD', 'mongosh', '--eval', 'db.adminCommand("ping")']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      PORT: ${PORT:-3000}
+      MONGODB_URI: ${MONGODB_URI:-mongodb://mongo:27017/esim}
+      NODE_ENV: ${NODE_ENV:-production}
+      CORS_ORIGINS: ${CORS_ORIGINS:-*}
+      API_KEYS: ${API_KEYS:-}
+      RATE_LIMIT_RPM: ${RATE_LIMIT_RPM:-120}
+      CONFIDENCE_ANSWER_THRESHOLD: ${CONFIDENCE_ANSWER_THRESHOLD:-0.8}
+      CONFIDENCE_GAP_THRESHOLD: ${CONFIDENCE_GAP_THRESHOLD:-0.08}
+      ALLOW_UNVERIFIED_CATALOG_ANSWERS: ${ALLOW_UNVERIFIED_CATALOG_ANSWERS:-false}
+      ENABLE_LLM_FALLBACK: ${ENABLE_LLM_FALLBACK:-false}
+      ADMIN_TOKEN: ${ADMIN_TOKEN:-}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      RESOLUTION_LOG_TTL_DAYS: ${RESOLUTION_LOG_TTL_DAYS:-30}
+    ports:
+      - '3000:3000'
+
+volumes:
+  mongo-data:

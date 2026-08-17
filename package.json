@@ -1,0 +1,33 @@
+{
+  "name": "esim-detector",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Сервис определения устройства пользователя и статуса поддержки eSIM",
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "build": "pnpm -r --if-present run build",
+    "dev": "pnpm -r --if-present --parallel run dev",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "pnpm -r --if-present run typecheck",
+    "test": "pnpm -r --if-present run test"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/jest": "30.0.0",
+    "@types/node": "26.2.0",
+    "eslint": "10.8.1",
+    "eslint-config-prettier": "10.1.8",
+    "jest": "30.4.2",
+    "jiti": "2.7.0",
+    "prettier": "3.9.6",
+    "ts-jest": "29.4.12",
+    "typescript": "^6",
+    "typescript-eslint": "8.67.0"
+  }
+}

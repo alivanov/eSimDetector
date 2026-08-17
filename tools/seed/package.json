@@ -1,0 +1,9 @@
+{
+  "name": "@esim-detector/tools-seed",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Импорт справочника устройств в MongoDB: подкоманды import, consensus, load, rebuild-signatures, export-overrides, verify (docs/14-catalog-ingestion.md)",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  }
+}

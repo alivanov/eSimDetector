@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["node", "jest"]
+  },
+  "include": ["eslint.config.ts", "apps/api/jest.config.ts", "packages/test-utils/jest.config.ts"]
+}

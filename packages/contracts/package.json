@@ -1,0 +1,12 @@
+{
+  "name": "@esim-detector/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Типы запросов/ответов API и схемы валидации, общие для сервера и клиентов",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  }
+}

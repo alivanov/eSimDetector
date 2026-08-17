@@ -1,0 +1,17 @@
+{
+  "name": "@esim-detector/test-utils",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Изолированная тестовая база данных на mongodb-memory-server и защитная проверка перед разрушающими операциями",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "jest"
+  },
+  "dependencies": {
+    "mongodb-memory-server": "11.2.0",
+    "mongoose": "9.9.2"
+  }
+}

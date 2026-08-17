@@ -17,39 +17,39 @@
 
 Кодировка UTF-8, разделитель — запятая, значения с запятыми в двойных кавычках, первая строка — заголовок с ровно такими именами столбцов.
 
-| Столбец | Обязателен | Допустимые значения | Пояснение |
-|---|---|---|---|
-| `brand` | да | Латиницей: `Apple`, `Samsung`, `Xiaomi`, `Honor`, `Huawei`, `Google`, `realme`, `OPPO`, `OnePlus`, `vivo`, `Tecno`, `Infinix`, `ZTE`, `Nothing`, `Motorola`, `ASUS`, `Sony` | Только бренд, без названия модели |
-| `marketing_name` | да | Официальное название без бренда: `Galaxy S24 Ultra`, `iPhone 15 Pro`, `Redmi Note 13 Pro+ 5G` | Без объёма памяти и цвета |
-| `model_codes` | нет | Коды через `\|`: `SM-S928B\|SM-S9280` | **Только при уверенности.** Пусто, если не уверены. Выдумывать запрещено |
-| `platform` | да | `ios`, `android`, `harmonyos`, `other` | |
-| `device_type` | да | `phone`, `tablet`, `watch`, `laptop`, `other` | |
-| `release_year` | да | Год, например `2024` | |
-| `esim_support` | да | `yes`, `no`, `conditional`, `unknown` | `conditional` — если зависит от региона или версии устройства |
-| `esim_conditions` | нет | `region:CN=no`, `region:US=esim-only`, `firmware:region-dependent` | Заполняется при `conditional` |
-| `dual_sim` | нет | `physical+esim`, `dual-esim`, `esim-only`, `none`, `unknown` | |
-| `max_esim_profiles` | нет | Целое число | Число хранимых профилей |
-| `os_min_version` | нет | `13.0` | Версия ОС на момент выпуска |
-| `os_max_version` | нет | `18` или пусто | Последняя поддерживаемая версия ОС; критично для iPhone |
-| `ru_market` | нет | `official`, `parallel`, `none`, `unknown` | Присутствие на рынке РФ |
-| `source_url` | нет | URL | **Только реально существующая страница.** Пусто, если не уверены |
-| `confidence` | да | `high`, `medium`, `low` | Самооценка уверенности модели в статусе eSIM |
-| `notes` | нет | Свободный текст | Существенные оговорки |
+| Столбец             | Обязателен | Допустимые значения                                                                                                                                                         | Пояснение                                                                |
+| ------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `brand`             | да         | Латиницей: `Apple`, `Samsung`, `Xiaomi`, `Honor`, `Huawei`, `Google`, `realme`, `OPPO`, `OnePlus`, `vivo`, `Tecno`, `Infinix`, `ZTE`, `Nothing`, `Motorola`, `ASUS`, `Sony` | Только бренд, без названия модели                                        |
+| `marketing_name`    | да         | Официальное название без бренда: `Galaxy S24 Ultra`, `iPhone 15 Pro`, `Redmi Note 13 Pro+ 5G`                                                                               | Без объёма памяти и цвета                                                |
+| `model_codes`       | нет        | Коды через `\|`: `SM-S928B\|SM-S9280`                                                                                                                                       | **Только при уверенности.** Пусто, если не уверены. Выдумывать запрещено |
+| `platform`          | да         | `ios`, `android`, `harmonyos`, `other`                                                                                                                                      |                                                                          |
+| `device_type`       | да         | `phone`, `tablet`, `watch`, `laptop`, `other`                                                                                                                               |                                                                          |
+| `release_year`      | да         | Год, например `2024`                                                                                                                                                        |                                                                          |
+| `esim_support`      | да         | `yes`, `no`, `conditional`, `unknown`                                                                                                                                       | `conditional` — если зависит от региона или версии устройства            |
+| `esim_conditions`   | нет        | `region:CN=no`, `region:US=esim-only`, `firmware:region-dependent`                                                                                                          | Заполняется при `conditional`                                            |
+| `dual_sim`          | нет        | `physical+esim`, `dual-esim`, `esim-only`, `none`, `unknown`                                                                                                                |                                                                          |
+| `max_esim_profiles` | нет        | Целое число                                                                                                                                                                 | Число хранимых профилей                                                  |
+| `os_min_version`    | нет        | `13.0`                                                                                                                                                                      | Версия ОС на момент выпуска                                              |
+| `os_max_version`    | нет        | `18` или пусто                                                                                                                                                              | Последняя поддерживаемая версия ОС; критично для iPhone                  |
+| `ru_market`         | нет        | `official`, `parallel`, `none`, `unknown`                                                                                                                                   | Присутствие на рынке РФ                                                  |
+| `source_url`        | нет        | URL                                                                                                                                                                         | **Только реально существующая страница.** Пусто, если не уверены         |
+| `confidence`        | да         | `high`, `medium`, `low`                                                                                                                                                     | Самооценка уверенности модели в статусе eSIM                             |
+| `notes`             | нет        | Свободный текст                                                                                                                                                             | Существенные оговорки                                                    |
 
 ## А.3. Схема `families.csv`
 
 Правила уровня линейки для длинного хвоста бюджетных устройств, которые нецелесообразно перечислять поштучно.
 
-| Столбец | Обязателен | Пояснение |
-|---|---|---|
-| `brand` | да | Как в `devices.csv` |
-| `family` | да | Линейка: `Redmi A`, `Galaxy A0x`, `Redmi Note`, `Galaxy M` |
-| `years_from` | да | Год начала линейки |
-| `years_to` | нет | Год окончания, пусто для актуальных |
-| `esim_default` | да | `yes`, `no`, `mixed`, `unknown` — типичный статус для линейки |
-| `exceptions` | нет | Модели-исключения через `\|` |
-| `confidence` | да | `high`, `medium`, `low` |
-| `notes` | нет | Пояснение |
+| Столбец        | Обязателен | Пояснение                                                     |
+| -------------- | ---------- | ------------------------------------------------------------- |
+| `brand`        | да         | Как в `devices.csv`                                           |
+| `family`       | да         | Линейка: `Redmi A`, `Galaxy A0x`, `Redmi Note`, `Galaxy M`    |
+| `years_from`   | да         | Год начала линейки                                            |
+| `years_to`     | нет        | Год окончания, пусто для актуальных                           |
+| `esim_default` | да         | `yes`, `no`, `mixed`, `unknown` — типичный статус для линейки |
+| `exceptions`   | нет        | Модели-исключения через `\|`                                  |
+| `confidence`   | да         | `high`, `medium`, `low`                                       |
+| `notes`        | нет        | Пояснение                                                     |
 
 Правила линейки используются для распознавания устройства и сужения набора кандидатов; самостоятельно давать отрицательный ответ они начинают только после подтверждения модератором.
 
@@ -115,23 +115,23 @@ confidence: high | medium | low
 
 Каждая партия — отдельный запрос в новом диалоге, чтобы контекст предыдущих ответов не влиял на следующие.
 
-| № | Партия | Ожидаемый объём |
-|---|---|---|
-| 1 | Все модели Apple iPhone, начиная с iPhone 6, с указанием последней поддерживаемой версии iOS | ~35 строк |
-| 2 | Samsung Galaxy S, начиная с Galaxy S9 | ~35 строк |
-| 3 | Samsung Galaxy Z Fold и Z Flip, все поколения; Galaxy Note, начиная с Note 9 | ~25 строк |
-| 4 | Samsung Galaxy A и M, начиная с 2020 года | ~60 строк |
-| 5 | Xiaomi флагманские серии: Mi 9–Mi 14, Xiaomi 14–15, Xiaomi T-серия | ~40 строк |
-| 6 | Redmi Note, начиная с Note 8; Redmi основная серия; POCO | ~60 строк |
-| 7 | Honor: Magic, серии 50–200, X-серия, начиная с 2020 года | ~50 строк |
-| 8 | Huawei: P, Mate, Nova, начиная с P30 и Mate 20 | ~45 строк |
-| 9 | Google Pixel, все поколения, начиная с Pixel 2 | ~30 строк |
-| 10 | realme, OPPO, OnePlus, начиная с 2020 года | ~60 строк |
-| 11 | vivo, Tecno, Infinix, ZTE, Nubia, начиная с 2020 года | ~60 строк |
-| 12 | Nothing, Motorola, ASUS, Sony, Fairphone, HMD/Nokia, начиная с 2020 года | ~50 строк |
-| 13 | Планшеты с eSIM: Apple iPad, Samsung Galaxy Tab, Huawei MatePad | ~40 строк |
-| 14 | Умные часы с eSIM: Apple Watch, Galaxy Watch, Huawei Watch | ~40 строк |
-| 15 | Линейки для `families.csv`: все перечисленные бренды | ~60 строк |
+| №   | Партия                                                                                       | Ожидаемый объём |
+| --- | -------------------------------------------------------------------------------------------- | --------------- |
+| 1   | Все модели Apple iPhone, начиная с iPhone 6, с указанием последней поддерживаемой версии iOS | ~35 строк       |
+| 2   | Samsung Galaxy S, начиная с Galaxy S9                                                        | ~35 строк       |
+| 3   | Samsung Galaxy Z Fold и Z Flip, все поколения; Galaxy Note, начиная с Note 9                 | ~25 строк       |
+| 4   | Samsung Galaxy A и M, начиная с 2020 года                                                    | ~60 строк       |
+| 5   | Xiaomi флагманские серии: Mi 9–Mi 14, Xiaomi 14–15, Xiaomi T-серия                           | ~40 строк       |
+| 6   | Redmi Note, начиная с Note 8; Redmi основная серия; POCO                                     | ~60 строк       |
+| 7   | Honor: Magic, серии 50–200, X-серия, начиная с 2020 года                                     | ~50 строк       |
+| 8   | Huawei: P, Mate, Nova, начиная с P30 и Mate 20                                               | ~45 строк       |
+| 9   | Google Pixel, все поколения, начиная с Pixel 2                                               | ~30 строк       |
+| 10  | realme, OPPO, OnePlus, начиная с 2020 года                                                   | ~60 строк       |
+| 11  | vivo, Tecno, Infinix, ZTE, Nubia, начиная с 2020 года                                        | ~60 строк       |
+| 12  | Nothing, Motorola, ASUS, Sony, Fairphone, HMD/Nokia, начиная с 2020 года                     | ~50 строк       |
+| 13  | Планшеты с eSIM: Apple iPad, Samsung Galaxy Tab, Huawei MatePad                              | ~40 строк       |
+| 14  | Умные часы с eSIM: Apple Watch, Galaxy Watch, Huawei Watch                                   | ~40 строк       |
+| 15  | Линейки для `families.csv`: все перечисленные бренды                                         | ~60 строк       |
 
 Партии 13 и 14 нужны не для полноты, а для корректного распознавания типа устройства: важно не выдать ответ про телефон пользователю планшета.
 
