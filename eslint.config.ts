@@ -29,6 +29,7 @@ export default tseslint.config(
             'apps/api/jest.config.ts',
             'packages/test-utils/jest.config.ts',
             'packages/text-normalizer/jest.config.ts',
+            'packages/fuzzy-matcher/jest.config.ts',
           ],
           defaultProject: 'tsconfig.eslint.json',
         },

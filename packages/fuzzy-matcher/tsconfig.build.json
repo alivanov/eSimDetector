@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    // Переопределение "paths" целиком (а не слияние с базовым) — стандартное поведение
+    // "extends" в TypeScript. Достаточно одной записи: этому пакету при сборке нужен
+    // только `@esim-detector/text-normalizer`, и то — не как исходники (см. tsconfig.json,
+    // где "rootDir" расширен до корня репозитория ради typecheck), а как уже собранные
+    // объявления типов: иначе `tsc` включил бы файлы text-normalizer в компиляцию и
+    // потребовал бы снова расширять "rootDir" — уже для эмита, что испортило бы структуру
+    // dist/ этого пакета (см. docs/04-matching-algorithm.md, поверхность экспортов
+    // fuzzy-matcher, раздел о сборке). Требует, чтобы `text-normalizer` был собран раньше
+    // (`pnpm -r run build` строит рабочие пространства в топологическом порядке благодаря
+    // объявленной зависимости "@esim-detector/text-normalizer" в package.json).
+    "paths": {
+      "@esim-detector/text-normalizer": ["../text-normalizer/dist/index.d.ts"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["src/**/*.spec.ts"]
+}

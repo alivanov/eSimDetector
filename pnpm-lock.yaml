@@ -119,7 +119,11 @@ importers:
 
   packages/esim-rules: {}
 
-  packages/fuzzy-matcher: {}
+  packages/fuzzy-matcher:
+    dependencies:
+      '@esim-detector/text-normalizer':
+        specifier: workspace:*
+        version: link:../text-normalizer
 
   packages/signals-collector: {}
 
