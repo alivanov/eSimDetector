@@ -143,8 +143,8 @@ export function buildDevice(input: BuildDeviceInput): Device {
 
   const aliases = [
     ...new Set(
-      [representative.marketingName, displayName, representative.id.replace(/-/g, ' ')].map((value) =>
-        value.toLowerCase(),
+      [representative.marketingName, displayName, representative.id.replace(/-/g, ' ')].map(
+        (value) => value.toLowerCase(),
       ),
     ),
   ];
@@ -183,13 +183,17 @@ export function buildDevice(input: BuildDeviceInput): Device {
     releaseYear: representative.releaseYear,
     marketPresenceRu: toMarketPresence(representative.ruMarket),
     popularity: estimatePopularity(representative.releaseYear, now),
-    sources: [...buildSources(representative.sourceUrl, provenanceSource, mergeDecision.source, now)],
+    sources: [
+      ...buildSources(representative.sourceUrl, provenanceSource, mergeDecision.source, now),
+    ],
     dataConfidence,
     provenance: {
       source: provenanceSource,
-      batchId: mergeDecision.source === 'rule:apple-generation' ? null : representative.provenance.batchId,
+      batchId:
+        mergeDecision.source === 'rule:apple-generation' ? null : representative.provenance.batchId,
       importedAt: now,
-      agreementCount: mergeDecision.source === 'rule:apple-generation' ? null : consensusDevice.agreementCount,
+      agreementCount:
+        mergeDecision.source === 'rule:apple-generation' ? null : consensusDevice.agreementCount,
     },
     status: 'active',
     createdAt: now,

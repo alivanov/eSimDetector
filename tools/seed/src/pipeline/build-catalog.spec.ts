@@ -84,17 +84,31 @@ describe('buildCatalog', () => {
     });
     expect(result.devices).toEqual([]);
     expect(result.appleRuleAppliedCount).toBe(1);
-    expect(result.quarantine).toEqual([
-      expect.objectContaining({ code: 'IOS_FIELDS_MISSING' }),
-    ]);
+    expect(result.quarantine).toEqual([expect.objectContaining({ code: 'IOS_FIELDS_MISSING' })]);
   });
 
   it('вычисляет агрегаты уровня линейки для отчёта', () => {
     // Каждая из трёх моделей линейки подтверждена ДВУМЯ источниками — уровень "derived" для
     // каждой записи, поэтому агрегат по линейке (минимум 3 записи) учитывает все три.
     const candidatesForId = (id: string, marketingName: string): DeviceCandidate[] => [
-      candidate({ id, brand: 'xiaomi', brandTitle: 'Xiaomi', family: 'redmi-a', marketingName, esimSupport: 'no', provenance: { ...candidate().provenance, source: 'llm:model-a' } }),
-      candidate({ id, brand: 'xiaomi', brandTitle: 'Xiaomi', family: 'redmi-a', marketingName, esimSupport: 'no', provenance: { ...candidate().provenance, source: 'llm:model-b' } }),
+      candidate({
+        id,
+        brand: 'xiaomi',
+        brandTitle: 'Xiaomi',
+        family: 'redmi-a',
+        marketingName,
+        esimSupport: 'no',
+        provenance: { ...candidate().provenance, source: 'llm:model-a' },
+      }),
+      candidate({
+        id,
+        brand: 'xiaomi',
+        brandTitle: 'Xiaomi',
+        family: 'redmi-a',
+        marketingName,
+        esimSupport: 'no',
+        provenance: { ...candidate().provenance, source: 'llm:model-b' },
+      }),
     ];
     const result = buildCatalog({
       candidates: [
@@ -108,14 +122,23 @@ describe('buildCatalog', () => {
     });
     expect(result.familyAggregates).toHaveLength(1);
     expect(result.familyAggregates[0]?.rule).toEqual(
-      expect.objectContaining({ brand: 'xiaomi', family: 'redmi-a', status: 'not_supported', recordCount: 3 }),
+      expect.objectContaining({
+        brand: 'xiaomi',
+        family: 'redmi-a',
+        status: 'not_supported',
+        recordCount: 3,
+      }),
     );
   });
 
   it('сообщает нарушения инвариантов, не прерывая построение (коллизия кода между разными id из разных источников)', () => {
     const result = buildCatalog({
       candidates: [
-        candidate({ id: 'samsung-galaxy-a21', marketingName: 'Galaxy A21', modelCodes: ['SM-A217F'] }),
+        candidate({
+          id: 'samsung-galaxy-a21',
+          marketingName: 'Galaxy A21',
+          modelCodes: ['SM-A217F'],
+        }),
         candidate({
           id: 'samsung-galaxy-a21s',
           marketingName: 'Galaxy A21s',
@@ -130,8 +153,8 @@ describe('buildCatalog', () => {
     // Оба кандидата — единственный источник для своего id, поэтому оба принимаются консенсусом
     // (внутриисточниковая коллизия кодов здесь неприменима — коды пришли от РАЗНЫХ источников).
     expect(result.devices).toHaveLength(2);
-    expect(result.invariantViolations.some((violation) => violation.code === 'DUPLICATE_MODEL_CODE')).toBe(
-      true,
-    );
+    expect(
+      result.invariantViolations.some((violation) => violation.code === 'DUPLICATE_MODEL_CODE'),
+    ).toBe(true);
   });
 });

@@ -16,7 +16,9 @@ export async function readDevices(connection: Connection): Promise<readonly Devi
   return rawDevices.map((raw) => deviceSchema.parse(raw));
 }
 
-export async function readCatalogOverrides(connection: Connection): Promise<readonly CatalogOverride[]> {
+export async function readCatalogOverrides(
+  connection: Connection,
+): Promise<readonly CatalogOverride[]> {
   const rawOverrides = await connection.collection(CATALOG_OVERRIDES_COLLECTION).find().toArray();
   return rawOverrides.map((raw) => catalogOverrideSchema.parse(raw));
 }

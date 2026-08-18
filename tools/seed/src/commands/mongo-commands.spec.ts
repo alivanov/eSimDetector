@@ -72,7 +72,10 @@ describe('команды rebuild-signatures/export-overrides/verify (интег�
 
     const exported: unknown = readJson(join(root, 'samsung-galaxy-s24-ultra.json'));
     expect(exported).toEqual(
-      expect.objectContaining({ deviceId: 'samsung-galaxy-s24-ultra', reason: 'https://www.samsung.com/verified' }),
+      expect.objectContaining({
+        deviceId: 'samsung-galaxy-s24-ultra',
+        reason: 'https://www.samsung.com/verified',
+      }),
     );
   });
 
@@ -131,7 +134,9 @@ describe('команды rebuild-signatures/export-overrides/verify (интег�
           support: 'conditional',
           dualSim: 'physical+esim',
           maxProfiles: 2,
-          conditions: [{ scope: 'region', value: 'CN', support: 'not_supported', note: 'region:CN=no' }],
+          conditions: [
+            { scope: 'region', value: 'CN', support: 'not_supported', note: 'region:CN=no' },
+          ],
           clarifyingQuestion: {
             kind: 'region',
             question: 'В каком регионе приобретено устройство?',

@@ -68,7 +68,12 @@ describe('buildDevice', () => {
 
   it('строит запись со статусом "conditional" и заполненным clarifyingQuestion (инвариант §5.8 п.5)', () => {
     const conditions = [
-      { scope: 'region' as const, value: 'CN', support: 'not_supported' as const, note: 'region:CN=no' },
+      {
+        scope: 'region' as const,
+        value: 'CN',
+        support: 'not_supported' as const,
+        note: 'region:CN=no',
+      },
     ];
     const device = buildDevice({
       consensusDevice: consensusDevice({ esimSupport: 'conditional', esimConditions: conditions }),
@@ -87,7 +92,14 @@ describe('buildDevice', () => {
   it('запись правила Apple без sourceUrl получает источник-цитату на регламент (инвариант §5.8 п.6)', () => {
     const device = buildDevice({
       consensusDevice: consensusDevice({
-        representative: candidate({ id: 'apple-iphone-13', brand: 'apple', platform: 'ios', family: 'iphone', generation: 13, modifiers: [] }),
+        representative: candidate({
+          id: 'apple-iphone-13',
+          brand: 'apple',
+          platform: 'ios',
+          family: 'iphone',
+          generation: 13,
+          modifiers: [],
+        }),
       }),
       mergeDecision: { source: 'rule:apple-generation', ruleEsimSupport: 'supported', notices: [] },
       dataConfidence: 'verified',

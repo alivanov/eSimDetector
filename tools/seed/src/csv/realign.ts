@@ -67,11 +67,18 @@ function combinations(n: number, k: number): number[][] {
 }
 
 /** Строит финальный массив длины `columns.length`, вставляя пустые строки в позиции `insertPositions`. */
-function buildByInsertingEmpties(rawFields: readonly string[], insertPositions: readonly number[]): string[] {
+function buildByInsertingEmpties(
+  rawFields: readonly string[],
+  insertPositions: readonly number[],
+): string[] {
   const insertSet = new Set(insertPositions);
   const result: string[] = [];
   let rawIndex = 0;
-  for (let finalIndex = 0; result.length < rawFields.length + insertPositions.length; finalIndex += 1) {
+  for (
+    let finalIndex = 0;
+    result.length < rawFields.length + insertPositions.length;
+    finalIndex += 1
+  ) {
     if (insertSet.has(finalIndex)) {
       result.push('');
     } else {
@@ -190,7 +197,9 @@ export function realignFields(
 
   const firstCandidate = validCandidates[0];
   if (firstCandidate === undefined) {
-    throw new Error('Внутренняя ошибка: пустой список допустимых выравниваний после проверки длины');
+    throw new Error(
+      'Внутренняя ошибка: пустой список допустимых выравниваний после проверки длины',
+    );
   }
 
   const identityAgrees = identityIndexes.every((index) =>
@@ -205,7 +214,9 @@ export function realignFields(
   }
 
   const fields: (string | undefined)[] = columns.map((_, index) => {
-    const allAgree = validCandidates.every((candidate) => candidate[index] === firstCandidate[index]);
+    const allAgree = validCandidates.every(
+      (candidate) => candidate[index] === firstCandidate[index],
+    );
     return allAgree ? firstCandidate[index] : undefined;
   });
 

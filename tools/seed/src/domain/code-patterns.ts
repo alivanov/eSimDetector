@@ -38,7 +38,9 @@ export function parseCodePatterns(value: unknown): CodePatternParseResult {
     try {
       patterns.set(key.toLowerCase(), new RegExp(patternValue));
     } catch {
-      errors.push(`code-patterns.json["${key}"]: невалидное регулярное выражение "${patternValue}"`);
+      errors.push(
+        `code-patterns.json["${key}"]: невалидное регулярное выражение "${patternValue}"`,
+      );
     }
   }
 

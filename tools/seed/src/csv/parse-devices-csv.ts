@@ -25,7 +25,9 @@ const IDENTITY_INDEXES = IDENTITY_FIELD_KEYS.map((key) =>
 );
 
 const ESIM_SUPPORT_INDEX = DEVICES_CSV_COLUMNS.findIndex((column) => column.key === 'esimSupport');
-const ESIM_CONDITIONS_INDEX = DEVICES_CSV_COLUMNS.findIndex((column) => column.key === 'esimConditions');
+const ESIM_CONDITIONS_INDEX = DEVICES_CSV_COLUMNS.findIndex(
+  (column) => column.key === 'esimConditions',
+);
 
 function tokensLookLikeHeader(tokens: readonly string[]): boolean {
   const lowered = tokens.map((token) => token.trim().toLowerCase());

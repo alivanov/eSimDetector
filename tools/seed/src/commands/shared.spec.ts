@@ -59,7 +59,10 @@ describe('runAndBuildReport', () => {
   it('фильтрует по переданным источникам', () => {
     writeText(
       join(root, 'import/llm-model-b/02-samsung-galaxy-s.csv'),
-      [DEVICES_HEADER, 'Samsung,Galaxy S23,SM-S911B,android,phone,2023,yes,,,,,,official,,high,'].join('\n'),
+      [
+        DEVICES_HEADER,
+        'Samsung,Galaxy S23,SM-S911B,android,phone,2023,yes,,,,,,official,,high,',
+      ].join('\n'),
     );
 
     const { result } = runAndBuildReport({
@@ -75,7 +78,13 @@ describe('runAndBuildReport', () => {
 
   it('учитывает предыдущий снимок при построении отчёта', () => {
     const snapshotPath = join(root, 'snapshot.json');
-    writeJson(snapshotPath, [{ id: 'samsung-galaxy-s24-ultra', esimSupport: 'not_supported', dataConfidence: 'unverified' }]);
+    writeJson(snapshotPath, [
+      {
+        id: 'samsung-galaxy-s24-ultra',
+        esimSupport: 'not_supported',
+        dataConfidence: 'unverified',
+      },
+    ]);
 
     const { report } = runAndBuildReport({
       paths: makePaths(root),

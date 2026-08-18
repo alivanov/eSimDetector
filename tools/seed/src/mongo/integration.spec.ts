@@ -51,7 +51,9 @@ describe('mongo read/write (интеграция, withTestDatabase)', () => {
     const inserted = await loadScreenSignatures(db.connection, records);
 
     expect(inserted).toBe(1);
-    const stored = await db.connection.collection(SCREEN_SIGNATURES_COLLECTION).findOne({ signature: '390x844@3' });
+    const stored = await db.connection
+      .collection(SCREEN_SIGNATURES_COLLECTION)
+      .findOne({ signature: '390x844@3' });
     expect(stored?.['candidates']).toEqual(['apple-iphone-13']);
   });
 
@@ -91,7 +93,10 @@ describe('mongo read/write (интеграция, withTestDatabase)', () => {
       updatedAt: new Date(),
     });
 
-    const device = buildSampleDevice({ _id: 'samsung-galaxy-s24-ultra', dataConfidence: 'unverified' });
+    const device = buildSampleDevice({
+      _id: 'samsung-galaxy-s24-ultra',
+      dataConfidence: 'unverified',
+    });
     await loadDevices(db.connection, [device]);
     await loadDevices(db.connection, [device]); // повторная загрузка не трогает overrides
 

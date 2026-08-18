@@ -1,10 +1,18 @@
-import { applyCatalogOverride, validateCatalogInvariants, type EsimSupport } from '@esim-detector/contracts';
+import {
+  applyCatalogOverride,
+  validateCatalogInvariants,
+  type EsimSupport,
+} from '@esim-detector/contracts';
 
 import { defaultPipelinePaths } from '../defaults';
 import { fileExists, readJson } from '../io/files';
 import { connectToMongo, disconnectFromMongo } from '../mongo/connection';
 import { readCatalogOverrides, readDevices } from '../mongo/read-collections';
-import { compareToReference, parseReferenceFile, type ReferenceEsimSupport } from '../pipeline/reference';
+import {
+  compareToReference,
+  parseReferenceFile,
+  type ReferenceEsimSupport,
+} from '../pipeline/reference';
 
 /** `Device.esim.support` ("supported"/"not_supported"/"conditional") → форма эталона ("yes"/"no"/"conditional"). */
 function toReferenceSupport(value: EsimSupport): ReferenceEsimSupport {
@@ -33,9 +41,14 @@ export async function runVerifyCommand(options: VerifyOptions): Promise<number> 
   const connection = await connectToMongo(options.mongoUri);
   let exitCode = 0;
   try {
-    const [devices, overrides] = await Promise.all([readDevices(connection), readCatalogOverrides(connection)]);
+    const [devices, overrides] = await Promise.all([
+      readDevices(connection),
+      readCatalogOverrides(connection),
+    ]);
     const overrideByDeviceId = new Map(overrides.map((override) => [override.deviceId, override]));
-    const resolvedDevices = devices.map((device) => applyCatalogOverride(device, overrideByDeviceId.get(device._id)));
+    const resolvedDevices = devices.map((device) =>
+      applyCatalogOverride(device, overrideByDeviceId.get(device._id)),
+    );
 
     const invariantResult = validateCatalogInvariants(resolvedDevices);
     process.stdout.write(`Устройств в базе: ${resolvedDevices.length}\n`);
@@ -55,7 +68,9 @@ export async function runVerifyCommand(options: VerifyOptions): Promise<number> 
     } else {
       const parsed = parseReferenceFile(readJson(referencePath));
       if (!parsed.ok) {
-        process.stderr.write(`catalog.reference.json не прошёл валидацию: ${parsed.errors.join('; ')}\n`);
+        process.stderr.write(
+          `catalog.reference.json не прошёл валидацию: ${parsed.errors.join('; ')}\n`,
+        );
         exitCode = 1;
       } else {
         const deviceStatuses = new Map(

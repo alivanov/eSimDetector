@@ -3,7 +3,9 @@ import { assignDataConfidence } from './confidence';
 describe('assignDataConfidence', () => {
   it('курируемое ядро всегда даёт "verified"', () => {
     expect(assignDataConfidence('curated', 'unanimous', 'supported', true)).toBe('verified');
-    expect(assignDataConfidence('curated', 'single-source', 'not_supported', false)).toBe('verified');
+    expect(assignDataConfidence('curated', 'single-source', 'not_supported', false)).toBe(
+      'verified',
+    );
   });
 
   it('детерминированное правило Apple всегда даёт "verified"', () => {

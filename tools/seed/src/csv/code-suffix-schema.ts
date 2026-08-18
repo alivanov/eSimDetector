@@ -1,13 +1,7 @@
 /** Схема столбцов партии 16 — `code-suffixes.csv` (docs/appendix-a-llm-csv-request.md §А.10). */
 
 export type CodeSuffixCsvFieldKey =
-  | 'brand'
-  | 'codeSuffix'
-  | 'codeExample'
-  | 'region'
-  | 'esimEffect'
-  | 'confidence'
-  | 'notes';
+  'brand' | 'codeSuffix' | 'codeExample' | 'region' | 'esimEffect' | 'confidence' | 'notes';
 
 export interface CodeSuffixCsvColumn {
   readonly key: CodeSuffixCsvFieldKey;
@@ -47,7 +41,12 @@ export const CODE_SUFFIX_CSV_COLUMNS: readonly CodeSuffixCsvColumn[] = [
     required: true,
     enumValues: ['supported', 'not_supported', 'same_as_global', 'unknown'],
   },
-  { key: 'confidence', header: 'confidence', required: true, enumValues: ['high', 'medium', 'low'] },
+  {
+    key: 'confidence',
+    header: 'confidence',
+    required: true,
+    enumValues: ['high', 'medium', 'low'],
+  },
   { key: 'notes', header: 'notes', required: false },
 ];
 

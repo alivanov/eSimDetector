@@ -93,7 +93,8 @@ function buildRepresentative(group: readonly DeviceCandidate[]): DeviceCandidate
     throw new Error('Внутренняя ошибка: пустая группа кандидатов консенсуса');
   }
   const modelCodes = [...new Set(group.flatMap((candidate) => candidate.modelCodes))];
-  const releaseYear = pickMajority(group.map((candidate) => candidate.releaseYear)) ?? first.releaseYear;
+  const releaseYear =
+    pickMajority(group.map((candidate) => candidate.releaseYear)) ?? first.releaseYear;
   const dualSim = pickMajority(group.map((candidate) => candidate.dualSim));
   const ruMarket = pickMajority(group.map((candidate) => candidate.ruMarket));
   const osMinVersion = pickMajority(group.map((candidate) => candidate.osMinVersion));
@@ -169,9 +170,13 @@ export function resolveConsensus(candidates: readonly DeviceCandidate[]): Consen
   for (const rawGroup of groupById(candidates).values()) {
     const group = oneCandidatePerSource(rawGroup);
     const abstaining = group.filter((candidate) => candidate.esimSupport === 'unknown');
-    const voting = group.filter((candidate): candidate is DeviceCandidate & {
-      esimSupport: 'yes' | 'no' | 'conditional';
-    } => candidate.esimSupport !== 'unknown');
+    const voting = group.filter(
+      (
+        candidate,
+      ): candidate is DeviceCandidate & {
+        esimSupport: 'yes' | 'no' | 'conditional';
+      } => candidate.esimSupport !== 'unknown',
+    );
 
     if (voting.length === 0) {
       noDataCount += 1;

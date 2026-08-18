@@ -5,7 +5,12 @@ import { join } from 'node:path';
 import { buildSampleDevice } from '@esim-detector/contracts';
 
 import { readJson } from '../io/files';
-import { readPreviousSnapshot, reportFilePaths, writeReportFiles, writeSnapshot } from './report-helpers';
+import {
+  readPreviousSnapshot,
+  reportFilePaths,
+  writeReportFiles,
+  writeSnapshot,
+} from './report-helpers';
 
 describe('report-helpers', () => {
   let root: string;
@@ -44,7 +49,10 @@ describe('report-helpers', () => {
   });
 
   it('reportFilePaths строит пути по дате в формате YYYY-MM-DD', () => {
-    const { markdownPath, jsonPath } = reportFilePaths('/reports', new Date('2026-08-18T12:00:00Z'));
+    const { markdownPath, jsonPath } = reportFilePaths(
+      '/reports',
+      new Date('2026-08-18T12:00:00Z'),
+    );
     expect(markdownPath).toBe('/reports/import-2026-08-18.md');
     expect(jsonPath).toBe('/reports/import-2026-08-18.json');
   });

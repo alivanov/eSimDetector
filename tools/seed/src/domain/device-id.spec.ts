@@ -32,7 +32,10 @@ describe('buildDeviceId', () => {
   it('пропускает пустые фразы в словаре dualSimMarkers без ошибки', () => {
     const dictionaryWithEmptyPhrase = {
       ...dictionary,
-      insignificantAttributes: { ...dictionary.insignificantAttributes, dualSimMarkers: ['', 'dual sim'] },
+      insignificantAttributes: {
+        ...dictionary.insignificantAttributes,
+        dualSimMarkers: ['', 'dual sim'],
+      },
     };
     expect(buildDeviceId('samsung', 'Galaxy S24 Ultra Dual SIM', dictionaryWithEmptyPhrase)).toBe(
       'samsung-galaxy-s24-ultra',

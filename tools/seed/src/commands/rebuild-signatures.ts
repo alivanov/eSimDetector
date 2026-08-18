@@ -12,7 +12,9 @@ export interface RebuildSignaturesOptions {
  * (уже загруженные `load`), пересобирает `screen_signatures` целиком (коллекция производная,
  * решений модератора в ней нет — безопасно заменяется полностью).
  */
-export async function runRebuildSignaturesCommand(options: RebuildSignaturesOptions): Promise<number> {
+export async function runRebuildSignaturesCommand(
+  options: RebuildSignaturesOptions,
+): Promise<number> {
   const connection = await connectToMongo(options.mongoUri);
   try {
     const devices = await readDevices(connection);

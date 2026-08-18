@@ -176,7 +176,8 @@ export function buildImportReport(input: ImportReportInput): ImportReportData {
       fileMissing: input.referenceFileMissing,
       checked: input.referenceChecked,
       matched: input.referenceMatched,
-      mismatchRate: input.referenceChecked === 0 ? 0 : 1 - input.referenceMatched / input.referenceChecked,
+      mismatchRate:
+        input.referenceChecked === 0 ? 0 : 1 - input.referenceMatched / input.referenceChecked,
     },
     byDataConfidence,
     byBrand: countBy(input.devices.map((device) => device.brand)),
@@ -206,7 +207,8 @@ const QUARANTINE_CODE_LABELS: Readonly<Record<QuarantineCode, string>> = {
   YEAR_IMPLAUSIBLE: 'Год выпуска вне диапазона 2007…текущий+1',
   ESIM_ANACHRONISM: 'eSIM заявлена у устройства до 2017 года',
   REFERENCE_MISMATCH: 'Противоречит эталонной выборке',
-  SOURCE_DISAGREEMENT_UNRESOLVED: '"yes" против "no" без "conditional" — не разрешено автоматически',
+  SOURCE_DISAGREEMENT_UNRESOLVED:
+    '"yes" против "no" без "conditional" — не разрешено автоматически',
   IOS_FIELDS_MISSING: 'iOS без сигнатур экрана/os.maxVersion из курируемого ядра',
 };
 
@@ -220,10 +222,14 @@ export function renderMarkdown(report: ImportReportData): string {
   lines.push('');
   lines.push('## Сводка');
   lines.push('');
-  lines.push(`- Строк разобрано: ${report.totals.linesParsed} (восстановлено выравниванием: ${report.totals.linesRealigned})`);
+  lines.push(
+    `- Строк разобрано: ${report.totals.linesParsed} (восстановлено выравниванием: ${report.totals.linesRealigned})`,
+  );
   lines.push(`- Принято в справочник: ${report.totals.accepted}`);
   lines.push(`- В карантине: ${report.totals.quarantined}`);
-  lines.push(`- Без статуса ни от одного источника (не загружено, не карантин): ${report.totals.noData}`);
+  lines.push(
+    `- Без статуса ни от одного источника (не загружено, не карантин): ${report.totals.noData}`,
+  );
   lines.push(`- Нарушений инвариантов §5.8 перед загрузкой: ${report.invariantViolationsCount}`);
   lines.push('');
 
@@ -282,12 +288,16 @@ export function renderMarkdown(report: ImportReportData): string {
   lines.push('## Слияние с курируемым ядром и правилами');
   lines.push('');
   lines.push(`- Записей заменено курируемым ядром: ${report.curatedAppliedCount}`);
-  lines.push(`- Записей разрешено правилом Apple по перечню поколений: ${report.appleRuleAppliedCount}`);
+  lines.push(
+    `- Записей разрешено правилом Apple по перечню поколений: ${report.appleRuleAppliedCount}`,
+  );
   lines.push('');
 
   lines.push('## Правила уровня линейки (агрегация принятых записей, ADR-021)');
   lines.push('');
-  lines.push('| Бренд | Линейка | Статус агрегата | Достоверность | Записей | Ответ пользователю |');
+  lines.push(
+    '| Бренд | Линейка | Статус агрегата | Достоверность | Записей | Ответ пользователю |',
+  );
   lines.push('| --- | --- | --- | --- | --- | --- |');
   for (const rule of report.familyRules) {
     lines.push(
@@ -303,7 +313,9 @@ export function renderMarkdown(report: ImportReportData): string {
   } else {
     lines.push(`- Добавлено записей: ${report.diffFromPrevious.added}`);
     lines.push(`- Удалено записей: ${report.diffFromPrevious.removed}`);
-    lines.push(`- Изменили статус eSIM либо достоверность: ${report.diffFromPrevious.changedStatus}`);
+    lines.push(
+      `- Изменили статус eSIM либо достоверность: ${report.diffFromPrevious.changedStatus}`,
+    );
   }
   lines.push('');
 

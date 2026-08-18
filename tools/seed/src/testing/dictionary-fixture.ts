@@ -14,7 +14,9 @@ export function loadRealDictionary(): NormalizationDictionary {
   const raw: unknown = JSON.parse(readFileSync(path, 'utf-8'));
   const result = parseNormalizationDictionary(raw);
   if (!result.ok) {
-    throw new Error(`data/catalog/aliases.json не прошёл валидацию: ${JSON.stringify(result.errors)}`);
+    throw new Error(
+      `data/catalog/aliases.json не прошёл валидацию: ${JSON.stringify(result.errors)}`,
+    );
   }
   return result.value;
 }

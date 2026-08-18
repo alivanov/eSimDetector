@@ -38,7 +38,9 @@ export const KNOWN_BRANDS: ReadonlyMap<string, string> = new Map(
   ].map((title) => [title.toLowerCase(), title]),
 );
 
-export function resolveBrand(rawBrand: string): { readonly brand: string; readonly brandTitle: string } | undefined {
+export function resolveBrand(
+  rawBrand: string,
+): { readonly brand: string; readonly brandTitle: string } | undefined {
   const normalized = rawBrand.trim().toLowerCase();
   const title = KNOWN_BRANDS.get(normalized);
   if (title === undefined) {

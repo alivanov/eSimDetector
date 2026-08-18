@@ -58,7 +58,10 @@ describe('detectDelimiter', () => {
 
 describe('preprocessCsvText', () => {
   it('снимает BOM в начале файла', () => {
-    const result = preprocessCsvText('\uFEFFbrand,marketing_name,esim_support\nApple,iPhone 15,yes', 3);
+    const result = preprocessCsvText(
+      '\uFEFFbrand,marketing_name,esim_support\nApple,iPhone 15,yes',
+      3,
+    );
     expect(result.notices.some((notice) => notice.code === 'BOM_STRIPPED')).toBe(true);
     expect(result.dataLines[0]?.raw.startsWith('\uFEFF')).toBe(false);
   });
@@ -85,7 +88,9 @@ describe('preprocessCsvText', () => {
   });
 
   it('сохраняет номера строк исходного файла даже после удаления строк-ограничителей', () => {
-    const text = ['```', 'brand,marketing_name,esim_support', 'Apple,iPhone 15,yes', '```'].join('\n');
+    const text = ['```', 'brand,marketing_name,esim_support', 'Apple,iPhone 15,yes', '```'].join(
+      '\n',
+    );
     const result = preprocessCsvText(text, 3);
     expect(result.dataLines.map((line) => line.lineNumber)).toEqual([2, 3]);
   });

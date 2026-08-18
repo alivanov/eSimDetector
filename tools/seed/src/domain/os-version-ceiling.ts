@@ -32,7 +32,9 @@ export function parseOsVersionCeilings(value: unknown): OsVersionCeilingsParseRe
   if (!isPositiveNumber(android) || !isPositiveNumber(ios)) {
     return {
       ok: false,
-      errors: ['os-version-ceilings.json: поля "android" и "ios" обязаны быть положительными числами'],
+      errors: [
+        'os-version-ceilings.json: поля "android" и "ios" обязаны быть положительными числами',
+      ],
     };
   }
   return { ok: true, value: { android, ios } };

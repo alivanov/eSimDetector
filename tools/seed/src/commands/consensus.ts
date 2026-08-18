@@ -25,7 +25,12 @@ export function runConsensusCommand(options: ConsensusCommandOptions): number {
   process.stdout.write(`${markdown}\n`);
 
   if (!options.dryRun) {
-    writeReportFiles(options.reportsDir ?? DEFAULT_REPORTS_DIR, new Date(report.generatedAt), markdown, report);
+    writeReportFiles(
+      options.reportsDir ?? DEFAULT_REPORTS_DIR,
+      new Date(report.generatedAt),
+      markdown,
+      report,
+    );
   }
 
   return 0;

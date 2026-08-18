@@ -31,7 +31,9 @@ describe('loadDevices (интеграция, withTestDatabase)', () => {
     expect(stats.upserted).toBe(1);
     expect(stats.matched).toBe(0);
 
-    const stored = await db.connection.collection<Device>(DEVICES_COLLECTION).findOne({ _id: 'samsung-galaxy-s24-ultra' });
+    const stored = await db.connection
+      .collection<Device>(DEVICES_COLLECTION)
+      .findOne({ _id: 'samsung-galaxy-s24-ultra' });
     expect(stored?.brand).toBe('samsung');
   });
 
@@ -49,7 +51,10 @@ describe('loadDevices (интеграция, withTestDatabase)', () => {
 
   it('сохраняет исходный createdAt между повторными запусками, обновляя updatedAt', async () => {
     const firstCreatedAt = new Date('2024-01-01T00:00:00.000Z');
-    const device = buildSampleDevice({ _id: 'samsung-galaxy-s24-ultra', createdAt: firstCreatedAt });
+    const device = buildSampleDevice({
+      _id: 'samsung-galaxy-s24-ultra',
+      createdAt: firstCreatedAt,
+    });
     await loadDevices(db.connection, [device]);
 
     const secondCreatedAt = new Date('2025-01-01T00:00:00.000Z');
@@ -61,7 +66,9 @@ describe('loadDevices (интеграция, withTestDatabase)', () => {
     });
     await loadDevices(db.connection, [updatedDevice]);
 
-    const stored = await db.connection.collection<Device>(DEVICES_COLLECTION).findOne({ _id: 'samsung-galaxy-s24-ultra' });
+    const stored = await db.connection
+      .collection<Device>(DEVICES_COLLECTION)
+      .findOne({ _id: 'samsung-galaxy-s24-ultra' });
     expect(stored?.createdAt).toBeInstanceOf(Date);
     expect(new Date(stored?.createdAt ?? 0).toISOString()).toBe(firstCreatedAt.toISOString());
     expect(stored?.popularity).toBe(0.99);

@@ -34,7 +34,10 @@ describe('runImportCommand', () => {
     writeJson(join(root, 'os-version-ceilings.json'), { android: 16, ios: 18 });
     writeText(
       join(root, 'import/llm-model-a/02-samsung-galaxy-s.csv'),
-      [DEVICES_HEADER, 'Samsung,Galaxy S24 Ultra,SM-S928B,android,phone,2024,yes,,,,,,official,,high,'].join('\n'),
+      [
+        DEVICES_HEADER,
+        'Samsung,Galaxy S24 Ultra,SM-S928B,android,phone,2024,yes,,,,,,official,,high,',
+      ].join('\n'),
     );
 
     stdout = [];
@@ -52,7 +55,11 @@ describe('runImportCommand', () => {
   });
 
   it('печатает отчёт и возвращает 0 без записи файлов при --dry-run', () => {
-    const exitCode = runImportCommand({ dryRun: true, paths: makePaths(root), reportsDir: join(root, 'reports') });
+    const exitCode = runImportCommand({
+      dryRun: true,
+      paths: makePaths(root),
+      reportsDir: join(root, 'reports'),
+    });
     expect(exitCode).toBe(0);
     expect(stdout.join('')).toContain('# Отчёт об импорте справочника');
 
@@ -61,12 +68,18 @@ describe('runImportCommand', () => {
   });
 
   it('без --dry-run записывает отчёт в файлы', () => {
-    const exitCode = runImportCommand({ dryRun: false, paths: makePaths(root), reportsDir: join(root, 'reports') });
+    const exitCode = runImportCommand({
+      dryRun: false,
+      paths: makePaths(root),
+      reportsDir: join(root, 'reports'),
+    });
     expect(exitCode).toBe(0);
 
     const { jsonPath } = reportFilePaths(join(root, 'reports'), new Date());
     const savedReport: unknown = readJson(jsonPath);
-    expect(savedReport).toEqual(expect.objectContaining({ totals: expect.objectContaining({ accepted: 1 }) }));
+    expect(savedReport).toEqual(
+      expect.objectContaining({ totals: expect.objectContaining({ accepted: 1 }) }),
+    );
   });
 
   it('без явных путей и --source использует настоящие данные репозитория', () => {
@@ -77,7 +90,10 @@ describe('runImportCommand', () => {
   it('фильтрует по --source', () => {
     writeText(
       join(root, 'import/llm-model-b/02.csv'),
-      [DEVICES_HEADER, 'Samsung,Galaxy S23,SM-S911B,android,phone,2023,yes,,,,,,official,,high,'].join('\n'),
+      [
+        DEVICES_HEADER,
+        'Samsung,Galaxy S23,SM-S911B,android,phone,2023,yes,,,,,,official,,high,',
+      ].join('\n'),
     );
     const exitCode = runImportCommand({
       dryRun: true,

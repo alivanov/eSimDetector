@@ -28,7 +28,10 @@ function candidate(overrides: Partial<DeviceCandidate>): DeviceCandidate {
 
 describe('resolveCollisions', () => {
   it('пропускает кандидатов без коллизий без изменений', () => {
-    const candidates = [candidate({}), candidate({ id: 'samsung-galaxy-s22', modelCodes: ['SM-S901B'] })];
+    const candidates = [
+      candidate({}),
+      candidate({ id: 'samsung-galaxy-s22', modelCodes: ['SM-S901B'] }),
+    ];
     const result = resolveCollisions(candidates);
     expect(result.accepted).toEqual(candidates);
     expect(result.quarantined).toEqual([]);
@@ -46,21 +49,32 @@ describe('resolveCollisions', () => {
   });
 
   it('карантинит обе строки при расхождении статуса eSIM у одного идентификатора (NAME_COLLISION_CONFLICT)', () => {
-    const candidates = [
-      candidate({ esimSupport: 'yes' }),
-      candidate({ esimSupport: 'no' }),
-    ];
+    const candidates = [candidate({ esimSupport: 'yes' }), candidate({ esimSupport: 'no' })];
     const result = resolveCollisions(candidates);
     expect(result.accepted).toEqual([]);
     expect(result.quarantined).toHaveLength(2);
-    expect(result.quarantined.every((entry) => entry.code === 'NAME_COLLISION_CONFLICT')).toBe(true);
+    expect(result.quarantined.every((entry) => entry.code === 'NAME_COLLISION_CONFLICT')).toBe(
+      true,
+    );
   });
 
   it('карантинит устройства с одинаковым сервисным кодом у разных идентификаторов (CODE_COLLISION)', () => {
     const candidates = [
-      candidate({ id: 'samsung-galaxy-a21', marketingName: 'Galaxy A21', modelCodes: ['SM-A217F'] }),
-      candidate({ id: 'samsung-galaxy-a21s', marketingName: 'Galaxy A21s', modelCodes: ['SM-A217F'] }),
-      candidate({ id: 'samsung-galaxy-s22', marketingName: 'Galaxy S22', modelCodes: ['SM-S901B'] }),
+      candidate({
+        id: 'samsung-galaxy-a21',
+        marketingName: 'Galaxy A21',
+        modelCodes: ['SM-A217F'],
+      }),
+      candidate({
+        id: 'samsung-galaxy-a21s',
+        marketingName: 'Galaxy A21s',
+        modelCodes: ['SM-A217F'],
+      }),
+      candidate({
+        id: 'samsung-galaxy-s22',
+        marketingName: 'Galaxy S22',
+        modelCodes: ['SM-S901B'],
+      }),
     ];
     const result = resolveCollisions(candidates);
     expect(result.accepted).toEqual([candidates[2]]);

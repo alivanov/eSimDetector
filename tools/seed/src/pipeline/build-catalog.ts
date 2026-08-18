@@ -5,7 +5,11 @@ import type { DeviceCandidate, QuarantineEntry, RowNotice } from '../domain/type
 import { buildDevice, toContractSupport } from './build-device';
 import { resolveConsensus } from './consensus';
 import { assignDataConfidence } from './confidence';
-import { computeFamilyAggregates, type FamilyAggregateInput, type FamilyAggregateReportEntry } from './family-aggregate';
+import {
+  computeFamilyAggregates,
+  type FamilyAggregateInput,
+  type FamilyAggregateReportEntry,
+} from './family-aggregate';
 import { decideMergeSource } from './merge';
 
 /**
@@ -75,11 +79,15 @@ export function buildCatalog(options: BuildCatalogOptions): BuildCatalogResult {
     // курируемое ядро Apple пусто (docs/appendix-a §А.6), поэтому это ожидаемый исход, а не
     // редкий сбой (docs/14 §14.8: "IOS_FIELDS_MISSING... начнёт работать на каждом импорте" как
     // только появится курируемое ядро).
-    if (device.platform === 'ios' && (device.screenSignatures.length === 0 || device.os.maxVersion === null)) {
+    if (
+      device.platform === 'ios' &&
+      (device.screenSignatures.length === 0 || device.os.maxVersion === null)
+    ) {
       notices.push({
         code: 'IOS_FIELDS_MISSING',
         deviceId: device._id,
-        detail: 'Платформа iOS без сигнатур экрана/os.maxVersion из курируемого ядра — запись не загружена',
+        detail:
+          'Платформа iOS без сигнатур экрана/os.maxVersion из курируемого ядра — запись не загружена',
       });
       quarantine.push({
         code: 'IOS_FIELDS_MISSING',

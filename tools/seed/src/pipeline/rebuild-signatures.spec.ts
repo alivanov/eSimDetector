@@ -23,8 +23,14 @@ describe('rebuildScreenSignatures', () => {
 
   it('строит запись с единым esimConsensus, когда статус кандидатов совпадает', () => {
     const devices = [
-      iosDevice({ _id: 'apple-iphone-13', esim: { ...buildSampleDevice().esim, support: 'supported' } }),
-      iosDevice({ _id: 'apple-iphone-13-mini', esim: { ...buildSampleDevice().esim, support: 'supported' } }),
+      iosDevice({
+        _id: 'apple-iphone-13',
+        esim: { ...buildSampleDevice().esim, support: 'supported' },
+      }),
+      iosDevice({
+        _id: 'apple-iphone-13-mini',
+        esim: { ...buildSampleDevice().esim, support: 'supported' },
+      }),
     ];
     const [record] = rebuildScreenSignatures(devices, NOW);
     expect(record).toEqual(
@@ -39,8 +45,14 @@ describe('rebuildScreenSignatures', () => {
 
   it('даёт "mixed" при расхождении статусов кандидатов сигнатуры', () => {
     const devices = [
-      iosDevice({ _id: 'apple-iphone-13', esim: { ...buildSampleDevice().esim, support: 'supported' } }),
-      iosDevice({ _id: 'apple-iphone-x', esim: { ...buildSampleDevice().esim, support: 'not_supported' } }),
+      iosDevice({
+        _id: 'apple-iphone-13',
+        esim: { ...buildSampleDevice().esim, support: 'supported' },
+      }),
+      iosDevice({
+        _id: 'apple-iphone-x',
+        esim: { ...buildSampleDevice().esim, support: 'not_supported' },
+      }),
     ];
     const [record] = rebuildScreenSignatures(devices, NOW);
     expect(record?.esimConsensus).toBe('mixed');
@@ -64,7 +76,10 @@ describe('rebuildScreenSignatures', () => {
   });
 
   it('разделяет обычную и "увеличенную" сигнатуру одного размера экрана', () => {
-    const devices = [iosDevice({ _id: 'a' }), iosDevice({ _id: 'b', screenSignatures: [{ ...SIGNATURE, zoomed: true }] })];
+    const devices = [
+      iosDevice({ _id: 'a' }),
+      iosDevice({ _id: 'b', screenSignatures: [{ ...SIGNATURE, zoomed: true }] }),
+    ];
     const records = rebuildScreenSignatures(devices, NOW);
     expect(records).toHaveLength(2);
   });

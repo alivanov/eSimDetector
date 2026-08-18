@@ -48,7 +48,11 @@ describe('runConsensusCommand', () => {
   });
 
   it('согласовывает несколько источников и записывает отчёт с уровнем "derived"', () => {
-    const exitCode = runConsensusCommand({ dryRun: false, paths: makePaths(root), reportsDir: join(root, 'reports') });
+    const exitCode = runConsensusCommand({
+      dryRun: false,
+      paths: makePaths(root),
+      reportsDir: join(root, 'reports'),
+    });
     expect(exitCode).toBe(0);
 
     const { jsonPath } = reportFilePaths(join(root, 'reports'), new Date());
@@ -64,7 +68,11 @@ describe('runConsensusCommand', () => {
   });
 
   it('--dry-run не пишет файлы отчёта', () => {
-    const exitCode = runConsensusCommand({ dryRun: true, paths: makePaths(root), reportsDir: join(root, 'reports') });
+    const exitCode = runConsensusCommand({
+      dryRun: true,
+      paths: makePaths(root),
+      reportsDir: join(root, 'reports'),
+    });
     expect(exitCode).toBe(0);
     const { jsonPath } = reportFilePaths(join(root, 'reports'), new Date());
     expect(() => readJson(jsonPath)).toThrow();

@@ -24,9 +24,10 @@ describe('importSource', () => {
         },
         {
           batchId: '04a-samsung-galaxy-a',
-          text: [HEADER, 'Samsung,Galaxy A54,SM-A546B,android,phone,2023,no,,,,,,official,,high,'].join(
-            '\n',
-          ),
+          text: [
+            HEADER,
+            'Samsung,Galaxy A54,SM-A546B,android,phone,2023,no,,,,,,official,,high,',
+          ].join('\n'),
         },
       ],
       dictionary,
@@ -93,7 +94,10 @@ describe('importSource', () => {
       files: [
         {
           batchId: '02-samsung-galaxy-s',
-          text: [HEADER, 'Samsung,Galaxy S24,SM-S921B,windows,phone,2024,yes,,,,,,official,,high,'].join('\n'),
+          text: [
+            HEADER,
+            'Samsung,Galaxy S24,SM-S921B,windows,phone,2024,yes,,,,,,official,,high,',
+          ].join('\n'),
         },
       ],
       dictionary,

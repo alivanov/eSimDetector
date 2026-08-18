@@ -258,9 +258,7 @@ describe('validateRow', () => {
     );
     expect(result.quarantine).toBeUndefined();
     expect(result.candidate?.modelCodes).toEqual([]);
-    expect(result.notices).toEqual([
-      expect.objectContaining({ code: 'CODE_PATTERN_INVALID' }),
-    ]);
+    expect(result.notices).toEqual([expect.objectContaining({ code: 'CODE_PATTERN_INVALID' })]);
   });
 
   it('не проверяет код бренда без шаблона в code-patterns.json (документированный пробел)', () => {
@@ -330,8 +328,6 @@ describe('validateRow', () => {
     );
     expect(result.quarantine).toBeUndefined();
     expect(result.candidate?.osMaxVersion).toBeUndefined();
-    expect(result.notices).toEqual([
-      expect.objectContaining({ code: 'OS_VERSION_IMPLAUSIBLE' }),
-    ]);
+    expect(result.notices).toEqual([expect.objectContaining({ code: 'OS_VERSION_IMPLAUSIBLE' })]);
   });
 });

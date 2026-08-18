@@ -73,7 +73,12 @@ export function validateRow(row: DevicesCsvRow, context: ValidateRowContext): Va
   const rawEsimSupport = row.esimSupport?.trim().toLowerCase() ?? '';
 
   if (!isOneOf(rawPlatform, PLATFORM_VALUES)) {
-    return quarantine('ENUM_INVALID', context, `platform="${row.platform ?? ''}" вне допустимого набора`, row);
+    return quarantine(
+      'ENUM_INVALID',
+      context,
+      `platform="${row.platform ?? ''}" вне допустимого набора`,
+      row,
+    );
   }
   if (!isOneOf(rawDeviceType, DEVICE_TYPE_VALUES)) {
     return quarantine(
@@ -92,18 +97,41 @@ export function validateRow(row: DevicesCsvRow, context: ValidateRowContext): Va
     );
   }
   if (row.dualSim !== undefined && !isOneOf(row.dualSim.trim().toLowerCase(), DUAL_SIM_VALUES)) {
-    return quarantine('ENUM_INVALID', context, `dual_sim="${row.dualSim}" вне допустимого набора`, row);
+    return quarantine(
+      'ENUM_INVALID',
+      context,
+      `dual_sim="${row.dualSim}" вне допустимого набора`,
+      row,
+    );
   }
   if (row.ruMarket !== undefined && !isOneOf(row.ruMarket.trim().toLowerCase(), RU_MARKET_VALUES)) {
-    return quarantine('ENUM_INVALID', context, `ru_market="${row.ruMarket}" вне допустимого набора`, row);
+    return quarantine(
+      'ENUM_INVALID',
+      context,
+      `ru_market="${row.ruMarket}" вне допустимого набора`,
+      row,
+    );
   }
-  if (row.confidence !== undefined && !isOneOf(row.confidence.trim().toLowerCase(), CONFIDENCE_VALUES)) {
-    return quarantine('ENUM_INVALID', context, `confidence="${row.confidence}" вне допустимого набора`, row);
+  if (
+    row.confidence !== undefined &&
+    !isOneOf(row.confidence.trim().toLowerCase(), CONFIDENCE_VALUES)
+  ) {
+    return quarantine(
+      'ENUM_INVALID',
+      context,
+      `confidence="${row.confidence}" вне допустимого набора`,
+      row,
+    );
   }
 
   const resolvedBrand = row.brand !== undefined ? resolveBrand(row.brand) : undefined;
   if (resolvedBrand === undefined) {
-    return quarantine('BRAND_UNKNOWN', context, `Бренд "${row.brand ?? ''}" не найден в словаре известных`, row);
+    return quarantine(
+      'BRAND_UNKNOWN',
+      context,
+      `Бренд "${row.brand ?? ''}" не найден в словаре известных`,
+      row,
+    );
   }
 
   if (row.marketingName === undefined || row.marketingName.trim().length === 0) {
@@ -150,7 +178,10 @@ export function validateRow(row: DevicesCsvRow, context: ValidateRowContext): Va
   }
 
   const esimSupport: CsvEsimSupport = rawEsimSupport;
-  if (releaseYear < ESIM_ANACHRONISM_YEAR && (esimSupport === 'yes' || esimSupport === 'conditional')) {
+  if (
+    releaseYear < ESIM_ANACHRONISM_YEAR &&
+    (esimSupport === 'yes' || esimSupport === 'conditional')
+  ) {
     return quarantine(
       'ESIM_ANACHRONISM',
       context,

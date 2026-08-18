@@ -51,7 +51,9 @@ export function buildDeviceId(
     (token) => !insignificantTokens.has(token),
   );
 
-  const brandToken = tokenize(collapseWhitespace(stripPunctuation(unifySeparators(foldCase(brand)))));
+  const brandToken = tokenize(
+    collapseWhitespace(stripPunctuation(unifySeparators(foldCase(brand)))),
+  );
   return [...brandToken, ...significantTokens].join('-');
 }
 

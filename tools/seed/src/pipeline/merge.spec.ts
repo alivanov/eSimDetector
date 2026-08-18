@@ -58,11 +58,11 @@ describe('parseCuratedDevices', () => {
 
 describe('decideMergeSource', () => {
   it('курируемое ядро побеждает целиком, даже если CSV дал иной статус (docs/14 §14.4 шаг 6, приоритет 2)', () => {
-    const curated = buildSampleDevice({ _id: 'apple-iphone-13', esim: { ...buildSampleDevice().esim, support: 'not_supported' } });
-    const decision = decideMergeSource(
-      consensusDevice(),
-      new Map([['apple-iphone-13', curated]]),
-    );
+    const curated = buildSampleDevice({
+      _id: 'apple-iphone-13',
+      esim: { ...buildSampleDevice().esim, support: 'not_supported' },
+    });
+    const decision = decideMergeSource(consensusDevice(), new Map([['apple-iphone-13', curated]]));
     expect(decision.source).toBe('curated');
     expect(decision.curatedDevice).toBe(curated);
   });
@@ -114,7 +114,11 @@ describe('decideMergeSource', () => {
   it('Apple-модель без числа поколения (правило не знает модель) проходит как обычный импорт', () => {
     const decision = decideMergeSource(
       consensusDevice({
-        representative: candidate({ id: 'apple-iphone-unknown', family: 'iphone', generation: null }),
+        representative: candidate({
+          id: 'apple-iphone-unknown',
+          family: 'iphone',
+          generation: null,
+        }),
       }),
       new Map(),
     );

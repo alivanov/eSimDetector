@@ -76,7 +76,14 @@ describe('resolveConsensus', () => {
   });
 
   it('"conditional" перекрывает "yes" и "no" (правило осторожности) и заводит source_disagreement', () => {
-    const conditions = [{ scope: 'region' as const, value: 'CN', support: 'not_supported' as const, note: 'region:CN=no' }];
+    const conditions = [
+      {
+        scope: 'region' as const,
+        value: 'CN',
+        support: 'not_supported' as const,
+        note: 'region:CN=no',
+      },
+    ];
     const result = resolveConsensus([
       fromSource('llm:model-a', { esimSupport: 'yes' }),
       fromSource('llm:model-b', { esimSupport: 'no' }),
@@ -102,9 +109,9 @@ describe('resolveConsensus', () => {
     ]);
     expect(result.accepted).toEqual([]);
     expect(result.quarantined).toHaveLength(2);
-    expect(result.quarantined.every((entry) => entry.code === 'SOURCE_DISAGREEMENT_UNRESOLVED')).toBe(
-      true,
-    );
+    expect(
+      result.quarantined.every((entry) => entry.code === 'SOURCE_DISAGREEMENT_UNRESOLVED'),
+    ).toBe(true);
   });
 
   it('объединяет сервисные коды разных источников', () => {
@@ -146,6 +153,8 @@ describe('resolveConsensus', () => {
     ]);
     expect(result.quarantined).toEqual([]);
     expect(result.accepted).toHaveLength(1);
-    expect(result.accepted[0]).toEqual(expect.objectContaining({ esimSupport: 'no', agreementCount: 2 }));
+    expect(result.accepted[0]).toEqual(
+      expect.objectContaining({ esimSupport: 'no', agreementCount: 2 }),
+    );
   });
 });

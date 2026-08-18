@@ -5,7 +5,14 @@ import { parseCodePatterns, type CodePatternMap } from '../domain/code-patterns'
 import { parseOsVersionCeilings, type OsVersionCeilings } from '../domain/os-version-ceiling';
 import type { DeviceCandidate, QuarantineEntry, RowNotice } from '../domain/types';
 import { serializeCandidates } from '../io/candidate-cache';
-import { discoverImportCsvFiles, discoverJsonFiles, fileExists, readJson, readText, writeJson } from '../io/files';
+import {
+  discoverImportCsvFiles,
+  discoverJsonFiles,
+  fileExists,
+  readJson,
+  readText,
+  writeJson,
+} from '../io/files';
 import { buildCatalog, type BuildCatalogResult } from './build-catalog';
 import { parseCuratedDevices } from './merge';
 import { importSource, type ImportSourceFileResult } from './import-source';
@@ -122,7 +129,14 @@ function importOneSource(
   reference: ReferenceMap | undefined,
   now: Date,
   useCache: boolean,
-): { candidates: readonly DeviceCandidate[]; quarantine: readonly QuarantineEntry[]; notices: readonly RowNotice[]; fileResults: readonly ImportSourceFileResult[]; referenceChecked: number; referenceMatched: number } {
+): {
+  candidates: readonly DeviceCandidate[];
+  quarantine: readonly QuarantineEntry[];
+  notices: readonly RowNotice[];
+  fileResults: readonly ImportSourceFileResult[];
+  referenceChecked: number;
+  referenceMatched: number;
+} {
   const result = importSource({
     source,
     files: files.map((file) => ({ batchId: file.batchId, text: readText(file.filePath) })),
@@ -162,7 +176,9 @@ export function runPipeline(options: RunPipelineOptions): RunPipelineResult {
   const osVersionCeilings = loadOsVersionCeilingsOrThrow(paths.osVersionCeilingsPath);
   const { reference, missing: referenceFileMissing } = tryLoadReference(paths.referencePath);
 
-  const discovered = discoverImportCsvFiles(paths.importDir).filter((file) => file.kind === 'devices');
+  const discovered = discoverImportCsvFiles(paths.importDir).filter(
+    (file) => file.kind === 'devices',
+  );
   const filesBySource = new Map<string, { batchId: string; filePath: string }[]>();
   for (const file of discovered) {
     if (options.sources !== undefined && !options.sources.includes(file.source)) {

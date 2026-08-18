@@ -36,8 +36,18 @@ export const DEVICES_CSV_COLUMNS: readonly DevicesCsvColumn[] = [
   { key: 'brand', header: 'brand', required: true },
   { key: 'marketingName', header: 'marketing_name', required: true },
   { key: 'modelCodes', header: 'model_codes', required: false },
-  { key: 'platform', header: 'platform', required: true, enumValues: ['ios', 'android', 'harmonyos', 'other'] },
-  { key: 'deviceType', header: 'device_type', required: true, enumValues: ['phone', 'tablet', 'watch', 'laptop', 'other'] },
+  {
+    key: 'platform',
+    header: 'platform',
+    required: true,
+    enumValues: ['ios', 'android', 'harmonyos', 'other'],
+  },
+  {
+    key: 'deviceType',
+    header: 'device_type',
+    required: true,
+    enumValues: ['phone', 'tablet', 'watch', 'laptop', 'other'],
+  },
   { key: 'releaseYear', header: 'release_year', required: true },
   {
     key: 'esimSupport',
@@ -62,7 +72,12 @@ export const DEVICES_CSV_COLUMNS: readonly DevicesCsvColumn[] = [
     enumValues: ['official', 'parallel', 'none', 'unknown'],
   },
   { key: 'sourceUrl', header: 'source_url', required: false },
-  { key: 'confidence', header: 'confidence', required: true, enumValues: ['high', 'medium', 'low'] },
+  {
+    key: 'confidence',
+    header: 'confidence',
+    required: true,
+    enumValues: ['high', 'medium', 'low'],
+  },
   { key: 'notes', header: 'notes', required: false },
 ];
 

@@ -105,10 +105,7 @@ describe('runPipeline', () => {
   });
 
   it('использует курируемое ядро вместо CSV-кандидата с тем же id', () => {
-    const csv = [
-      DEVICES_HEADER,
-      'Apple,iPhone 13,,ios,phone,2021,no,,,,,,,,high,',
-    ].join('\n');
+    const csv = [DEVICES_HEADER, 'Apple,iPhone 13,,ios,phone,2021,no,,,,,,,,high,'].join('\n');
     writeText(join(root, 'import/llm-model-a/01.csv'), csv);
     writeJson(join(root, 'curated/apple-iphone-13.json'), {
       _id: 'apple-iphone-13',
@@ -136,9 +133,16 @@ describe('runPipeline', () => {
       releaseYear: 2021,
       marketPresenceRu: 'official',
       popularity: 0.8,
-      sources: [{ url: 'https://www.apple.com', title: 'Apple', checkedAt: '2024-01-01T00:00:00.000Z' }],
+      sources: [
+        { url: 'https://www.apple.com', title: 'Apple', checkedAt: '2024-01-01T00:00:00.000Z' },
+      ],
       dataConfidence: 'verified',
-      provenance: { source: 'curated', batchId: null, importedAt: '2024-01-01T00:00:00.000Z', agreementCount: null },
+      provenance: {
+        source: 'curated',
+        batchId: null,
+        importedAt: '2024-01-01T00:00:00.000Z',
+        agreementCount: null,
+      },
       status: 'active',
       createdAt: '2024-01-01T00:00:00.000Z',
       updatedAt: '2024-01-01T00:00:00.000Z',
@@ -166,28 +170,48 @@ describe('runPipeline', () => {
   it('выбрасывает исключение при невалидном code-patterns.json', () => {
     writeJson(join(root, 'code-patterns.json'), { samsung: 123 });
     expect(() =>
-      runPipeline({ paths: makePaths(root), now: new Date(), familyMinRecords: 3, useCache: false }),
+      runPipeline({
+        paths: makePaths(root),
+        now: new Date(),
+        familyMinRecords: 3,
+        useCache: false,
+      }),
     ).toThrow(/содержит ошибки/);
   });
 
   it('выбрасывает исключение при невалидном os-version-ceilings.json', () => {
     writeJson(join(root, 'os-version-ceilings.json'), { android: -1 });
     expect(() =>
-      runPipeline({ paths: makePaths(root), now: new Date(), familyMinRecords: 3, useCache: false }),
+      runPipeline({
+        paths: makePaths(root),
+        now: new Date(),
+        familyMinRecords: 3,
+        useCache: false,
+      }),
     ).toThrow(/не прошёл валидацию/);
   });
 
   it('выбрасывает исключение при невалидном catalog.reference.json', () => {
     writeJson(join(root, 'catalog.reference.json'), { not: 'an array' });
     expect(() =>
-      runPipeline({ paths: makePaths(root), now: new Date(), familyMinRecords: 3, useCache: false }),
+      runPipeline({
+        paths: makePaths(root),
+        now: new Date(),
+        familyMinRecords: 3,
+        useCache: false,
+      }),
     ).toThrow(/не прошёл валидацию/);
   });
 
   it('выбрасывает исключение при невалидной записи курируемого ядра', () => {
     writeJson(join(root, 'curated/broken.json'), { not: 'a device' });
     expect(() =>
-      runPipeline({ paths: makePaths(root), now: new Date(), familyMinRecords: 3, useCache: false }),
+      runPipeline({
+        paths: makePaths(root),
+        now: new Date(),
+        familyMinRecords: 3,
+        useCache: false,
+      }),
     ).toThrow(/curated содержит невалидные записи/);
   });
 
@@ -199,24 +223,43 @@ describe('runPipeline', () => {
     writeText(join(root, 'import/llm-model-a/02.csv'), csv);
 
     const paths = makePaths(root);
-    const first = runPipeline({ paths, now: new Date('2026-08-18T00:00:00Z'), familyMinRecords: 3, useCache: true });
+    const first = runPipeline({
+      paths,
+      now: new Date('2026-08-18T00:00:00Z'),
+      familyMinRecords: 3,
+      useCache: true,
+    });
     expect(first.sourceFiles).toEqual([
-      { source: 'llm-model-a', batchId: '02', linesParsed: 1, linesRealigned: 0, csvQuarantineCount: 0 },
+      {
+        source: 'llm-model-a',
+        batchId: '02',
+        linesParsed: 1,
+        linesRealigned: 0,
+        csvQuarantineCount: 0,
+      },
     ]);
 
     const cachePath = join(root, '.cache', 'llm-model-a.json');
-    expect(readJson(cachePath)).toEqual(expect.arrayContaining([expect.objectContaining({ id: 'samsung-galaxy-s24-ultra' })]));
+    expect(readJson(cachePath)).toEqual(
+      expect.arrayContaining([expect.objectContaining({ id: 'samsung-galaxy-s24-ultra' })]),
+    );
 
     // Повторный запуск снова разбирает CSV с диска (а не подставляет кэш) — статистика строк
     // не обнуляется независимо от того, что кэш от предыдущего запуска уже существует.
-    const second = runPipeline({ paths, now: new Date('2026-08-18T00:00:00Z'), familyMinRecords: 3, useCache: true });
+    const second = runPipeline({
+      paths,
+      now: new Date('2026-08-18T00:00:00Z'),
+      familyMinRecords: 3,
+      useCache: true,
+    });
     expect(second.sourceFiles).toEqual(first.sourceFiles);
   });
 
   it('исключает "gigachat-3-5-ultra" по умолчанию (docs/appendix-a §А.8.1, вопрос 12 не решён)', () => {
-    const csv = [DEVICES_HEADER, 'Samsung,Galaxy S24 Ultra,SM-S928B,android,phone,2024,yes,,,,,,official,,high,'].join(
-      '\n',
-    );
+    const csv = [
+      DEVICES_HEADER,
+      'Samsung,Galaxy S24 Ultra,SM-S928B,android,phone,2024,yes,,,,,,official,,high,',
+    ].join('\n');
     writeText(join(root, 'import/gigachat-3-5-ultra/02.csv'), csv);
 
     const result = runPipeline({
@@ -230,9 +273,10 @@ describe('runPipeline', () => {
   });
 
   it('исключение источников настраивается параметром, а не зашито константой', () => {
-    const csv = [DEVICES_HEADER, 'Samsung,Galaxy S24 Ultra,SM-S928B,android,phone,2024,yes,,,,,,official,,high,'].join(
-      '\n',
-    );
+    const csv = [
+      DEVICES_HEADER,
+      'Samsung,Galaxy S24 Ultra,SM-S928B,android,phone,2024,yes,,,,,,official,,high,',
+    ].join('\n');
     writeText(join(root, 'import/gigachat-3-5-ultra/02.csv'), csv);
 
     const result = runPipeline({

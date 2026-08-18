@@ -48,7 +48,12 @@ describe('applyReferenceCheck', () => {
   it('без файла эталона пропускает все кандидаты без изменений', () => {
     const candidates = [{ id: 'a', esimSupport: 'yes' as const }];
     const result = applyReferenceCheck(candidates, undefined);
-    expect(result).toEqual({ accepted: candidates, contradicting: [], matchedCount: 0, checkedCount: 0 });
+    expect(result).toEqual({
+      accepted: candidates,
+      contradicting: [],
+      matchedCount: 0,
+      checkedCount: 0,
+    });
   });
 
   it('пропускает кандидатов с esimSupport="unknown" без сверки (воздержание)', () => {

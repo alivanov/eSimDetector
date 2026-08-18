@@ -23,12 +23,13 @@ interface SerializedCandidate extends Omit<DeviceCandidate, 'provenance'> {
 }
 
 export function serializeCandidates(candidates: readonly DeviceCandidate[]): unknown {
-  return candidates.map(
-    (candidate): SerializedCandidate => ({
-      ...candidate,
-      provenance: { ...candidate.provenance, importedAt: candidate.provenance.importedAt.toISOString() },
-    }),
-  );
+  return candidates.map((candidate): SerializedCandidate => ({
+    ...candidate,
+    provenance: {
+      ...candidate.provenance,
+      importedAt: candidate.provenance.importedAt.toISOString(),
+    },
+  }));
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -145,7 +146,9 @@ export function deserializeCandidate(value: unknown): DeviceCandidate | undefine
     ...(isString(osMaxVersion) ? { osMaxVersion } : {}),
     ...(isString(ruMarket) ? { ruMarket } : {}),
     ...(isString(sourceUrl) ? { sourceUrl } : {}),
-    ...(confidenceSelfReported === 'high' || confidenceSelfReported === 'medium' || confidenceSelfReported === 'low'
+    ...(confidenceSelfReported === 'high' ||
+    confidenceSelfReported === 'medium' ||
+    confidenceSelfReported === 'low'
       ? { confidenceSelfReported }
       : {}),
     ...(isString(notes) ? { notes } : {}),

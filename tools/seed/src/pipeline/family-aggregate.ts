@@ -65,7 +65,9 @@ export function computeFamilyAggregates(
   minRecords: number,
   moderatorConfirmedNotSupported: ReadonlySet<string> = new Set(),
 ): readonly FamilyAggregateReportEntry[] {
-  const eligible = devices.filter((device) => CONFIDENCE_RANK[device.dataConfidence] >= CONFIDENCE_RANK.derived);
+  const eligible = devices.filter(
+    (device) => CONFIDENCE_RANK[device.dataConfidence] >= CONFIDENCE_RANK.derived,
+  );
 
   const groups = new Map<string, FamilyAggregateInput[]>();
   for (const device of eligible) {

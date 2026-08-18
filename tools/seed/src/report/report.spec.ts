@@ -18,8 +18,16 @@ const QUARANTINE: readonly QuarantineEntry[] = [
 ];
 
 const NOTICES: readonly RowNotice[] = [
-  { code: 'CODE_PATTERN_INVALID', deviceId: 'samsung-galaxy-s9', detail: 'код не соответствует шаблону' },
-  { code: 'CODE_PATTERN_INVALID', deviceId: 'samsung-galaxy-s10', detail: 'код не соответствует шаблону' },
+  {
+    code: 'CODE_PATTERN_INVALID',
+    deviceId: 'samsung-galaxy-s9',
+    detail: 'код не соответствует шаблону',
+  },
+  {
+    code: 'CODE_PATTERN_INVALID',
+    deviceId: 'samsung-galaxy-s10',
+    detail: 'код не соответствует шаблону',
+  },
 ];
 
 describe('buildImportReport', () => {
@@ -30,7 +38,15 @@ describe('buildImportReport', () => {
     ];
     const report = buildImportReport({
       generatedAt: NOW,
-      sourceFiles: [{ source: 'llm:model-a', batchId: '02', linesParsed: 30, linesRealigned: 3, csvQuarantineCount: 1 }],
+      sourceFiles: [
+        {
+          source: 'llm:model-a',
+          batchId: '02',
+          linesParsed: 30,
+          linesRealigned: 3,
+          csvQuarantineCount: 1,
+        },
+      ],
       quarantine: QUARANTINE,
       notices: NOTICES,
       noDataCount: 2,
@@ -57,7 +73,12 @@ describe('buildImportReport', () => {
     expect(report.reference.checked).toBe(10);
     expect(report.reference.matched).toBe(9);
     expect(report.reference.mismatchRate).toBeCloseTo(0.1);
-    expect(report.byDataConfidence).toEqual({ verified: 1, derived: 1, unverified: 0, quarantined: 0 });
+    expect(report.byDataConfidence).toEqual({
+      verified: 1,
+      derived: 1,
+      unverified: 0,
+      quarantined: 0,
+    });
     expect(report.byBrand).toEqual({ samsung: 1, apple: 1 });
   });
 
@@ -77,11 +98,18 @@ describe('buildImportReport', () => {
       appleRuleAppliedCount: 0,
       invariantViolationsCount: 0,
     });
-    expect(report.reference).toEqual({ fileMissing: true, checked: 0, matched: 0, mismatchRate: 0 });
+    expect(report.reference).toEqual({
+      fileMissing: true,
+      checked: 0,
+      matched: 0,
+      mismatchRate: 0,
+    });
   });
 
   it('считает разницу с предыдущим снимком', () => {
-    const devices = [buildSampleDevice({ _id: 'a', esim: { ...buildSampleDevice().esim, support: 'supported' } })];
+    const devices = [
+      buildSampleDevice({ _id: 'a', esim: { ...buildSampleDevice().esim, support: 'supported' } }),
+    ];
     const report = buildImportReport({
       generatedAt: NOW,
       sourceFiles: [],
@@ -171,7 +199,15 @@ describe('renderMarkdown', () => {
     const devices = [buildSampleDevice({ _id: 'a', brand: 'samsung', dataConfidence: 'derived' })];
     const report = buildImportReport({
       generatedAt: NOW,
-      sourceFiles: [{ source: 'llm:model-a', batchId: '02', linesParsed: 10, linesRealigned: 1, csvQuarantineCount: 0 }],
+      sourceFiles: [
+        {
+          source: 'llm:model-a',
+          batchId: '02',
+          linesParsed: 10,
+          linesRealigned: 1,
+          csvQuarantineCount: 0,
+        },
+      ],
       quarantine: QUARANTINE,
       notices: NOTICES,
       noDataCount: 1,
@@ -211,7 +247,15 @@ describe('renderMarkdown', () => {
       generatedAt: NOW,
       sourceFiles: [],
       quarantine: [
-        { code: 'CODE_COLLISION', source: 's', batchId: 'b', lineNumber: 1, detail: 'd', rawBrand: 'x', rawMarketingName: 'y' },
+        {
+          code: 'CODE_COLLISION',
+          source: 's',
+          batchId: 'b',
+          lineNumber: 1,
+          detail: 'd',
+          rawBrand: 'x',
+          rawMarketingName: 'y',
+        },
       ],
       notices: [],
       noDataCount: 0,

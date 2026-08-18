@@ -107,7 +107,9 @@ describe('CatalogModule (интеграция, withTestDatabase)', () => {
     // Сохранение с отключённой валидацией Mongoose — единственный способ воспроизвести
     // рассинхронизацию данных, которую должна поймать `deviceSchema.parse` внутри
     // `CatalogService.reload()` (защита независимо от валидации на пути записи).
-    await new deviceModel({ _id: 'broken-device', brand: 'test' }).save({ validateBeforeSave: false });
+    await new deviceModel({ _id: 'broken-device', brand: 'test' }).save({
+      validateBeforeSave: false,
+    });
 
     catalogService = moduleRef.get(CatalogService);
     await catalogService.reload();

@@ -14,7 +14,9 @@ const SAMPLE: DeviceCandidate = {
   deviceType: 'phone',
   releaseYear: 2024,
   esimSupport: 'conditional',
-  esimConditions: [{ scope: 'region', value: 'CN', support: 'not_supported', note: 'region:CN=no' }],
+  esimConditions: [
+    { scope: 'region', value: 'CN', support: 'not_supported', note: 'region:CN=no' },
+  ],
   dualSim: 'physical+esim',
   maxEsimProfiles: 2,
   ruMarket: 'official',

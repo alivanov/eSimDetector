@@ -130,17 +130,7 @@ describe('realignFields', () => {
     const outcome = realignFields(fields, COLUMNS, IDENTITY_INDEXES);
     expect(outcome).toEqual({
       status: 'recovered',
-      fields: [
-        'apple',
-        'iphone 15',
-        'A3090',
-        'ios',
-        'phone',
-        '2023',
-        'yes',
-        undefined,
-        undefined,
-      ],
+      fields: ['apple', 'iphone 15', 'A3090', 'ios', 'phone', '2023', 'yes', undefined, undefined],
     });
   });
 

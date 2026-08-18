@@ -86,7 +86,10 @@ describe('runLoadCommand (интеграция, withTestDatabase)', () => {
     // "yes" без source_url — SUPPORTED_SOURCES_MISSING (§5.8 п.6), загрузка обязана отказать.
     writeText(
       join(root, 'import/llm-model-a/02.csv'),
-      [DEVICES_HEADER, 'Samsung,Galaxy S23,SM-S911B,android,phone,2023,yes,,,,,,official,,high,'].join('\n'),
+      [
+        DEVICES_HEADER,
+        'Samsung,Galaxy S23,SM-S911B,android,phone,2023,yes,,,,,,official,,high,',
+      ].join('\n'),
     );
     const exitCode = await runLoadCommand({
       dryRun: false,

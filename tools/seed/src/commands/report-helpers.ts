@@ -14,7 +14,9 @@ function isPreviousSnapshotEntry(value: unknown): value is PreviousSnapshotEntry
   const { id, esimSupport, dataConfidence } = value;
   return (
     typeof id === 'string' &&
-    (esimSupport === 'supported' || esimSupport === 'not_supported' || esimSupport === 'conditional') &&
+    (esimSupport === 'supported' ||
+      esimSupport === 'not_supported' ||
+      esimSupport === 'conditional') &&
     (dataConfidence === 'verified' ||
       dataConfidence === 'derived' ||
       dataConfidence === 'unverified' ||
@@ -61,7 +63,12 @@ export function reportFilePaths(
   };
 }
 
-export function writeReportFiles(reportsDir: string, now: Date, markdown: string, json: unknown): void {
+export function writeReportFiles(
+  reportsDir: string,
+  now: Date,
+  markdown: string,
+  json: unknown,
+): void {
   const { markdownPath, jsonPath } = reportFilePaths(reportsDir, now);
   writeText(markdownPath, markdown);
   writeJson(jsonPath, json);

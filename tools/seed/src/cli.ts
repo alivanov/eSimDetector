@@ -82,6 +82,8 @@ main()
     process.exitCode = exitCode;
   })
   .catch((error: unknown) => {
-    process.stderr.write(`Ошибка: ${error instanceof Error ? error.stack ?? error.message : String(error)}\n`);
+    process.stderr.write(
+      `Ошибка: ${error instanceof Error ? (error.stack ?? error.message) : String(error)}\n`,
+    );
     process.exitCode = 1;
   });
