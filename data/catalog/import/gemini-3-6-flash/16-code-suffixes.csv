@@ -1,0 +1,36 @@
+brand,code_suffix,code_example,region,esim_effect,confidence,notes
+Samsung,B,SM-S928B,global,supported,high,Европейская и глобальная версия с поддержкой eSIM
+Samsung,B/DS,SM-S928B/DS,global,supported,high,Глобальная версия Dual SIM с поддержкой eSIM
+Samsung,N,SM-S928N,kr,supported,high,Южнокорейская версия с поддержкой eSIM
+Samsung,U,SM-S928U,us,supported,high,Операторская версия для США с поддержкой eSIM
+Samsung,U1,SM-S928U1,us,supported,high,Разблокированная версия для США с поддержкой eSIM
+Samsung,W,SM-S928W,global,supported,high,Канадская версия с поддержкой eSIM
+Samsung,0,SM-S9280,cn,not_supported,high,Версия для Китая Гонконга и Тайваня без поддержки eSIM
+Samsung,E,SM-S928E,global,supported,high,Международная версия для Азии Латинской Америки и Ближнего Востока
+Samsung,E/DS,SM-S928E/DS,global,supported,high,Международная версия Dual SIM
+Samsung,00,SM-S92800,cn,not_supported,high,Альтернативный код версии для материкового Китая без eSIM
+Samsung,Q,SM-A556Q,jp,supported,high,Японская операторская версия
+Samsung,JPN,SM-S928JPN,jp,supported,high,Японская версия
+Samsung,SC,SM-G991SC,jp,supported,medium,Японская операторская версия Docomo
+Samsung,K,SM-G991K,kr,supported,medium,Южнокорейская версия KT
+Samsung,L,SM-G991L,kr,supported,medium,Южнокорейская версия LGU+
+Samsung,S,SM-G991S,kr,supported,medium,Южнокорейская версия SKT
+Huawei,L21,VOG-L21,global,supported,high,Глобальная версия Dual SIM с поддержкой eSIM
+Huawei,L09,VOG-L09,global,supported,high,Глобальная версия Single SIM с поддержкой eSIM
+Huawei,L29,VOG-L29,global,supported,high,Глобальная версия Dual SIM
+Huawei,AL00,ALT-AL00,cn,not_supported,high,Версия для Китая без поддержки eSIM
+Huawei,AN00,NOP-AN00,cn,not_supported,high,Версия для Китая 5G без eSIM
+Huawei,AL10,LIO-AL10,cn,not_supported,high,Китайская локальная версия без eSIM
+Huawei,LX1,JNY-LX1,eu,same_as_global,medium,Европейская версия
+Huawei,LX9,JNY-LX9,global,same_as_global,medium,Глобальная версия
+Honor,L21,LNY-L21,global,supported,high,Глобальная версия с поддержкой eSIM
+Honor,L09,LNY-L09,global,supported,high,Глобальная Single SIM версия с поддержкой eSIM
+Honor,AN00,ELZ-AN00,cn,not_supported,high,Китайская версия без eSIM
+Honor,TN00,ELZ-TN00,cn,not_supported,high,Китайская операторская версия без eSIM
+Honor,AL00,ANY-AL00,cn,not_supported,high,Китайская 4G версия без eSIM
+Xiaomi,unknown,,global,same_as_global,high,Нет регулярного суффикса региональные версии различаются символами в середине или полностью разными кодами
+OPPO,unknown,,global,same_as_global,high,Нет регулярного суффикса региональные версии различаются полностью разными модельными кодами
+OnePlus,unknown,,global,same_as_global,high,Нет регулярного суффикса модификации различаются числовым индексом моделей
+realme,unknown,,global,same_as_global,high,Нет регулярного суффикса региональные версии различаются полностью модельный кодом
+vivo,unknown,,global,same_as_global,high,Нет регулярного суффикса региональные версии отличаются суффиксами в других форматах или отдельными кодами
+ZTE,unknown,,global,same_as_global,high,Нет регулярной схемы региональных окончаний кодов

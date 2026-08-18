@@ -1,0 +1,31 @@
+brand,code_suffix,code_example,region,esim_effect,confidence,notes
+Samsung,B,SM-S928B,global,supported,high,Глобальная и европейская версия
+Samsung,U,SM-S928U,us,supported,high,Версия для операторов США
+Samsung,U1,SM-S928U1,us,supported,high,Разблокированная версия для США
+Samsung,W,SM-S928W,global,supported,high,Версия для Канады
+Samsung,0,SM-S9280,cn,not_supported,high,Китайская версия без eSIM
+Samsung,6,SM-S9186,cn,not_supported,high,Китайская версия без eSIM
+Samsung,8,SM-S9218,cn,not_supported,high,Китайская версия без eSIM
+Samsung,N,SM-S928N,kr,supported,high,Южнокорейская версия
+Samsung,P,SM-A546P,in,not_supported,high,Индийская версия без eSIM
+Samsung,F,SM-S918F,global,supported,high,Глобальная версия
+Samsung,M,SM-A546M,latam,not_supported,high,Версия для Латинской Америки без eSIM
+Samsung,E,SM-S911E,eu,supported,high,Европейская версия
+Huawei,AN00,NOH-AN00,cn,not_supported,high,Китайская версия Huawei
+Huawei,AL00,JAD-AL00,cn,not_supported,high,Китайская версия Huawei
+Huawei,TL00,LNA-TL00,cn,not_supported,high,Китайская версия Huawei
+Huawei,L29,LEX-L29,eu,not_supported,high,Европейская версия Huawei
+Huawei,L09,LEX-L09,eu,not_supported,high,Европейская версия Huawei
+Huawei,L21,CLT-L21,latam,not_supported,high,Версия Huawei для Латинской Америки
+Huawei,L22,CLT-L22,mea,not_supported,high,Версия Huawei для Ближнего Востока
+Huawei,L23,CLT-L23,sea,not_supported,high,Версия Huawei для Юго-Восточной Азии
+Huawei,NX9,BVL-NX9,global,not_supported,high,Глобальная версия Huawei
+Honor,AN00,ANY-AN00,cn,not_supported,high,Китайская версия Honor
+Honor,AL00,BVL-AL00,cn,not_supported,high,Китайская версия Honor
+Honor,NX9,BVL-NX9,global,not_supported,high,Глобальная версия Honor
+Xiaomi,unknown,,unknown,unknown,low,Нет регулярной схемы суффиксов для регионов
+OPPO,unknown,,unknown,unknown,low,Нет регулярной схемы суффиксов для регионов
+OnePlus,unknown,,unknown,unknown,low,Нет регулярной схемы суффиксов для регионов
+realme,unknown,,unknown,unknown,low,Нет регулярной схемы суффиксов для регионов
+vivo,unknown,,unknown,unknown,low,Нет регулярной схемы суффиксов для регионов
+ZTE,unknown,,unknown,unknown,low,Нет регулярной схемы суффиксов для регионов

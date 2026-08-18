@@ -1,0 +1,21 @@
+brand,code_suffix,code_example,region,esim_effect,confidence,notes
+Samsung,F,SM-G973F,eu,supported,high,
+Samsung,U,SM-G973U,us,supported,high,
+Samsung,U1,SM-G973U1,us,supported,high,
+Samsung,N,SM-G973N,kr,unknown,medium,
+Samsung,0,SM-G9730,cn,not_supported,high,
+Samsung,M,SM-A525M,latam,unknown,medium,
+Samsung,B,,unknown,unknown,low,"Регион для B не установлен"
+Samsung,W,,unknown,unknown,low,"W обычно для Канады, но регион не в списке"
+Huawei,AL00,LIO-AL00,cn,not_supported,high,
+Huawei,L29,LIO-L29,global,supported,medium,
+Huawei,L09,LIO-L09,unknown,unknown,low,"L09 часто европейская версия, но точно неизвестно"
+Honor,unknown,,unknown,unknown,low,"Региональные суффиксы для Honor неизвестны"
+Xiaomi,G,M2001J2G,global,supported,high,
+Xiaomi,C,M2001J2C,cn,not_supported,high,
+Xiaomi,I,M2001J2I,in,unknown,medium,
+OPPO,unknown,,unknown,unknown,low,"Региональные суффиксы для OPPO отсутствуют или неизвестны"
+OnePlus,unknown,,unknown,unknown,low,"Региональные суффиксы для OnePlus отсутствуют или неизвестны"
+realme,unknown,,unknown,unknown,low,"Региональные суффиксы для realme отсутствуют или неизвестны"
+vivo,unknown,,unknown,unknown,low,"Региональные суффиксы для vivo отсутствуют или неизвестны"
+ZTE,unknown,,unknown,unknown,low,"Региональные суффиксы для ZTE отсутствуют или неизвестны"

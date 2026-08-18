@@ -1,0 +1,27 @@
+brand,code_suffix,code_example,region,esim_effect,confidence,notes
+Samsung,F,SM-G973F,eu,same_as_global,high,Common international/European model suffix.
+Samsung,B,SM-S928B,global,same_as_global,high,Common international model suffix; exact sales region varies by market.
+Samsung,E,SM-S918E,in,same_as_global,medium,Used on India and some other international-market variants; not uniquely India.
+Samsung,G,SM-G780G,global,same_as_global,medium,Used on international variants; not a unique geographic market code.
+Samsung,U,SM-G991U,us,same_as_global,high,US carrier model suffix.
+Samsung,U1,SM-G991U1,us,same_as_global,high,US unlocked model suffix.
+Samsung,W,SM-G991W,unknown,same_as_global,high,Canadian model suffix; region is not representable by the allowed region list.
+Samsung,N,SM-G973N,kr,same_as_global,high,South Korea model suffix.
+Samsung,0,SM-G9730,cn,not_supported,high,China/Hong Kong mainland-style model suffix; eSIM is generally absent on these Samsung variants.
+Samsung,A,SM-G973A,us,same_as_global,high,US carrier model suffix.
+Samsung,Q,SM-S911Q,jp,same_as_global,medium,Japan-market model suffix used on recent Galaxy models.
+Huawei,L29,LYA-L29,global,same_as_global,high,Common international dual-SIM suffix.
+Huawei,L09,LYA-L09,eu,same_as_global,high,Common international single-SIM suffix used in European markets.
+Huawei,AL00,LYA-AL00,cn,not_supported,high,China-market suffix.
+Huawei,TL00,LYA-TL00,cn,not_supported,high,China-market suffix.
+Huawei,AN00,ELS-AN00,cn,not_supported,high,China-market suffix.
+Huawei,TN00,ELS-TN00,cn,not_supported,medium,China-market suffix seen on domestic variants.
+Honor,L21,BND-L21,eu,same_as_global,medium,Common European/international Honor suffix.
+Honor,AL10,BND-AL10,cn,not_supported,high,China-market suffix.
+Honor,AN00,,cn,not_supported,medium,China-market suffix used by Honor; example omitted to avoid guessing a full code.
+Xiaomi,unknown,,,unknown,low,Regional versions commonly use different full model codes rather than one reliable universal regional suffix.
+OPPO,unknown,,,unknown,low,Regional versions commonly use different full model codes rather than one reliable universal regional suffix.
+OnePlus,unknown,,,unknown,low,Regional versions commonly use different full model codes rather than one reliable universal regional suffix.
+realme,unknown,,,unknown,low,Regional versions commonly use different full model codes rather than one reliable universal regional suffix.
+vivo,unknown,,,unknown,low,Regional versions commonly use different full model codes rather than one reliable universal regional suffix.
+ZTE,unknown,,,unknown,low,Regional versions commonly use different full model codes rather than one reliable universal regional suffix.
