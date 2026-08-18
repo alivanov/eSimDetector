@@ -1,7 +1,14 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "rootDir": "src"
+    "rootDir": "src",
+    // Продуктовая сборка (в отличие от typecheck) обязана резолвить workspace-пакеты через
+    // обычное разрешение node_modules → собранный `dist/` (main/types package.json), а не
+    // через "paths" из tsconfig.base.json на исходники `../../packages/*/src` — при
+    // `rootDir: "src"` компилятор иначе отказывает (TS6059): исходники пакетов лежат вне
+    // rootDir этой сборки. `pnpm -r build` строит зависимости раньше зависимых пакетов
+    // (топологический порядок), поэтому к моменту сборки apps/api их `dist/` уже существует.
+    "paths": {}
   },
   "include": ["src/**/*.ts"],
   "exclude": ["src/**/*.spec.ts", "test"]

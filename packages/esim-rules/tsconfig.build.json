@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    // Переопределение "paths" целиком — тот же приём, что и в
+    // packages/fuzzy-matcher/tsconfig.build.json: сборке нужен только
+    // "@esim-detector/contracts", и не как исходники (иначе "rootDir" пришлось бы снова
+    // расширять до корня репозитория ради эмита, что испортило бы структуру dist/ этого
+    // пакета), а как уже собранные объявления типов. Требует, чтобы "contracts" был собран
+    // раньше (`pnpm -r run build` строит рабочие пространства в топологическом порядке
+    // благодаря объявленной зависимости "@esim-detector/contracts" в package.json).
+    "paths": {
+      "@esim-detector/contracts": ["../contracts/dist/index.d.ts"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["src/**/*.spec.ts"]
+}

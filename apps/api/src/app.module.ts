@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import { AppConfigModule } from './config/config.module';
 import type { EnvConfig } from './config/env.schema';
+import { CatalogModule } from './modules/catalog/catalog.module';
 import { HealthModule } from './modules/health/health.module';
 
 @Module({
@@ -15,6 +16,7 @@ import { HealthModule } from './modules/health/health.module';
         uri: configService.get('MONGODB_URI', { infer: true }),
       }),
     }),
+    CatalogModule,
     HealthModule,
   ],
 })

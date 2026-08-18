@@ -22,6 +22,7 @@ export const envSchema = z.object({
   RATE_LIMIT_RPM: z.coerce.number().int().positive().default(120),
   CONFIDENCE_ANSWER_THRESHOLD: z.coerce.number().min(0).max(1).default(0.8),
   CONFIDENCE_GAP_THRESHOLD: z.coerce.number().min(0).max(1).default(0.08),
+  ALLOW_DERIVED_CATALOG_ANSWERS: booleanEnvVar(true),
   ALLOW_UNVERIFIED_CATALOG_ANSWERS: booleanEnvVar(false),
   ENABLE_LLM_FALLBACK: booleanEnvVar(false),
   ADMIN_TOKEN: z.string().default(''),

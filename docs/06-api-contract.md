@@ -255,6 +255,14 @@ GET /api/v1/devices/search?q=galaxy%20s23
 | `GET /api/docs`, `GET /api/docs-json`        | Swagger UI и спецификация OpenAPI                                                                         |
 | `GET /metrics`                               | Метрики в формате Prometheus                                                                              |
 
+Форма ответа `GET /api/v1/catalog/meta` (реализация агента 3, `apps/api/src/modules/catalog`):
+
+```json
+{ "version": "a1b2c3d4e5f6", "deviceCount": 0, "updatedAt": null }
+```
+
+`version` — детерминированный хеш от содержимого справочника (не хранится отдельным полем, пока нет коллекции версий импорта — см. docs/09 ADR-022, п.4); `updatedAt` — `null` на пустом справочнике, иначе ISO-дата самой свежей записи. Эндпоинт отвечает 200 и на пустом справочнике; при незагруженном/сбойном справочнике — `CATALOG_UNAVAILABLE` (503, §6.5).
+
 ## 6.5. Формат ошибок
 
 Единый для всех эндпоинтов:

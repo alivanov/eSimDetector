@@ -13,6 +13,7 @@ describe('validateEnv', () => {
       RATE_LIMIT_RPM: 120,
       CONFIDENCE_ANSWER_THRESHOLD: 0.8,
       CONFIDENCE_GAP_THRESHOLD: 0.08,
+      ALLOW_DERIVED_CATALOG_ANSWERS: true,
       ALLOW_UNVERIFIED_CATALOG_ANSWERS: false,
       ENABLE_LLM_FALLBACK: false,
       ADMIN_TOKEN: '',
@@ -25,12 +26,14 @@ describe('validateEnv', () => {
     const config = validateEnv({
       PORT: '4000',
       RATE_LIMIT_RPM: '60',
+      ALLOW_DERIVED_CATALOG_ANSWERS: 'false',
       ALLOW_UNVERIFIED_CATALOG_ANSWERS: 'true',
       ENABLE_LLM_FALLBACK: '1',
     });
 
     expect(config.PORT).toBe(4000);
     expect(config.RATE_LIMIT_RPM).toBe(60);
+    expect(config.ALLOW_DERIVED_CATALOG_ANSWERS).toBe(false);
     expect(config.ALLOW_UNVERIFIED_CATALOG_ANSWERS).toBe(true);
     expect(config.ENABLE_LLM_FALLBACK).toBe(true);
   });

@@ -44,6 +44,12 @@ importers:
 
   apps/api:
     dependencies:
+      '@esim-detector/contracts':
+        specifier: workspace:*
+        version: link:../../packages/contracts
+      '@esim-detector/fuzzy-matcher':
+        specifier: workspace:*
+        version: link:../../packages/fuzzy-matcher
       '@nestjs/common':
         specifier: 11.2.1
         version: 11.2.1(reflect-metadata@0.2.2)(rxjs@7.8.2)
@@ -115,9 +121,17 @@ importers:
 
   apps/widget: {}
 
-  packages/contracts: {}
+  packages/contracts:
+    dependencies:
+      zod:
+        specifier: 4.4.3
+        version: 4.4.3
 
-  packages/esim-rules: {}
+  packages/esim-rules:
+    dependencies:
+      '@esim-detector/contracts':
+        specifier: workspace:*
+        version: link:../contracts
 
   packages/fuzzy-matcher:
     dependencies:

@@ -30,6 +30,8 @@ export default tseslint.config(
             'packages/test-utils/jest.config.ts',
             'packages/text-normalizer/jest.config.ts',
             'packages/fuzzy-matcher/jest.config.ts',
+            'packages/contracts/jest.config.ts',
+            'packages/esim-rules/jest.config.ts',
             'tools/eval/jest.config.ts',
           ],
           defaultProject: 'tsconfig.eslint.json',

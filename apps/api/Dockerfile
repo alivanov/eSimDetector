@@ -9,7 +9,12 @@ WORKDIR /workspace
 
 COPY . .
 RUN pnpm install --frozen-lockfile
-RUN pnpm --filter @esim-detector/api build
+# "..." после имени пакета — сборка самого пакета и ВСЕХ его зависимостей рабочего
+# пространства в топологическом порядке (@esim-detector/contracts, @esim-detector/fuzzy-matcher
+# и, транзитивно, @esim-detector/text-normalizer). Без "..." pnpm собрал бы только apps/api,
+# и сборка отказала бы: apps/api/tsconfig.build.json резолвит эти пакеты через обычное
+# разрешение node_modules → собранный dist/, а не через исходники (docs/09 ADR-022).
+RUN pnpm --filter @esim-detector/api... build
 
 FROM node:24-alpine AS runtime
 RUN corepack enable
