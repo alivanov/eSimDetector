@@ -1,0 +1,64 @@
+brand,marketing_name,model_codes,platform,device_type,release_year,esim_support,esim_conditions,dual_sim,max_esim_profiles,os_min_version,os_max_version,ru_market,source_url,confidence,notes
+samsung,Galaxy A01,,android,phone,2020,no,,,,9.0,11,official,,high,
+samsung,Galaxy A01 Core,,android,phone,2020,no,,,,10.0,11,official,,high,
+samsung,Galaxy A02,,android,phone,2021,no,,,,10.0,12,official,,high,
+samsung,Galaxy A02s,,android,phone,2020,no,,,,10.0,13,official,,high,
+samsung,Galaxy A03,,android,phone,2021,no,,,,11.0,13,official,,high,
+samsung,Galaxy A03 Core,,android,phone,2021,no,,,,11.0,12,official,,high,
+samsung,Galaxy A03s,,android,phone,2021,no,,,,11.0,13,official,,high,
+samsung,Galaxy A04,,android,phone,2022,no,,,,12.0,14,official,,high,
+samsung,Galaxy A04e,,android,phone,2022,no,,,,12.0,14,official,,high,
+samsung,Galaxy A04s,,android,phone,2022,no,,,,12.0,14,official,,high,
+samsung,Galaxy A05,,android,phone,2023,no,,,,13.0,14,official,,high,
+samsung,Galaxy A05s,,android,phone,2023,no,,,,13.0,14,official,,high,
+samsung,Galaxy A06,,android,phone,2024,no,,,,14.0,14,official,,high,
+samsung,Galaxy A10,,android,phone,2019,n/a,,,,9.0,11,official,,high,Out of task scope (released before 2020)
+samsung,Galaxy A10s,,android,phone,2019,n/a,,,,9.0,11,official,,high,Out of task scope (released before 2020)
+samsung,Galaxy A10e,,android,phone,2019,n/a,,,,9.0,11,official,,high,Out of task scope (released before 2020)
+samsung,Galaxy A11,,android,phone,2020,no,,,,10.0,12,official,,high,
+samsung,Galaxy A12,,android,phone,2020,no,,,,10.0,13,official,,high,
+samsung,Galaxy A12 Nacho,,android,phone,2021,no,,,,11.0,13,official,,high,
+samsung,Galaxy A13,,android,phone,2022,no,,,,12.0,14,official,,high,
+samsung,Galaxy A13 5G,SM-A136U,android,phone,2021,conditional,"region:US=yes;global=no",physical+esim,,11.0,14,official,,medium,eSIM in US carrier models only
+samsung,Galaxy A14,,android,phone,2023,no,,,,13.0,14,official,,high,
+samsung,Galaxy A14 5G,SM-A146B,android,phone,2022,conditional,"region:EU/IN=yes;global=no",physical+esim,,12.0,14,official,,medium,eSIM limited to specific regions
+samsung,Galaxy A15,,android,phone,2023,no,,,,13.0,14,official,,high,
+samsung,Galaxy A15 5G,SM-A156B,android,phone,2023,conditional,"region:EU/IN=yes;global=no",physical+esim,,13.0,14,official,,medium,eSIM limited to specific regions
+samsung,Galaxy A16,,android,phone,2024,no,,,,14.0,14,official,,high,
+samsung,Galaxy A16 5G,SM-A166B,android,phone,2024,conditional,"region:EU/IN=yes;global=no",physical+esim,,14.0,14,official,,medium,eSIM limited to specific regions
+samsung,Galaxy A20,,android,phone,2019,n/a,,,,9.0,11,official,,high,Out of task scope (released before 2020)
+samsung,Galaxy A20e,,android,phone,2019,n/a,,,,9.0,11,official,,high,Out of task scope (released before 2020)
+samsung,Galaxy A20s,,android,phone,2019,n/a,,,,9.0,11,official,,high,Out of task scope (released before 2020)
+samsung,Galaxy A21,,android,phone,2020,no,,,,10.0,11,official,,high,
+samsung,Galaxy A21s,,android,phone,2020,no,,,,10.0,13,official,,high,
+samsung,Galaxy A22,,android,phone,2021,no,,,,11.0,13,official,,high,
+samsung,Galaxy A22 5G,SM-A226B,android,phone,2021,conditional,"region:EU/IN=yes;global=no",physical+esim,,11.0,14,official,,medium,eSIM limited to specific regions
+samsung,Galaxy A23,,android,phone,2022,no,,,,12.0,14,official,,high,
+samsung,Galaxy A23 5G,SM-A236B,android,phone,2022,conditional,"region:EU/IN=yes;global=no",physical+esim,,12.0,14,official,,medium,eSIM limited to specific regions
+samsung,Galaxy A24,,android,phone,2022,no,,,,13.0,14,official,,high,
+samsung,Galaxy A25,,android,phone,2023,no,,,,13.0,14,official,,high,
+samsung,Galaxy A25 5G,SM-A256B,android,phone,2023,conditional,"region:EU/IN=yes;global=no",physical+esim,,13.0,14,official,,medium,eSIM limited to specific regions
+samsung,Galaxy A26,,android,phone,2024,no,,,,14.0,14,official,,high,
+samsung,Galaxy A26 5G,SM-A266B,android,phone,2024,conditional,"region:EU/IN=yes;global=no",physical+esim,,14.0,14,official,,medium,eSIM limited to specific regions
+samsung,Galaxy A30,,android,phone,2019,n/a,,,,9.0,11,official,,high,Out of task scope (released before 2020)
+samsung,Galaxy A30s,,android,phone,2019,n/a,,,,9.0,11,official,,high,Out of task scope (released before 2020)
+samsung,Galaxy A31,,android,phone,2020,no,,,,10.0,13,official,,high,
+samsung,Galaxy A32,,android,phone,2021,no,,,,11.0,13,official,,high,
+samsung,Galaxy A32 5G,SM-A326B,android,phone,2021,conditional,"region:EU/IN=yes;global=no",physical+esim,,11.0,14,official,,medium,eSIM limited to specific regions
+samsung,Galaxy A33,,android,phone,2022,no,,,,12.0,14,official,,high,
+samsung,Galaxy A34,,android,phone,2023,no,,,,13.0,14,official,,high,
+samsung,Galaxy A35,,android,phone,2024,no,,,,14.0,14,official,,high,
+samsung,Galaxy A50,,android,phone,2019,n/a,,,,9.0,11,official,,high,Out of task scope (released before 2020)
+samsung,Galaxy A50s,,android,phone,2019,n/a,,,,9.0,11,official,,high,Out of task scope (released before 2020)
+samsung,Galaxy A51,,android,phone,2019,n/a,,,,10.0,13,official,,high,Out of task scope (released before 2020)
+samsung,Galaxy A51 5G,,android,phone,2020,no,,,,10.0,13,official,,high,
+samsung,Galaxy A52,,android,phone,2021,no,,,,11.0,14,official,,high,
+samsung,Galaxy A52 5G,SM-A526B,android,phone,2021,conditional,"region:EU/IN=yes;global=no",physical+esim,,11.0,14,official,,medium,eSIM limited to specific regions
+samsung,Galaxy A52s 5G,SM-A528B,android,phone,2021,conditional,"region:EU/IN=yes;global=no",physical+esim,,11.0,14,official,,medium,eSIM limited to specific regions
+samsung,Galaxy A53,,android,phone,2022,no,,,,12.0,14,official,,high,
+samsung,Galaxy A54,,android,phone,2023,no,,,,13.0,14,official,,high,
+samsung,Galaxy A55,,android,phone,2024,no,,,,14.0,14,official,,high,
+samsung,Galaxy A70,,android,phone,2019,n/a,,,,9.0,11,official,,high,Out of task scope (released before 2020)
+samsung,Galaxy A71,,android,phone,2019,n/a,,,,10.0,13,official,,high,Out of task scope (released before 2020)
+samsung,Galaxy A72,,android,phone,2021,no,,,,11.0,14,official,,high,
+samsung,Galaxy A73,,android,phone,2022,no,,,,12.0,14,official,,high,end

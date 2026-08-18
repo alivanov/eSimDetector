@@ -1,0 +1,35 @@
+brand,marketing_name,model_codes,platform,device_type,release_year,esim_support,esim_conditions,dual_sim,max_esim_profiles,os_min_version,os_max_version,ru_market,source_url,confidence,notes
+Xiaomi,Redmi Note 8,,android,phone,2019,no,,,,physical+sim,,,,medium,
+Xiaomi,Redmi Note 8 Pro,,android,phone,2019,no,,,,physical+sim,,,,high,
+Xiaomi,Redmi Note 9,,android,phone,2020,no,,,,physical+sim,,,,high,
+Xiaomi,Redmi Note 9S,,android,phone,2020,no,,,,physical+sim,,,,high,
+Xiaomi,Redmi Note 9 Pro,,android,phone,2020,no,,,,physical+sim,,,,high,
+Xiaomi,Redmi Note 9T,,android,phone,2020,conditional,"region:EU=yes;region:RU=no",physical+esim,,,10.0,12.0,official,,low,Только для EU-версий M2003J15SG/M2003J15SS.
+Xiaomi,Redmi Note 10,,android,phone,2021,no,,,,physical+sim,11.0,13.0,parallel,,high,
+Xiaomi,Redmi Note 10 5G,,android,phone,2021,conditional,"region:EU=yes;region:RU=no",physical+esim,,,11.0,13.0,parallel,,low,ESIM только на глобальных/EU-моделях (M2101K9AG).
+Xiaomi,Redmi Note 10 Pro,,android,phone,2021,no,,,,physical+sim,11.0,13.0,parallel,,high,
+Xiaomi,Redmi Note 10 Pro 5G,,android,phone,2022,unknown,,,,,,12.0,14.0,parallel,,low,
+Xiaomi,Redmi Note 11,,android,phone,2022,no,,,,physical+sim,11.0,13.0,parallel,,high,
+Xiaomi,Redmi Note 11 Pro,,android,phone,2022,no,,,,physical+sim,11.0,13.0,parallel,,high,
+Xiaomi,Redmi Note 11 Pro 5G,,android,phone,2022,conditional,"region:EU=yes;region:RU=no",physical+esim,,,11.0,13.0,parallel,,medium,Глобальные версии с eSIM имеют коды 2201116SI/2201116SG.
+Xiaomi,Redmi Note 11 Pro+ 5G,,android,phone,2022,conditional,"region:EU=yes;region:RU=no",physical+esim,,,11.0,13.0,parallel,,medium,Глобальные версии с eSIM имеют код 2201116UG.
+Xiaomi,Redmi Note 11S,,android,phone,2022,no,,,,physical+sim,11.0,13.0,parallel,,high,
+Xiaomi,Redmi Note 11T Pro,,android,phone,2022,no,,,,physical+sim,12.0,14.0,parallel,,high,Китайская версия без eSIM.
+Xiaomi,Redmi Note 11T Pro+,,android,phone,2022,no,,,,physical+sim,12.0,14.0,parallel,,high,Китайская версия без eSIM.
+Xiaomi,Redmi Note 12,,android,phone,2022,conditional,"region:EU=yes;region:RU=no",physical+esim,,,12.0,14.0,parallel,,medium,EU-модель 22111317I поддерживает eSIM.
+Xiaomi,Redmi Note 12 5G,,android,phone,2022,conditional,"region:EU=yes;region:RU=no",physical+esim,,,12.0,14.0,parallel,,medium,EU-модель 22111317I поддерживает eSIM.
+Xiaomi,Redmi Note 12 Pro,,android,phone,2022,conditional,"region:EU=yes;region:RU=no",physical+esim,,,12.0,14.0,parallel,,medium,EU-модель 22111317G поддерживает eSIM.
+Xiaomi,Redmi Note 12 Pro+,,android,phone,2022,conditional,"region:EU=yes;region:RU=no",physical+esim,,,12.0,14.0,parallel,,medium,EU-модель 22101316UG поддерживает eSIM.
+Xiaomi,Redmi Note 12 Pro 5G,,android,phone,2022,conditional,"region:EU=yes;region:RU=no",physical+esim,,,12.0,14.0,parallel,,medium,EU-модель 22111317G поддерживает eSIM.
+Xiaomi,Redmi Note 12R,,android,phone,2023,no,,,,physical+sim,12.0,14.0,parallel,,high,Китайская версия без eSIM.
+Xiaomi,Redmi Note 12 Turbo,,android,phone,2023,no,,,,physical+sim,13.0,15.0,parallel,,high,Китайская версия без eSIM.
+Xiaomi,Redmi Note 13,,android,phone,2023,conditional,"region:EU=yes;region:RU=no",physical+esim,,,13.0,15.0,parallel,,medium,EU-модель 23124RA7EI поддерживает eSIM.
+Xiaomi,Redmi Note 13 5G,,android,phone,2023,conditional,"region:EU=yes;region:RU=no",physical+esim,,,13.0,15.0,parallel,,medium,EU-модель 23124RA7DI поддерживает eSIM.
+Xiaomi,Redmi Note 13 Pro,,android,phone,2023,conditional,"region:EU=yes;region:RU=no",physical+esim,,,13.0,15.0,parallel,,medium,EU-модель 2312CRAD9C поддерживает eSIM.
+Xiaomi,Redmi Note 13 Pro+,,android,phone,2023,conditional,"region:EU=yes;region:RU=no",physical+esim,,,13.0,15.0,parallel,,medium,EU-модель 23124RD62G поддерживает eSIM.
+Xiaomi,Redmi Note 13 Pro 5G,,android,phone,2023,conditional,"region:EU=yes;region:RU=no",physical+esim,,,13.0,15.0,parallel,,medium,EU-модель 2312FRN9DC поддерживает eSIM.
+Xiaomi,Redmi Note 14,,android,phone,2024,conditional,"region:EU=yes;region:RU=no",physical+esim,,,14.0,15.0,parallel,,medium,EU-модель 24093RKC9C поддерживает eSIM.
+Xiaomi,Redmi Note 14 5G,,android,phone,2024,conditional,"region:EU=yes;region:RU=no",physical+esim,,,14.0,15.0,parallel,,medium,EU-модель 24093RKC9G поддерживает eSIM.
+Xiaomi,Redmi Note 14 Pro,,android,phone,2024,conditional,"region:EU=yes;region:RU=no",physical+esim,,,14.0,15.0,parallel,,medium,EU-модель 24104RYD9C поддерживает eSIM.
+Xiaomi,Redmi Note 14 Pro+,,android,phone,2024,conditional,"region:EU=yes;region:RU=no",physical+esim,,,14.0,15.0,parallel,,medium,EU-модель 24104RYD9G поддерживает eSIM.
+Xiaomi,Redmi Note 14 Pro 5G,,android,phone,2024,conditional,"region:EU=yes;region:RU=no",physical+esim,,,14.0,15.0,parallel,,medium,EU-модель 24104RYD9G поддерживает eSIM

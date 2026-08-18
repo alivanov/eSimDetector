@@ -43,7 +43,7 @@ flowchart LR
 | `aliases`                        | string[]       | Псевдонимы, включая русские написания и сокращения                                                                                       |
 | `platform`                       | enum           | `ios`, `android`, `harmonyos`, `other`                                                                                                   |
 | `deviceType`                     | enum           | `phone`, `tablet`, `watch`, `laptop`, `other`                                                                                            |
-| `os.minVersion`, `os.maxVersion` | string \| null | Диапазон поддерживаемых версий ОС — основа правила по версии iOS                                                                         |
+| `os.minVersion`, `os.maxVersion` | string \| null | Диапазон фактически вышедших версий ОС — основа правила по версии iOS. Обещанная вендором длительность поддержки сюда не записывается    |
 | `screenSignatures`               | object[]       | `{ cssWidth, cssHeight, dpr, zoomed }` — сигнатуры для ветки iOS                                                                         |
 | `esim`                           | object         | Сведения о поддержке eSIM (см. 5.4)                                                                                                      |
 | `releaseYear`                    | number         | Год выхода; используется в априорной популярности и сортировке                                                                           |
