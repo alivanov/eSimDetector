@@ -1,0 +1,125 @@
+import { mkdtempSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+
+import { withTestDatabase, type TestDatabaseHandle } from '@esim-detector/test-utils';
+
+import { DEVICES_COLLECTION } from '../mongo/collections';
+import type { PipelinePaths } from '../pipeline/pipeline-runner';
+import { writeJson, writeText } from '../io/files';
+import { runLoadCommand } from './load';
+
+const REAL_ALIASES_PATH = join(__dirname, '../../../../data/catalog/aliases.json');
+const DEVICES_HEADER =
+  'brand,marketing_name,model_codes,platform,device_type,release_year,esim_support,esim_conditions,dual_sim,max_esim_profiles,os_min_version,os_max_version,ru_market,source_url,confidence,notes';
+
+function makePaths(root: string): PipelinePaths {
+  return {
+    importDir: join(root, 'import'),
+    curatedDir: join(root, 'curated'),
+    aliasesPath: REAL_ALIASES_PATH,
+    codePatternsPath: join(root, 'code-patterns.json'),
+    osVersionCeilingsPath: join(root, 'os-version-ceilings.json'),
+    referencePath: join(root, 'catalog.reference.json'),
+    cacheDir: join(root, '.cache'),
+  };
+}
+
+/**
+ * Интеграция командного слоя `load` (docs/14 §14.5) — идемпотентность повторного `pnpm seed
+ * load` на изолированной тестовой базе (ADR-017).
+ */
+describe('runLoadCommand (интеграция, withTestDatabase)', () => {
+  let root: string;
+  let db: TestDatabaseHandle;
+  let originalWrite: typeof process.stdout.write;
+
+  beforeAll(async () => {
+    db = await withTestDatabase('load-command');
+  });
+
+  beforeEach(() => {
+    root = mkdtempSync(join(tmpdir(), 'seed-load-cmd-'));
+    writeJson(join(root, 'code-patterns.json'), { samsung: '^SM-[A-Z]\\d{3,4}[A-Z0-9]*$' });
+    writeJson(join(root, 'os-version-ceilings.json'), { android: 16, ios: 18 });
+    writeText(
+      join(root, 'import/llm-model-a/02.csv'),
+      [
+        DEVICES_HEADER,
+        'Samsung,Galaxy S24 Ultra,SM-S928B,android,phone,2024,yes,,,,,,official,https://www.samsung.com,high,',
+      ].join('\n'),
+    );
+
+    originalWrite = process.stdout.write.bind(process.stdout);
+    process.stdout.write = () => true;
+  });
+
+  afterEach(async () => {
+    process.stdout.write = originalWrite;
+    rmSync(root, { recursive: true, force: true });
+    await db.truncateAll();
+  });
+
+  afterAll(async () => {
+    await db.close();
+  });
+
+  it('дважды подряд не создаёт дубликатов в MongoDB', async () => {
+    const commonOptions = {
+      dryRun: false,
+      mongoUri: db.uri,
+      paths: makePaths(root),
+      reportsDir: join(root, 'reports'),
+      snapshotPath: join(root, 'snapshot.json'),
+    };
+
+    const first = await runLoadCommand(commonOptions);
+    expect(first).toBe(0);
+    const second = await runLoadCommand(commonOptions);
+    expect(second).toBe(0);
+
+    const count = await db.connection.collection(DEVICES_COLLECTION).countDocuments({});
+    expect(count).toBe(1);
+  });
+
+  it('отменяет загрузку и возвращает 1, если найдены нарушения инвариантов §5.8', async () => {
+    // "yes" без source_url — SUPPORTED_SOURCES_MISSING (§5.8 п.6), загрузка обязана отказать.
+    writeText(
+      join(root, 'import/llm-model-a/02.csv'),
+      [DEVICES_HEADER, 'Samsung,Galaxy S23,SM-S911B,android,phone,2023,yes,,,,,,official,,high,'].join('\n'),
+    );
+    const exitCode = await runLoadCommand({
+      dryRun: false,
+      mongoUri: db.uri,
+      paths: makePaths(root),
+      reportsDir: join(root, 'reports'),
+      snapshotPath: join(root, 'snapshot.json'),
+    });
+    expect(exitCode).toBe(1);
+    const count = await db.connection.collection(DEVICES_COLLECTION).countDocuments({});
+    expect(count).toBe(0);
+  });
+
+  it('без явных путей использует настоящие данные репозитория (--dry-run)', async () => {
+    const exitCode = await runLoadCommand({
+      dryRun: true,
+      mongoUri: db.uri,
+      reportsDir: join(root, 'reports'),
+      snapshotPath: join(root, 'snapshot.json'),
+    });
+    expect([0, 1]).toContain(exitCode);
+  });
+
+  it('--dry-run не подключается к MongoDB и не пишет устройства', async () => {
+    const exitCode = await runLoadCommand({
+      dryRun: true,
+      mongoUri: db.uri,
+      paths: makePaths(root),
+      reportsDir: join(root, 'reports'),
+      snapshotPath: join(root, 'snapshot.json'),
+    });
+    expect(exitCode).toBe(0);
+    const count = await db.connection.collection(DEVICES_COLLECTION).countDocuments({});
+    expect(count).toBe(0);
+  });
+});

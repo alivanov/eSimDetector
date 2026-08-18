@@ -15,7 +15,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "pnpm -r --if-present run typecheck",
-    "test": "pnpm -r --if-present run test"
+    "test": "pnpm -r --if-present run test",
+    "seed": "pnpm --filter @esim-detector/tools-seed run start"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",

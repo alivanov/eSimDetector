@@ -33,7 +33,13 @@ export default tseslint.config(
             'packages/contracts/jest.config.ts',
             'packages/esim-rules/jest.config.ts',
             'tools/eval/jest.config.ts',
+            'tools/seed/jest.config.ts',
           ],
+          // Список выше превысил встроенный лимит (8) — agent 4 добавил девятый файл
+          // (tools/seed/jest.config.ts). Список файлов конечен и не растёт с объёмом кода
+          // приложения (по одному jest.config.ts на пакет/инструмент), поэтому предупреждение
+          // о производительности линтинга не применимо к этому случаю.
+          maximumDefaultProjectFileMatchCount_THIS_WILL_SLOW_DOWN_LINTING: 9,
           defaultProject: 'tsconfig.eslint.json',
         },
         tsconfigRootDir: process.cwd(),

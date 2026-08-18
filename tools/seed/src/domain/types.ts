@@ -1,0 +1,88 @@
+import type { DeviceType, EsimCondition, Platform } from '@esim-detector/contracts';
+
+/** `esim_support` до слияния с курируемым ядром — тот же союз значений, что в CSV (docs/appendix-a §А.2). */
+export type CsvEsimSupport = 'yes' | 'no' | 'conditional' | 'unknown';
+
+/** Происхождение одной строки (docs/05-data-model.md §5.3: `provenance`). */
+export interface RowProvenance {
+  readonly source: string;
+  readonly batchId: string;
+  readonly importedAt: Date;
+  readonly lineNumber: number;
+}
+
+/**
+ * Кандидат в запись справочника (docs/14-catalog-ingestion.md §14.4, между шагами 3 и 4) —
+ * прошёл нормализацию и валидацию ОДНОЙ строки ОДНОГО источника. Дальше по конвейеру несколько
+ * кандидатов с одинаковым `id` из разных источников сравниваются шагом консенсуса (шаг 5).
+ */
+export interface DeviceCandidate {
+  readonly id: string;
+  readonly brand: string;
+  readonly brandTitle: string;
+  readonly marketingName: string;
+  readonly family: string;
+  readonly generation: number | null;
+  readonly modifiers: readonly string[];
+  readonly modelCodes: readonly string[];
+  readonly platform: Platform;
+  readonly deviceType: DeviceType;
+  readonly releaseYear: number;
+  readonly esimSupport: CsvEsimSupport;
+  readonly esimConditions: readonly EsimCondition[];
+  readonly dualSim?: string;
+  readonly maxEsimProfiles?: number;
+  readonly osMinVersion?: string;
+  readonly osMaxVersion?: string;
+  readonly ruMarket?: string;
+  readonly sourceUrl?: string;
+  readonly confidenceSelfReported?: 'high' | 'medium' | 'low';
+  readonly notes?: string;
+  readonly provenance: RowProvenance;
+}
+
+export type QuarantineCode =
+  | 'FIELD_COUNT_MISMATCH'
+  | 'ENUM_INVALID'
+  | 'CONDITION_SYNTAX_INVALID'
+  | 'BRAND_UNKNOWN'
+  | 'NAME_UNPARSEABLE'
+  | 'CODE_COLLISION'
+  | 'NAME_COLLISION_CONFLICT'
+  | 'YEAR_IMPLAUSIBLE'
+  | 'ESIM_ANACHRONISM'
+  | 'REFERENCE_MISMATCH'
+  | 'SOURCE_DISAGREEMENT_UNRESOLVED'
+  /** iOS без сигнатур экрана/`os.maxVersion` из курируемого ядра — запись не может быть загружена (§5.8 п.4). */
+  | 'IOS_FIELDS_MISSING';
+
+export interface QuarantineEntry {
+  readonly code: QuarantineCode;
+  readonly source: string;
+  readonly batchId: string;
+  readonly lineNumber: number;
+  readonly detail: string;
+  /** Исходные значения строки — для примеров в отчёте (docs/14 §14.6) без повторного парсинга. */
+  readonly rawBrand?: string;
+  readonly rawMarketingName?: string;
+}
+
+/** Пометки, не отправляющие строку в карантин, но попадающие в отчёт (docs/14 §14.4 шаг 3). */
+export type RowNoticeCode =
+  | 'CODE_PATTERN_INVALID'
+  | 'OS_VERSION_IMPLAUSIBLE'
+  | 'SOURCE_MISSING'
+  | 'APPLE_RULE_CONFLICT'
+  | 'IOS_FIELDS_MISSING';
+
+export interface RowNotice {
+  readonly code: RowNoticeCode;
+  readonly deviceId: string;
+  readonly detail: string;
+}
+
+export interface ValidateRowResult {
+  readonly candidate?: DeviceCandidate;
+  readonly quarantine?: QuarantineEntry;
+  readonly notices: readonly RowNotice[];
+}

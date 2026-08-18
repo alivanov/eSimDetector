@@ -4,6 +4,18 @@
   "private": true,
   "description": "Импорт справочника устройств в MongoDB: подкоманды import, consensus, load, rebuild-signatures, export-overrides, verify (docs/14-catalog-ingestion.md)",
   "scripts": {
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "start": "ts-node -T src/cli.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@esim-detector/contracts": "workspace:*",
+    "@esim-detector/esim-rules": "workspace:*",
+    "@esim-detector/text-normalizer": "workspace:*",
+    "mongoose": "9.9.2"
+  },
+  "devDependencies": {
+    "@esim-detector/test-utils": "workspace:*",
+    "ts-node": "10.9.2"
   }
 }
