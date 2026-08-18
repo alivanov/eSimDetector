@@ -5,7 +5,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppConfigModule } from './config/config.module';
 import type { EnvConfig } from './config/env.schema';
 import { CatalogModule } from './modules/catalog/catalog.module';
+import { DetectionModule } from './modules/detection/detection.module';
 import { HealthModule } from './modules/health/health.module';
+import { MatchingModule } from './modules/matching/matching.module';
 
 @Module({
   imports: [
@@ -17,6 +19,8 @@ import { HealthModule } from './modules/health/health.module';
       }),
     }),
     CatalogModule,
+    DetectionModule,
+    MatchingModule,
     HealthModule,
   ],
 })

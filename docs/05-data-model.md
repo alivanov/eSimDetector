@@ -130,6 +130,23 @@ flowchart LR
 
 Журналы не содержат персональных данных: сохраняются класс устройства и хеш сигнатуры, а не «сырой» набор сигналов, который потенциально мог бы использоваться для отслеживания. Срок хранения ограничен TTL-индексом.
 
+**Форма документа `resolution_logs` (реализация агента 5, `apps/api/src/modules/resolution-log/resolution-log.schema.ts`).** Docs не фиксировали буквальную форму — она введена этим агентом:
+
+```ts
+{
+  requestId: string;
+  signalsHash: string;      // sha256 от сериализованных сигналов запроса — сигналы сами не хранятся
+  platform: "ios" | "android" | "harmonyos" | "other";
+  status: "supported" | "not_supported" | "clarification_required";
+  confidence: number;
+  reasonCodes: string[];    // только коды reasons[], без detail
+  durationMs: number;
+  createdAt: Date;          // TTL-индекс, RESOLUTION_LOG_TTL_DAYS (по умолчанию 30 дней)
+}
+```
+
+Пишется только эндпоинтом `POST /api/v1/detect` (сигналы устройства и платформа не имеют смысла для текстового поиска `/devices/search`) в фоне, без ожидания — сбой записи журнала не влияет на ответ пользователю (ADR-024).
+
 ## 5.7. Индексы
 
 | Коллекция           | Индекс                                  | Назначение                                                     |

@@ -172,7 +172,9 @@ Sec-CH-UA-Platform-Version: "14.0.0"
 
 Блок `clarification` описывает следующий шаг диалога в машиночитаемом виде: `kind` принимает значения `choose_candidate` (выбор из списка), `answer_question` (уточняющий вопрос по региону или прошивке), `manual_input` (ввод названия), `check_on_device` (инструкция по проверке в настройках).
 
-## 6.3. `GET /api/v1/devices/search` — определение по названию
+**Реализация агента 5 (`apps/api/src/modules/detection`).** `POST /api/v1/detect` и `POST /api/v1/devices/search` (§6.3) отвечают кодом `200` явно (`@HttpCode(200)`), а не принятым в NestJS по умолчанию для `POST` кодом `201` — ADR-008/ADR-024. Полный перечень стабильных кодов `reasons[]` этого эндпоинта («PLATFORM_DETECTED», «UA_CH_MODEL_RECEIVED», «CATALOG_EXACT_MATCH», «CATALOG_MODEL_CODE_UNKNOWN», «LEGACY_UA_MODEL_PARSED», «IOS_VERSION_IMPLIES_MIN_MODEL», «SCREEN_SIGNATURE_MATCHED», «SCREEN_SIGNATURE_UNKNOWN», «EMULATION_SUSPECTED», «SIGNAL_HEADERS_CONSISTENT»/«SIGNAL_HEADERS_INCONSISTENT», «CONFIDENCE_BELOW_THRESHOLD», «PLATFORM_NOT_MOBILE», «NO_SIGNALS» — плюс коды `esim-rules`/`fuzzy-matcher`, переиспользуемые как есть) документирован в коде (`apps/api/src/modules/detection/*.ts`) и в ADR-024, а не повторён здесь дословно, чтобы не расходиться при последующих правках.
+
+## 6.3. `GET/POST /api/v1/devices/search` — определение по названию
 
 ```http
 GET /api/v1/devices/search?q=айфон%2013%20про%20макс HTTP/1.1
