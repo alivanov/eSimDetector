@@ -1,0 +1,982 @@
+[
+  {
+    "id": "apple-iphone-6",
+    "esimSupport": "no",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-6-plus",
+    "esimSupport": "no",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-6s",
+    "esimSupport": "no",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-6s-plus",
+    "esimSupport": "no",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-se-2016",
+    "esimSupport": "no",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-7",
+    "esimSupport": "no",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-7-plus",
+    "esimSupport": "no",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-8",
+    "esimSupport": "no",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-8-plus",
+    "esimSupport": "no",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-x",
+    "esimSupport": "no",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-xs",
+    "esimSupport": "yes",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-xs-max",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-xr",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-11",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-11-pro",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-11-pro-max",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-se-2020",
+    "esimSupport": "yes",
+    "note": "https://support.apple.com/en-us/111882"
+  },
+  {
+    "id": "apple-iphone-se-2022",
+    "esimSupport": "yes",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-12-mini",
+    "esimSupport": "yes",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-12",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-12-pro",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-12-pro-max",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-13-mini",
+    "esimSupport": "yes",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-13",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-13-pro",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-13-pro-max",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-14",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-14-plus",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-14-pro",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-14-pro-max",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-15",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-15-plus",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-15-pro",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-15-pro-max",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-16e",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-16",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-16-plus",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-16-pro",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-16-pro-max",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-17e",
+    "esimSupport": "yes",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-17",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-17-pro",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-17-pro-max",
+    "esimSupport": "conditional",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "apple-iphone-air",
+    "esimSupport": "yes",
+    "note": "https://support.apple.com/en-us/118569"
+  },
+  {
+    "id": "google-pixel",
+    "esimSupport": "no",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-xl",
+    "esimSupport": "no",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-2",
+    "esimSupport": "no",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-2-xl",
+    "esimSupport": "no",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-3",
+    "esimSupport": "no",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-3-xl",
+    "esimSupport": "no",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-3a",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-3a-xl",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-4",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-4-xl",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-4a",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-5",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-5a",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-6",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-6-pro",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-6a",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-7",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-7-pro",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-7a",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-fold",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-8",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-8-pro",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-8a",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-9",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-9-pro",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-9-pro-xl",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-9-pro-fold",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-9a",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-10",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-10-pro",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-10-pro-xl",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "google-pixel-10-pro-fold",
+    "esimSupport": "yes",
+    "note": "https://support.google.com/pixelphone/answer/7086887"
+  },
+  {
+    "id": "samsung-galaxy-s20",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s20-ultra",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s21",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s21-ultra",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s22",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s22-ultra",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s23",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s23-ultra",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s23-fe",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s24",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s24-ultra",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s24-fe",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s25",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s25-ultra",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s25-edge",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s25-fe",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s26",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s26-ultra",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-note20",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-note20-ultra",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-fold",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-z-fold2",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-z-fold3",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-z-fold4",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-z-fold5",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-z-fold6",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-z-fold7",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-z-flip",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-z-flip3",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-z-flip4",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-z-flip5",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-z-flip6",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-z-flip7",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a55",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a56",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a35",
+    "esimSupport": "conditional",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — в перечне поддерживающих eSIM с явной региональной оговоркой (Европа/Северная Америка/Корея, для A54 — включая Японию) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a36",
+    "esimSupport": "conditional",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — в перечне поддерживающих eSIM с явной региональной оговоркой (Европа/Северная Америка/Корея, для A54 — включая Японию) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a54",
+    "esimSupport": "conditional",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — в перечне поддерживающих eSIM с явной региональной оговоркой (Европа/Северная Америка/Корея, для A54 — включая Японию) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a01",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a01-core",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a01s",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a02",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a02s",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a03",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a03-core",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a03s",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a04",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a04e",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a04s",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a05",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a05s",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a06",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a11",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a12",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a12-nacho",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a13",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a14",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a15",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a16",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a21",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a21s",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a22",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a23",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a24",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a25",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a31",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a32",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a33",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a34",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a41",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a42",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a51",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a52",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a52s",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a53",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a71",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a72",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-a73",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m01",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m01-core",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m01s",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m02",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m02s",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m04",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m05",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m06",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m07",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m11",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m12",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m13",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m14",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m15",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m16",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m17",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m21",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m21-2021-edition",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m21s",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m22",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m23",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m26",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m31",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m31s",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m32",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m33",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m34",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m35",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m36",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m51",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m52",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m53",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m54",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m55",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m55s",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-m56",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s10",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s10-lite",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s10e",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s20-fe",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s21-fe",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  },
+  {
+    "id": "samsung-galaxy-s9",
+    "esimSupport": "no",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — устройство НЕ входит в актуальный перечень поддерживающих eSIM моделей (перечень построен как список поддерживаемых, более новые модели той же линейки/поколения в нём явно перечислены) (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+  }
+]

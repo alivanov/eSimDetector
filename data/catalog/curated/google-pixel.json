@@ -1,0 +1,1749 @@
+[
+  {
+    "_id": "google-pixel",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel",
+    "displayName": "Google Pixel",
+    "family": "pixel",
+    "generation": null,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "pixel",
+      "google pixel"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Первый Pixel (2016) eSIM не поддерживает ни в одной конфигурации: eSIM в линейке Pixel появилась только с Pixel 2, и даже там — лишь при покупке с сервисом Google Fi (support.google.com/pixelphone/answer/7086887)."
+    },
+    "releaseYear": 2016,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.01,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-xl",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel XL",
+    "displayName": "Google Pixel XL",
+    "family": "pixel",
+    "generation": null,
+    "modifiers": [
+      "xl"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel xl",
+      "google pixel xl"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Тот же модельный год и то же отсутствие eSIM, что и у базового Pixel (2016) (support.google.com/pixelphone/answer/7086887)."
+    },
+    "releaseYear": 2016,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.01,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-2",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 2",
+    "displayName": "Google Pixel 2",
+    "family": "pixel",
+    "generation": 2,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 2",
+      "google pixel 2"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Вендорское исключение уже — не правило: eSIM у Pixel 2 работает ТОЛЬКО у телефонов, купленных с сервисом Google Fi (доступен лишь в США); во всех остальных случаях покупки eSIM не работает. Google Fi не продаётся в России, поэтому для рынка РФ реалистичный ответ — «не поддерживает» (source.google.com/pixelphone/answer/7086887). Схема условий записи справочника поддерживает только сценарии «регион»/«версия ОС» (docs/05-data-model.md §5.4), а не «оператор», поэтому узкое операторское исключение не может быть выражено условием `conditional` без искажения смысла региона — решение и ограничение зафиксированы в отчёте агента 5.4."
+    },
+    "releaseYear": 2017,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.01,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-2-xl",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 2 XL",
+    "displayName": "Google Pixel 2 XL",
+    "family": "pixel",
+    "generation": 2,
+    "modifiers": [
+      "xl"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 2 xl",
+      "google pixel 2 xl"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "То же исключение, что и у Pixel 2: eSIM работает только при покупке с Google Fi (support.google.com/pixelphone/answer/7086887); для рынка РФ — «не поддерживает»."
+    },
+    "releaseYear": 2017,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.01,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-3",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 3",
+    "displayName": "Google Pixel 3",
+    "family": "pixel",
+    "generation": 3,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 3",
+      "google pixel 3"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "eSIM у Pixel 3 не работает у любых операторов США и Канады, кроме Sprint и Google Fi, а также не работает у телефонов, купленных в Австралии, на Тайване и в Японии (support.google.com/pixelphone/answer/7086887). Sprint прекратил существование как отдельный оператор в 2020 году, Google Fi в России не продаётся — для подавляющего большинства пользователей, включая рынок РФ, корректный ответ «не поддерживает». Операторское исключение не выражается условием `conditional` схемы (только «регион»/«версия ОС», docs/05 §5.4) без искажения смысла — ограничение зафиксировано в отчёте агента 5.4."
+    },
+    "releaseYear": 2018,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.02,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-3-xl",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 3 XL",
+    "displayName": "Google Pixel 3 XL",
+    "family": "pixel",
+    "generation": 3,
+    "modifiers": [
+      "xl"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 3 xl",
+      "google pixel 3 xl"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "То же исключение, что и у Pixel 3 (support.google.com/pixelphone/answer/7086887): eSIM работает только у Sprint/Google Fi в США/Канаде, для рынка РФ — «не поддерживает»."
+    },
+    "releaseYear": 2018,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.02,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-3a",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 3a",
+    "displayName": "Google Pixel 3a",
+    "family": "pixel",
+    "generation": 3,
+    "modifiers": [
+      "a"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 3a",
+      "google pixel 3a"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Pixel 3a — первая модель линейки с eSIM в общем случае (support.google.com/pixelphone/answer/9449293: «If you have a Pixel 3a or later Pixel phone, you can use two SIMs: one physical SIM card and one eSIM»). Исключения по вендорской странице: телефоны, купленные с сервисом Verizon (США) или в Японии, eSIM не поддерживают, а купленные в Японии — вообще не поддерживают функцию двух SIM (support.google.com/pixelphone/answer/7086887, support.google.com/pixelphone/answer/9449293). Оба исключения — операторское (Verizon) и страновое для японского канала продаж — не выражаются условием `conditional` схемы записи (только «регион»/«версия ОС», docs/05 §5.4) без создания ложного срабатывания для большинства пользователей США/Канады; для рынка РФ (параллельный импорт, вне этих каналов продаж) исключения практически не применимы."
+    },
+    "releaseYear": 2019,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.03,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.google.com/pixelphone/answer/9449293",
+        "title": "How to use dual SIMs on your Google Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-3a-xl",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 3a XL",
+    "displayName": "Google Pixel 3a XL",
+    "family": "pixel",
+    "generation": 3,
+    "modifiers": [
+      "a",
+      "xl"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 3a xl",
+      "google pixel 3a xl"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Те же исключения по каналу продаж, что и у Pixel 3a: Verizon (США) и Япония (support.google.com/pixelphone/answer/7086887, support.google.com/pixelphone/answer/9449293)."
+    },
+    "releaseYear": 2019,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.02,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.google.com/pixelphone/answer/9449293",
+        "title": "How to use dual SIMs on your Google Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-4",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 4",
+    "displayName": "Google Pixel 4",
+    "family": "pixel",
+    "generation": 4,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 4",
+      "google pixel 4"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "«Pixel 4 and later: All phones work with eSIM» — начиная с этого поколения вендорских исключений по региону или оператору нет (support.google.com/pixelphone/answer/7086887)."
+    },
+    "releaseYear": 2019,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.03,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-4-xl",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 4 XL",
+    "displayName": "Google Pixel 4 XL",
+    "family": "pixel",
+    "generation": 4,
+    "modifiers": [
+      "xl"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 4 xl",
+      "google pixel 4 xl"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "«Pixel 4 and later: All phones work with eSIM» (support.google.com/pixelphone/answer/7086887)."
+    },
+    "releaseYear": 2019,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.03,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-4a",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 4a",
+    "displayName": "Google Pixel 4a",
+    "family": "pixel",
+    "generation": 4,
+    "modifiers": [
+      "a"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 4a",
+      "google pixel 4a",
+      "pixel 4a 5g",
+      "pixel 4a (5g)",
+      "google pixel 4a 5g"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Запись покрывает и Pixel 4a (5G) — отдельную по спецификациям модель с иным экраном и чипсетом, но с идентичным статусом eSIM («Pixel 4 and later: All phones work with eSIM», support.google.com/pixelphone/answer/7086887); признак сети «5G» — незначимый атрибут идентификатора (docs/14-catalog-ingestion.md §14.4 шаг 2), поэтому у обеих моделей один и тот же детерминированный _id, и заводить вторую запись означало бы дублирующийся _id (инвариант §5.8 п.1)."
+    },
+    "releaseYear": 2020,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.03,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-5",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 5",
+    "displayName": "Google Pixel 5",
+    "family": "pixel",
+    "generation": 5,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 5",
+      "google pixel 5"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "«Pixel 4 and later: All phones work with eSIM» (support.google.com/pixelphone/answer/7086887)."
+    },
+    "releaseYear": 2020,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.04,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-5a",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 5a",
+    "displayName": "Google Pixel 5a",
+    "family": "pixel",
+    "generation": 5,
+    "modifiers": [
+      "a"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 5a",
+      "google pixel 5a"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "«Pixel 4 and later: All phones work with eSIM» (support.google.com/pixelphone/answer/7086887)."
+    },
+    "releaseYear": 2021,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.03,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-6",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 6",
+    "displayName": "Google Pixel 6",
+    "family": "pixel",
+    "generation": 6,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 6",
+      "google pixel 6"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "«Pixel 4 and later: All phones work with eSIM» (support.google.com/pixelphone/answer/7086887)."
+    },
+    "releaseYear": 2021,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.05,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-6-pro",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 6 Pro",
+    "displayName": "Google Pixel 6 Pro",
+    "family": "pixel",
+    "generation": 6,
+    "modifiers": [
+      "pro"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 6 pro",
+      "google pixel 6 pro"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "«Pixel 4 and later: All phones work with eSIM» (support.google.com/pixelphone/answer/7086887)."
+    },
+    "releaseYear": 2021,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.05,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-6a",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 6a",
+    "displayName": "Google Pixel 6a",
+    "family": "pixel",
+    "generation": 6,
+    "modifiers": [
+      "a"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 6a",
+      "google pixel 6a"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "«Pixel 4 and later: All phones work with eSIM» (support.google.com/pixelphone/answer/7086887)."
+    },
+    "releaseYear": 2022,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.04,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-7",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 7",
+    "displayName": "Google Pixel 7",
+    "family": "pixel",
+    "generation": 7,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 7",
+      "google pixel 7"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "eSIM поддерживается без исключений; начиная с этой модели дополнительно доступны два активных профиля eSIM одновременно при поддержке оператора (support.google.com/pixelphone/answer/9449293: «You can use 2 eSIM profiles at once if: You have a Pixel 7, Pixel 7 Pro, or later phone»)."
+    },
+    "releaseYear": 2022,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.06,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.google.com/pixelphone/answer/9449293",
+        "title": "How to use dual SIMs on your Google Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-7-pro",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 7 Pro",
+    "displayName": "Google Pixel 7 Pro",
+    "family": "pixel",
+    "generation": 7,
+    "modifiers": [
+      "pro"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 7 pro",
+      "google pixel 7 pro"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Два активных профиля eSIM одновременно при поддержке оператора (support.google.com/pixelphone/answer/9449293)."
+    },
+    "releaseYear": 2022,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.06,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.google.com/pixelphone/answer/9449293",
+        "title": "How to use dual SIMs on your Google Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-7a",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 7a",
+    "displayName": "Google Pixel 7a",
+    "family": "pixel",
+    "generation": 7,
+    "modifiers": [
+      "a"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 7a",
+      "google pixel 7a"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "«Pixel 4 and later: All phones work with eSIM» (support.google.com/pixelphone/answer/7086887); модель 2023 года, младше Pixel 7/7 Pro, поэтому под «Pixel 7 или новее» из support.google.com/pixelphone/answer/9449293 формально не попадает — два активных профиля eSIM для неё вендорской страницей не заявлены."
+    },
+    "releaseYear": 2023,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.05,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-fold",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel Fold",
+    "displayName": "Google Pixel Fold",
+    "family": "pixel",
+    "generation": null,
+    "modifiers": [
+      "fold"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel fold",
+      "google pixel fold"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "«Pixel 4 and later: All phones work with eSIM» (support.google.com/pixelphone/answer/7086887)."
+    },
+    "releaseYear": 2023,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.02,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-8",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 8",
+    "displayName": "Google Pixel 8",
+    "family": "pixel",
+    "generation": 8,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 8",
+      "google pixel 8"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Два активных профиля eSIM одновременно при поддержке оператора (support.google.com/pixelphone/answer/9449293)."
+    },
+    "releaseYear": 2023,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.07,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.google.com/pixelphone/answer/9449293",
+        "title": "How to use dual SIMs on your Google Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-8-pro",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 8 Pro",
+    "displayName": "Google Pixel 8 Pro",
+    "family": "pixel",
+    "generation": 8,
+    "modifiers": [
+      "pro"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 8 pro",
+      "google pixel 8 pro"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Два активных профиля eSIM одновременно при поддержке оператора (support.google.com/pixelphone/answer/9449293)."
+    },
+    "releaseYear": 2023,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.07,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.google.com/pixelphone/answer/9449293",
+        "title": "How to use dual SIMs on your Google Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-8a",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 8a",
+    "displayName": "Google Pixel 8a",
+    "family": "pixel",
+    "generation": 8,
+    "modifiers": [
+      "a"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 8a",
+      "google pixel 8a"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Два активных профиля eSIM одновременно при поддержке оператора (support.google.com/pixelphone/answer/9449293)."
+    },
+    "releaseYear": 2024,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.06,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.google.com/pixelphone/answer/9449293",
+        "title": "How to use dual SIMs on your Google Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-9",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 9",
+    "displayName": "Google Pixel 9",
+    "family": "pixel",
+    "generation": 9,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 9",
+      "google pixel 9"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Два активных профиля eSIM одновременно при поддержке оператора (support.google.com/pixelphone/answer/9449293)."
+    },
+    "releaseYear": 2024,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.08,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.google.com/pixelphone/answer/9449293",
+        "title": "How to use dual SIMs on your Google Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-9-pro",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 9 Pro",
+    "displayName": "Google Pixel 9 Pro",
+    "family": "pixel",
+    "generation": 9,
+    "modifiers": [
+      "pro"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 9 pro",
+      "google pixel 9 pro"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Два активных профиля eSIM одновременно при поддержке оператора (support.google.com/pixelphone/answer/9449293)."
+    },
+    "releaseYear": 2024,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.08,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.google.com/pixelphone/answer/9449293",
+        "title": "How to use dual SIMs on your Google Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-9-pro-xl",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 9 Pro XL",
+    "displayName": "Google Pixel 9 Pro XL",
+    "family": "pixel",
+    "generation": 9,
+    "modifiers": [
+      "pro",
+      "xl"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 9 pro xl",
+      "google pixel 9 pro xl"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Два активных профиля eSIM одновременно при поддержке оператора (support.google.com/pixelphone/answer/9449293)."
+    },
+    "releaseYear": 2024,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.08,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.google.com/pixelphone/answer/9449293",
+        "title": "How to use dual SIMs on your Google Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-9-pro-fold",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 9 Pro Fold",
+    "displayName": "Google Pixel 9 Pro Fold",
+    "family": "pixel",
+    "generation": 9,
+    "modifiers": [
+      "pro",
+      "fold"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 9 pro fold",
+      "google pixel 9 pro fold"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Два активных профиля eSIM одновременно при поддержке оператора (support.google.com/pixelphone/answer/9449293)."
+    },
+    "releaseYear": 2024,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.03,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.google.com/pixelphone/answer/9449293",
+        "title": "How to use dual SIMs on your Google Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-9a",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 9a",
+    "displayName": "Google Pixel 9a",
+    "family": "pixel",
+    "generation": 9,
+    "modifiers": [
+      "a"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 9a",
+      "google pixel 9a"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Два активных профиля eSIM одновременно при поддержке оператора (support.google.com/pixelphone/answer/9449293)."
+    },
+    "releaseYear": 2025,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.07,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.google.com/pixelphone/answer/9449293",
+        "title": "How to use dual SIMs on your Google Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-10",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 10",
+    "displayName": "Google Pixel 10",
+    "family": "pixel",
+    "generation": 10,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 10",
+      "google pixel 10"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "eSIM поддерживается везде; версия для США — исключение по механизму, а не по статусу: физический слот отсутствует, устройство работает только на eSIM («In the US, Pixel 10 and later, except the Pixel 10 Pro Fold, work with eSIM only», support.google.com/pixelphone/answer/9449293; «Phones in the US with the Pixel 10, Pixel 10 Pro, and Pixel 10 Pro XL model don't use physical SIMs, and are eSIM-only», support.google.com/pixelphone/answer/16115741). Ответ на вопрос «поддерживает ли устройство eSIM» от этого не меняется — по аналогии с курируемым ядром Apple (docs/05-data-model.md §5.4, случай 2, где такой же региональный нюанс не заведён отдельным условием `conditional`), региональное условие не заводится, а нюанс фиксируется здесь текстом."
+    },
+    "releaseYear": 2025,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.1,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.google.com/pixelphone/answer/9449293",
+        "title": "How to use dual SIMs on your Google Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.google.com/pixelphone/answer/16115741",
+        "title": "Learn more about eSIMs — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-10-pro",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 10 Pro",
+    "displayName": "Google Pixel 10 Pro",
+    "family": "pixel",
+    "generation": 10,
+    "modifiers": [
+      "pro"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 10 pro",
+      "google pixel 10 pro"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Версия для США — eSIM-only, без физического слота (support.google.com/pixelphone/answer/16115741); статус «поддерживает» это не меняет."
+    },
+    "releaseYear": 2025,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.1,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.google.com/pixelphone/answer/9449293",
+        "title": "How to use dual SIMs on your Google Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.google.com/pixelphone/answer/16115741",
+        "title": "Learn more about eSIMs — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-10-pro-xl",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 10 Pro XL",
+    "displayName": "Google Pixel 10 Pro XL",
+    "family": "pixel",
+    "generation": 10,
+    "modifiers": [
+      "pro",
+      "xl"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 10 pro xl",
+      "google pixel 10 pro xl"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Версия для США — eSIM-only, без физического слота (support.google.com/pixelphone/answer/16115741); статус «поддерживает» это не меняет."
+    },
+    "releaseYear": 2025,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.1,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.google.com/pixelphone/answer/9449293",
+        "title": "How to use dual SIMs on your Google Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.google.com/pixelphone/answer/16115741",
+        "title": "Learn more about eSIMs — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "google-pixel-10-pro-fold",
+    "brand": "google",
+    "brandTitle": "Google",
+    "marketingName": "Pixel 10 Pro Fold",
+    "displayName": "Google Pixel 10 Pro Fold",
+    "family": "pixel",
+    "generation": 10,
+    "modifiers": [
+      "pro",
+      "fold"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "pixel 10 pro fold",
+      "google pixel 10 pro fold"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Единственная модель поколения Pixel 10, явно исключённая вендором из требования «только eSIM» в США — сохраняет физический слот и там («In the US, Pixel 10 and later, except the Pixel 10 Pro Fold, work with eSIM only», support.google.com/pixelphone/answer/9449293)."
+    },
+    "releaseYear": 2025,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.04,
+    "sources": [
+      {
+        "url": "https://support.google.com/pixelphone/answer/7086887",
+        "title": "Get a SIM or eSIM & add it to your Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.google.com/pixelphone/answer/9449293",
+        "title": "How to use dual SIMs on your Google Pixel phone — Pixel Phone Help",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  }
+]
