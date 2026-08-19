@@ -59,8 +59,10 @@ function loadOsVersionCeilingsOrThrow(path: string): OsVersionCeilings {
 
 function tryLoadReference(path: string): { reference: ReferenceMap | undefined; missing: boolean } {
   if (!fileExists(path)) {
-    // Файл `data/fixtures/catalog.reference.json` не создан на момент реализации агента 4
-    // (docs/12-open-questions.md, вопрос 13, не решён) — это ожидаемое, а не аварийное состояние.
+    // Файл `data/fixtures/catalog.reference.json` не создан на момент реализации агента 4;
+    // вопрос 13 решён (docs/09-decisions.md, ADR-013, дополнение "вопрос 13 закрыт" — выборку
+    // формирует агент 5.4 по вендорским страницам), но сам файл появится позже. До тех пор
+    // отсутствие файла — ожидаемое, а не аварийное состояние.
     return { reference: undefined, missing: true };
   }
   const result = parseReferenceFile(readJson(path));
@@ -78,11 +80,11 @@ export interface RunPipelineOptions {
   /** Использовать кэш `import` между запусками CLI (docs/14 §14.5) — по умолчанию включено. */
   readonly useCache?: boolean;
   /**
-   * Источники, исключённые из консенсуса целиком (docs/appendix-a §А.6/§А.8.1: источник, не
-   * выдержавший схему CSV, отбраковывается целиком, а не частично). По умолчанию —
-   * `DEFAULT_EXCLUDED_SOURCES` (`gigachat-3-5-ultra`) — действующее решение до тех пор, пока
-   * не закрыт вопрос 12 (docs/12-open-questions.md); параметр, а не константа внутри функции,
-   * чтобы пересмотр этого вопроса не требовал правки кода конвейера.
+   * Источники, исключённые из консенсуса целиком (docs/appendix-a §А.7: источник, не прошедший
+   * проверку пригодности, отбраковывается целиком, а не частично). По умолчанию —
+   * `DEFAULT_EXCLUDED_SOURCES` (`gigachat-3-5-ultra`, окончательное решение — docs/09-decisions.md
+   * ADR-013, дополнение "вопрос 12 закрыт"). Остаётся параметром, а не константой внутри функции,
+   * чтобы будущий пересмотр состава источников не требовал правки кода конвейера.
    */
   readonly excludedSources?: readonly string[];
 }
@@ -97,10 +99,12 @@ export interface RunPipelineResult extends BuildCatalogResult {
 }
 
 /**
- * Источник, не выдержавший схему CSV на пилотной партии, отбраковывается целиком (docs/appendix-a
- * §А.7, §А.8.1) — действующее решение до тех пор, пока не закрыт вопрос 12 (docs/12-open-questions.md:
- * "пересматриваем ли исключение источника gigachat-3-5-ultra" — вопрос ОТКРЫТ, не решён, но статус-кво
- * до его решения — исключение, а не включение по умолчанию).
+ * Источник исключён из консенсуса окончательно (docs/09-decisions.md, ADR-013, дополнение
+ * "вопрос 12 закрыт"; docs/12-open-questions.md, вопрос 12 — решено). Обоснование — не схема CSV
+ * (на партии 16 источник её выдержал, docs/appendix-a §А.10.4), а содержательные дефекты той же
+ * партии: суффикс `W` отнесён к Китаю против трёх источников, назвавших Канаду (регион `cn` даёт
+ * `not_supported` — готовый ложный отрицательный ответ), суффикс `N` отнесён к Европе против
+ * Кореи, и 6 строк из 14 с пустыми обязательными полями.
  */
 export const DEFAULT_EXCLUDED_SOURCES: readonly string[] = ['gigachat-3-5-ultra'];
 

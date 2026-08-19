@@ -255,7 +255,7 @@ describe('runPipeline', () => {
     expect(second.sourceFiles).toEqual(first.sourceFiles);
   });
 
-  it('исключает "gigachat-3-5-ultra" по умолчанию (docs/appendix-a §А.8.1, вопрос 12 не решён)', () => {
+  it('исключает "gigachat-3-5-ultra" по умолчанию (ADR-013, дополнение "вопрос 12 закрыт")', () => {
     const csv = [
       DEVICES_HEADER,
       'Samsung,Galaxy S24 Ultra,SM-S928B,android,phone,2024,yes,,,,,,official,,high,',

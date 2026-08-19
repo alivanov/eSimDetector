@@ -35,7 +35,8 @@ export interface VerifyOptions {
  * код возврата для CI: 1, если найдены нарушения инвариантов §5.8 (слой `catalog_overrides`
  * применяется перед проверкой — как это делает `CatalogModule` на чтении, ADR-022 п.5) либо
  * доля расхождений с эталоном ненулевая. Без файла эталона сверка пропускается с явной пометкой
- * (docs/12-open-questions.md, вопрос 13 — не решён), а не тихо считается пройденной.
+ * (файл появится по решению вопроса 13 — docs/09-decisions.md, ADR-013, дополнение "вопрос 13
+ * закрыт"), а не тихо считается пройденной.
  */
 export async function runVerifyCommand(options: VerifyOptions): Promise<number> {
   const connection = await connectToMongo(options.mongoUri);
@@ -63,7 +64,7 @@ export async function runVerifyCommand(options: VerifyOptions): Promise<number> 
     const referencePath = options.referencePath ?? defaultPipelinePaths().referencePath;
     if (!fileExists(referencePath)) {
       process.stdout.write(
-        'data/fixtures/catalog.reference.json отсутствует — сверка с эталоном пропущена (docs/12-open-questions.md, вопрос 13)\n',
+        'data/fixtures/catalog.reference.json отсутствует — сверка с эталоном пропущена (docs/09-decisions.md, ADR-013, дополнение "вопрос 13 закрыт")\n',
       );
     } else {
       const parsed = parseReferenceFile(readJson(referencePath));

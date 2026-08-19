@@ -258,7 +258,8 @@ export function renderMarkdown(report: ImportReportData): string {
   if (report.reference.fileMissing) {
     lines.push(
       '**Файл `data/fixtures/catalog.reference.json` отсутствует — покрытие эталоном НЕ ПРОВЕРЕНО.** ' +
-        'Доля расхождений с эталоном не может быть измерена до появления файла (docs/12-open-questions.md, вопрос 13).',
+        'Доля расхождений с эталоном не может быть измерена до появления файла ' +
+        '(docs/09-decisions.md, ADR-013, дополнение "вопрос 13 закрыт" — выборку формирует агент 5.4).',
     );
   } else {
     lines.push(`- Пересечение с эталоном: ${report.reference.checked}`);

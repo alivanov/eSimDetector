@@ -173,11 +173,12 @@ flowchart TD
 
 ## 14.5. Скрипт наполнения базы
 
-Отдельный инструмент командной строки `tools/seed`, не часть запуска API. Подкоманды:
+Отдельный инструмент командной строки `tools/seed`, не часть запуска API. Подкоманды и реально читаемые ими флаги командной строки (`tools/seed/src/cli.ts`) — только `--source`, `--sources`, `--dry-run`; флага `--input` нет: пути к файлам выгрузок не передаются аргументом, а вычисляются программно (`tools/seed/src/defaults.ts`, `defaultPipelinePaths()`) от расположения инструмента в репозитории — `import`/`consensus` без `--source` разбирают ВСЕ источники `data/catalog/import/<источник>/*.csv` целиком (ADR-023: реальная выгрузка разбита на 46 файлов по источникам и партиям, а не на один `devices.csv`, как в упрощённом примере ниже).
 
 ```bash
-pnpm seed import --input data/catalog/import/devices.csv --source llm:model-a --dry-run
-pnpm seed import --input data/catalog/import/devices.csv --source llm:model-a
+pnpm seed import --source llm:model-a --dry-run   # один источник, без записи файла отчёта
+pnpm seed import --source llm:model-a              # один источник, отчёт пишется в reports/
+pnpm seed import                                    # все источники data/catalog/import/
 pnpm seed consensus --sources llm:model-a,llm:model-b,llm:model-c
 pnpm seed load                 # загрузка принятых записей в MongoDB
 pnpm seed rebuild-signatures   # пересборка сигнатур экранов
