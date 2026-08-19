@@ -22,6 +22,12 @@ describe('classifyPlatform', () => {
     expect(classifyPlatform({ userAgent: ua })).toBe('harmonyos');
   });
 
+  it('распознаёт HarmonyOS NEXT по реальному образцу UA браузера Huawei (docs/09 ADR-024, п.2, этап 5.5): платформа названа "OpenHarmony", а не "HarmonyOS", при этом рядом присутствует токен совместимости "Android 10"', () => {
+    const ua =
+      'Mozilla/5.0 (Phone; OpenHarmony 6.0; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 ArkWeb/6.0.0.130 Mobile HuaweiBrowser/5.1.12.351';
+    expect(classifyPlatform({ userAgent: ua })).toBe('harmonyos');
+  });
+
   it('распознаёт Android по урезанному UA ("K") через uaData.platform', () => {
     const ua = 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36';
     expect(classifyPlatform({ userAgent: ua, uaData: { platform: 'Android' } })).toBe('android');
