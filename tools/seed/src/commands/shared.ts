@@ -57,6 +57,7 @@ export function runAndBuildReport(options: RunCommandOptions = {}): RunCommandOu
     curatedAppliedCount: result.curatedAppliedCount,
     appleRuleAppliedCount: result.appleRuleAppliedCount,
     invariantViolationsCount: result.invariantViolations.length,
+    invariantQuarantinedCount: result.invariantQuarantinedCount,
     ...(previousSnapshot !== undefined ? { previousSnapshot } : {}),
   });
 

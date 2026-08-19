@@ -3,6 +3,7 @@ import { parseNormalizationDictionary } from '@esim-detector/text-normalizer';
 
 import { parseCodePatterns, type CodePatternMap } from '../domain/code-patterns';
 import { parseOsVersionCeilings, type OsVersionCeilings } from '../domain/os-version-ceiling';
+import { parseSubbrands, type SubbrandMap } from '../domain/subbrands';
 import type { DeviceCandidate, QuarantineEntry, RowNotice } from '../domain/types';
 import { serializeCandidates } from '../io/candidate-cache';
 import {
@@ -17,6 +18,7 @@ import { buildCatalog, type BuildCatalogResult } from './build-catalog';
 import { parseCuratedDevices } from './merge';
 import { importSource, type ImportSourceFileResult } from './import-source';
 import { parseReferenceFile, type ReferenceMap } from './reference';
+import { normalizeSubbrandCandidates } from './subbrand-merge';
 
 /**
  * Пути к данным конвейера (docs/14-catalog-ingestion.md) — приходят параметром от `cli.ts`,
@@ -29,6 +31,7 @@ export interface PipelinePaths {
   readonly aliasesPath: string;
   readonly codePatternsPath: string;
   readonly osVersionCeilingsPath: string;
+  readonly subbrandsPath: string;
   readonly referencePath: string;
   readonly cacheDir: string;
 }
@@ -55,6 +58,23 @@ function loadOsVersionCeilingsOrThrow(path: string): OsVersionCeilings {
     throw new Error(`${path} не прошёл валидацию: ${result.errors.join('; ')}`);
   }
   return result.value;
+}
+
+/**
+ * `data/catalog/subbrands.json` (docs/09-decisions.md ADR-029) — в отличие от шаблонов кодов и
+ * потолков версий ОС, отсутствие файла не аварийная ситуация: без него конвейер просто не
+ * выполняет слияние подбрендов (POCO/Redmi против Xiaomi) и работает как раньше. Тот же принцип
+ * терпимости к отсутствию файла, что и у `tryLoadReference` ниже.
+ */
+function tryLoadSubbrands(path: string): SubbrandMap {
+  if (!fileExists(path)) {
+    return new Map();
+  }
+  const { subbrands, errors } = parseSubbrands(readJson(path));
+  if (errors.length > 0) {
+    throw new Error(`${path} содержит ошибки: ${errors.join('; ')}`);
+  }
+  return subbrands;
 }
 
 function tryLoadReference(path: string): { reference: ReferenceMap | undefined; missing: boolean } {
@@ -178,6 +198,7 @@ export function runPipeline(options: RunPipelineOptions): RunPipelineResult {
   const dictionary = loadDictionaryOrThrow(paths.aliasesPath);
   const codePatterns = loadCodePatternsOrThrow(paths.codePatternsPath);
   const osVersionCeilings = loadOsVersionCeilingsOrThrow(paths.osVersionCeilingsPath);
+  const subbrands = tryLoadSubbrands(paths.subbrandsPath);
   const { reference, missing: referenceFileMissing } = tryLoadReference(paths.referencePath);
 
   const discovered = discoverImportCsvFiles(paths.importDir).filter(
@@ -234,8 +255,13 @@ export function runPipeline(options: RunPipelineOptions): RunPipelineResult {
     throw new Error(`data/catalog/curated содержит невалидные записи: ${curatedErrors.join('; ')}`);
   }
 
+  // Слияние подбрендов (docs/09-decisions.md ADR-029) — НАД ВСЕМ пулом кандидатов всех
+  // источников, ДО консенсуса (шаг 5): только здесь видны кандидаты с разным `id`, пришедшие от
+  // разных источников с разным написанием бренда/подбренда для одного и того же устройства.
+  const subbrandMergeResult = normalizeSubbrandCandidates(allCandidates, subbrands, dictionary);
+
   const catalogResult = buildCatalog({
-    candidates: allCandidates,
+    candidates: subbrandMergeResult.candidates,
     curatedDevices,
     now,
     familyMinRecords,
@@ -244,7 +270,7 @@ export function runPipeline(options: RunPipelineOptions): RunPipelineResult {
   return {
     ...catalogResult,
     quarantine: [...allQuarantine, ...catalogResult.quarantine],
-    notices: [...allNotices, ...catalogResult.notices],
+    notices: [...allNotices, ...subbrandMergeResult.notices, ...catalogResult.notices],
     sourceFiles,
     candidateNotices: allNotices,
     referenceChecked,

@@ -29,6 +29,16 @@ export interface CatalogInvariantViolation {
   readonly invariant: CatalogInvariantNumber;
   readonly code: CatalogInvariantCode;
   readonly deviceId?: string;
+  /**
+   * Все устройства, затронутые ПАРНЫМ нарушением (инварианты 2 и 3 — один код/псевдоним у
+   * нескольких разных записей): заполнено для `DUPLICATE_MODEL_CODE`/`CONFLICTING_ALIAS`, чтобы
+   * вызывающая сторона могла отправить в карантин ОБЕ (или все) записи пары, а не только одну
+   * (docs/09-decisions.md ADR-029: "нарушение инварианта карантинит запись, а не отменяет
+   * справочник целиком" — карантин обеих сторон конфликта, симметрично `CODE_COLLISION`,
+   * docs/14-catalog-ingestion.md §14.3). Для остальных инвариантов (одно устройство на нарушение)
+   * не заполняется — достаточно `deviceId`.
+   */
+  readonly deviceIds?: readonly string[];
   readonly message: string;
 }
 
@@ -72,6 +82,7 @@ function checkUniqueModelCodes(devices: readonly Device[]): CatalogInvariantViol
           invariant: 2,
           code: 'DUPLICATE_MODEL_CODE',
           deviceId: device._id,
+          deviceIds: [owner, device._id],
           message: `Сервисный код "${code}" принадлежит одновременно "${owner}" и "${device._id}"`,
         });
       }
@@ -102,11 +113,12 @@ function checkAliasConflicts(devices: readonly Device[]): CatalogInvariantViolat
   for (const [alias, ownersToStatus] of statusesByAlias) {
     const distinctStatuses = new Set(ownersToStatus.values());
     if (distinctStatuses.size > 1) {
-      const owners = [...ownersToStatus.keys()].join(', ');
+      const deviceIds = [...ownersToStatus.keys()];
       violations.push({
         invariant: 3,
         code: 'CONFLICTING_ALIAS',
-        message: `Псевдоним "${alias}" указывает на устройства с разным статусом eSIM: ${owners}`,
+        deviceIds,
+        message: `Псевдоним "${alias}" указывает на устройства с разным статусом eSIM: ${deviceIds.join(', ')}`,
       });
     }
   }
@@ -163,9 +175,22 @@ function checkConditionalFieldsPresent(device: Device): CatalogInvariantViolatio
   return violations;
 }
 
-/** Инвариант 6: для `esim.support: supported` — наличие хотя бы одного источника в `sources`. */
+/**
+ * Инвариант 6 (docs/05-data-model.md §5.8, п.6; .cursor/rules/catalog-data.mdc): статус
+ * `esim.support: supported` с уровнем достоверности `verified` требует непустого `sources`. Без
+ * ссылки на источник запись не может подниматься выше `derived` (docs/09-decisions.md ADR-029) —
+ * поэтому нарушение возникает ТОЛЬКО при сочетании `supported` И `dataConfidence: "verified"`, а
+ * не при любом `supported` без источника.
+ *
+ * До ADR-029 проверка блокировала любую запись `supported` без `sources` независимо от уровня
+ * достоверности — это была ошибка реализации, а не более строгое требование: выгрузки языковых
+ * моделей запрашивались с выключенным веб-поиском (docs/appendix-a §А.1, правило 5), поэтому
+ * пустой `source_url` у записей уровня `derived`/`unverified` — ожидаемое, документированное
+ * состояние конвейера (`SOURCE_MISSING`, docs/14 §14.3: "уровень достоверности не выше `derived`"),
+ * а не дефект данных, который стоило бы карантинить.
+ */
 function checkSupportedHasSources(device: Device): CatalogInvariantViolation[] {
-  if (device.esim.support !== 'supported') {
+  if (device.esim.support !== 'supported' || device.dataConfidence !== 'verified') {
     return [];
   }
   if (device.sources.length === 0) {
@@ -174,7 +199,7 @@ function checkSupportedHasSources(device: Device): CatalogInvariantViolation[] {
         invariant: 6,
         code: 'SUPPORTED_SOURCES_MISSING',
         deviceId: device._id,
-        message: `Устройство "${device._id}" со статусом "supported" без "sources"`,
+        message: `Устройство "${device._id}" со статусом "supported" и достоверностью "verified" без "sources"`,
       },
     ];
   }

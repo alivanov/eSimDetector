@@ -38,6 +38,8 @@ export interface ImportReportInput {
   readonly curatedAppliedCount: number;
   readonly appleRuleAppliedCount: number;
   readonly invariantViolationsCount: number;
+  /** Устройств, исключённых из `devices` за нарушение инвариантов §5.8 (docs/09 ADR-029). */
+  readonly invariantQuarantinedCount: number;
   readonly previousSnapshot?: readonly PreviousSnapshotEntry[];
 }
 
@@ -72,6 +74,7 @@ export interface ImportReportData {
     readonly resolvedAnswer: string;
   }[];
   readonly invariantViolationsCount: number;
+  readonly invariantQuarantinedCount: number;
   readonly diffFromPrevious?: {
     readonly added: number;
     readonly removed: number;
@@ -192,6 +195,7 @@ export function buildImportReport(input: ImportReportInput): ImportReportData {
       resolvedAnswer: entry.resolution.status,
     })),
     invariantViolationsCount: input.invariantViolationsCount,
+    invariantQuarantinedCount: input.invariantQuarantinedCount,
     ...(diffFromPrevious !== undefined ? { diffFromPrevious } : {}),
   };
 }
@@ -210,6 +214,20 @@ const QUARANTINE_CODE_LABELS: Readonly<Record<QuarantineCode, string>> = {
   SOURCE_DISAGREEMENT_UNRESOLVED:
     '"yes" против "no" без "conditional" — не разрешено автоматически',
   IOS_FIELDS_MISSING: 'iOS без сигнатур экрана/os.maxVersion из курируемого ядра',
+  // Инварианты §5.8, найденные ПОСЛЕ построения устройств (docs/09-decisions.md ADR-029) — карантин
+  // индивидуальной записи (или пары для DUPLICATE_MODEL_CODE/CONFLICTING_ALIAS), а не блокировка
+  // загрузки целиком.
+  DUPLICATE_DEVICE_ID: 'Инвариант §5.8 п.1: дублирующийся _id',
+  DUPLICATE_MODEL_CODE: 'Инвариант §5.8 п.2: сервисный код у двух разных записей',
+  CONFLICTING_ALIAS: 'Инвариант §5.8 п.3: псевдоним с разным статусом eSIM у разных записей',
+  IOS_SCREEN_SIGNATURES_MISSING: 'Инвариант §5.8 п.4: iOS без screenSignatures',
+  IOS_MAX_VERSION_MISSING: 'Инвариант §5.8 п.4: iOS без os.maxVersion',
+  CONDITIONAL_CONDITIONS_MISSING: 'Инвариант §5.8 п.5: "conditional" без esim.conditions',
+  CONDITIONAL_CLARIFYING_QUESTION_MISSING:
+    'Инвариант §5.8 п.5: "conditional" без esim.clarifyingQuestion',
+  SUPPORTED_SOURCES_MISSING: 'Инвариант §5.8 п.6: "supported"+"verified" без sources',
+  SCREEN_SIGNATURE_CONSENSUS_MISMATCH: 'Инвариант §5.8 п.7: esimConsensus не совпадает с кандидатами',
+  SCREEN_SIGNATURE_UNKNOWN_CANDIDATE: 'Инвариант §5.8 п.7: сигнатура ссылается на неизвестное устройство',
 };
 
 function isKnownQuarantineCode(code: string): code is QuarantineCode {
@@ -230,7 +248,10 @@ export function renderMarkdown(report: ImportReportData): string {
   lines.push(
     `- Без статуса ни от одного источника (не загружено, не карантин): ${report.totals.noData}`,
   );
-  lines.push(`- Нарушений инвариантов §5.8 перед загрузкой: ${report.invariantViolationsCount}`);
+  lines.push(
+    `- Нарушений инвариантов §5.8 после построения: ${report.invariantViolationsCount} ` +
+      `(карантинировано записей: ${report.invariantQuarantinedCount} — docs/09-decisions.md ADR-029)`,
+  );
   lines.push('');
 
   lines.push('## Карантин по кодам нарушений');

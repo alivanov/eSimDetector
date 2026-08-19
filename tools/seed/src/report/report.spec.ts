@@ -58,6 +58,7 @@ describe('buildImportReport', () => {
       curatedAppliedCount: 0,
       appleRuleAppliedCount: 0,
       invariantViolationsCount: 0,
+      invariantQuarantinedCount: 0,
     });
 
     expect(report.totals).toEqual({
@@ -97,6 +98,7 @@ describe('buildImportReport', () => {
       curatedAppliedCount: 0,
       appleRuleAppliedCount: 0,
       invariantViolationsCount: 0,
+      invariantQuarantinedCount: 0,
     });
     expect(report.reference).toEqual({
       fileMissing: true,
@@ -124,6 +126,7 @@ describe('buildImportReport', () => {
       curatedAppliedCount: 0,
       appleRuleAppliedCount: 0,
       invariantViolationsCount: 0,
+      invariantQuarantinedCount: 0,
       previousSnapshot: [
         { id: 'a', esimSupport: 'not_supported', dataConfidence: 'derived' },
         { id: 'removed', esimSupport: 'supported', dataConfidence: 'derived' },
@@ -148,6 +151,7 @@ describe('buildImportReport', () => {
       curatedAppliedCount: 0,
       appleRuleAppliedCount: 0,
       invariantViolationsCount: 0,
+      invariantQuarantinedCount: 0,
       previousSnapshot: [],
     });
     expect(report.diffFromPrevious).toEqual({ added: 1, removed: 0, changedStatus: 0 });
@@ -168,6 +172,7 @@ describe('buildImportReport', () => {
       curatedAppliedCount: 0,
       appleRuleAppliedCount: 0,
       invariantViolationsCount: 0,
+      invariantQuarantinedCount: 0,
     });
     expect(report.codePatternRejectionsByBrand).toEqual({});
   });
@@ -189,6 +194,7 @@ describe('renderMarkdown', () => {
       curatedAppliedCount: 0,
       appleRuleAppliedCount: 0,
       invariantViolationsCount: 0,
+      invariantQuarantinedCount: 0,
     });
     const markdown = renderMarkdown(report);
     expect(markdown).toContain('# Отчёт об импорте справочника');
@@ -231,6 +237,7 @@ describe('renderMarkdown', () => {
       curatedAppliedCount: 1,
       appleRuleAppliedCount: 1,
       invariantViolationsCount: 0,
+      invariantQuarantinedCount: 0,
       previousSnapshot: [{ id: 'a', esimSupport: 'not_supported', dataConfidence: 'unverified' }],
     });
 
@@ -267,6 +274,7 @@ describe('renderMarkdown', () => {
       curatedAppliedCount: 0,
       appleRuleAppliedCount: 0,
       invariantViolationsCount: 0,
+      invariantQuarantinedCount: 0,
     });
     expect(renderMarkdown(report)).toContain('Один сервисный код у двух разных устройств');
   });

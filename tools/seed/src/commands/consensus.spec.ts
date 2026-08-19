@@ -18,6 +18,7 @@ function makePaths(root: string): PipelinePaths {
     aliasesPath: REAL_ALIASES_PATH,
     codePatternsPath: join(root, 'code-patterns.json'),
     osVersionCeilingsPath: join(root, 'os-version-ceilings.json'),
+    subbrandsPath: join(root, 'subbrands.json'),
     referencePath: join(root, 'catalog.reference.json'),
     cacheDir: join(root, '.cache'),
   };

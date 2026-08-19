@@ -54,7 +54,25 @@ export type QuarantineCode =
   | 'REFERENCE_MISMATCH'
   | 'SOURCE_DISAGREEMENT_UNRESOLVED'
   /** iOS без сигнатур экрана/`os.maxVersion` из курируемого ядра — запись не может быть загружена (§5.8 п.4). */
-  | 'IOS_FIELDS_MISSING';
+  | 'IOS_FIELDS_MISSING'
+  /**
+   * Запись нарушает один из инвариантов §5.8 (`CatalogInvariantCode`, `@esim-detector/contracts`)
+   * ПОСЛЕ построения устройств — карантинится индивидуально (или парой, для инвариантов 2 и 3),
+   * а не блокирует загрузку целиком (docs/09-decisions.md ADR-029, ADR-023 "Последствия").
+   * Значения — коды самих инвариантов, переиспользуемые как есть (не самостоятельный набор), чтобы
+   * разбивка карантина в отчёте (docs/14 §14.6) показывала тот же код, что напечатан в списке
+   * нарушений, без дублирующего словаря соответствий.
+   */
+  | 'DUPLICATE_DEVICE_ID'
+  | 'DUPLICATE_MODEL_CODE'
+  | 'CONFLICTING_ALIAS'
+  | 'IOS_SCREEN_SIGNATURES_MISSING'
+  | 'IOS_MAX_VERSION_MISSING'
+  | 'CONDITIONAL_CONDITIONS_MISSING'
+  | 'CONDITIONAL_CLARIFYING_QUESTION_MISSING'
+  | 'SUPPORTED_SOURCES_MISSING'
+  | 'SCREEN_SIGNATURE_CONSENSUS_MISMATCH'
+  | 'SCREEN_SIGNATURE_UNKNOWN_CANDIDATE';
 
 export interface QuarantineEntry {
   readonly code: QuarantineCode;
@@ -73,7 +91,9 @@ export type RowNoticeCode =
   | 'OS_VERSION_IMPLAUSIBLE'
   | 'SOURCE_MISSING'
   | 'APPLE_RULE_CONFLICT'
-  | 'IOS_FIELDS_MISSING';
+  | 'IOS_FIELDS_MISSING'
+  /** Кандидат сведён к подбренду по совпадению сервисного кода (docs/09 ADR-029, `subbrand-merge.ts`). */
+  | 'SUBBRAND_ALIAS_MERGED';
 
 export interface RowNotice {
   readonly code: RowNoticeCode;

@@ -57,8 +57,18 @@ async function main(): Promise<number> {
       return runConsensusCommand({ dryRun, ...(sources !== undefined ? { sources } : {}) });
     }
 
-    case 'load':
-      return runLoadCommand({ dryRun, mongoUri });
+    case 'load': {
+      const maxQuarantineRatioRaw = readOption(args, '--max-quarantine-ratio');
+      const maxQuarantineRatio =
+        maxQuarantineRatioRaw !== undefined ? Number.parseFloat(maxQuarantineRatioRaw) : undefined;
+      return runLoadCommand({
+        dryRun,
+        mongoUri,
+        ...(maxQuarantineRatio !== undefined && Number.isFinite(maxQuarantineRatio)
+          ? { invariantQuarantineRatioThreshold: maxQuarantineRatio }
+          : {}),
+      });
+    }
 
     case 'rebuild-signatures':
       return runRebuildSignaturesCommand({ mongoUri });

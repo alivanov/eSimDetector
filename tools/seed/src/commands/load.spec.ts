@@ -20,6 +20,7 @@ function makePaths(root: string): PipelinePaths {
     aliasesPath: REAL_ALIASES_PATH,
     codePatternsPath: join(root, 'code-patterns.json'),
     osVersionCeilingsPath: join(root, 'os-version-ceilings.json'),
+    subbrandsPath: join(root, 'subbrands.json'),
     referencePath: join(root, 'catalog.reference.json'),
     cacheDir: join(root, '.cache'),
   };
@@ -82,8 +83,9 @@ describe('runLoadCommand (интеграция, withTestDatabase)', () => {
     expect(count).toBe(1);
   });
 
-  it('отменяет загрузку и возвращает 1, если найдены нарушения инвариантов §5.8', async () => {
-    // "yes" без source_url — SUPPORTED_SOURCES_MISSING (§5.8 п.6), загрузка обязана отказать.
+  it('"supported" без source_url на уровне derived — НЕ нарушение (ADR-029), загрузка проходит', async () => {
+    // Единственный источник → dataConfidence "unverified" (не "verified") — инвариант 6 в новой
+    // формулировке требует источник только для "verified" (docs/09-decisions.md ADR-029).
     writeText(
       join(root, 'import/llm-model-a/02.csv'),
       [
@@ -97,6 +99,68 @@ describe('runLoadCommand (интеграция, withTestDatabase)', () => {
       paths: makePaths(root),
       reportsDir: join(root, 'reports'),
       snapshotPath: join(root, 'snapshot.json'),
+    });
+    expect(exitCode).toBe(0);
+    const count = await db.connection.collection(DEVICES_COLLECTION).countDocuments({});
+    expect(count).toBe(1);
+  });
+
+  it('карантинит пару DUPLICATE_MODEL_CODE и загружает остальное, если доля нарушений ниже порога (ADR-029)', async () => {
+    // Один и тот же код у двух разных id из РАЗНЫХ источников — минуя внутриисточниковый
+    // CODE_COLLISION (docs/14 §14.3) — доходит до инварианта §5.8 п.2 после консенсуса.
+    writeText(
+      join(root, 'import/llm-model-a/02.csv'),
+      [
+        DEVICES_HEADER,
+        'Samsung,Galaxy S24 Ultra,SM-S928B,android,phone,2024,yes,,,,,,official,https://www.samsung.com,high,',
+        'Samsung,Galaxy A21,SM-A217F,android,phone,2020,no,,,,,,official,,high,',
+      ].join('\n'),
+    );
+    writeText(
+      join(root, 'import/llm-model-b/02.csv'),
+      [DEVICES_HEADER, 'Samsung,Galaxy A21s,SM-A217F,android,phone,2020,no,,,,,,official,,high,'].join(
+        '\n',
+      ),
+    );
+
+    const exitCode = await runLoadCommand({
+      dryRun: false,
+      mongoUri: db.uri,
+      paths: makePaths(root),
+      reportsDir: join(root, 'reports'),
+      snapshotPath: join(root, 'snapshot.json'),
+      // Порог по умолчанию (20%) слишком строг для этого маленького набора (2 карантинных из
+      // 3) — тест проверяет механизм карантина, а не конкретное значение порога по умолчанию.
+      invariantQuarantineRatioThreshold: 0.7,
+    });
+    expect(exitCode).toBe(0);
+    const count = await db.connection.collection(DEVICES_COLLECTION).countDocuments({});
+    expect(count).toBe(1);
+  });
+
+  it('отменяет загрузку целиком, если доля нарушений выше порога (ADR-029)', async () => {
+    writeText(
+      join(root, 'import/llm-model-a/02.csv'),
+      [
+        DEVICES_HEADER,
+        'Samsung,Galaxy S24 Ultra,SM-S928B,android,phone,2024,yes,,,,,,official,https://www.samsung.com,high,',
+        'Samsung,Galaxy A21,SM-A217F,android,phone,2020,no,,,,,,official,,high,',
+      ].join('\n'),
+    );
+    writeText(
+      join(root, 'import/llm-model-b/02.csv'),
+      [DEVICES_HEADER, 'Samsung,Galaxy A21s,SM-A217F,android,phone,2020,no,,,,,,official,,high,'].join(
+        '\n',
+      ),
+    );
+
+    const exitCode = await runLoadCommand({
+      dryRun: false,
+      mongoUri: db.uri,
+      paths: makePaths(root),
+      reportsDir: join(root, 'reports'),
+      snapshotPath: join(root, 'snapshot.json'),
+      invariantQuarantineRatioThreshold: 0.5, // 2 из 3 (66.7%) — выше порога
     });
     expect(exitCode).toBe(1);
     const count = await db.connection.collection(DEVICES_COLLECTION).countDocuments({});

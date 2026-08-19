@@ -160,17 +160,34 @@ describe('validateCatalogInvariants', () => {
     expect(violationsOf('CONDITIONAL_CLARIFYING_QUESTION_MISSING', result)).toHaveLength(1);
   });
 
-  it('инвариант 6: esim.support supported без sources — нарушение', () => {
-    const device = buildSampleDevice({ sources: [] });
+  it('инвариант 6: esim.support supported, dataConfidence verified, без sources — нарушение', () => {
+    const device = buildSampleDevice({ sources: [], dataConfidence: 'verified' });
 
     const result = validateCatalogInvariants([device]);
 
     expect(violationsOf('SUPPORTED_SOURCES_MISSING', result)).toHaveLength(1);
   });
 
-  it('инвариант 6: esim.support not_supported без sources — не нарушение', () => {
+  it('инвариант 6: esim.support supported, dataConfidence derived, без sources — НЕ нарушение (ADR-029: выгрузки без веб-поиска дают пустой source_url)', () => {
+    const device = buildSampleDevice({ sources: [], dataConfidence: 'derived' });
+
+    const result = validateCatalogInvariants([device]);
+
+    expect(violationsOf('SUPPORTED_SOURCES_MISSING', result)).toHaveLength(0);
+  });
+
+  it('инвариант 6: esim.support supported, dataConfidence unverified, без sources — не нарушение', () => {
+    const device = buildSampleDevice({ sources: [], dataConfidence: 'unverified' });
+
+    const result = validateCatalogInvariants([device]);
+
+    expect(violationsOf('SUPPORTED_SOURCES_MISSING', result)).toHaveLength(0);
+  });
+
+  it('инвариант 6: esim.support not_supported, dataConfidence verified, без sources — не нарушение', () => {
     const device = buildSampleDevice({
       sources: [],
+      dataConfidence: 'verified',
       esim: { ...buildSampleDevice().esim, support: 'not_supported' },
     });
 

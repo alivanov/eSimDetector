@@ -90,13 +90,18 @@ describe('buildCatalog', () => {
   it('вычисляет агрегаты уровня линейки для отчёта', () => {
     // Каждая из трёх моделей линейки подтверждена ДВУМЯ источниками — уровень "derived" для
     // каждой записи, поэтому агрегат по линейке (минимум 3 записи) учитывает все три.
-    const candidatesForId = (id: string, marketingName: string): DeviceCandidate[] => [
+    const candidatesForId = (
+      id: string,
+      marketingName: string,
+      modelCode: string,
+    ): DeviceCandidate[] => [
       candidate({
         id,
         brand: 'xiaomi',
         brandTitle: 'Xiaomi',
         family: 'redmi-a',
         marketingName,
+        modelCodes: [modelCode],
         esimSupport: 'no',
         provenance: { ...candidate().provenance, source: 'llm:model-a' },
       }),
@@ -106,15 +111,16 @@ describe('buildCatalog', () => {
         brandTitle: 'Xiaomi',
         family: 'redmi-a',
         marketingName,
+        modelCodes: [modelCode],
         esimSupport: 'no',
         provenance: { ...candidate().provenance, source: 'llm:model-b' },
       }),
     ];
     const result = buildCatalog({
       candidates: [
-        ...candidatesForId('xiaomi-redmi-a1', 'Redmi A1'),
-        ...candidatesForId('xiaomi-redmi-a2', 'Redmi A2'),
-        ...candidatesForId('xiaomi-redmi-a3', 'Redmi A3'),
+        ...candidatesForId('xiaomi-redmi-a1', 'Redmi A1', 'ABC-A1'),
+        ...candidatesForId('xiaomi-redmi-a2', 'Redmi A2', 'ABC-A2'),
+        ...candidatesForId('xiaomi-redmi-a3', 'Redmi A3', 'ABC-A3'),
       ],
       curatedDevices: new Map(),
       now: NOW,
@@ -131,7 +137,7 @@ describe('buildCatalog', () => {
     );
   });
 
-  it('сообщает нарушения инвариантов, не прерывая построение (коллизия кода между разными id из разных источников)', () => {
+  it('карантинит ОБЕ записи пары при нарушении DUPLICATE_MODEL_CODE, не блокируя загрузку целиком (ADR-029)', () => {
     const result = buildCatalog({
       candidates: [
         candidate({
@@ -151,10 +157,61 @@ describe('buildCatalog', () => {
       familyMinRecords: 3,
     });
     // Оба кандидата — единственный источник для своего id, поэтому оба принимаются консенсусом
-    // (внутриисточниковая коллизия кодов здесь неприменима — коды пришли от РАЗНЫХ источников).
-    expect(result.devices).toHaveLength(2);
+    // (внутриисточниковая коллизия кодов здесь неприменима — коды пришли от РАЗНЫХ источников), но
+    // нарушают инвариант §5.8 п.2 между собой — обе записи карантинятся, а не блокируют загрузку.
+    expect(result.devices).toEqual([]);
+    expect(result.invariantQuarantinedCount).toBe(2);
     expect(
       result.invariantViolations.some((violation) => violation.code === 'DUPLICATE_MODEL_CODE'),
     ).toBe(true);
+    const quarantinedIds = result.quarantine
+      .filter((entry) => entry.code === 'DUPLICATE_MODEL_CODE')
+      .map((entry) => entry.rawMarketingName);
+    expect(quarantinedIds).toEqual(
+      expect.arrayContaining(['Galaxy A21', 'Galaxy A21s']),
+    );
+  });
+
+  it('запись без нарушений остаётся в devices рядом с карантинированной парой', () => {
+    const result = buildCatalog({
+      candidates: [
+        candidate({
+          id: 'samsung-galaxy-a21',
+          marketingName: 'Galaxy A21',
+          modelCodes: ['SM-A217F'],
+        }),
+        candidate({
+          id: 'samsung-galaxy-a21s',
+          marketingName: 'Galaxy A21s',
+          modelCodes: ['SM-A217F'],
+          provenance: { ...candidate().provenance, source: 'llm:model-b' },
+        }),
+        candidate({ id: 'samsung-galaxy-s25', marketingName: 'Galaxy S25', modelCodes: ['SM-X1'] }),
+      ],
+      curatedDevices: new Map(),
+      now: NOW,
+      familyMinRecords: 3,
+    });
+    expect(result.devices.map((device) => device._id)).toEqual(['samsung-galaxy-s25']);
+    expect(result.invariantQuarantinedCount).toBe(2);
+  });
+
+  it('нарушение инварианта 6 (verified/supported без sources) карантинит только эту запись', () => {
+    const curated = buildSampleDevice({
+      _id: 'samsung-galaxy-broken',
+      sources: [],
+      dataConfidence: 'verified',
+    });
+    const result = buildCatalog({
+      candidates: [candidate({ id: 'samsung-galaxy-broken' })],
+      curatedDevices: new Map([['samsung-galaxy-broken', curated]]),
+      now: NOW,
+      familyMinRecords: 3,
+    });
+    expect(result.devices).toEqual([]);
+    expect(result.invariantQuarantinedCount).toBe(1);
+    expect(result.quarantine).toEqual([
+      expect.objectContaining({ code: 'SUPPORTED_SOURCES_MISSING' }),
+    ]);
   });
 });
