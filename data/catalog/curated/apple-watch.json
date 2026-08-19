@@ -1,0 +1,115 @@
+[
+  {
+    "_id": "apple-watch-series-9-cellular",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "Apple Watch Series 9 (GPS + Cellular)",
+    "displayName": "Apple Watch Series 9 (GPS + Cellular)",
+    "family": "watch",
+    "generation": 9,
+    "modifiers": [],
+    "modelCodes": ["A2982", "A2983", "A2984", "A2985"],
+    "aliases": [
+      "apple watch series 9",
+      "watch series 9",
+      "apple watch 9",
+      "watch 9 cellular"
+    ],
+    "platform": "other",
+    "deviceType": "watch",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "esim-only",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Модель GPS + Cellular использует eSIM для самостоятельной сотовой связи — физического слота SIM у Apple Watch нет ни в одной модификации (apple.com/watch/cellular/, support.apple.com/en-us/108056). Модель GPS-only (без Cellular) eSIM не имеет вовсе — заведена отдельным признаком в marketingName, а не тем же _id, так как это разные по факту устройства."
+    },
+    "releaseYear": 2023,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.05,
+    "sources": [
+      {
+        "url": "https://www.apple.com/watch/cellular/",
+        "title": "Apple Watch GPS + Cellular — Apple",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108056",
+        "title": "Identify your Apple Watch — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-watch-ultra-2",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "Apple Watch Ultra 2 (GPS + Cellular)",
+    "displayName": "Apple Watch Ultra 2 (GPS + Cellular)",
+    "family": "watch",
+    "generation": 2,
+    "modifiers": ["ultra"],
+    "modelCodes": ["A2986", "A2987"],
+    "aliases": [
+      "apple watch ultra 2",
+      "watch ultra 2",
+      "apple watch ultra2"
+    ],
+    "platform": "other",
+    "deviceType": "watch",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "esim-only",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Apple Watch Ultra выпускается только в исполнении GPS + Cellular — использует eSIM для самостоятельной сотовой связи, физического слота SIM нет (apple.com/watch/cellular/, support.apple.com/en-us/108056)."
+    },
+    "releaseYear": 2023,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.03,
+    "sources": [
+      {
+        "url": "https://www.apple.com/watch/cellular/",
+        "title": "Apple Watch GPS + Cellular — Apple",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108056",
+        "title": "Identify your Apple Watch — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  }
+]

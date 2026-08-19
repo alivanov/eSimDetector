@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import type {
   CatalogAnswerPolicy,
   Device,
+  DeviceType,
   EsimResolutionContext,
   Platform,
 } from '@esim-detector/contracts';
@@ -21,6 +22,10 @@ import { resolveAndroidDevice } from './android/resolve-android';
 import { BASE_CONFIDENCE, applyConfidenceGate, applyHeaderConsistency } from './confidence';
 import type { DetectionInfo, DetectResponse } from './detect-response';
 import type { DetectionSignals, RequestHeaderSignals } from './detection-signals';
+import {
+  classifyDeviceType,
+  type DeviceTypeClassification,
+} from './device-type/classify-device-type';
 import { detectEmulation } from './emulation/detect-emulation';
 import { checkHeaderConsistency, type HeaderConsistencyResult } from './header-consistency';
 import { buildIosClarification } from './ios/build-ios-clarification';
@@ -35,6 +40,26 @@ import {
 } from './platform/parse-user-agent';
 
 export type DetectResult = Omit<DetectResponse, 'requestId'>;
+
+/**
+ * Уточнение для умных часов (docs/09-decisions.md ADR-034, этап 5.6; ADR-025 п.4). Часы почти
+ * никогда не открывают произвольные страницы в браузере (докс/03 §3.9, "Отсечение неподдерживаемых
+ * сценариев") — попытка сопоставить сигналы такого устройства с телефоном или планшетом рискует
+ * дать ложный результат заведомо не по адресу, поэтому при уверенном распознавании часов сервис не
+ * пытается их резолвить дальше, а прямо называет предполагаемый тип и предлагает проверить eSIM в
+ * настройках самого устройства. Текст черновой — финальную формулировку утверждает пользователь
+ * одним проходом (ADR-025 п.3), как и региональный вопрос iOS (docs/09 ADR-031).
+ */
+const WATCH_CLARIFICATION: Clarification = {
+  kind: 'manual_input',
+  question:
+    'Похоже, это умные часы. Сервис определяет поддержку eSIM для телефонов и планшетов — уточните модель вручную или проверьте наличие eSIM в настройках самих часов.',
+};
+
+/** Слово, называющее группу кандидатов iOS в текстах уточнения (docs/09 ADR-034) — 'iPhone' для телефонов, 'iPad' для планшетов. */
+function iosGroupLabel(deviceType: DeviceType): string {
+  return deviceType === 'tablet' ? 'iPad' : 'iPhone';
+}
 
 /**
  * Оркестрация автоопределения (docs/03-detection-algorithm.md, §3.3): классификация платформы →
@@ -106,13 +131,21 @@ export class DetectionService {
     region: string | undefined,
   ): DetectResult {
     const platform = classifyPlatform(signals);
+    // Классификация типа вычисляется ДО проверки на эмуляцию (docs/09 ADR-034): иначе устройство,
+    // чей User-Agent прямо называет iPad, но которое поймано эмуляцией по другому признаку
+    // (например, несогласованный рендерер WebGL), получило бы в ответе `deviceType: "phone"" по
+    // умолчанию — метаданные ответа не должны противоречить очевидному сигналу даже тогда, когда
+    // сам статус определения понижен до уточнения.
+    const deviceTypeClassification = classifyDeviceType(platform, signals);
     const emulation = detectEmulation({ platform, signals });
 
     if (emulation.suspected) {
       return this.buildClarificationOnly(
         platform,
+        deviceTypeClassification.deviceType,
         [
           { code: 'PLATFORM_DETECTED', detail: platform },
+          ...deviceTypeClassification.reasons,
           ...emulation.details.map((detail) => ({ code: 'EMULATION_SUSPECTED', detail })),
         ],
         {
@@ -133,17 +166,66 @@ export class DetectionService {
         headerConsistency,
         consistencyReason,
         region,
+        deviceTypeClassification,
       );
     }
     if (platform === 'ios') {
-      return this.detectIos(signals, headerConsistency, consistencyReason, region);
+      return this.detectIos(
+        signals,
+        headerConsistency,
+        consistencyReason,
+        region,
+        deviceTypeClassification,
+      );
     }
 
+    return this.detectOther(platform, signals, deviceTypeClassification);
+  }
+
+  /**
+   * Платформа `other` (докс/03 §3.3, узел "Desktop / прочее"). Разделено на два исхода
+   * (docs/09-decisions.md ADR-034, этап 5.6): обычный десктоп даёт нейтральное сообщение "не
+   * мобильное устройство", а Mac-подобный User-Agent без сигнала `maxTouchPoints` — отдельное,
+   * адресное сообщение о неоднозначности (настоящий Mac либо iPad в режиме настольного сайта, для
+   * которого браузер не сообщил `maxTouchPoints`), а не молчаливую догадку в пользу десктопа.
+   */
+  private detectOther(
+    platform: Platform,
+    signals: DetectionSignals | undefined,
+    deviceTypeClassification: DeviceTypeClassification,
+  ): DetectResult {
     const hasAnySignal =
       signals !== undefined && (signals.userAgent !== undefined || signals.uaData !== undefined);
+    const baseReason: ApiReason = hasAnySignal
+      ? { code: 'PLATFORM_NOT_MOBILE', detail: platform }
+      : { code: 'NO_SIGNALS' };
+
+    if (deviceTypeClassification.deviceType === 'watch') {
+      return this.buildClarificationOnly(
+        platform,
+        'watch',
+        [baseReason, ...deviceTypeClassification.reasons],
+        WATCH_CLARIFICATION,
+      );
+    }
+
+    if (deviceTypeClassification.ambiguous) {
+      return this.buildClarificationOnly(
+        platform,
+        deviceTypeClassification.deviceType,
+        [baseReason, ...deviceTypeClassification.reasons],
+        {
+          kind: 'manual_input',
+          question:
+            'Не удалось точно определить, обычный компьютер это или планшет iPad в режиме сайта для компьютера. Уточните модель вручную либо переключите Safari в обычный режим и повторите попытку.',
+        },
+      );
+    }
+
     return this.buildClarificationOnly(
       platform,
-      [hasAnySignal ? { code: 'PLATFORM_NOT_MOBILE', detail: platform } : { code: 'NO_SIGNALS' }],
+      deviceTypeClassification.deviceType,
+      [baseReason],
       {
         kind: 'manual_input',
         question:
@@ -168,11 +250,13 @@ export class DetectionService {
     headerConsistency: HeaderConsistencyResult,
     consistencyReason: ApiReason | undefined,
     region: string | undefined,
+    deviceTypeClassification: DeviceTypeClassification,
   ): DetectResult {
     const snapshot = this.catalogService.getSnapshot();
     const androidResolution = resolveAndroidDevice(signals, snapshot.matchIndex.aliasIndex);
     const baseReasons: ApiReason[] = [
       { code: 'PLATFORM_DETECTED', detail: platform },
+      ...deviceTypeClassification.reasons,
       ...androidResolution.reasons,
     ];
 
@@ -182,10 +266,18 @@ export class DetectionService {
         : snapshot.devices.get(androidResolution.deviceId);
 
     if (device === undefined) {
-      return this.buildClarificationOnly(platform, baseReasons, {
-        kind: 'manual_input',
-        question: 'Модель устройства не найдена в справочнике. Попробуйте найти её вручную.',
-      });
+      // Сопоставление по сервисному коду безразлично к типу устройства (docs/03 §3.4) — код,
+      // принадлежащий планшету, находил бы его так же, как код телефона. Классификация типа
+      // здесь используется ТОЛЬКО для того, чтобы адресовать сообщение об отказе (docs/09
+      // ADR-034): владелец планшета без совпавшего кода должен услышать "это планшет" вместо
+      // безликого "модель устройства не найдена", а владелец часов — не получить ответ про
+      // телефон вовсе.
+      return this.buildClarificationOnly(
+        platform,
+        deviceTypeClassification.deviceType,
+        baseReasons,
+        this.androidUnresolvedClarification(deviceTypeClassification),
+      );
     }
 
     const osVersion =
@@ -221,6 +313,10 @@ export class DetectionService {
       method: androidResolution.method,
       platform,
       exactModelKnown: true,
+      // Тип берётся из САМОЙ записи справочника, а не из предварительной классификации по
+      // сигналам: точный код найден, значит тип устройства — уже проверенный факт данных, а не
+      // предположение (docs/09 ADR-034).
+      deviceType: device.deviceType,
     };
 
     return {
@@ -247,14 +343,35 @@ export class DetectionService {
     headerConsistency: HeaderConsistencyResult,
     consistencyReason: ApiReason | undefined,
     region: string | undefined,
+    deviceTypeClassification: DeviceTypeClassification,
   ): DetectResult {
+    // Часы (`platform` не бывает `ios`, но проверка симметрична остальным веткам — на случай,
+    // если сигнал платформы окажется недостоверным) обрабатываются отдельно от группы моделей:
+    // резолюция по сигнатуре экрана для них не имеет смысла (docs/09 ADR-034).
+    if (deviceTypeClassification.deviceType === 'watch') {
+      return this.buildClarificationOnly(
+        'ios',
+        'watch',
+        [{ code: 'PLATFORM_DETECTED', detail: 'ios' }, ...deviceTypeClassification.reasons],
+        WATCH_CLARIFICATION,
+      );
+    }
+
+    const deviceType = deviceTypeClassification.deviceType === 'tablet' ? 'tablet' : 'phone';
+    const groupLabel = iosGroupLabel(deviceType);
+
     const snapshot = this.catalogService.getSnapshot();
     const iosVersion = parseIosVersionFromUserAgent(signals?.userAgent);
     const screenKey = buildScreenSignatureKey(signals?.screen);
     const screenSignature =
       screenKey === undefined ? undefined : this.screenSignatureService.getBySignature(screenKey);
 
-    const selection = selectIosCandidates(snapshot.devices, iosVersion, screenSignature);
+    const selection = selectIosCandidates(
+      snapshot.devices,
+      iosVersion,
+      screenSignature,
+      deviceType,
+    );
     const esimContext: EsimResolutionContext = {
       ...(iosVersion !== undefined ? { osVersion: iosVersion } : {}),
       ...(region !== undefined ? { region } : {}),
@@ -292,6 +409,7 @@ export class DetectionService {
 
     const reasons: ApiReason[] = [
       { code: 'PLATFORM_DETECTED', detail: 'ios' },
+      ...deviceTypeClassification.reasons,
       ...selection.reasons,
       ...(consistencyReason !== undefined ? [consistencyReason] : []),
       ...groupResolution.reasons.map((reason) => ({ ...reason })),
@@ -307,10 +425,11 @@ export class DetectionService {
       method: 'ios_version_and_screen_signature',
       platform: 'ios',
       exactModelKnown,
+      deviceType,
     };
     const clarification =
       gate.status === 'clarification_required'
-        ? buildIosClarification(selection.candidates)
+        ? buildIosClarification(selection.candidates, groupLabel)
         : undefined;
 
     return {
@@ -327,7 +446,12 @@ export class DetectionService {
       presentation: buildPresentation({
         status: gate.status,
         exactModelKnown,
-        ...(singleDevice !== undefined ? { deviceName: singleDevice.displayName } : {}),
+        // Для группы (`exactModelKnown: false`) имя устройства — обобщённое слово линейки
+        // (`groupLabel`, 'iPhone'/'iPad'), а не конкретная модель: AGENTS.md, правило 3 — на iOS
+        // определяется группа, а не модель, и текст ответа обязан отражать это честно. До этапа
+        // 5.6 поле для групп не заполнялось вовсе, из-за чего ответ был безлико нейтральным
+        // ("Ваше устройство...") даже для iPhone — заодно исправлено здесь (docs/09 ADR-034).
+        deviceName: singleDevice !== undefined ? singleDevice.displayName : groupLabel,
         // Готовый текст вопроса — только для адресного уточнения (docs/13 §13.5: «уточнение
         // вызвано региональным/версионным условием»); "выбор из списка" по-прежнему показывает
         // общую формулировку презентации, а не текст clarification.question.
@@ -335,6 +459,36 @@ export class DetectionService {
           ? { clarificationQuestion: clarification.question }
           : {}),
       }),
+    };
+  }
+
+  /**
+   * Сообщение об отказе ветки Android/HarmonyOS, когда сервисный код не найден в справочнике
+   * (docs/09-decisions.md ADR-034, этап 5.6). Классификация типа по сигналам — единственное, чем
+   * можно адресовать сообщение в этой ситуации (данных о конкретной модели нет): при неоднозначных
+   * сигналах — нейтральный вопрос о самом типе, а не догадка (AGENTS.md, правило 1, применённое к
+   * типу устройства).
+   */
+  private androidUnresolvedClarification(classification: DeviceTypeClassification): Clarification {
+    if (classification.deviceType === 'watch') {
+      return WATCH_CLARIFICATION;
+    }
+    if (classification.ambiguous) {
+      return {
+        kind: 'manual_input',
+        question: 'Не удалось точно определить, телефон это или планшет. Уточните модель вручную.',
+      };
+    }
+    if (classification.deviceType === 'tablet') {
+      return {
+        kind: 'manual_input',
+        question:
+          'Похоже, это планшет на Android. Такой модели нет в справочнике — уточните её вручную.',
+      };
+    }
+    return {
+      kind: 'manual_input',
+      question: 'Модель устройства не найдена в справочнике. Попробуйте найти её вручную.',
     };
   }
 
@@ -369,10 +523,16 @@ export class DetectionService {
 
   private buildClarificationOnly(
     platform: Platform,
+    deviceType: DeviceType,
     reasons: readonly ApiReason[],
     clarification: Clarification,
   ): DetectResult {
-    const detection: DetectionInfo = { method: 'unknown', platform, exactModelKnown: false };
+    const detection: DetectionInfo = {
+      method: 'unknown',
+      platform,
+      exactModelKnown: false,
+      deviceType,
+    };
     return {
       status: 'clarification_required',
       confidence: 0,

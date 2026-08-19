@@ -132,4 +132,69 @@ describe('selectIosCandidates', () => {
     expect(result.candidates).toEqual([]);
     expect(result.reasons.some((r) => r.code === 'SCREEN_SIGNATURE_UNKNOWN')).toBe(true);
   });
+
+  describe('deviceType — параметр отбора, а не константа (docs/09 ADR-034, этап 5.6)', () => {
+    const ipad10 = iosDevice({
+      _id: 'apple-ipad-10',
+      deviceType: 'tablet',
+      marketingName: 'iPad (10th generation)',
+      displayName: 'Apple iPad (10th generation)',
+      os: { minVersion: '16.1', maxVersion: '26.6.1' },
+    });
+    const ipadMini = iosDevice({
+      _id: 'apple-ipad-mini-6',
+      deviceType: 'tablet',
+      marketingName: 'iPad mini (6th generation)',
+      displayName: 'Apple iPad mini (6th generation)',
+      os: { minVersion: '15.0', maxVersion: '26.6.1' },
+    });
+
+    it('по умолчанию (без deviceType) продолжает отбирать только "phone" — планшет не попадает в кандидаты телефона', () => {
+      const devices = toDeviceMap([iphoneXs, ipad10]);
+      const result = selectIosCandidates(devices, '18.0', undefined);
+
+      expect(result.candidates.map((d) => d._id)).toEqual(['apple-iphone-xs']);
+    });
+
+    it('deviceType="tablet" отбирает планшеты по версии iOS и не включает телефоны той же платформы', () => {
+      const devices = toDeviceMap([iphoneXs, ipad10, ipadMini]);
+      const result = selectIosCandidates(devices, '17.0', undefined, 'tablet');
+
+      const ids = result.candidates.map((d) => d._id).sort();
+      expect(ids).toEqual(['apple-ipad-10', 'apple-ipad-mini-6']);
+      expect(ids).not.toContain('apple-iphone-xs');
+    });
+
+    it('deviceType="tablet" вместе с сигнатурой экрана iPad (не пересекается с сигнатурами iPhone)', () => {
+      const devices = toDeviceMap([iphoneX, iphoneXs, ipad10]);
+      const ipadSignature: ScreenSignatureRecord = {
+        signature: '820x1180@2',
+        zoomed: false,
+        candidates: ['apple-ipad-10'],
+        esimConsensus: 'supported',
+        createdAt: new Date('2024-01-01'),
+        updatedAt: new Date('2024-01-01'),
+      };
+
+      const result = selectIosCandidates(devices, '17.0', ipadSignature, 'tablet');
+
+      expect(result.candidates.map((d) => d._id)).toEqual(['apple-ipad-10']);
+    });
+
+    it('запись справочника с deviceType="tablet" не просачивается в отбор по умолчанию через сигнатуру экрана', () => {
+      const devices = toDeviceMap([ipad10]);
+      const signature: ScreenSignatureRecord = {
+        signature: '820x1180@2',
+        zoomed: false,
+        candidates: ['apple-ipad-10'],
+        esimConsensus: 'supported',
+        createdAt: new Date('2024-01-01'),
+        updatedAt: new Date('2024-01-01'),
+      };
+
+      const result = selectIosCandidates(devices, undefined, signature);
+
+      expect(result.candidates).toEqual([]);
+    });
+  });
 });

@@ -94,6 +94,7 @@ describe('DetectionService.detect — ветка Android', () => {
       method: 'ua_client_hints_model',
       platform: 'android',
       exactModelKnown: true,
+      deviceType: 'phone',
     });
     expect(result.device?.id).toBe('samsung-galaxy-s24-ultra');
     expect(result.confidence).toBeGreaterThanOrEqual(0.9);
@@ -313,6 +314,196 @@ describe('DetectionService.detect — ветка iOS', () => {
   });
 });
 
+describe('DetectionService.detect — ветка iOS, планшеты (docs/09 ADR-034, этап 5.6)', () => {
+  function ipadDevice(overrides: Partial<Device> = {}): Device {
+    return buildSampleDevice({
+      platform: 'ios',
+      deviceType: 'tablet',
+      brand: 'apple',
+      brandTitle: 'Apple',
+      modelCodes: [],
+      aliases: [],
+      screenSignatures: [],
+      ...overrides,
+    });
+  }
+
+  const ipad10 = ipadDevice({
+    _id: 'apple-ipad-10',
+    marketingName: 'iPad (10th generation)',
+    displayName: 'Apple iPad (10th generation)',
+    os: { minVersion: '16.1', maxVersion: '26.6.1' },
+  });
+
+  it('iPad с явным User-Agent "iPad" и сигнатурой экрана → адресный ответ про iPad, а не про телефон', () => {
+    const record = screenSignature({
+      signature: '820x1180@2',
+      candidates: ['apple-ipad-10'],
+      esimConsensus: 'supported',
+    });
+    const service = buildService([ipad10], [record]);
+
+    const result = service.detect(
+      {
+        userAgent: 'Mozilla/5.0 (iPad; CPU OS 17_4 like Mac OS X) AppleWebKit/605.1.15',
+        screen: { width: 820, height: 1180, dpr: 2 },
+      },
+      {},
+    );
+
+    expect(result.status).toBe('supported');
+    expect(result.detection.deviceType).toBe('tablet');
+    expect(result.detection.platform).toBe('ios');
+    expect(result.presentation.description).toContain('iPad');
+    expect(result.presentation.description).not.toContain('iPhone');
+    expect(result.reasons.some((r) => r.code === 'DEVICE_TYPE_TABLET_DETECTED')).toBe(true);
+  });
+
+  it('iPad c User-Agent настольного macOS Safari и maxTouchPoints > 0 → тот же адресный ответ (ловушка iPadOS 13+)', () => {
+    const record = screenSignature({
+      signature: '820x1180@2',
+      candidates: ['apple-ipad-10'],
+      esimConsensus: 'supported',
+    });
+    const service = buildService([ipad10], [record]);
+
+    const result = service.detect(
+      {
+        userAgent:
+          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15',
+        screen: { width: 820, height: 1180, dpr: 2 },
+        hardware: { maxTouchPoints: 5 },
+      },
+      {},
+    );
+
+    expect(result.status).toBe('supported');
+    expect(result.detection.platform).toBe('ios');
+    expect(result.detection.deviceType).toBe('tablet');
+    // Единственный кандидат сигнатуры → точная модель известна (то же правило, что и для iPhone).
+    expect(result.device?.id).toBe('apple-ipad-10');
+    expect(result.presentation.description).toContain('iPad');
+  });
+
+  it('такой же User-Agent Mac, но maxTouchPoints = 0 (настоящий Mac) → НЕ классифицируется как планшет', () => {
+    const service = buildService([ipad10]);
+
+    const result = service.detect(
+      {
+        userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15',
+        hardware: { maxTouchPoints: 0 },
+      },
+      {},
+    );
+
+    expect(result.detection.platform).not.toBe('ios');
+    expect(result.detection.deviceType).not.toBe('tablet');
+    expect(result.status).toBe('clarification_required');
+  });
+
+  it('тот же User-Agent Mac без сигнала maxTouchPoints вовсе → clarification_required, неоднозначность, а не догадка', () => {
+    const service = buildService([ipad10]);
+
+    const result = service.detect(
+      { userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15' },
+      {},
+    );
+
+    expect(result.status).toBe('clarification_required');
+    expect(result.detection.platform).toBe('other');
+    expect(result.reasons.some((r) => r.code === 'DEVICE_TYPE_AMBIGUOUS')).toBe(true);
+  });
+
+  it('iPad без совпавшей сигнатуры/версии в справочнике → уточнение адресовано iPad, а не "iPhone"', () => {
+    const service = buildService([]);
+
+    const result = service.detect(
+      { userAgent: 'Mozilla/5.0 (iPad; CPU OS 17_4 like Mac OS X)' },
+      {},
+    );
+
+    expect(result.status).toBe('clarification_required');
+    expect(result.detection.deviceType).toBe('tablet');
+    expect(result.clarification).toEqual({
+      kind: 'manual_input',
+      question: 'Не удалось определить модель iPad. Введите модель вручную.',
+    });
+  });
+});
+
+describe('DetectionService.detect — Android/HarmonyOS, планшеты и часы (docs/09 ADR-034, этап 5.6)', () => {
+  it('Sec-CH-UA-Mobile=false и неизвестный код → уточнение адресовано планшету, а не безликое', () => {
+    const service = buildService([androidDevice()]);
+
+    const result = service.detect(
+      { uaData: { platform: 'Android', model: 'SM-UNKNOWN-TAB', mobile: false } },
+      {},
+    );
+
+    expect(result.status).toBe('clarification_required');
+    expect(result.detection.deviceType).toBe('tablet');
+    expect(result.clarification).toEqual({
+      kind: 'manual_input',
+      question:
+        'Похоже, это планшет на Android. Такой модели нет в справочнике — уточните её вручную.',
+    });
+  });
+
+  it('Sec-CH-UA-Mobile=false, но код совпал с планшетом в справочнике → обычный точный ответ (deviceType из данных)', () => {
+    const tablet = androidDevice({
+      _id: 'samsung-galaxy-tab-s9',
+      deviceType: 'tablet',
+      modelCodes: ['SM-X716B'],
+    });
+    const service = buildService([tablet]);
+
+    const result = service.detect(
+      { uaData: { platform: 'Android', model: 'SM-X716B', mobile: false } },
+      {},
+    );
+
+    expect(result.status).toBe('supported');
+    expect(result.detection.deviceType).toBe('tablet');
+    expect(result.detection.exactModelKnown).toBe(true);
+  });
+
+  it('User-Agent называет часы явно → clarification_required, адресован часам, поиск устройства не предпринимается', () => {
+    const service = buildService([androidDevice()]);
+
+    const result = service.detect(
+      {
+        userAgent: 'Mozilla/5.0 (Linux; Android 13; Wear OS) AppleWebKit/537.36',
+        uaData: { platform: 'Android', model: 'SM-R925' },
+      },
+      {},
+    );
+
+    expect(result.status).toBe('clarification_required');
+    expect(result.detection.deviceType).toBe('watch');
+    expect(result.clarification?.kind).toBe('manual_input');
+    expect(result.clarification?.question).toContain('умные часы');
+  });
+
+  it('неоднозначный Android (нет Sec-CH-UA-Mobile, экран планшетного размера) → уточнение о типе, а не догадка', () => {
+    const service = buildService([androidDevice()]);
+
+    const result = service.detect(
+      {
+        uaData: { platform: 'Android', model: 'SM-UNKNOWN-2' },
+        screen: { width: 800, height: 1280 },
+      },
+      {},
+    );
+
+    expect(result.status).toBe('clarification_required');
+    expect(result.reasons.some((r) => r.code === 'DEVICE_TYPE_AMBIGUOUS')).toBe(true);
+    expect(result.clarification).toEqual({
+      kind: 'manual_input',
+      question: 'Не удалось точно определить, телефон это или планшет. Уточните модель вручную.',
+    });
+  });
+});
+
 describe('DetectionService.detect — защита от ложных определений', () => {
   it('признаки эмуляции (iOS + maxTouchPoints=0) → clarification_required, confidence=0', () => {
     const service = buildService([]);
@@ -327,6 +518,21 @@ describe('DetectionService.detect — защита от ложных опред�
     expect(result.status).toBe('clarification_required');
     expect(result.confidence).toBe(0);
     expect(result.reasons.some((r) => r.code === 'EMULATION_SUSPECTED')).toBe(true);
+  });
+
+  it('iPad с признаками эмуляции (User-Agent называет iPad, но подозрение по WebGL) → deviceType в ответе — "tablet", а не безусловный "phone"', () => {
+    const service = buildService([]);
+    const result = service.detect(
+      {
+        userAgent: 'Mozilla/5.0 (iPad; CPU OS 17_4 like Mac OS X)',
+        webgl: { renderer: 'SwiftShader' },
+      },
+      {},
+    );
+
+    expect(result.status).toBe('clarification_required');
+    expect(result.reasons.some((r) => r.code === 'EMULATION_SUSPECTED')).toBe(true);
+    expect(result.detection.deviceType).toBe('tablet');
   });
 
   it('десктопная платформа → clarification_required, устройство не пытается определиться', () => {

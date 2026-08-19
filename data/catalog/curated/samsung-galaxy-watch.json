@@ -1,0 +1,59 @@
+[
+  {
+    "_id": "samsung-galaxy-watch7-lte",
+    "brand": "samsung",
+    "brandTitle": "Samsung",
+    "marketingName": "Galaxy Watch7 (LTE)",
+    "displayName": "Samsung Galaxy Watch7 (LTE)",
+    "family": "galaxy-watch",
+    "generation": 7,
+    "modifiers": [],
+    "modelCodes": ["SM-L305F", "SM-L315F"],
+    "aliases": [
+      "galaxy watch7 lte",
+      "galaxy watch 7 lte",
+      "watch7 lte",
+      "galaxy watch7"
+    ],
+    "platform": "android",
+    "deviceType": "watch",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "esim-only",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Только модель LTE (SM-L305F 40мм / SM-L315F 44мм) использует встроенный eSIM для самостоятельной сотовой связи («SIM size: Embedded-SIM», samsung.com/ca и samsung.com/uk, официальные страницы продукта); Bluetooth-версия без LTE eSIM не имеет."
+    },
+    "releaseYear": 2024,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.03,
+    "sources": [
+      {
+        "url": "https://www.samsung.com/ca/business/watches/galaxy-watch/galaxy-watch7-44mm-silver-lte-sm-l315fzsaxac/",
+        "title": "Galaxy Watch7 (LTE, 44mm) — Samsung Canada",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://www.samsung.com/uk/business/watches/galaxy-watch/galaxy-watch7-40mm-green-lte-sm-l305fzgaeua/",
+        "title": "Galaxy Watch7 LTE (40mm) — Samsung Business UK",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  }
+]

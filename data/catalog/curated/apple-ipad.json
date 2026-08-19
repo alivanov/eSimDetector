@@ -1,0 +1,256 @@
+[
+  {
+    "_id": "apple-ipad-10",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPad (10th generation)",
+    "displayName": "Apple iPad (10th generation)",
+    "family": "ipad",
+    "generation": 10,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "ipad 10",
+      "ipad (10th generation)",
+      "apple ipad 10",
+      "ipad 10th generation"
+    ],
+    "platform": "ios",
+    "deviceType": "tablet",
+    "os": {
+      "minVersion": "16.1",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 820,
+        "cssHeight": 1180,
+        "dpr": 2,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Wi-Fi + Cellular модель поддерживает eSIM наряду с физической nano-SIM (support.apple.com/en-us/119592)."
+    },
+    "releaseYear": 2022,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.15,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/119592",
+        "title": "Set up eSIM on iPad — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/111840",
+        "title": "iPad (10th generation) - Tech Specs — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-ipad-air-5",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPad Air (5th generation)",
+    "displayName": "Apple iPad Air (5th generation)",
+    "family": "ipad",
+    "generation": 5,
+    "modifiers": ["air"],
+    "modelCodes": [],
+    "aliases": [
+      "ipad air 5",
+      "ipad air (5th generation)",
+      "apple ipad air 5"
+    ],
+    "platform": "ios",
+    "deviceType": "tablet",
+    "os": {
+      "minVersion": "15.4",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 820,
+        "cssHeight": 1180,
+        "dpr": 2,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Wi-Fi + Cellular модель поддерживает eSIM наряду с физической nano-SIM (support.apple.com/en-us/119592). Тот же физический размер экрана, что у iPad (10th generation) — группа кандидатов сигнатуры экрана делится между этими двумя моделями."
+    },
+    "releaseYear": 2022,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.15,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/119592",
+        "title": "Set up eSIM on iPad — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/111887",
+        "title": "iPad Air (5th generation) - Tech Specs — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-ipad-mini-6",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPad mini (6th generation)",
+    "displayName": "Apple iPad mini (6th generation)",
+    "family": "ipad",
+    "generation": 6,
+    "modifiers": ["mini"],
+    "modelCodes": [],
+    "aliases": [
+      "ipad mini 6",
+      "ipad mini (6th generation)",
+      "apple ipad mini 6"
+    ],
+    "platform": "ios",
+    "deviceType": "tablet",
+    "os": {
+      "minVersion": "15.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 744,
+        "cssHeight": 1133,
+        "dpr": 2,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Wi-Fi + Cellular модель поддерживает eSIM наряду с физической nano-SIM (support.apple.com/en-us/119592)."
+    },
+    "releaseYear": 2021,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.1,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/119592",
+        "title": "Set up eSIM on iPad — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-euro/111886",
+        "title": "iPad mini (6th generation) - Tech Specs — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-ipad-pro-11-m2",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPad Pro 11-inch (4th generation)",
+    "displayName": "Apple iPad Pro 11-inch (4th generation)",
+    "family": "ipad",
+    "generation": 4,
+    "modifiers": ["pro"],
+    "modelCodes": [],
+    "aliases": [
+      "ipad pro 11 4",
+      "ipad pro 11-inch (4th generation)",
+      "ipad pro 11 m2",
+      "apple ipad pro 11 m2"
+    ],
+    "platform": "ios",
+    "deviceType": "tablet",
+    "os": {
+      "minVersion": "16.1",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 834,
+        "cssHeight": 1194,
+        "dpr": 2,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Wi-Fi + Cellular модель (чип M2) поддерживает eSIM наряду с физической nano-SIM (support.apple.com/en-us/119592). Более новые поколения (M4/M5) перешли на eSIM-only и не заведены — вне минимального объёма распознавания типа (docs/09 ADR-034)."
+    },
+    "releaseYear": 2022,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.1,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/119592",
+        "title": "Set up eSIM on iPad — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/111842",
+        "title": "iPad Pro 11-inch (4th generation) - Technical Specifications — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  }
+]

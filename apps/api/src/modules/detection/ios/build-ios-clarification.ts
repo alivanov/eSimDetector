@@ -13,12 +13,21 @@ import type { Clarification } from '../../../common/response';
  * Условие применения адресного вопроса — строго все кандидаты согласны и по `scope`, и по
  * буквальному тексту вопроса; если хотя бы один кандидат без условия (пример — iPhone 17e в группе
  * `390×844@3`) либо вопросы расходятся, остаётся выбор из списка, как и было.
+ *
+ * `groupLabel` (docs/09-decisions.md ADR-034, этап 5.6) — слово, называющее группу в текстах по
+ * умолчанию ("Уточните модель вашего iPhone" / "...вашего iPad"): раньше было вшито константой
+ * `iPhone`, что для планшета дало бы ложное "не могу определить модель iPhone" в ответе про iPad —
+ * то есть ровно тот "ответ про телефон", который эта задача обязана исключить. Значение по
+ * умолчанию — `'iPhone'`, чтобы существующие вызовы (и их тесты) не требовали правки.
  */
-export function buildIosClarification(candidates: readonly Device[]): Clarification {
+export function buildIosClarification(
+  candidates: readonly Device[],
+  groupLabel = 'iPhone',
+): Clarification {
   if (candidates.length === 0) {
     return {
       kind: 'manual_input',
-      question: 'Не удалось определить модель iPhone. Введите модель вручную.',
+      question: `Не удалось определить модель ${groupLabel}. Введите модель вручную.`,
     };
   }
 
@@ -33,7 +42,7 @@ export function buildIosClarification(candidates: readonly Device[]): Clarificat
 
   return {
     kind: 'choose_candidate',
-    question: 'Уточните модель вашего iPhone',
+    question: `Уточните модель вашего ${groupLabel}`,
     options: [
       ...candidates.map((device) => ({ id: device._id, label: device.displayName })),
       { id: '__other__', label: 'Другая модель' },

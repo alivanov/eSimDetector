@@ -75,7 +75,8 @@ Sec-CH-UA-Platform-Version: "14.0.0"
   "detection": {
     "method": "ua_client_hints_model",
     "platform": "android",
-    "exactModelKnown": true
+    "exactModelKnown": true,
+    "deviceType": "phone"
   },
   "device": {
     "id": "samsung-galaxy-s24-ultra",
@@ -111,7 +112,8 @@ Sec-CH-UA-Platform-Version: "14.0.0"
   "detection": {
     "method": "ios_version_and_screen_signature",
     "platform": "ios",
-    "exactModelKnown": false
+    "exactModelKnown": false,
+    "deviceType": "phone"
   },
   "device": null,
   "candidates": [
@@ -136,6 +138,43 @@ Sec-CH-UA-Platform-Version: "14.0.0"
 
 Обратите внимание: `exactModelKnown: false`, но `status: supported` с высокой уверенностью. Это и есть практическая реализация принципа «определяем ответ, а не название модели».
 
+### Ответ: планшет (iPad) определён как группа (этап 5.6, ADR-034)
+
+Тот же метод, что и для iPhone, но по множеству кандидатов `deviceType: "tablet"` (докс/03 §3.2а/§3.5) — сигнатуры экрана iPad не пересекаются с сигнатурами iPhone, поэтому владелец iPad получает адресный ответ про iPad, а не про телефон:
+
+```json
+{
+  "requestId": "…",
+  "status": "supported",
+  "confidence": 0.85,
+  "detection": {
+    "method": "ios_version_and_screen_signature",
+    "platform": "ios",
+    "exactModelKnown": false,
+    "deviceType": "tablet"
+  },
+  "device": null,
+  "candidates": [
+    { "id": "apple-ipad-10", "name": "Apple iPad (10th generation)" },
+    { "id": "apple-ipad-air-5", "name": "Apple iPad Air (5th generation)" }
+  ],
+  "reasons": [
+    { "code": "PLATFORM_DETECTED", "detail": "ios" },
+    { "code": "DEVICE_TYPE_TABLET_DETECTED", "detail": "user-agent содержит \"iPad\"" },
+    { "code": "SCREEN_SIGNATURE_MATCHED", "detail": "820x1180@2" },
+    { "code": "CANDIDATES_AGREE_ON_ESIM", "detail": "2 кандидата, статус единый" }
+  ],
+  "presentation": {
+    "title": "Ваше устройство поддерживает eSIM",
+    "description": "Мы определили, что у вас iPad — эта группа моделей поддерживает eSIM.",
+    "primaryAction": { "label": "Подключить eSIM", "kind": "continue" },
+    "secondaryAction": { "label": "Уточнить модель", "kind": "clarify" }
+  }
+}
+```
+
+Тот же принцип действует и при явном признаке настольного User-Agent (Safari на iPadOS 13+ по умолчанию отправляет UA настольного macOS): при `maxTouchPoints > 0` сервис распознаёт платформу `ios` и тип `tablet` без слова `iPad` в самой строке User-Agent (докс/03 §3.2а). При `maxTouchPoints === 0` то же устройство остаётся настоящим Mac (`platform: "other"`) — планшетом не классифицируется никогда.
+
 ### Ответ: требуется уточнение
 
 ```json
@@ -146,7 +185,8 @@ Sec-CH-UA-Platform-Version: "14.0.0"
   "detection": {
     "method": "ios_version_and_screen_signature",
     "platform": "ios",
-    "exactModelKnown": false
+    "exactModelKnown": false,
+    "deviceType": "phone"
   },
   "device": null,
   "candidates": [
@@ -190,7 +230,8 @@ Sec-CH-UA-Platform-Version: "14.0.0"
   "detection": {
     "method": "ios_version_and_screen_signature",
     "platform": "ios",
-    "exactModelKnown": false
+    "exactModelKnown": false,
+    "deviceType": "phone"
   },
   "device": null,
   "candidates": [
@@ -221,7 +262,9 @@ Sec-CH-UA-Platform-Version: "14.0.0"
 
 Повторный запрос с теми же `signals` и `context.region`, равным одному из значений `clarification.options[].id`, возвращает определённый статус (`supported`/`not_supported`) вместо уточнения — `exactModelKnown` при этом остаётся `false`: регион разрешает статус eSIM, а не модель внутри группы (AGENTS.md, предметное правило 3). Если хотя бы у одного кандидата группы условий нет либо вопросы кандидатов расходятся (пример — сигнатура `390×844@3`, где iPhone 17e без условия стоит рядом с условными 12/13/14/16e), клиент по-прежнему получает `choose_candidate`, как в предыдущем примере.
 
-**Реализация агента 5 (`apps/api/src/modules/detection`).** `POST /api/v1/detect` и `POST /api/v1/devices/search` (§6.3) отвечают кодом `200` явно (`@HttpCode(200)`), а не принятым в NestJS по умолчанию для `POST` кодом `201` — ADR-008/ADR-024. Полный перечень стабильных кодов `reasons[]` этого эндпоинта («PLATFORM_DETECTED», «UA_CH_MODEL_RECEIVED», «CATALOG_EXACT_MATCH», «CATALOG_MODEL_CODE_UNKNOWN», «LEGACY_UA_MODEL_PARSED», «IOS_VERSION_IMPLIES_MIN_MODEL», «SCREEN_SIGNATURE_MATCHED», «SCREEN_SIGNATURE_UNKNOWN», «EMULATION_SUSPECTED», «SIGNAL_HEADERS_CONSISTENT»/«SIGNAL_HEADERS_INCONSISTENT», «CONFIDENCE_BELOW_THRESHOLD», «PLATFORM_NOT_MOBILE», «NO_SIGNALS» — плюс коды `esim-rules`/`fuzzy-matcher`, переиспользуемые как есть) документирован в коде (`apps/api/src/modules/detection/*.ts`) и в ADR-024, а не повторён здесь дословно, чтобы не расходиться при последующих правках.
+**Реализация агента 5 (`apps/api/src/modules/detection`).** `POST /api/v1/detect` и `POST /api/v1/devices/search` (§6.3) отвечают кодом `200` явно (`@HttpCode(200)`), а не принятым в NestJS по умолчанию для `POST` кодом `201` — ADR-008/ADR-024. Полный перечень стабильных кодов `reasons[]` этого эндпоинта («PLATFORM_DETECTED», «UA_CH_MODEL_RECEIVED», «CATALOG_EXACT_MATCH», «CATALOG_MODEL_CODE_UNKNOWN», «LEGACY_UA_MODEL_PARSED», «IOS_VERSION_IMPLIES_MIN_MODEL», «SCREEN_SIGNATURE_MATCHED», «SCREEN_SIGNATURE_UNKNOWN», «EMULATION_SUSPECTED», «SIGNAL_HEADERS_CONSISTENT»/«SIGNAL_HEADERS_INCONSISTENT», «CONFIDENCE_BELOW_THRESHOLD», «PLATFORM_NOT_MOBILE», «NO_SIGNALS», «DEVICE_TYPE_TABLET_DETECTED», «DEVICE_TYPE_WATCH_DETECTED», «DEVICE_TYPE_AMBIGUOUS» (три последних — этап 5.6, докс/09 ADR-034) — плюс коды `esim-rules`/`fuzzy-matcher`, переиспользуемые как есть) документирован в коде (`apps/api/src/modules/detection/*.ts`) и в ADR-024/ADR-034, а не повторён здесь дословно, чтобы не расходиться при последующих правках.
+
+**Поле `detection.deviceType` (этап 5.6, докс/09 ADR-034).** Значение — `phone`/`tablet`/`watch`/`laptop`/`other` (docs/05 §5.3, тот же перечень, что и у `devices.deviceType` справочника). Определяется классификацией по сигналам (§3.2а докс/03) либо, при точном сопоставлении с записью справочника, берётся из самой записи. Поле аддитивное — клиенты, не читающие его, продолжают работать без изменений. Владелец планшета/умных часов получает адресный ответ с этим полем и соответствующим кодом `reasons[]`, а не ответ, предполагающий телефон.
 
 ## 6.3. `GET/POST /api/v1/devices/search` — определение по названию
 

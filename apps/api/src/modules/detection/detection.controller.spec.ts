@@ -14,7 +14,12 @@ describe('DetectionController', () => {
   const sampleResult: DetectResult = {
     status: 'clarification_required',
     confidence: 0,
-    detection: { method: 'unknown', platform: 'other', exactModelKnown: false },
+    detection: {
+      method: 'unknown',
+      platform: 'other',
+      exactModelKnown: false,
+      deviceType: 'phone',
+    },
     device: null,
     candidates: [],
     reasons: [{ code: 'NO_SIGNALS' }],

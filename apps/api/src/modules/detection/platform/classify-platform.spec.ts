@@ -59,4 +59,36 @@ describe('classifyPlatform', () => {
     const ua = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X)';
     expect(classifyPlatform({ userAgent: ua, uaData: { platform: 'Android' } })).toBe('ios');
   });
+
+  describe('iPad в режиме настольного сайта (docs/09 ADR-034, ловушка iPadOS 13+)', () => {
+    const desktopSafariUa =
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15';
+
+    it('User-Agent настольного macOS Safari + maxTouchPoints > 0 → ios (это iPad, а не Mac)', () => {
+      expect(
+        classifyPlatform({ userAgent: desktopSafariUa, hardware: { maxTouchPoints: 5 } }),
+      ).toBe('ios');
+    });
+
+    it('тот же User-Agent с maxTouchPoints = 0 (настоящий Mac) → other, а не ios', () => {
+      expect(
+        classifyPlatform({ userAgent: desktopSafariUa, hardware: { maxTouchPoints: 0 } }),
+      ).toBe('other');
+    });
+
+    it('тот же User-Agent без сигнала maxTouchPoints вовсе → other (не догадка про планшет)', () => {
+      expect(classifyPlatform({ userAgent: desktopSafariUa })).toBe('other');
+    });
+
+    it('Chrome на настоящем десктопном Mac (не Safari) с maxTouchPoints > 0 тоже классифицируется как ios', () => {
+      // Намеренное следствие эвристики: Mac с сенсорным экраном не существует на практике (docs/03
+      // §3.9а), поэтому сочетание "Macintosh в UA" + "maxTouchPoints > 0" остаётся надёжным
+      // различителем iPad независимо от конкретного браузера в UA.
+      const chromeOnMacUa =
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36';
+      expect(classifyPlatform({ userAgent: chromeOnMacUa, hardware: { maxTouchPoints: 5 } })).toBe(
+        'ios',
+      );
+    });
+  });
 });

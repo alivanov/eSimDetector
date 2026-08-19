@@ -1,0 +1,59 @@
+[
+  {
+    "_id": "samsung-galaxy-tab-s9-5g",
+    "brand": "samsung",
+    "brandTitle": "Samsung",
+    "marketingName": "Galaxy Tab S9 5G",
+    "displayName": "Samsung Galaxy Tab S9 5G",
+    "family": "galaxy-tab",
+    "generation": 9,
+    "modifiers": [],
+    "modelCodes": ["SM-X716B"],
+    "aliases": [
+      "galaxy tab s9 5g",
+      "galaxy tab s9",
+      "tab s9 5g",
+      "tab s9"
+    ],
+    "platform": "android",
+    "deviceType": "tablet",
+    "os": {
+      "minVersion": "13",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Только версия 5G (SM-X716B) поддерживает eSIM наряду с физической nano-SIM; версия Wi-Fi (SM-X710) не имеет модема сотовой связи вовсе и в справочник не заводится (samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/)."
+    },
+    "releaseYear": 2023,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.05,
+    "sources": [
+      {
+        "url": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/",
+        "title": "Galaxy eSIM and supported network carriers — Samsung",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://www.samsung.com/ph/tablets/galaxy-tab-s/galaxy-tab-s9-5g-graphite-256gb-sm-x716bzaextc/",
+        "title": "Galaxy Tab S9 5G (SM-X716B) — Samsung Philippines",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  }
+]

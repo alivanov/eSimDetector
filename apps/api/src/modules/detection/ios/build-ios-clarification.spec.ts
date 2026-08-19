@@ -155,4 +155,33 @@ describe('buildIosClarification', () => {
       question: 'Не удалось определить модель iPhone. Введите модель вручную.',
     });
   });
+
+  it('groupLabel="iPad" — тексты по умолчанию называют планшет, а не телефон (docs/09 ADR-034)', () => {
+    const empty = buildIosClarification([], 'iPad');
+    expect(empty).toEqual({
+      kind: 'manual_input',
+      question: 'Не удалось определить модель iPad. Введите модель вручную.',
+    });
+
+    const a = unconditionalDevice({
+      _id: 'apple-ipad-10',
+      displayName: 'Apple iPad (10th generation)',
+    });
+    const b = unconditionalDevice({
+      _id: 'apple-ipad-mini-6',
+      displayName: 'Apple iPad mini (6th generation)',
+      esim: {
+        support: 'not_supported',
+        dualSim: 'none',
+        maxProfiles: null,
+        conditions: [],
+        clarifyingQuestion: null,
+        notes: '',
+      },
+    });
+    const clarification = buildIosClarification([a, b], 'iPad');
+    expect(clarification.kind).toBe('choose_candidate');
+    expect(clarification.question).toBe('Уточните модель вашего iPad');
+    expect(clarification.question).not.toContain('iPhone');
+  });
 });
