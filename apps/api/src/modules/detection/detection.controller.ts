@@ -42,7 +42,12 @@ export class DetectionController {
   @HttpCode(HttpStatus.OK)
   public detect(@Body() body: DetectRequestDto, @Req() req: Request): DetectResponse {
     const requestId = getRequestId(req);
-    const result = this.detectionService.detect(body.signals, extractHeaders(req), requestId);
+    const result = this.detectionService.detect(
+      body.signals,
+      extractHeaders(req),
+      requestId,
+      body.context?.region,
+    );
     return { requestId, ...result };
   }
 }

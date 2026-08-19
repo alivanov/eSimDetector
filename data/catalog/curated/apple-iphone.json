@@ -746,24 +746,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2018,
     "marketPresenceRu": "parallel-import",
@@ -834,24 +846,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2018,
     "marketPresenceRu": "parallel-import",
@@ -921,24 +945,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2019,
     "marketPresenceRu": "parallel-import",
@@ -1011,24 +1047,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2019,
     "marketPresenceRu": "parallel-import",
@@ -1102,24 +1150,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2019,
     "marketPresenceRu": "parallel-import",
@@ -1396,24 +1456,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2020,
     "marketPresenceRu": "parallel-import",
@@ -1486,24 +1558,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2020,
     "marketPresenceRu": "parallel-import",
@@ -1577,24 +1661,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2020,
     "marketPresenceRu": "parallel-import",
@@ -1734,24 +1830,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2021,
     "marketPresenceRu": "parallel-import",
@@ -1824,24 +1932,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2021,
     "marketPresenceRu": "parallel-import",
@@ -1915,24 +2035,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2021,
     "marketPresenceRu": "parallel-import",
@@ -2002,24 +2134,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2022,
     "marketPresenceRu": "parallel-import",
@@ -2092,24 +2236,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2022,
     "marketPresenceRu": "parallel-import",
@@ -2182,24 +2338,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2022,
     "marketPresenceRu": "parallel-import",
@@ -2273,24 +2441,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2022,
     "marketPresenceRu": "parallel-import",
@@ -2360,24 +2540,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2023,
     "marketPresenceRu": "parallel-import",
@@ -2450,24 +2642,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2023,
     "marketPresenceRu": "parallel-import",
@@ -2540,24 +2744,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2023,
     "marketPresenceRu": "parallel-import",
@@ -2631,24 +2847,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2023,
     "marketPresenceRu": "parallel-import",
@@ -2719,24 +2947,24 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует; в Гонконге и Макао та же модель поддерживает eSIM (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (в том числе версии для Гонконга и Макао)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+      "notes": "Версия для материкового Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; версии для Гонконга и Макао, как и все остальные регионы, — с одной nano-SIM и поддержкой eSIM. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2025,
     "marketPresenceRu": "parallel-import",
@@ -2806,24 +3034,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2024,
     "marketPresenceRu": "parallel-import",
@@ -2896,24 +3136,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2024,
     "marketPresenceRu": "parallel-import",
@@ -2986,24 +3238,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2024,
     "marketPresenceRu": "parallel-import",
@@ -3077,24 +3341,36 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "HK",
+          "support": "not_supported",
+          "note": "Версия для Гонконга: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
+        },
+        {
+          "scope": "region",
+          "value": "MO",
+          "support": "not_supported",
+          "note": "Версия для Макао: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая, Гонконга или Макао)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (все остальные версии)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+      "notes": "Версии для материкового Китая, Гонконга и Макао поставляются с двумя физическими nano-SIM и eSIM не поддерживают; во всех остальных регионах — eSIM есть. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке (два в этих версиях, одно в остальных), тот же признак иногда виден по номеру модели в настройках. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2024,
     "marketPresenceRu": "parallel-import",
@@ -3237,24 +3513,24 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует; в Гонконге и Макао та же модель поддерживает eSIM (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (в том числе версии для Гонконга и Макао)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+      "notes": "Версия для материкового Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; версии для Гонконга и Макао, как и все остальные регионы, — с одной nano-SIM и поддержкой eSIM. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2025,
     "marketPresenceRu": "parallel-import",
@@ -3327,24 +3603,24 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует; в Гонконге и Макао та же модель поддерживает eSIM (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (в том числе версии для Гонконга и Макао)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+      "notes": "Версия для материкового Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; версии для Гонконга и Макао, как и все остальные регионы, — с одной nano-SIM и поддержкой eSIM. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2025,
     "marketPresenceRu": "parallel-import",
@@ -3418,24 +3694,24 @@
           "scope": "region",
           "value": "CN",
           "support": "not_supported",
-          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+          "note": "Версия для материкового Китая: два физических nano-SIM, eSIM отсутствует; в Гонконге и Макао та же модель поддерживает eSIM (Apple, «Using Dual SIM with two nano-SIM cards», support.apple.com/en-us/108898)."
         }
       ],
       "clarifyingQuestion": {
         "kind": "region",
-        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "question": "Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?",
         "options": [
           {
             "value": "CN",
-            "label": "Да, в Китае"
+            "label": "Две nano-SIM (версия для материкового Китая)"
           },
           {
             "value": "OTHER",
-            "label": "Нет, в другом регионе"
+            "label": "Одну nano-SIM (в том числе версии для Гонконга и Макао)"
           }
         ]
       },
-      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+      "notes": "Версия для материкового Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; версии для Гонконга и Макао, как и все остальные регионы, — с одной nano-SIM и поддержкой eSIM. Наблюдаемый пользователем признак — число мест для nano-SIM в лотке. Средствами браузера регион неотличим, поэтому статус — conditional."
     },
     "releaseYear": 2025,
     "marketPresenceRu": "parallel-import",

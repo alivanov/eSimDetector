@@ -212,6 +212,22 @@ describe('MatchingService.search', () => {
       { id: 'OTHER', label: 'Нет, в другой стране' },
     ]);
   });
+
+  it('запись "conditional" с переданным регионом → определённый статус вместо уточнения (docs/06 §6.3)', () => {
+    const service = buildService([conditionalDevice]);
+
+    const withChina = service.search('test conditional device', 'CN');
+    expect(withChina.status).toBe('not_supported');
+    expect(withChina.clarification).toBeUndefined();
+    expect(withChina.reasons.some((r) => r.code === 'ESIM_CONDITION_MATCHED_REGION')).toBe(true);
+
+    const withOtherRegion = service.search('test conditional device', 'RU');
+    expect(withOtherRegion.status).toBe('supported');
+    expect(withOtherRegion.clarification).toBeUndefined();
+    expect(withOtherRegion.reasons.some((r) => r.code === 'ESIM_CONDITION_DEFAULT_SUPPORTED')).toBe(
+      true,
+    );
+  });
 });
 
 describe('MatchingService.search — защитные ветки на рассинхронизацию индекса и справочника', () => {

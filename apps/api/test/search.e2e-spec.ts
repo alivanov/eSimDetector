@@ -29,6 +29,37 @@ describe('Search (e2e)', () => {
 
     const deviceModel = moduleRef.get<Model<Device>>(getModelToken(DEVICE_MODEL_NAME));
     await deviceModel.create(buildSampleDevice());
+    await deviceModel.create(
+      buildSampleDevice({
+        _id: 'test-conditional-device',
+        brand: 'test',
+        brandTitle: 'Test',
+        marketingName: 'Conditional Device',
+        displayName: 'Test Conditional Device',
+        family: 'conditional',
+        generation: null,
+        modifiers: [],
+        modelCodes: [],
+        aliases: ['test conditional device'],
+        esim: {
+          support: 'conditional',
+          dualSim: 'physical+esim',
+          maxProfiles: 1,
+          conditions: [
+            { scope: 'region', value: 'CN', support: 'not_supported', note: 'версия для КНР' },
+          ],
+          clarifyingQuestion: {
+            kind: 'region',
+            question: 'Устройство приобретено в Китае?',
+            options: [
+              { value: 'CN', label: 'Да, в Китае' },
+              { value: 'OTHER', label: 'Нет, в другой стране' },
+            ],
+          },
+          notes: '',
+        },
+      }),
+    );
 
     app = moduleRef.createNestApplication();
     configureApp(app);
@@ -76,6 +107,36 @@ describe('Search (e2e)', () => {
 
     expect(response.status).toBe(400);
     expect(response.body.error.code).toBe('VALIDATION_ERROR');
+  });
+
+  it('запись "conditional" без региона → 200 clarification_required с answer_question', async () => {
+    const response = await request(httpServer)
+      .get('/api/v1/devices/search')
+      .query({ q: 'test conditional device' });
+
+    expect(response.status).toBe(200);
+    expect(response.body.status).toBe('clarification_required');
+    expect(response.body.clarification.kind).toBe('answer_question');
+  });
+
+  it('GET .../search?region=CN → 200 not_supported, регион разрешает уточнение (docs/06 §6.3)', async () => {
+    const response = await request(httpServer)
+      .get('/api/v1/devices/search')
+      .query({ q: 'test conditional device', region: 'CN' });
+
+    expect(response.status).toBe(200);
+    expect(response.body.status).toBe('not_supported');
+    expect(response.body.clarification).toBeUndefined();
+  });
+
+  it('POST .../search с region в теле → 200 supported для любого другого региона', async () => {
+    const response = await request(httpServer)
+      .post('/api/v1/devices/search')
+      .send({ q: 'test conditional device', region: 'RU' });
+
+    expect(response.status).toBe(200);
+    expect(response.body.status).toBe('supported');
+    expect(response.body.clarification).toBeUndefined();
   });
 
   it('GET /api/v1/devices/suggest возвращает подсказки', async () => {

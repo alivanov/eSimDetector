@@ -21,13 +21,13 @@ export class MatchingController {
 
   @Get('search')
   public searchByQuery(@Query() query: SearchQueryDto, @Req() req: Request): SearchResponse {
-    return { requestId: getRequestId(req), ...this.matchingService.search(query.q) };
+    return { requestId: getRequestId(req), ...this.matchingService.search(query.q, query.region) };
   }
 
   @Post('search')
   @HttpCode(HttpStatus.OK)
   public searchByBody(@Body() body: SearchQueryDto, @Req() req: Request): SearchResponse {
-    return { requestId: getRequestId(req), ...this.matchingService.search(body.q) };
+    return { requestId: getRequestId(req), ...this.matchingService.search(body.q, body.region) };
   }
 
   @Get('suggest')

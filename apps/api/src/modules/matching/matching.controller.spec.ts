@@ -31,8 +31,18 @@ describe('MatchingController', () => {
 
     const response = controller.searchByQuery({ q: 'iphone 15' }, buildFakeRequest());
 
-    expect(searchSpy).toHaveBeenCalledWith('iphone 15');
+    expect(searchSpy).toHaveBeenCalledWith('iphone 15', undefined);
     expect(response).toEqual({ requestId: 'unknown', ...sampleSearchResult });
+  });
+
+  it('searchByQuery передаёт region — только явный ответ пользователя, без вывода из locale', () => {
+    const searchSpy = jest.fn().mockReturnValue(sampleSearchResult);
+    const fakeService: Pick<MatchingService, 'search'> = { search: searchSpy };
+    const controller = new MatchingController(fakeService as MatchingService);
+
+    controller.searchByQuery({ q: 'iphone 15', region: 'CN' }, buildFakeRequest());
+
+    expect(searchSpy).toHaveBeenCalledWith('iphone 15', 'CN');
   });
 
   it('searchByBody вызывает MatchingService.search с q из тела запроса', () => {
@@ -42,7 +52,17 @@ describe('MatchingController', () => {
 
     controller.searchByBody({ q: 'iphone 15' }, buildFakeRequest());
 
-    expect(searchSpy).toHaveBeenCalledWith('iphone 15');
+    expect(searchSpy).toHaveBeenCalledWith('iphone 15', undefined);
+  });
+
+  it('searchByBody передаёт region из тела POST-запроса (ADR-024 п.6: тот же контракт, что и GET)', () => {
+    const searchSpy = jest.fn().mockReturnValue(sampleSearchResult);
+    const fakeService: Pick<MatchingService, 'search'> = { search: searchSpy };
+    const controller = new MatchingController(fakeService as MatchingService);
+
+    controller.searchByBody({ q: 'iphone 15', region: 'RU' }, buildFakeRequest());
+
+    expect(searchSpy).toHaveBeenCalledWith('iphone 15', 'RU');
   });
 
   it('suggest вызывает MatchingService.suggest с q и limit', () => {

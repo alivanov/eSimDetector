@@ -126,13 +126,82 @@ describe('data/catalog/curated/apple-iphone.json', () => {
         expect(condition.note.length).toBeGreaterThan(0);
       }
       expect(device.esim.clarifyingQuestion?.kind).toBe('region');
-      // Вариант «не Китай» обязан отличаться от значения условия, иначе уточнение не может
-      // разрешиться в общий случай (`resolveEsimConditions`: условие срабатывает по точному
-      // совпадению региона).
-      const optionValues = device.esim.clarifyingQuestion?.options.map((option) => option.value);
-      expect(optionValues).toContain('CN');
-      expect(optionValues?.some((value) => value !== 'CN')).toBe(true);
+      // Вопрос бинарный (докладной этап 5.3а): два варианта, а не перечень регионов — граница
+      // проходит по наблюдаемому признаку «два места под nano-SIM в лотке» против «одно место»,
+      // сами рынки упомянуты только в метке варианта как пояснение (docs/09 ADR-031).
+      const options = device.esim.clarifyingQuestion?.options ?? [];
+      expect(options).toHaveLength(2);
+      const optionValues = options.map((option) => option.value);
+      const conditionValues = device.esim.conditions.map((condition) => condition.value);
+      // Значение «да» обязано совпасть хотя бы с одним условием записи (иначе ответ пользователя
+      // никогда не разрешит уточнение), а значение «нет» обязано НЕ совпадать НИ С ОДНИМ условием
+      // записи — иначе `resolveEsimConditions` по ошибке сочтёт отрицательный ответ совпадением
+      // условия, и статус бесшумно перевернётся с `supported` на `not_supported`.
+      const yesOption = optionValues.find((value) => conditionValues.includes(value));
+      const noOption = optionValues.find((value) => value !== yesOption);
+      expect(yesOption).toBeDefined();
+      expect(noOption).toBeDefined();
+      expect(conditionValues).not.toContain(noOption);
     }
+  });
+
+  it('состав региональных условий совпадает с вендорским перечнем (support.apple.com/en-us/108898)', () => {
+    // Apple перечисляет 27 моделей с двумя физическими nano-SIM: 23 доступны на трёх рынках
+    // (материковый Китай, Гонконг, Макао), 4 — только на материковом Китае (в Гонконге и Макао
+    // эти модели идут с eSIM). Расхождение с этим перечнем сейчас не ловится ни одним фильтром
+    // конвейера CSV, так как курируемое ядро через конвейер не проходит (ADR-026) — эта проверка
+    // единственный автоматический барьер против будущей опечатки в списке регионов.
+    const THREE_MARKET_IDS = [
+      'apple-iphone-xs-max',
+      'apple-iphone-xr',
+      'apple-iphone-11',
+      'apple-iphone-11-pro',
+      'apple-iphone-11-pro-max',
+      'apple-iphone-12',
+      'apple-iphone-12-pro',
+      'apple-iphone-12-pro-max',
+      'apple-iphone-13',
+      'apple-iphone-13-pro',
+      'apple-iphone-13-pro-max',
+      'apple-iphone-14',
+      'apple-iphone-14-plus',
+      'apple-iphone-14-pro',
+      'apple-iphone-14-pro-max',
+      'apple-iphone-15',
+      'apple-iphone-15-plus',
+      'apple-iphone-15-pro',
+      'apple-iphone-15-pro-max',
+      'apple-iphone-16',
+      'apple-iphone-16-plus',
+      'apple-iphone-16-pro',
+      'apple-iphone-16-pro-max',
+    ] as const;
+    const CN_ONLY_IDS = [
+      'apple-iphone-16e',
+      'apple-iphone-17',
+      'apple-iphone-17-pro',
+      'apple-iphone-17-pro-max',
+    ] as const;
+    const byId = new Map(devices.map((device) => [device._id, device]));
+
+    for (const id of THREE_MARKET_IDS) {
+      const values = byId
+        .get(id)
+        ?.esim.conditions.map((condition) => condition.value)
+        .sort();
+      expect(values).toEqual(['CN', 'HK', 'MO']);
+    }
+    for (const id of CN_ONLY_IDS) {
+      const values = byId.get(id)?.esim.conditions.map((condition) => condition.value);
+      expect(values).toEqual(['CN']);
+    }
+    // Полнота перечня: ровно эти 27 записей — conditional, никакая другая запись не должна была
+    // получить региональное условие по ошибке при правке.
+    const conditionalIds = devices
+      .filter((device) => device.esim.support === 'conditional')
+      .map((device) => device._id)
+      .sort();
+    expect(conditionalIds).toEqual([...THREE_MARKET_IDS, ...CN_ONLY_IDS].sort());
   });
 
   it('правило по КНР не сплошное: iPhone Air и 17e поддерживают eSIM в Китае (support.apple.com/en-sg/123879)', () => {

@@ -23,7 +23,9 @@ import type { DetectionInfo, DetectResponse } from './detect-response';
 import type { DetectionSignals, RequestHeaderSignals } from './detection-signals';
 import { detectEmulation } from './emulation/detect-emulation';
 import { checkHeaderConsistency, type HeaderConsistencyResult } from './header-consistency';
+import { buildIosClarification } from './ios/build-ios-clarification';
 import { buildScreenSignatureKey } from './ios/build-screen-signature-key';
+import { collectGroupConditionReasons } from './ios/collect-group-condition-reasons';
 import { ScreenSignatureService } from './ios/screen-signature.service';
 import { selectIosCandidates } from './ios/select-ios-candidates';
 import { classifyPlatform } from './platform/classify-platform';
@@ -70,14 +72,20 @@ export class DetectionService {
    * Запись в журнал выполняется в фоне (`void`, без ожидания) — сбой или задержка записи не
    * должны замедлять или ломать ответ пользователю (ADR-008: результат определения — не ошибка,
    * и служебный журнал тем более не должен становиться источником отказа).
+   *
+   * `region` — ТОЛЬКО явный ответ пользователя на адресный вопрос уточнения (`context.region`,
+   * docs/06 §6.2), а не сигнал устройства: сервис не выводит регион из `locale`/заголовков/IP
+   * (ADR-003) и не хранит состояние между запросами — клиент присылает ответ заново с каждым
+   * запросом, поэтому эндпоинт остаётся идемпотентным (без сессии на стороне API).
    */
   public detect(
     signals: DetectionSignals | undefined,
     headers: RequestHeaderSignals,
     requestId = 'unknown',
+    region?: string,
   ): DetectResult {
     const startedAt = Date.now();
-    const result = this.resolveDetection(signals, headers);
+    const result = this.resolveDetection(signals, headers, region);
 
     void this.resolutionLogService.record({
       requestId,
@@ -95,6 +103,7 @@ export class DetectionService {
   private resolveDetection(
     signals: DetectionSignals | undefined,
     headers: RequestHeaderSignals,
+    region: string | undefined,
   ): DetectResult {
     const platform = classifyPlatform(signals);
     const emulation = detectEmulation({ platform, signals });
@@ -118,10 +127,16 @@ export class DetectionService {
     const consistencyReason = this.consistencyReason(headerConsistency);
 
     if (platform === 'android' || platform === 'harmonyos') {
-      return this.detectAndroidLike(platform, signals, headerConsistency, consistencyReason);
+      return this.detectAndroidLike(
+        platform,
+        signals,
+        headerConsistency,
+        consistencyReason,
+        region,
+      );
     }
     if (platform === 'ios') {
-      return this.detectIos(signals, headerConsistency, consistencyReason);
+      return this.detectIos(signals, headerConsistency, consistencyReason, region);
     }
 
     const hasAnySignal =
@@ -152,6 +167,7 @@ export class DetectionService {
     signals: DetectionSignals | undefined,
     headerConsistency: HeaderConsistencyResult,
     consistencyReason: ApiReason | undefined,
+    region: string | undefined,
   ): DetectResult {
     const snapshot = this.catalogService.getSnapshot();
     const androidResolution = resolveAndroidDevice(signals, snapshot.matchIndex.aliasIndex);
@@ -174,7 +190,10 @@ export class DetectionService {
 
     const osVersion =
       signals?.uaData?.platformVersion ?? parseAndroidVersionFromUserAgent(signals?.userAgent);
-    const esimContext: EsimResolutionContext = osVersion !== undefined ? { osVersion } : {};
+    const esimContext: EsimResolutionContext = {
+      ...(osVersion !== undefined ? { osVersion } : {}),
+      ...(region !== undefined ? { region } : {}),
+    };
     const resolution = resolveDeviceEsimStatus(device, esimContext, this.policy());
 
     const baseConfidence =
@@ -227,6 +246,7 @@ export class DetectionService {
     signals: DetectionSignals | undefined,
     headerConsistency: HeaderConsistencyResult,
     consistencyReason: ApiReason | undefined,
+    region: string | undefined,
   ): DetectResult {
     const snapshot = this.catalogService.getSnapshot();
     const iosVersion = parseIosVersionFromUserAgent(signals?.userAgent);
@@ -235,15 +255,18 @@ export class DetectionService {
       screenKey === undefined ? undefined : this.screenSignatureService.getBySignature(screenKey);
 
     const selection = selectIosCandidates(snapshot.devices, iosVersion, screenSignature);
-    const esimContext: EsimResolutionContext =
-      iosVersion !== undefined ? { osVersion: iosVersion } : {};
+    const esimContext: EsimResolutionContext = {
+      ...(iosVersion !== undefined ? { osVersion: iosVersion } : {}),
+      ...(region !== undefined ? { region } : {}),
+    };
+    const policy = this.policy();
     const groupResolution = resolveCandidateGroupEsimStatus(
       selection.candidates.map((device) => ({
         esim: device.esim,
         dataConfidence: device.dataConfidence,
       })),
       esimContext,
-      this.policy(),
+      policy,
     );
 
     const candidatesAgree = groupResolution.status !== 'clarification_required';
@@ -259,11 +282,20 @@ export class DetectionService {
       answerThreshold: this.answerThreshold(),
     });
 
+    // Свёртка группы (`resolveCandidateGroupEsimStatus`) сообщает только `CANDIDATES_AGREE_ON_ESIM`
+    // при согласии — код конкретного сработавшего правила (условие по региону/общий случай)
+    // разворачивается отдельно, чтобы ответ оставался машиночитаемым и после того, как регион
+    // сделал статус группы определённым (ADR-010, docs/09 ADR-031).
+    const conditionReasons = candidatesAgree
+      ? collectGroupConditionReasons(selection.candidates, esimContext, policy)
+      : [];
+
     const reasons: ApiReason[] = [
       { code: 'PLATFORM_DETECTED', detail: 'ios' },
       ...selection.reasons,
       ...(consistencyReason !== undefined ? [consistencyReason] : []),
       ...groupResolution.reasons.map((reason) => ({ ...reason })),
+      ...conditionReasons.map((reason) => ({ ...reason })),
       ...(gate.downgradedByConfidence
         ? [{ code: 'CONFIDENCE_BELOW_THRESHOLD', detail: confidence.toFixed(2) }]
         : []),
@@ -276,6 +308,10 @@ export class DetectionService {
       platform: 'ios',
       exactModelKnown,
     };
+    const clarification =
+      gate.status === 'clarification_required'
+        ? buildIosClarification(selection.candidates)
+        : undefined;
 
     return {
       status: gate.status,
@@ -287,31 +323,18 @@ export class DetectionService {
           ? selection.candidates.map(toCandidateSummary)
           : [],
       reasons,
-      ...(gate.status === 'clarification_required'
-        ? { clarification: this.buildIosClarification(selection.candidates) }
-        : {}),
+      ...(clarification !== undefined ? { clarification } : {}),
       presentation: buildPresentation({
         status: gate.status,
         exactModelKnown,
         ...(singleDevice !== undefined ? { deviceName: singleDevice.displayName } : {}),
+        // Готовый текст вопроса — только для адресного уточнения (docs/13 §13.5: «уточнение
+        // вызвано региональным/версионным условием»); "выбор из списка" по-прежнему показывает
+        // общую формулировку презентации, а не текст clarification.question.
+        ...(clarification?.kind === 'answer_question'
+          ? { clarificationQuestion: clarification.question }
+          : {}),
       }),
-    };
-  }
-
-  private buildIosClarification(candidates: readonly Device[]): Clarification {
-    if (candidates.length === 0) {
-      return {
-        kind: 'manual_input',
-        question: 'Не удалось определить модель iPhone. Введите модель вручную.',
-      };
-    }
-    return {
-      kind: 'choose_candidate',
-      question: 'Уточните модель вашего iPhone',
-      options: [
-        ...candidates.map((device) => ({ id: device._id, label: device.displayName })),
-        { id: '__other__', label: 'Другая модель' },
-      ],
     };
   }
 

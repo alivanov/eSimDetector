@@ -130,12 +130,13 @@ describe('Ветка iOS на курируемом ядре Apple', () => {
     expect(result.device?.id).toBe('apple-iphone-air');
   });
 
-  it('сигнатура 393×852@3 → группа кандидатов и уточнение: регион неизвестен, статус зависит от версии для КНР', () => {
+  it('сигнатура 393×852@3 без региона → адресный вопрос про nano-SIM/Китай, а не список моделей (этап 5.3а)', () => {
     const result = service.detect(safariSignals('26_6_1', 393, 852, 3), {});
 
-    // Все кандидаты этой сигнатуры — записи со статусом `conditional` (регион КНР), а региона в
-    // сигналах браузера нет вовсе, поэтому однозначный ответ невозможен: сервис показывает группу
-    // моделей вместо догадки (ADR-003, ADR-007).
+    // Все кандидаты этой сигнатуры — записи со статусом `conditional` с ОДНИМ и тем же вопросом
+    // (регион КНР/ГК/Макао), а региона в сигналах браузера нет вовсе. Список моделей здесь вводил
+    // бы в заблуждение о природе вопроса: сервис не знает, iPhone 14 Pro это или 15, — он не знает
+    // региона покупки, поэтому задаёт именно этот вопрос (docs/09 ADR-031, закрывает пробел ADR-030).
     expect(result.status).toBe('clarification_required');
     expect(result.detection.exactModelKnown).toBe(false);
     expect(result.candidates.map((candidate) => candidate.id)).toEqual([
@@ -144,7 +145,49 @@ describe('Ветка iOS на курируемом ядре Apple', () => {
       'apple-iphone-15-pro',
       'apple-iphone-16',
     ]);
+    expect(result.clarification?.kind).toBe('answer_question');
+    expect(result.clarification?.question).toContain('nano-SIM');
+    expect(result.clarification?.options?.map((option) => option.id).sort()).toEqual([
+      'CN',
+      'OTHER',
+    ]);
+  });
+
+  it('сигнатура 393×852@3 с регионом "CN" → определённый ответ "not_supported" (условие сработало)', () => {
+    const result = service.detect(safariSignals('26_6_1', 393, 852, 3), {}, 'unknown', 'CN');
+
+    expect(result.status).toBe('not_supported');
+    expect(result.detection.exactModelKnown).toBe(false);
+    expect(result.clarification).toBeUndefined();
+    expect(result.reasons.map((reason) => reason.code)).toContain('ESIM_CONDITION_MATCHED_REGION');
+  });
+
+  it('сигнатура 393×852@3 с любым другим регионом → определённый ответ "supported" (общий случай conditional)', () => {
+    const result = service.detect(safariSignals('26_6_1', 393, 852, 3), {}, 'unknown', 'RU');
+
+    expect(result.status).toBe('supported');
+    expect(result.detection.exactModelKnown).toBe(false);
+    expect(result.clarification).toBeUndefined();
+    expect(result.reasons.map((reason) => reason.code)).toContain(
+      'ESIM_CONDITION_DEFAULT_SUPPORTED',
+    );
+  });
+
+  it('сигнатура 390×844@3 (17e без условия рядом с условными 12/13/14/16e) → по-прежнему выбор из моделей', () => {
+    const result = service.detect(safariSignals('26_6_1', 390, 844, 3), {});
+
+    // iPhone 17e поддерживает eSIM безусловно — у него нет `esim.conditions`, поэтому общего
+    // вопроса для всей группы не существует: список моделей — единственный корректный сценарий.
+    expect(result.status).toBe('clarification_required');
     expect(result.clarification?.kind).toBe('choose_candidate');
+    expect(result.candidates.map((candidate) => candidate.id)).toContain('apple-iphone-17e');
+  });
+
+  it('сигнатура 414×736@3 с iOS 15 → "not_supported" сразу, без лишнего уточнения (регрессия)', () => {
+    const result = service.detect(safariSignals('15_8_8', 414, 736, 3), {});
+
+    expect(result.status).toBe('not_supported');
+    expect(result.clarification).toBeUndefined();
   });
 
   it('неизвестная сигнатура при известной версии iOS не даёт догадки: только уточнение', () => {

@@ -35,8 +35,24 @@ describe('DetectionController', () => {
 
     const response = controller.detect(body, req);
 
-    expect(detectSpy).toHaveBeenCalledWith(body.signals, {}, 'unknown');
+    expect(detectSpy).toHaveBeenCalledWith(body.signals, {}, 'unknown', undefined);
     expect(response).toEqual({ requestId: 'unknown', ...sampleResult });
+  });
+
+  it('передаёт context.region сервису — только явный ответ пользователя, не выводится из locale', () => {
+    const detectSpy = jest.fn().mockReturnValue(sampleResult);
+    const fakeService: Pick<DetectionService, 'detect'> = { detect: detectSpy };
+    const controller = new DetectionController(fakeService as DetectionService);
+
+    const body: DetectRequestDto = {
+      signals: { userAgent: 'test-ua' },
+      context: { region: 'CN', locale: 'ru-RU' },
+    };
+    const req = buildFakeRequest({});
+
+    controller.detect(body, req);
+
+    expect(detectSpy).toHaveBeenCalledWith(body.signals, {}, 'unknown', 'CN');
   });
 
   it('снимает кавычки со значений заголовков Sec-CH-UA-* перед передачей в сервис', () => {
@@ -55,6 +71,7 @@ describe('DetectionController', () => {
       undefined,
       { model: 'SM-S928B', platform: 'Android' },
       'unknown',
+      undefined,
     );
   });
 
@@ -67,6 +84,6 @@ describe('DetectionController', () => {
 
     controller.detect({}, req);
 
-    expect(detectSpy).toHaveBeenCalledWith(undefined, { model: 'SM-S928B' }, 'unknown');
+    expect(detectSpy).toHaveBeenCalledWith(undefined, { model: 'SM-S928B' }, 'unknown', undefined);
   });
 });

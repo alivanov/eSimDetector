@@ -176,6 +176,18 @@ export class RequestContextDto {
   @IsString()
   @MaxLength(20)
   public locale?: string;
+
+  /**
+   * Регион — ТОЛЬКО явный ответ пользователя на адресный вопрос уточнения (docs/06 §6.2,
+   * ADR-007). Валидация здесь проверяет только тип и длину присланной строки (ADR-016); значения
+   * (`"CN"`, `"OTHER"` и т. п.) заданы `esim.clarifyingQuestion.options` конкретной записи
+   * справочника, а не фиксированным перечнем на границе API — набор регионов различается между
+   * записями (docs/05 §5.4).
+   */
+  @IsOptional()
+  @IsString()
+  @MaxLength(10)
+  public region?: string;
 }
 
 export class DetectRequestDto {

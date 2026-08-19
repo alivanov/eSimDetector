@@ -184,6 +184,51 @@ describe('DetectionService.detect — ветка Android', () => {
       ],
     });
   });
+
+  it('запись "conditional" с переданным регионом → определённый статус вместо уточнения (context.region)', () => {
+    const device = androidDevice({
+      esim: {
+        support: 'conditional',
+        dualSim: 'physical+esim',
+        maxProfiles: 1,
+        conditions: [
+          { scope: 'region', value: 'CN', support: 'not_supported', note: 'версия для КНР' },
+        ],
+        clarifyingQuestion: {
+          kind: 'region',
+          question: 'Устройство приобретено в Китае?',
+          options: [
+            { value: 'CN', label: 'Да' },
+            { value: 'OTHER', label: 'Нет' },
+          ],
+        },
+        notes: '',
+      },
+    });
+    const service = buildService([device]);
+
+    const withChina = service.detect(
+      { uaData: { platform: 'Android', model: 'SM-S928B' } },
+      {},
+      'req-1',
+      'CN',
+    );
+    expect(withChina.status).toBe('not_supported');
+    expect(withChina.clarification).toBeUndefined();
+    expect(withChina.reasons.map((r) => r.code)).toContain('ESIM_CONDITION_MATCHED_REGION');
+
+    const withOtherRegion = service.detect(
+      { uaData: { platform: 'Android', model: 'SM-S928B' } },
+      {},
+      'req-2',
+      'RU',
+    );
+    expect(withOtherRegion.status).toBe('supported');
+    expect(withOtherRegion.clarification).toBeUndefined();
+    expect(withOtherRegion.reasons.map((r) => r.code)).toContain(
+      'ESIM_CONDITION_DEFAULT_SUPPORTED',
+    );
+  });
 });
 
 describe('DetectionService.detect — ветка iOS', () => {

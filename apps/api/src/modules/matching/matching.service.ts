@@ -1,6 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import type { CatalogAnswerPolicy, Device, ResultStatus } from '@esim-detector/contracts';
+import type {
+  CatalogAnswerPolicy,
+  Device,
+  EsimResolutionContext,
+  ResultStatus,
+} from '@esim-detector/contracts';
 import { resolveDeviceEsimStatus } from '@esim-detector/esim-rules';
 import type {
   DecisionThresholds,
@@ -86,18 +91,24 @@ export class MatchingService {
     };
   }
 
-  public search(rawQuery: string): SearchResult {
+  /**
+   * `region` — ТОЛЬКО явный ответ пользователя на адресный вопрос уточнения (docs/06 §6.3,
+   * ADR-007), симметрично `context.region` `/detect` (ADR-003: не выводится из `locale`/IP).
+   */
+  public search(rawQuery: string, region?: string): SearchResult {
     const snapshot = this.catalogService.getSnapshot();
     const normalized = normalizeQuery(rawQuery, this.dictionary);
     const policy = this.policy();
+    const esimContext: EsimResolutionContext = region !== undefined ? { region } : {};
 
     const decision = matchQuery(normalized.slots, snapshot.matchIndex, {
       queryText: normalized.normalized,
       thresholds: this.thresholds(),
       // docs/04 §4.7: «если статус eSIM у всех кандидатов совпадает, ответ выдаётся сразу» —
       // кандидаты, иначе давшие бы уточнение по разрыву оценок, эквивалентны, когда конвейер
-      // вывода статуса дал бы им один и тот же итоговый статус.
-      resolveEquivalenceKey: (deviceId) => this.resolveEquivalenceKey(deviceId, policy),
+      // вывода статуса дал бы им один и тот же итоговый статус (с учётом того же региона).
+      resolveEquivalenceKey: (deviceId) =>
+        this.resolveEquivalenceKey(deviceId, esimContext, policy),
     });
 
     return this.buildSearchResult(
@@ -106,15 +117,20 @@ export class MatchingService {
       decision,
       snapshot.devices,
       policy,
+      esimContext,
     );
   }
 
-  private resolveEquivalenceKey(deviceId: string, policy: CatalogAnswerPolicy): string {
+  private resolveEquivalenceKey(
+    deviceId: string,
+    esimContext: EsimResolutionContext,
+    policy: CatalogAnswerPolicy,
+  ): string {
     const device = this.catalogService.getSnapshot().devices.get(deviceId);
     if (device === undefined) {
       return deviceId;
     }
-    return resolveDeviceEsimStatus(device, {}, policy).status;
+    return resolveDeviceEsimStatus(device, esimContext, policy).status;
   }
 
   private buildSearchResult(
@@ -123,12 +139,20 @@ export class MatchingService {
     decision: MatchDecision,
     devices: ReadonlyMap<string, Device>,
     policy: CatalogAnswerPolicy,
+    esimContext: EsimResolutionContext,
   ): SearchResult {
     const query = { raw, normalized: normalizedText };
     const reasons: ApiReason[] = decision.reasons.map((code) => ({ code }));
 
     if (decision.status === 'determined') {
-      return this.buildDeterminedResult(query, decision.candidates, devices, policy, reasons);
+      return this.buildDeterminedResult(
+        query,
+        decision.candidates,
+        devices,
+        policy,
+        reasons,
+        esimContext,
+      );
     }
 
     if (decision.status === 'not_found') {
@@ -159,6 +183,7 @@ export class MatchingService {
     devices: ReadonlyMap<string, Device>,
     policy: CatalogAnswerPolicy,
     matchReasons: readonly ApiReason[],
+    esimContext: EsimResolutionContext,
   ): SearchResult {
     const leader = candidates[0];
     const leaderDevice = leader === undefined ? undefined : devices.get(leader.device.id);
@@ -182,7 +207,7 @@ export class MatchingService {
       };
     }
 
-    const resolution = resolveDeviceEsimStatus(leaderDevice, {}, policy);
+    const resolution = resolveDeviceEsimStatus(leaderDevice, esimContext, policy);
     const reasons: ApiReason[] = [
       ...matchReasons,
       ...resolution.reasons.map((reason) => ({ ...reason })),

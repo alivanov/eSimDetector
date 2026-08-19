@@ -77,6 +77,63 @@ describe('Detect (e2e)', () => {
       }),
     );
 
+    const REGION_QUESTION = {
+      kind: 'region' as const,
+      question: 'Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?',
+      options: [
+        { value: 'CN', label: 'Две nano-SIM (версия для материкового Китая, Гонконга или Макао)' },
+        { value: 'OTHER', label: 'Одну nano-SIM (все остальные версии)' },
+      ],
+    };
+    const conditionalEsim = {
+      support: 'conditional' as const,
+      dualSim: 'physical+esim' as const,
+      maxProfiles: 8,
+      conditions: [
+        { scope: 'region' as const, value: 'CN', support: 'not_supported' as const, note: 'КНР' },
+      ],
+      clarifyingQuestion: REGION_QUESTION,
+      notes: '',
+    };
+    await deviceModel.create(
+      buildSampleDevice({
+        _id: 'apple-iphone-16',
+        brand: 'apple',
+        brandTitle: 'Apple',
+        marketingName: 'iPhone 16',
+        displayName: 'iPhone 16',
+        family: 'iphone',
+        generation: 16,
+        modifiers: [],
+        modelCodes: [],
+        aliases: [],
+        platform: 'ios',
+        deviceType: 'phone',
+        os: { minVersion: '18.0', maxVersion: '18.6' },
+        screenSignatures: [{ cssWidth: 402, cssHeight: 874, dpr: 3, zoomed: false }],
+        esim: conditionalEsim,
+      }),
+    );
+    await deviceModel.create(
+      buildSampleDevice({
+        _id: 'apple-iphone-16-pro',
+        brand: 'apple',
+        brandTitle: 'Apple',
+        marketingName: 'iPhone 16 Pro',
+        displayName: 'iPhone 16 Pro',
+        family: 'iphone',
+        generation: 16,
+        modifiers: ['pro'],
+        modelCodes: [],
+        aliases: [],
+        platform: 'ios',
+        deviceType: 'phone',
+        os: { minVersion: '18.0', maxVersion: '18.6' },
+        screenSignatures: [{ cssWidth: 402, cssHeight: 874, dpr: 3, zoomed: false }],
+        esim: conditionalEsim,
+      }),
+    );
+
     const screenSignatureModel = moduleRef.get<Model<ScreenSignatureRecord>>(
       getModelToken(SCREEN_SIGNATURE_MODEL_NAME),
     );
@@ -85,6 +142,12 @@ describe('Detect (e2e)', () => {
       zoomed: false,
       candidates: ['apple-iphone-14-pro', 'apple-iphone-15'],
       esimConsensus: 'supported',
+    });
+    await screenSignatureModel.create({
+      signature: '402x874@3',
+      zoomed: false,
+      candidates: ['apple-iphone-16', 'apple-iphone-16-pro'],
+      esimConsensus: 'conditional',
     });
 
     app = moduleRef.createNestApplication();
@@ -167,5 +230,59 @@ describe('Detect (e2e)', () => {
 
     expect(response.headers['accept-ch']).toContain('Sec-CH-UA-Model');
     expect(response.headers['critical-ch']).toBe('Sec-CH-UA-Model');
+  });
+
+  it('iOS-группа с общим региональным условием без региона → 200 answer_question, а не список моделей (этап 5.3а)', async () => {
+    const response = await request(httpServer)
+      .post('/api/v1/detect')
+      .send({
+        signals: {
+          userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15',
+          screen: { width: 402, height: 874, dpr: 3, orientation: 'portrait-primary' },
+        },
+      });
+
+    expect(response.status).toBe(200);
+    expect(response.body.status).toBe('clarification_required');
+    expect(response.body.detection.exactModelKnown).toBe(false);
+    expect(response.body.clarification.kind).toBe('answer_question');
+    const options = response.body.clarification.options as { id: string }[];
+    expect(options.map((o) => o.id).sort()).toEqual(['CN', 'OTHER']);
+  });
+
+  it('тот же запрос с context.region="CN" → 200 not_supported, определённо, без уточнения', async () => {
+    const response = await request(httpServer)
+      .post('/api/v1/detect')
+      .send({
+        signals: {
+          userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15',
+          screen: { width: 402, height: 874, dpr: 3, orientation: 'portrait-primary' },
+        },
+        context: { region: 'CN' },
+      });
+
+    expect(response.status).toBe(200);
+    expect(response.body.status).toBe('not_supported');
+    expect(response.body.clarification).toBeUndefined();
+    const reasons = response.body.reasons as { code: string }[];
+    expect(reasons.some((r) => r.code === 'ESIM_CONDITION_MATCHED_REGION')).toBe(true);
+  });
+
+  it('тот же запрос с другим context.region → 200 supported (общий случай conditional)', async () => {
+    const response = await request(httpServer)
+      .post('/api/v1/detect')
+      .send({
+        signals: {
+          userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15',
+          screen: { width: 402, height: 874, dpr: 3, orientation: 'portrait-primary' },
+        },
+        context: { region: 'RU' },
+      });
+
+    expect(response.status).toBe(200);
+    expect(response.body.status).toBe('supported');
+    expect(response.body.clarification).toBeUndefined();
+    const reasons = response.body.reasons as { code: string }[];
+    expect(reasons.some((r) => r.code === 'ESIM_CONDITION_DEFAULT_SUPPORTED')).toBe(true);
   });
 });
