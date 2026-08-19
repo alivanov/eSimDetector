@@ -137,27 +137,40 @@ export function validateRow(row: DevicesCsvRow, context: ValidateRowContext): Va
   if (row.marketingName === undefined || row.marketingName.trim().length === 0) {
     return quarantine('NAME_UNPARSEABLE', context, 'marketing_name пуст', row);
   }
-  // Проверка "разбирается ли название само по себе" выполняется БЕЗ бренда впереди: с брендом
-  // `family` определён почти всегда (бренд сам по себе — словесный токен, `splitBrandAndFamily`
-  // в text-normalizer вернёт хотя бы его), а без бренда `family === undefined` означает
-  // отсутствие в названии хотя бы одного словесного токена (например, только пунктуация/emoji).
+  // Проверка "разбирается ли название само по себе" выполняется БЕЗ бренда впереди — но
+  // отсутствие СЛОВЕСНОГО токена (`family === undefined`) само по себе не признак мусора:
+  // у части вендоров официальное название флагмана — ЧИСТОЕ число без единого слова (`Xiaomi 12`,
+  // `Xiaomi 13 Ultra` — по правилу А.2 marketing_name пишется БЕЗ бренда, а бренд "Xiaomi" и есть
+  // единственное словесное отличие от простого числа). До этапа 5.5 таких строк в собранных
+  // выгрузках не было (Mi 9…Mi 11 всегда содержат словесный токен "Mi"), поэтому дефект не
+  // проявлялся; партия 5 (флагманы Xiaomi) впервые дала 36 таких строк с одним источником каждая,
+  // и все они уходили в карантин, хотя `generation`/`modifiers` разобраны верно и `parseMarketingNameSlots`
+  // ниже (С брендом) успешно определил бы `family` от слова "xiaomi". Мусором признаётся только
+  // название, где НИЧЕГО не разобралось вовсе — ни слово, ни поколение, ни модификатор линейки
+  // (пунктуация, эмодзи, случайные символы: `★ ??? ★`, docs/14 §14.3 `NAME_UNPARSEABLE`).
   const aloneSlots = normalizeQuery(row.marketingName, context.dictionary, {
     detectModelCode: false,
   }).slots;
-  if (aloneSlots.family === undefined) {
+  const hasAnyParsedSignal =
+    aloneSlots.family !== undefined ||
+    aloneSlots.generation !== undefined ||
+    aloneSlots.modifiers.length > 0;
+  if (!hasAnyParsedSignal) {
     return quarantine(
       'NAME_UNPARSEABLE',
       context,
-      `Название "${row.marketingName}" не содержит ни одного словесного токена`,
+      `Название "${row.marketingName}" не содержит ни одного словесного токена, поколения или модификатора линейки`,
       row,
     );
   }
   const slots = parseMarketingNameSlots(resolvedBrand.brand, row.marketingName, context.dictionary);
   const family = slots.family;
   if (family === undefined) {
-    // Защитная ветка: с брендом впереди `family` не может остаться неопределённым, если он не
-    // был неопределён уже без бренда (проверено выше) — но компилятор об этом не знает, а
-    // ADR-016 запрещает `as`/`!` для сужения типа внешних данных.
+    // Защитная ветка: бренд сам по себе — словесный токен, и `splitBrandAndFamily` в
+    // text-normalizer при единственном словесном токене отдаёт его сразу в оба поля (`brand` и
+    // `family`), поэтому `family` не может остаться неопределённым после того, как бренд
+    // подставлен впереди строки, — но компилятор об этом не знает, а ADR-016 запрещает `as`/`!`
+    // для сужения типа внешних данных.
     return quarantine(
       'NAME_UNPARSEABLE',
       context,

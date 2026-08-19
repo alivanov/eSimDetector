@@ -1,0 +1,66 @@
+brand,marketing_name,model_codes,platform,device_type,release_year,esim_support,esim_conditions,dual_sim,max_esim_profiles,os_min_version,os_max_version,ru_market,source_url,confidence,notes
+Huawei,P30,,android,phone,,conditional,"region:CN=no;region:global=yes",physical+esim,,,,unknown,,high,"eSIM available on global versions"
+Huawei,P30 Pro,,android,phone,,conditional,"region:CN=no;region:global=yes",physical+esim,,,,unknown,,high,"eSIM available on global versions"
+Huawei,P40,,android,phone,,conditional,"region:CN=no;region:global=yes",physical+esim,,,,unknown,,high,"eSIM available on global versions"
+Huawei,P40 Pro,,android,phone,,conditional,"region:CN=no;region:global=yes",physical+esim,,,,unknown,,high,"eSIM available on global versions"
+Huawei,P40 Pro+,,android,phone,,conditional,"region:CN=no;region:global=yes",physical+esim,,,,unknown,,high,"eSIM available on global versions"
+Huawei,P50,,harmonyos,phone,,conditional,"region:CN=no;region:global=yes",physical+esim,,,,unknown,,high,"eSIM available on global versions"
+Huawei,P50 Pro,,harmonyos,phone,,conditional,"region:CN=no;region:global=yes",physical+esim,,,,unknown,,high,"eSIM available on global versions"
+Huawei,P50 Pocket,,harmonyos,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,P60,,harmonyos,phone,,conditional,"region:CN=no;region:global=yes",physical+esim,,,,unknown,,high,"eSIM available on global versions"
+Huawei,P60 Pro,,harmonyos,phone,,conditional,"region:CN=no;region:global=yes",physical+esim,,,,unknown,,high,"eSIM available on global versions"
+Huawei,P60 Art,,harmonyos,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Pura 70,,harmonyos,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Pura 70 Pro,,harmonyos,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Pura 70 Ultra,,harmonyos,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Pura 80,,harmonyos,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Pura 80 Pro,,harmonyos,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Pura 80 Ultra,,harmonyos,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Mate 20,,android,phone,,conditional,"region:CN=no;region:global=yes",physical+esim,,,,unknown,,high,"eSIM available on global versions"
+Huawei,Mate 20 Pro,,android,phone,,conditional,"region:CN=no;region:global=yes",physical+esim,,,,unknown,,high,"eSIM available on global versions"
+Huawei,Mate 20 X,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Mate 30,,android,phone,,conditional,"region:CN=no;region:global=yes",physical+esim,,,,unknown,,high,"eSIM available on global versions"
+Huawei,Mate 30 Pro,,android,phone,,conditional,"region:CN=no;region:global=yes",physical+esim,,,,unknown,,high,"eSIM available on global versions"
+Huawei,Mate 40,,android,phone,,conditional,"region:CN=no;region:global=yes",physical+esim,,,,unknown,,high,"eSIM available on global versions"
+Huawei,Mate 40 Pro,,android,phone,,conditional,"region:CN=no;region:global=yes",physical+esim,,,,unknown,,high,"eSIM available on global versions"
+Huawei,Mate 40 Pro+,,android,phone,,conditional,"region:CN=no;region:global=yes",physical+esim,,,,unknown,,high,"eSIM available on global versions"
+Huawei,Mate 50,,harmonyos,phone,,conditional,"region:CN=no;region:global=yes",physical+esim,,,,unknown,,high,"eSIM available on global versions"
+Huawei,Mate 50 Pro,,harmonyos,phone,,conditional,"region:CN=no;region:global=yes",physical+esim,,,,unknown,,high,"eSIM available on global versions"
+Huawei,Mate X,,harmonyos,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Mate Xs,,harmonyos,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Mate X2,,harmonyos,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Mate X3,,harmonyos,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Mate X5,,harmonyos,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Mate X6,,harmonyos,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Mate 60,,harmonyos,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Mate 60 Pro,,harmonyos,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Mate 60 Pro+,,harmonyos,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Mate 70,,harmonyos,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Mate 70 Pro,,harmonyos,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Mate 70 Pro+,,harmonyos,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 5,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 5 Pro,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 6,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 6 Pro,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 6 SE,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 7,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 7 Pro,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 7 SE,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 8,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 8 Pro,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 8 SE,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 9,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 9 Pro,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 9 SE,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 10,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 10 Pro,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 10 SE,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 11,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 11 Pro,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 11 Ultra,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 12,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 12 Pro,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 12 Ultra,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 13,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 13 Pro,,android,phone,,unknown,,unknown,,,,unknown,,low,
+Huawei,Nova 13 Ultra,,android,phone,,unknown,,unknown,,,,unknown,,low,

@@ -140,4 +140,38 @@ describe('buildDevice', () => {
     expect(device.aliases).toContain('galaxy s24 ultra');
     expect(device.aliases).toContain('samsung galaxy s24 ultra');
   });
+
+  it('НЕ регистрирует голое marketing_name псевдонимом, когда family совпадает с brand (нет собственного словесного токена помимо бренда) — обнаружено этапом 5.5: "Xiaomi 12 Pro"/"iQOO 12 Pro"/курируемый "iPhone 12 Pro" иначе делят один и тот же псевдоним "12 pro" и дают CONFLICTING_ALIAS (инвариант §5.8 п.3) на записи разных вендоров', () => {
+    const device = buildDevice({
+      consensusDevice: consensusDevice({
+        representative: candidate({
+          id: 'xiaomi-12-pro',
+          brand: 'xiaomi',
+          brandTitle: 'Xiaomi',
+          marketingName: '12 Pro',
+          family: 'xiaomi',
+          generation: 12,
+          modifiers: ['pro'],
+          modelCodes: [],
+        }),
+      }),
+      mergeDecision: IMPORT_DECISION,
+      dataConfidence: 'derived',
+      now: NOW,
+    });
+    expect(device.aliases).not.toContain('12 pro');
+    expect(device.aliases).toEqual(['xiaomi 12 pro']); // displayName и id с пробелами совпадают текстом
+  });
+
+  it('регистрирует голое marketing_name псевдонимом как раньше, когда family отличается от brand (есть собственное слово помимо бренда)', () => {
+    const device = buildDevice({
+      consensusDevice: consensusDevice(),
+      mergeDecision: IMPORT_DECISION,
+      dataConfidence: 'derived',
+      now: NOW,
+    });
+    expect(device.family).toBe('galaxy-s');
+    expect(device.brand).toBe('samsung');
+    expect(device.aliases).toContain('galaxy s24 ultra');
+  });
 });

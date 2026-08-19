@@ -141,11 +141,29 @@ export function buildDevice(input: BuildDeviceInput): Device {
   const conditions = support === 'conditional' ? consensusDevice.esimConditions : [];
   const displayName = `${representative.brandTitle} ${representative.marketingName}`;
 
+  // `marketingName` сам по себе — псевдоним ТОЛЬКО когда несёт хотя бы одно слово помимо
+  // бренда: `family !== brand` означает, что слотовый разбор нашёл собственный словесный токен
+  // (`"Redmi Note"` → family `redmi-note`), а не только цифру/модификатор линейки, разобранные
+  // единственно благодаря подставленному бренду. Найдено этапом 5.5 на партии 5: официальное
+  // название флагманов Xiaomi с 2022 года — чистое число без единого слова (`"12"`, `"13 Pro"`,
+  // §А.2 «marketing_name без бренда»), и ЭТО ЖЕ верно для OnePlus/iQOO/realme с 2020 года —
+  // разные бренды массово используют одинаковые номера поколений («12», «12 Pro» существуют у
+  // Xiaomi, iQOO и в курируемом ядре Apple как псевдоним iPhone 12 Pro одновременно). Регистрация
+  // такого голого числа отдельным псевдонимом гарантированно даёт `CONFLICTING_ALIAS` (инвариант
+  // §5.8 п.3) при первом же совпадении с другим брендом — вплоть до карантина ВСЕХ затронутых
+  // записей целиком, включая курируемые записи Apple (ADR-029, п.2: парное нарушение карантинит
+  // ОБЕ стороны). Полное имя (`displayName`, `"Xiaomi 12 Pro"`) и идентификатор с пробелами
+  // остаются псевдонимами всегда — теряется только не несущая бренд-независимой информации
+  // короткая форма, а не сама запись.
+  const marketingNameCarriesOwnWord = representative.family !== representative.brand;
+
   const aliases = [
     ...new Set(
-      [representative.marketingName, displayName, representative.id.replace(/-/g, ' ')].map(
-        (value) => value.toLowerCase(),
-      ),
+      [
+        ...(marketingNameCarriesOwnWord ? [representative.marketingName] : []),
+        displayName,
+        representative.id.replace(/-/g, ' '),
+      ].map((value) => value.toLowerCase()),
     ),
   ];
 

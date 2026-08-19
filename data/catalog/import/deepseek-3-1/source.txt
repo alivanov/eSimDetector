@@ -64,3 +64,35 @@ GT), ZTE (Blade, Axon) и Nubia (Z, Neo, Flip), выпущенные с 2020 г�
 веб-поиск: настройки интерфейса по умолчанию, фактический режим не зафиксирован —
 в отличие от партий 02 и 04а–11б, где поиск был выключен
 результат разбора: §А.10.4
+
+ПАРТИЯ 03 — SAMSUNG Z FOLD / Z FLIP / NOTE
+файл: 03-samsung-fold-flip-note.csv
+границы: устройства линейки Samsung Galaxy Z Fold — все поколения: Galaxy Fold (2019), Galaxy Z Fold2, Z Fold3, Z Fold4, Z Fold5, Z Fold6, Z Fold7 (и более новые поколения, если они уже вышли на момент ответа); устройства линейки Samsung Galaxy Z Flip — все поколения: Galaxy Z Flip, Z Flip 5G, Z Flip3 5G, Z Flip4, Z Flip5, Z Flip6, Z Flip7, Z Flip7 FE (и более новые, если уже вышли); устройства линейки Samsung Galaxy Note, начиная с Note 9: Note 9, Note 10, Note 10+, Note 20, Note 20 Ultra
+формулировка: docs/appendix-a-llm-csv-request.md §А.4, правила 9–20
+дата запроса: 2026-08-19
+веб-поиск: выключен
+диалог: новый пустой на каждую партию
+
+ПАРТИЯ 05 — флагманы Xiaomi
+файл: 05-xiaomi-flagship.csv
+границы: флагманские смартфоны Xiaomi серий Mi и Xiaomi (без суффиксов Redmi/POCO — они не входят в эту задачу): Mi 9, Mi 9 Pro, Mi 10, Mi 10 Pro, Mi 10 Ultra, Mi 11, Mi 11 Pro, Mi 11 Ultra, Xiaomi 12, 12 Pro, 12S, 12S Pro, 12S Ultra, Xiaomi 13, 13 Pro, 13 Ultra, Xiaomi 14, 14 Pro, 14 Ultra, Xiaomi 15, 15 Pro, 15 Ultra (и более новые поколения, если они уже вышли на момент ответа); T-серия: Mi 9T, Mi 9T Pro, Xiaomi 11T, 11T Pro, 12T, 12T Pro, 13T, 13T Pro, 14T, 14T Pro, 15T, 15T Pro; складные модели флагманской линейки Xiaomi Mix Fold и Mix Flip, все поколения
+формулировка: docs/appendix-a-llm-csv-request.md §А.4, правила 9–20
+дата запроса: 2026-08-19
+веб-поиск: выключен
+диалог: новый пустой на каждую партию
+
+ПАРТИЯ 8 — Huawei
+файл: 08-huawei.csv
+границы: смартфоны Huawei серии P, начиная с P30: P30, P30 Pro, P40, P40 Pro, P40 Pro+, P50, P50 Pro, P50 Pocket, P60, P60 Pro, P60 Art, Pura 70, Pura 70 Pro, Pura 70 Ultra, Pura 80, Pura 80 Pro, Pura 80 Ultra (и более новые, если уже вышли); смартфоны Huawei серии Mate, начиная с Mate 20: Mate 20, Mate 20 Pro, Mate 20 X, Mate 30, Mate 30 Pro, Mate 40, Mate 40 Pro, Mate 40 Pro+, Mate 50, Mate 50 Pro, складные Mate X, Mate Xs, Mate X2, Mate X3, Mate X5, Mate X6, Mate 60, Mate 60 Pro, Mate 60 Pro+, Mate 70, Mate 70 Pro, Mate 70 Pro+ (и более новые, если уже вышли); смартфоны Huawei серии Nova с 2020 года: номерные поколения Nova 5–13 с вариантами Pro/SE/Ultra там, где они выпускались для конкретного поколения
+формулировка: docs/appendix-a-llm-csv-request.md §А.4, правила 9–20
+дата запроса: 2026-08-19
+веб-поиск: выключен
+диалог: новый пустой на каждую партию
+
+ПАРТИЯ 12 — Nothing, Motorola, ASUS, Sony, Fairphone, HMD/Nokia
+файл: 12-other-brands.csv
+границы: смартфоны следующих брендов, выпущенные с 2020 года. Nothing: Phone (1), Phone (2), Phone (2a), Phone (2a) Plus, Phone (3), Phone (3a), Phone (3a) Pro, CMF Phone 1, CMF Phone 2. Motorola: линейка Edge (Edge, Edge+, Edge 20, Edge 30, Edge 40, Edge 50, Edge 60 с вариантами Lite/Neo/Pro/Fusion/Ultra), линейка Moto G (номерные поколения с G8 по актуальное на момент ответа, включая варианты Play/Power/Stylus), складные Razr (Razr 5G, Razr 2022, Razr 40, Razr 40 Ultra, Razr 50, Razr 50 Ultra и новее). ASUS: Zenfone (7, 8, 9, 10, 11 Ultra и новее), серия ROG Phone (3, 5, 6, 7, 8, 9 и новее, с вариантами Pro/Ultimate). Sony: Xperia 1 (поколения II–VII), Xperia 5 (поколения II–V), Xperia 10 (поколения II–VII). Fairphone: Fairphone 3, Fairphone 3+, Fairphone 4, Fairphone 5 (и новее, если уже вышли). HMD/Nokia: серии Nokia G, X, C, а также модели под собственным брендом HMD (Skyline, Pulse, Pulse+, Pulse Pro и новее)
+формулировка: docs/appendix-a-llm-csv-request.md §А.4, правила 9–20
+дата запроса: 2026-08-19
+веб-поиск: выключен
+диалог: новый пустой на каждую партию

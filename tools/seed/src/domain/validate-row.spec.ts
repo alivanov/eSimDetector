@@ -198,6 +198,43 @@ describe('validateRow', () => {
     expect(result.quarantine?.code).toBe('NAME_UNPARSEABLE');
   });
 
+  it('принимает marketing_name из ЧИСТОГО числа без единого словесного токена — официальное название флагманов Xiaomi с 2022 года ("Xiaomi 12", "Xiaomi 13 Ultra"), а не мусор (docs/appendix-a §А.2: marketing_name пишется без бренда, обнаружено этапом 5.5 на партии 5)', () => {
+    const result = validateRow(
+      {
+        brand: 'Xiaomi',
+        marketingName: '13 Ultra',
+        platform: 'android',
+        deviceType: 'phone',
+        releaseYear: '2023',
+        esimSupport: 'yes',
+      },
+      context(),
+    );
+    expect(result.quarantine).toBeUndefined();
+    expect(result.candidate).toEqual(
+      expect.objectContaining({
+        family: 'xiaomi',
+        generation: 13,
+        modifiers: ['ultra'],
+      }),
+    );
+  });
+
+  it('карантин NAME_UNPARSEABLE остаётся для названия без единого словесного токена, поколения или модификатора (только пунктуация, ни одной цифры)', () => {
+    const result = validateRow(
+      {
+        brand: 'Samsung',
+        marketingName: '### @@@ ###',
+        platform: 'android',
+        deviceType: 'phone',
+        releaseYear: '2024',
+        esimSupport: 'yes',
+      },
+      context(),
+    );
+    expect(result.quarantine?.code).toBe('NAME_UNPARSEABLE');
+  });
+
   it('карантин YEAR_IMPLAUSIBLE для года выпуска вне диапазона', () => {
     const result = validateRow(
       {

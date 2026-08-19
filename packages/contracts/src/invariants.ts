@@ -96,11 +96,31 @@ function checkUniqueModelCodes(devices: readonly Device[]): CatalogInvariantViol
  * Один и тот же псевдоним у нескольких устройств С ОДИНАКОВЫМ статусом — не нарушение
  * (например, объединённые записи 4G/5G одной модели, docs/14 §14.4, шаг 2) — конфликт
  * возникает только когда статус реально расходится, что и было бы ложным ответом (К1).
+ *
+ * `marketingName` участвует в проверке ТОЛЬКО когда `family !== brand` — то есть когда в
+ * названии есть собственное словесное содержание помимо самого бренда (`"Redmi Note"`,
+ * `"Galaxy S24 Ultra"`). Найдено этапом 5.5 (docs/09 ADR-024/029, партия 5): по правилу
+ * приложения А §А.2 `marketing_name` пишется БЕЗ бренда, а у ряда вендоров (Xiaomi с 2022 года,
+ * OnePlus, iQOO, realme) официальное название флагмана — чистое число без единого слова
+ * (`"12"`, `"13 Pro"`); `family` в этом случае равен `brand` (слотовый разбор не нашёл ничего
+ * своего, кроме подставленного бренда). Такое `marketingName` заведомо не уникально МЕЖДУ
+ * брендами — разные вендоры массово переиспользуют одни и те же номера поколений
+ * (`OnePlus 12`, `Xiaomi 12`, `iQOO 12` — три разных телефона одного года). Проверка этого
+ * поля буквально как псевдонима превращала бы ЛЮБОЕ совпадение номера поколения между
+ * любыми двумя брендами в карантин ОБЕИХ записей целиком (ADR-029 п.2) — включая курируемые
+ * записи Apple, если один из совпавших номеров попадал в их собственный список псевдонимов
+ * (`"12 pro"` у `apple-iphone-12-pro`). Настоящий (записанный явно в `aliases`) псевдоним
+ * такую защиту не получает и продолжает участвовать в проверке всегда — редкий сознательный
+ * ввод короткой формы (как у Apple) — это утверждение о РЕАЛЬНОЙ узнаваемости, а не побочный
+ * продукт схемы CSV.
  */
 function checkAliasConflicts(devices: readonly Device[]): CatalogInvariantViolation[] {
   const statusesByAlias = new Map<string, Map<string, string>>();
   for (const device of devices) {
-    const aliasesAndNames = [...device.aliases, device.marketingName];
+    const marketingNameCarriesOwnWord = device.family !== device.brand;
+    const aliasesAndNames = marketingNameCarriesOwnWord
+      ? [...device.aliases, device.marketingName]
+      : [...device.aliases];
     for (const alias of aliasesAndNames) {
       const normalizedAlias = alias.trim().toLowerCase();
       const bucket = statusesByAlias.get(normalizedAlias) ?? new Map<string, string>();

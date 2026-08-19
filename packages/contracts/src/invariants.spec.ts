@@ -86,6 +86,62 @@ describe('validateCatalogInvariants', () => {
     expect(violationsOf('CONFLICTING_ALIAS', result)).toHaveLength(0);
   });
 
+  it('инвариант 3: marketingName без явного псевдонима НЕ участвует в проверке, когда family совпадает с brand — голое название флагмана без собственного слова ("Xiaomi 12 Pro"/"iQOO 12 Pro"/"OnePlus 12 Pro" все хранят marketingName "12 Pro") не даёт ложного конфликта между разными брендами (этап 5.5, docs/09 ADR-024/029)', () => {
+    const a = buildSampleDevice({
+      _id: 'xiaomi-12-pro',
+      brand: 'xiaomi',
+      brandTitle: 'Xiaomi',
+      marketingName: '12 Pro',
+      family: 'xiaomi',
+      aliases: ['xiaomi 12 pro'],
+      modelCodes: ['A1'],
+      esim: { ...buildSampleDevice().esim, support: 'supported' },
+    });
+    const b = buildSampleDevice({
+      _id: 'iqoo-12-pro',
+      brand: 'iqoo',
+      brandTitle: 'iQOO',
+      marketingName: '12 Pro',
+      family: 'iqoo',
+      aliases: ['iqoo 12 pro'],
+      modelCodes: ['A2'],
+      esim: { ...buildSampleDevice().esim, support: 'not_supported' },
+    });
+
+    const result = validateCatalogInvariants([a, b]);
+
+    expect(violationsOf('CONFLICTING_ALIAS', result)).toHaveLength(0);
+  });
+
+  it('инвариант 3: явный псевдоним (family !== brand у устройства, добавившего его) продолжает участвовать в проверке даже если он текстуально совпал с исключённым marketingName другого устройства', () => {
+    const apple = buildSampleDevice({
+      _id: 'apple-iphone-12-pro',
+      brand: 'apple',
+      brandTitle: 'Apple',
+      marketingName: 'iPhone 12 Pro',
+      family: 'iphone',
+      aliases: ['iphone 12 pro', '12 pro'],
+      modelCodes: [],
+      esim: { ...buildSampleDevice().esim, support: 'conditional' },
+    });
+    const xiaomi = buildSampleDevice({
+      _id: 'xiaomi-12-pro',
+      brand: 'xiaomi',
+      brandTitle: 'Xiaomi',
+      marketingName: '12 Pro',
+      family: 'xiaomi',
+      aliases: ['xiaomi 12 pro', '12 pro'],
+      modelCodes: ['A1'],
+      esim: { ...buildSampleDevice().esim, support: 'supported' },
+    });
+
+    const result = validateCatalogInvariants([apple, xiaomi]);
+
+    // Оба явно добавили "12 pro" в СВОЙ aliases (а не только через исключённый marketingName) —
+    // проверка обязана сработать: конфликт настоящий, оба статуса не совпадают.
+    expect(violationsOf('CONFLICTING_ALIAS', result)).toHaveLength(1);
+  });
+
   it('инвариант 4: платформа ios без screenSignatures — нарушение', () => {
     const device = buildSampleDevice({
       platform: 'ios',
