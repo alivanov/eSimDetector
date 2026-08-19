@@ -1,0 +1,3546 @@
+[
+  {
+    "_id": "apple-iphone-6",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 6",
+    "displayName": "Apple iPhone 6",
+    "family": "iphone",
+    "generation": 6,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 6",
+      "apple iphone 6"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "8.0",
+      "maxVersion": "12.5.8"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 375,
+        "cssHeight": 667,
+        "dpr": 2,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Модель выпущена до появления eSIM в линейке iPhone: eSIM впервые появилась в iPhone XS, XS Max и XR (2018)."
+    },
+    "releaseYear": 2014,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.05,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-6-plus",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 6 Plus",
+    "displayName": "Apple iPhone 6 Plus",
+    "family": "iphone",
+    "generation": 6,
+    "modifiers": [
+      "plus"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 6 plus",
+      "apple iphone 6 plus",
+      "6 plus"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "8.0",
+      "maxVersion": "12.5.8"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 414,
+        "cssHeight": 736,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Модель выпущена до появления eSIM в линейке iPhone: eSIM впервые появилась в iPhone XS, XS Max и XR (2018)."
+    },
+    "releaseYear": 2014,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.05,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-6s",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 6s",
+    "displayName": "Apple iPhone 6s",
+    "family": "iphone",
+    "generation": 6,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 6s",
+      "apple iphone 6s",
+      "6s"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "9.0",
+      "maxVersion": "15.8.8"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 375,
+        "cssHeight": 667,
+        "dpr": 2,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Модель выпущена до появления eSIM в линейке iPhone: eSIM впервые появилась в iPhone XS, XS Max и XR (2018)."
+    },
+    "releaseYear": 2015,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.07,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-6s-plus",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 6s Plus",
+    "displayName": "Apple iPhone 6s Plus",
+    "family": "iphone",
+    "generation": 6,
+    "modifiers": [
+      "plus"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 6s plus",
+      "apple iphone 6s plus",
+      "6s plus"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "9.0",
+      "maxVersion": "15.8.8"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 414,
+        "cssHeight": 736,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Модель выпущена до появления eSIM в линейке iPhone: eSIM впервые появилась в iPhone XS, XS Max и XR (2018)."
+    },
+    "releaseYear": 2015,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.06,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-se-2016",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone SE (1-го поколения)",
+    "displayName": "Apple iPhone SE (1-го поколения)",
+    "family": "iphone-se",
+    "generation": 1,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "iphone se (1-го поколения)",
+      "apple iphone se (1-го поколения)",
+      "apple iphone se 2016",
+      "se (1-го поколения)",
+      "iphone se 2016",
+      "se 2016",
+      "iphone se"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "9.3",
+      "maxVersion": "15.8.8"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 320,
+        "cssHeight": 568,
+        "dpr": 2,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Модель выпущена до появления eSIM в линейке iPhone: eSIM впервые появилась в iPhone XS, XS Max и XR (2018)."
+    },
+    "releaseYear": 2016,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.06,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-7",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 7",
+    "displayName": "Apple iPhone 7",
+    "family": "iphone",
+    "generation": 7,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 7",
+      "apple iphone 7"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "10.0",
+      "maxVersion": "15.8.8"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 375,
+        "cssHeight": 667,
+        "dpr": 2,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Модель выпущена до появления eSIM в линейке iPhone: eSIM впервые появилась в iPhone XS, XS Max и XR (2018)."
+    },
+    "releaseYear": 2016,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.1,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-7-plus",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 7 Plus",
+    "displayName": "Apple iPhone 7 Plus",
+    "family": "iphone",
+    "generation": 7,
+    "modifiers": [
+      "plus"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 7 plus",
+      "apple iphone 7 plus",
+      "7 plus"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "10.0",
+      "maxVersion": "15.8.8"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 414,
+        "cssHeight": 736,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Модель выпущена до появления eSIM в линейке iPhone: eSIM впервые появилась в iPhone XS, XS Max и XR (2018)."
+    },
+    "releaseYear": 2016,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.09,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-8",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 8",
+    "displayName": "Apple iPhone 8",
+    "family": "iphone",
+    "generation": 8,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 8",
+      "apple iphone 8"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "11.0",
+      "maxVersion": "16.7.16"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 375,
+        "cssHeight": 667,
+        "dpr": 2,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Модель выпущена до появления eSIM в линейке iPhone: eSIM впервые появилась в iPhone XS, XS Max и XR (2018)."
+    },
+    "releaseYear": 2017,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.12,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-8-plus",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 8 Plus",
+    "displayName": "Apple iPhone 8 Plus",
+    "family": "iphone",
+    "generation": 8,
+    "modifiers": [
+      "plus"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 8 plus",
+      "apple iphone 8 plus",
+      "8 plus"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "11.0",
+      "maxVersion": "16.7.16"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 414,
+        "cssHeight": 736,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Модель выпущена до появления eSIM в линейке iPhone: eSIM впервые появилась в iPhone XS, XS Max и XR (2018)."
+    },
+    "releaseYear": 2017,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.11,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-x",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone X",
+    "displayName": "Apple iPhone X",
+    "family": "iphone-x",
+    "generation": null,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "iphone x",
+      "apple iphone x",
+      "x"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "11.0",
+      "maxVersion": "16.7.16"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 375,
+        "cssHeight": 812,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Модель выпущена до появления eSIM в линейке iPhone: eSIM впервые появилась в iPhone XS, XS Max и XR (2018)."
+    },
+    "releaseYear": 2017,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.15,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-xs",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone XS",
+    "displayName": "Apple iPhone XS",
+    "family": "iphone-xs",
+    "generation": null,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "iphone xs",
+      "apple iphone xs",
+      "xs"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "12.0",
+      "maxVersion": "18.7.10"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 375,
+        "cssHeight": 812,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Модель не входит в перечень версий с двумя физическими nano-SIM для континентального Китая (Apple, «Using Dual SIM with two nano-SIM cards»), поэтому регионального исключения по eSIM у неё нет."
+    },
+    "releaseYear": 2018,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.2,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-xs-max",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone XS Max",
+    "displayName": "Apple iPhone XS Max",
+    "family": "iphone-xs",
+    "generation": null,
+    "modifiers": [
+      "max"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone xs max",
+      "apple iphone xs max",
+      "xs max"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "12.0",
+      "maxVersion": "18.7.10"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 414,
+        "cssHeight": 896,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+    },
+    "releaseYear": 2018,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.18,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-xr",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone XR",
+    "displayName": "Apple iPhone XR",
+    "family": "iphone-xr",
+    "generation": null,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "iphone xr",
+      "apple iphone xr",
+      "xr"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "12.0",
+      "maxVersion": "18.7.10"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 414,
+        "cssHeight": 896,
+        "dpr": 2,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+    },
+    "releaseYear": 2018,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.25,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-11",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 11",
+    "displayName": "Apple iPhone 11",
+    "family": "iphone",
+    "generation": 11,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 11",
+      "apple iphone 11"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "13.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 414,
+        "cssHeight": 896,
+        "dpr": 2,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+    },
+    "releaseYear": 2019,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.45,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-11-pro",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 11 Pro",
+    "displayName": "Apple iPhone 11 Pro",
+    "family": "iphone",
+    "generation": 11,
+    "modifiers": [
+      "pro"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 11 pro",
+      "apple iphone 11 pro",
+      "11 pro"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "13.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 375,
+        "cssHeight": 812,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+    },
+    "releaseYear": 2019,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.3,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-11-pro-max",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 11 Pro Max",
+    "displayName": "Apple iPhone 11 Pro Max",
+    "family": "iphone",
+    "generation": 11,
+    "modifiers": [
+      "pro",
+      "max"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 11 pro max",
+      "apple iphone 11 pro max",
+      "11 pro max"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "13.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 414,
+        "cssHeight": 896,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+    },
+    "releaseYear": 2019,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.3,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-se-2020",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone SE (2-го поколения)",
+    "displayName": "Apple iPhone SE (2-го поколения)",
+    "family": "iphone-se",
+    "generation": 2,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "iphone se (2-го поколения)",
+      "apple iphone se (2-го поколения)",
+      "apple iphone se 2020",
+      "se (2-го поколения)",
+      "iphone se 2020",
+      "se 2020"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "13.4",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 375,
+        "cssHeight": 667,
+        "dpr": 2,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Модель не входит в перечень версий с двумя физическими nano-SIM для континентального Китая (Apple, «Using Dual SIM with two nano-SIM cards»), поэтому регионального исключения по eSIM у неё нет."
+    },
+    "releaseYear": 2020,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.3,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/111882",
+        "title": "iPhone SE (2nd generation) — Technical Specifications — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-se-2022",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone SE (3-го поколения)",
+    "displayName": "Apple iPhone SE (3-го поколения)",
+    "family": "iphone-se",
+    "generation": 3,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "iphone se (3-го поколения)",
+      "apple iphone se (3-го поколения)",
+      "apple iphone se 2022",
+      "se (3-го поколения)",
+      "iphone se 2022",
+      "se 2022"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "15.4",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 375,
+        "cssHeight": 667,
+        "dpr": 2,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Модель не входит в перечень версий с двумя физическими nano-SIM для континентального Китая (Apple, «Using Dual SIM with two nano-SIM cards»), поэтому регионального исключения по eSIM у неё нет."
+    },
+    "releaseYear": 2022,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.35,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-12-mini",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 12 mini",
+    "displayName": "Apple iPhone 12 mini",
+    "family": "iphone",
+    "generation": 12,
+    "modifiers": [
+      "mini"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 12 mini",
+      "apple iphone 12 mini",
+      "12 mini"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "14.1",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 375,
+        "cssHeight": 812,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Модель не входит в перечень версий с двумя физическими nano-SIM для континентального Китая (Apple, «Using Dual SIM with two nano-SIM cards»), поэтому регионального исключения по eSIM у неё нет."
+    },
+    "releaseYear": 2020,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.25,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-12",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 12",
+    "displayName": "Apple iPhone 12",
+    "family": "iphone",
+    "generation": 12,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 12",
+      "apple iphone 12"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "14.1",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 390,
+        "cssHeight": 844,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+    },
+    "releaseYear": 2020,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.5,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-12-pro",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 12 Pro",
+    "displayName": "Apple iPhone 12 Pro",
+    "family": "iphone",
+    "generation": 12,
+    "modifiers": [
+      "pro"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 12 pro",
+      "apple iphone 12 pro",
+      "12 pro"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "14.1",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 390,
+        "cssHeight": 844,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+    },
+    "releaseYear": 2020,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.35,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-12-pro-max",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 12 Pro Max",
+    "displayName": "Apple iPhone 12 Pro Max",
+    "family": "iphone",
+    "generation": 12,
+    "modifiers": [
+      "pro",
+      "max"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 12 pro max",
+      "apple iphone 12 pro max",
+      "12 pro max"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "14.1",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 428,
+        "cssHeight": 926,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+    },
+    "releaseYear": 2020,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.35,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-13-mini",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 13 mini",
+    "displayName": "Apple iPhone 13 mini",
+    "family": "iphone",
+    "generation": 13,
+    "modifiers": [
+      "mini"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 13 mini",
+      "apple iphone 13 mini",
+      "13 mini"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "15.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 375,
+        "cssHeight": 812,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Модель не входит в перечень версий с двумя физическими nano-SIM для континентального Китая (Apple, «Using Dual SIM with two nano-SIM cards»), поэтому регионального исключения по eSIM у неё нет."
+    },
+    "releaseYear": 2021,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.3,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-13",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 13",
+    "displayName": "Apple iPhone 13",
+    "family": "iphone",
+    "generation": 13,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 13",
+      "apple iphone 13"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "15.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 390,
+        "cssHeight": 844,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+    },
+    "releaseYear": 2021,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.6,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-13-pro",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 13 Pro",
+    "displayName": "Apple iPhone 13 Pro",
+    "family": "iphone",
+    "generation": 13,
+    "modifiers": [
+      "pro"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 13 pro",
+      "apple iphone 13 pro",
+      "13 pro"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "15.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 390,
+        "cssHeight": 844,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+    },
+    "releaseYear": 2021,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.45,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-13-pro-max",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 13 Pro Max",
+    "displayName": "Apple iPhone 13 Pro Max",
+    "family": "iphone",
+    "generation": 13,
+    "modifiers": [
+      "pro",
+      "max"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 13 pro max",
+      "apple iphone 13 pro max",
+      "13 pro max"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "15.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 428,
+        "cssHeight": 926,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional."
+    },
+    "releaseYear": 2021,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.45,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-14",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 14",
+    "displayName": "Apple iPhone 14",
+    "family": "iphone",
+    "generation": 14,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 14",
+      "apple iphone 14"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "16.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 390,
+        "cssHeight": 844,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+    },
+    "releaseYear": 2022,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.6,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-14-plus",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 14 Plus",
+    "displayName": "Apple iPhone 14 Plus",
+    "family": "iphone",
+    "generation": 14,
+    "modifiers": [
+      "plus"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 14 plus",
+      "apple iphone 14 plus",
+      "14 plus"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "16.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 428,
+        "cssHeight": 926,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+    },
+    "releaseYear": 2022,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.35,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-14-pro",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 14 Pro",
+    "displayName": "Apple iPhone 14 Pro",
+    "family": "iphone",
+    "generation": 14,
+    "modifiers": [
+      "pro"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 14 pro",
+      "apple iphone 14 pro",
+      "14 pro"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "16.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 393,
+        "cssHeight": 852,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+    },
+    "releaseYear": 2022,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.5,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-14-pro-max",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 14 Pro Max",
+    "displayName": "Apple iPhone 14 Pro Max",
+    "family": "iphone",
+    "generation": 14,
+    "modifiers": [
+      "pro",
+      "max"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 14 pro max",
+      "apple iphone 14 pro max",
+      "14 pro max"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "16.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 430,
+        "cssHeight": 932,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+    },
+    "releaseYear": 2022,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.5,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-15",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 15",
+    "displayName": "Apple iPhone 15",
+    "family": "iphone",
+    "generation": 15,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 15",
+      "apple iphone 15"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "17.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 393,
+        "cssHeight": 852,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+    },
+    "releaseYear": 2023,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.7,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-15-plus",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 15 Plus",
+    "displayName": "Apple iPhone 15 Plus",
+    "family": "iphone",
+    "generation": 15,
+    "modifiers": [
+      "plus"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 15 plus",
+      "apple iphone 15 plus",
+      "15 plus"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "17.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 430,
+        "cssHeight": 932,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+    },
+    "releaseYear": 2023,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.4,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-15-pro",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 15 Pro",
+    "displayName": "Apple iPhone 15 Pro",
+    "family": "iphone",
+    "generation": 15,
+    "modifiers": [
+      "pro"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 15 pro",
+      "apple iphone 15 pro",
+      "15 pro"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "17.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 393,
+        "cssHeight": 852,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+    },
+    "releaseYear": 2023,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.6,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-15-pro-max",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 15 Pro Max",
+    "displayName": "Apple iPhone 15 Pro Max",
+    "family": "iphone",
+    "generation": 15,
+    "modifiers": [
+      "pro",
+      "max"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 15 pro max",
+      "apple iphone 15 pro max",
+      "15 pro max"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "17.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 430,
+        "cssHeight": 932,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+    },
+    "releaseYear": 2023,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.65,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-16e",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 16e",
+    "displayName": "Apple iPhone 16e",
+    "family": "iphone",
+    "generation": 16,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 16e",
+      "apple iphone 16e",
+      "16e"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "18.3",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 390,
+        "cssHeight": 844,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+    },
+    "releaseYear": 2025,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.5,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-16",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 16",
+    "displayName": "Apple iPhone 16",
+    "family": "iphone",
+    "generation": 16,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 16",
+      "apple iphone 16"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "18.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 393,
+        "cssHeight": 852,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+    },
+    "releaseYear": 2024,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.8,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-16-plus",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 16 Plus",
+    "displayName": "Apple iPhone 16 Plus",
+    "family": "iphone",
+    "generation": 16,
+    "modifiers": [
+      "plus"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 16 plus",
+      "apple iphone 16 plus",
+      "16 plus"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "18.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 430,
+        "cssHeight": 932,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+    },
+    "releaseYear": 2024,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.45,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-16-pro",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 16 Pro",
+    "displayName": "Apple iPhone 16 Pro",
+    "family": "iphone",
+    "generation": 16,
+    "modifiers": [
+      "pro"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 16 pro",
+      "apple iphone 16 pro",
+      "16 pro"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "18.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 402,
+        "cssHeight": 874,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+    },
+    "releaseYear": 2024,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.7,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-16-pro-max",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 16 Pro Max",
+    "displayName": "Apple iPhone 16 Pro Max",
+    "family": "iphone",
+    "generation": 16,
+    "modifiers": [
+      "pro",
+      "max"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 16 pro max",
+      "apple iphone 16 pro max",
+      "16 pro max"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "18.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 440,
+        "cssHeight": 956,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+    },
+    "releaseYear": 2024,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.75,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-17e",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 17e",
+    "displayName": "Apple iPhone 17e",
+    "family": "iphone",
+    "generation": 17,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 17e",
+      "apple iphone 17e",
+      "17e"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "26.3",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 390,
+        "cssHeight": 844,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Исключение из правила по КНР: в континентальном Китае модель активируется либо eSIM, либо физической nano-SIM, то есть eSIM поддерживается и там (Apple, «Using eSIM with your iPhone in China mainland»)."
+    },
+    "releaseYear": 2026,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.6,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-sg/123879",
+        "title": "Using eSIM with your iPhone in China mainland — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-17",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 17",
+    "displayName": "Apple iPhone 17",
+    "family": "iphone",
+    "generation": 17,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 17",
+      "apple iphone 17"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "26.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 402,
+        "cssHeight": 874,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+    },
+    "releaseYear": 2025,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.85,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-17-pro",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 17 Pro",
+    "displayName": "Apple iPhone 17 Pro",
+    "family": "iphone",
+    "generation": 17,
+    "modifiers": [
+      "pro"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 17 pro",
+      "apple iphone 17 pro",
+      "17 pro"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "26.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 402,
+        "cssHeight": 874,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+    },
+    "releaseYear": 2025,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.8,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-17-pro-max",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone 17 Pro Max",
+    "displayName": "Apple iPhone 17 Pro Max",
+    "family": "iphone",
+    "generation": 17,
+    "modifiers": [
+      "pro",
+      "max"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone 17 pro max",
+      "apple iphone 17 pro max",
+      "17 pro max"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "26.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 440,
+        "cssHeight": 956,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 8,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "CN",
+          "support": "not_supported",
+          "note": "Версия для континентального Китая: два физических nano-SIM, eSIM отсутствует (Apple, «Using Dual SIM with two nano-SIM cards»)."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Ваш iPhone куплен в континентальном Китае?",
+        "options": [
+          {
+            "value": "CN",
+            "label": "Да, в Китае"
+          },
+          {
+            "value": "OTHER",
+            "label": "Нет, в другом регионе"
+          }
+        ]
+      },
+      "notes": "Версия для континентального Китая поставляется с двумя физическими nano-SIM и eSIM не поддерживает; во всех остальных регионах eSIM есть. Средствами браузера регион неотличим, поэтому статус — conditional. В США (и ряде рынков для линейки 17) модель продаётся без лотка физической SIM и работает только на eSIM — на статус поддержки это не влияет, но требует отдельной формулировки в интерфейсе."
+    },
+    "releaseYear": 2025,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.85,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  },
+  {
+    "_id": "apple-iphone-air",
+    "brand": "apple",
+    "brandTitle": "Apple",
+    "marketingName": "iPhone Air",
+    "displayName": "Apple iPhone Air",
+    "family": "iphone",
+    "generation": null,
+    "modifiers": [
+      "air"
+    ],
+    "modelCodes": [],
+    "aliases": [
+      "iphone air",
+      "apple iphone air",
+      "air"
+    ],
+    "platform": "ios",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "26.0",
+      "maxVersion": "26.6.1"
+    },
+    "screenSignatures": [
+      {
+        "cssWidth": 420,
+        "cssHeight": 912,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ],
+    "esim": {
+      "support": "supported",
+      "dualSim": "esim-only",
+      "maxProfiles": 8,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Единственная модель без лотка физической SIM во всех регионах: активируется только eSIM, включая континентальный Китай (Apple, «Using eSIM with your iPhone in China mainland»)."
+    },
+    "releaseYear": 2025,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.5,
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-sg/123879",
+        "title": "Using eSIM with your iPhone in China mainland — Apple Support",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-19T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-19T00:00:00.000Z",
+    "updatedAt": "2026-08-19T00:00:00.000Z"
+  }
+]

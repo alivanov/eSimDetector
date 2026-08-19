@@ -54,6 +54,35 @@ describe('parseCuratedDevices', () => {
     expect(result.devices.get('samsung-galaxy-s24-ultra')).toEqual(valid);
     expect(result.errors).toHaveLength(1);
   });
+
+  it('принимает массив записей в одном файле — линейка заводится одним диффом (docs/14 §14.4 шаг 6)', () => {
+    const first = buildSampleDevice({ _id: 'apple-iphone-15' });
+    const second = buildSampleDevice({ _id: 'apple-iphone-15-pro' });
+    const result = parseCuratedDevices(
+      new Map<string, unknown>([['apple-iphone.json', [first, second]]]),
+    );
+
+    expect(result.errors).toEqual([]);
+    expect([...result.devices.keys()]).toEqual(['apple-iphone-15', 'apple-iphone-15-pro']);
+  });
+
+  it('невалидный элемент массива не отменяет остальные и указывает свой индекс', () => {
+    const valid = buildSampleDevice({ _id: 'apple-iphone-15' });
+    const result = parseCuratedDevices(
+      new Map<string, unknown>([['apple-iphone.json', [valid, { not: 'a device' }]]]),
+    );
+
+    expect([...result.devices.keys()]).toEqual(['apple-iphone-15']);
+    expect(result.errors).toHaveLength(1);
+    expect(result.errors[0]).toContain('apple-iphone.json[1]');
+  });
+
+  it('пустой массив — не ошибка, а отсутствие записей в файле', () => {
+    const result = parseCuratedDevices(new Map<string, unknown>([['empty.json', []]]));
+
+    expect(result.devices.size).toBe(0);
+    expect(result.errors).toEqual([]);
+  });
 });
 
 describe('decideMergeSource', () => {

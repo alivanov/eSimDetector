@@ -21,16 +21,32 @@ export interface CuratedLoadResult {
   readonly errors: readonly string[];
 }
 
+/**
+ * Файл курируемого ядра содержит либо один `Device`, либо массив `Device[]` (docs/14
+ * §14.4 шаг 6): линейка (например, весь модельный ряд Apple iPhone) заводится одним
+ * обозримым диффом в одном файле, а не десятками файлов по одной записи. Формат каждого
+ * элемента внутри массива идентичен одиночной записи — отдельной обёртки/метаданных массив
+ * не несёт.
+ */
+function toRawRecords(raw: unknown): readonly unknown[] {
+  return Array.isArray(raw) ? raw : [raw];
+}
+
 export function parseCuratedDevices(files: ReadonlyMap<string, unknown>): CuratedLoadResult {
   const devices = new Map<string, Device>();
   const errors: string[] = [];
   for (const [fileName, raw] of files) {
-    const result = safeParseDevice(raw);
-    if (!result.success || result.device === undefined) {
-      errors.push(`${fileName}: не прошёл валидацию deviceSchema — ${String(result.error)}`);
-      continue;
+    const records = toRawRecords(raw);
+    const isArrayFile = Array.isArray(raw);
+    for (const [index, record] of records.entries()) {
+      const result = safeParseDevice(record);
+      if (!result.success || result.device === undefined) {
+        const label = isArrayFile ? `${fileName}[${index}]` : fileName;
+        errors.push(`${label}: не прошёл валидацию deviceSchema — ${String(result.error)}`);
+        continue;
+      }
+      devices.set(result.device._id, result.device);
     }
-    devices.set(result.device._id, result.device);
   }
   return { devices, errors };
 }

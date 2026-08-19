@@ -1,4 +1,5 @@
 import aliasesJson from '../../../data/catalog/aliases.json';
+import appleCuratedJson from '../../../data/catalog/curated/apple-iphone.json';
 import goldenQueriesJson from '../../../data/fixtures/queries.golden.json';
 import type {
   NormalizationDictionary,
@@ -407,5 +408,26 @@ describe('data/fixtures/queries.golden.json', () => {
         expect(actual).toEqual(entry.expectedSlots);
       },
     );
+  });
+
+  /**
+   * Идентификаторы `expectedDeviceId` эталонной выборки — контракт между выборкой и справочником:
+   * стенд оценки качества (docs/04 §4.10) сверяет с ними результат сопоставления. Пока справочник
+   * не покрывал платформу `ios`, эти ожидания были принципиально недостижимы (docs/04 §4.10.1);
+   * с появлением курируемого ядра Apple (ADR-030) они стали проверяемыми, и этот тест фиксирует
+   * согласованность имён: переименование записи ядра ломает выборку молча, если не проверять.
+   */
+  it('каждый ожидаемый выборкой идентификатор Apple существует в курируемом ядре', () => {
+    const curatedIds = new Set(appleCuratedJson.map((device) => device._id));
+    const expectedAppleIds = [
+      ...new Set(
+        entries
+          .map((entry) => entry.expectedDeviceId)
+          .filter((id): id is string => id !== null && id.startsWith('apple-')),
+      ),
+    ];
+
+    expect(expectedAppleIds.length).toBeGreaterThan(0);
+    expect(expectedAppleIds.filter((id) => !curatedIds.has(id))).toEqual([]);
   });
 });

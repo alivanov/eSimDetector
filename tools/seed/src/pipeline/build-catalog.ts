@@ -134,6 +134,10 @@ export function buildCatalog(options: BuildCatalogOptions): BuildCatalogResult {
   const originByDeviceId = new Map<string, DeviceOrigin>();
   let curatedAppliedCount = 0;
   let appleRuleAppliedCount = 0;
+  // Идентификаторы курируемого ядра, уже применённые слиянием ниже — остаток (устройства
+  // курируемого ядра без единой строки CSV, например всё ядро Apple при пустом импорте,
+  // docs/appendix-a §А.8.3) добавляется отдельным проходом ПОСЛЕ основного цикла, см. ниже.
+  const appliedCuratedIds = new Set<string>();
 
   for (const consensusDevice of consensusResult.accepted) {
     const decision = decideMergeSource(consensusDevice, curatedDevices);
@@ -141,6 +145,7 @@ export function buildCatalog(options: BuildCatalogOptions): BuildCatalogResult {
 
     if (decision.source === 'curated' && decision.curatedDevice !== undefined) {
       curatedAppliedCount += 1;
+      appliedCuratedIds.add(decision.curatedDevice._id);
       devices.push(decision.curatedDevice);
       originByDeviceId.set(decision.curatedDevice._id, {
         source: 'curated',
@@ -200,6 +205,20 @@ export function buildCatalog(options: BuildCatalogOptions): BuildCatalogResult {
       batchId: consensusDevice.representative.provenance.batchId,
       lineNumber: consensusDevice.representative.provenance.lineNumber,
     });
+  }
+
+  // Курируемое ядро побеждает "целиком, даже без строки CSV" (docs/14 §14.4 шаг 6, приоритет 2;
+  // .cursor/rules/catalog-data.mdc). Цикл выше применяет курируемую запись ТОЛЬКО когда для того
+  // же `id` нашёлся кандидат консенсуса — этого недостаточно, когда у линейки нет ни одной строки
+  // CSV вовсе (Apple: docs/appendix-a §А.8.3, "ноль записей с платформой ios"). Без этого прохода
+  // курируемое ядро Apple никогда не попадает в `devices`, несмотря на прохождение валидации.
+  for (const [id, curatedDevice] of curatedDevices) {
+    if (appliedCuratedIds.has(id)) {
+      continue;
+    }
+    curatedAppliedCount += 1;
+    devices.push(curatedDevice);
+    originByDeviceId.set(id, { source: 'curated', batchId: 'curated', lineNumber: 0 });
   }
 
   const invariantViolations = validateCatalogInvariants(devices).violations;

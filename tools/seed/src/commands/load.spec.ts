@@ -2,14 +2,20 @@ import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
+import { validateCatalogInvariants, screenSignatureRecordSchema } from '@esim-detector/contracts';
 import { withTestDatabase, type TestDatabaseHandle } from '@esim-detector/test-utils';
 
-import { DEVICES_COLLECTION } from '../mongo/collections';
+import { DEVICES_COLLECTION, SCREEN_SIGNATURES_COLLECTION } from '../mongo/collections';
+import { readDevices } from '../mongo/read-collections';
 import type { PipelinePaths } from '../pipeline/pipeline-runner';
 import { writeJson, writeText } from '../io/files';
+import { runRebuildSignaturesCommand } from './rebuild-signatures';
 import { runLoadCommand } from './load';
 
 const REAL_ALIASES_PATH = join(__dirname, '../../../../data/catalog/aliases.json');
+const REAL_CURATED_DIR = join(__dirname, '../../../../data/catalog/curated');
+const REAL_CODE_PATTERNS_PATH = join(__dirname, '../../../../data/catalog/code-patterns.json');
+const REAL_OS_CEILINGS_PATH = join(__dirname, '../../../../data/catalog/os-version-ceilings.json');
 const DEVICES_HEADER =
   'brand,marketing_name,model_codes,platform,device_type,release_year,esim_support,esim_conditions,dual_sim,max_esim_profiles,os_min_version,os_max_version,ru_market,source_url,confidence,notes';
 
@@ -177,6 +183,48 @@ describe('runLoadCommand (интеграция, withTestDatabase)', () => {
       snapshotPath: join(root, 'snapshot.json'),
     });
     expect([0, 1]).toContain(exitCode);
+  });
+
+  it('курируемое ядро Apple загружается в MongoDB без строк CSV, и сигнатуры экранов пересобираются согласованно', async () => {
+    // Пустой каталог импорта — ровно та ситуация, в которой находится платформа ios: в собранных
+    // выгрузках ноль строк с `platform: ios` (docs/appendix-a §А.8.3), поэтому единственным
+    // источником записей остаётся курируемое ядро `data/catalog/curated`.
+    const paths: PipelinePaths = {
+      ...makePaths(root),
+      curatedDir: REAL_CURATED_DIR,
+      codePatternsPath: REAL_CODE_PATTERNS_PATH,
+      osVersionCeilingsPath: REAL_OS_CEILINGS_PATH,
+    };
+
+    const loadExitCode = await runLoadCommand({
+      dryRun: false,
+      mongoUri: db.uri,
+      paths,
+      reportsDir: join(root, 'reports'),
+      snapshotPath: join(root, 'snapshot.json'),
+    });
+    expect(loadExitCode).toBe(0);
+
+    const devices = await readDevices(db.connection);
+    const iosDevices = devices.filter((device) => device.platform === 'ios');
+    expect(iosDevices.length).toBeGreaterThanOrEqual(40);
+    expect(iosDevices.every((device) => device.dataConfidence === 'verified')).toBe(true);
+    // Инварианты 4 и 5 на этих записях: iOS с сигнатурами и `os.maxVersion`, `conditional` с
+    // условиями и вопросом — иначе `buildCatalog` их бы карантинировал и до базы они не дошли.
+    expect(validateCatalogInvariants(devices).violations).toEqual([]);
+
+    const rebuildExitCode = await runRebuildSignaturesCommand({ mongoUri: db.uri });
+    expect(rebuildExitCode).toBe(0);
+
+    const rawSignatures = await db.connection
+      .collection(SCREEN_SIGNATURES_COLLECTION)
+      .find()
+      .toArray();
+    const signatures = rawSignatures.map((raw) => screenSignatureRecordSchema.parse(raw));
+    expect(signatures.length).toBeGreaterThan(0);
+
+    // Инвариант §5.8 п.7: `esimConsensus` каждой сигнатуры согласован со статусами кандидатов.
+    expect(validateCatalogInvariants(devices, signatures).violations).toEqual([]);
   });
 
   it('--dry-run не подключается к MongoDB и не пишет устройства', async () => {

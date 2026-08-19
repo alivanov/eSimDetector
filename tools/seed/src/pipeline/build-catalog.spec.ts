@@ -66,6 +66,53 @@ describe('buildCatalog', () => {
     expect(result.appleRuleAppliedCount).toBe(0);
   });
 
+  it('курируемая запись без единой строки CSV попадает в справочник (курируемое ядро Apple, §А.8.3)', () => {
+    // В собранном массиве ноль строк с платформой ios, поэтому у записей ядра Apple нет и не
+    // может быть кандидата консенсуса: без отдельного прохода по остатку курируемого ядра они
+    // никогда не попали бы в `devices`.
+    const curated = buildSampleDevice({
+      _id: 'apple-iphone-15',
+      brand: 'apple',
+      brandTitle: 'Apple',
+      marketingName: 'iPhone 15',
+      family: 'iphone',
+      generation: 15,
+      modifiers: [],
+      modelCodes: [],
+      aliases: ['iphone 15'],
+      platform: 'ios',
+      os: { minVersion: '17.0', maxVersion: '26.6.1' },
+      screenSignatures: [{ cssWidth: 393, cssHeight: 852, dpr: 3, zoomed: false }],
+    });
+
+    const result = buildCatalog({
+      candidates: [candidate()],
+      curatedDevices: new Map([['apple-iphone-15', curated]]),
+      now: NOW,
+      familyMinRecords: 3,
+    });
+
+    expect(result.devices.map((device) => device._id)).toEqual([
+      'samsung-galaxy-s24-ultra',
+      'apple-iphone-15',
+    ]);
+    expect(result.curatedAppliedCount).toBe(1);
+    expect(result.quarantine).toEqual([]);
+  });
+
+  it('курируемая запись, применённая к кандидату CSV, не дублируется остаточным проходом', () => {
+    const curated = buildSampleDevice({ _id: 'samsung-galaxy-s24-ultra' });
+    const result = buildCatalog({
+      candidates: [candidate()],
+      curatedDevices: new Map([['samsung-galaxy-s24-ultra', curated]]),
+      now: NOW,
+      familyMinRecords: 3,
+    });
+
+    expect(result.devices).toEqual([curated]);
+    expect(result.curatedAppliedCount).toBe(1);
+  });
+
   it('карантинит устройство iOS без курируемых сигнатур экрана (IOS_FIELDS_MISSING)', () => {
     const result = buildCatalog({
       candidates: [
