@@ -49,7 +49,9 @@ export function parseSubbrands(value: unknown): SubbrandParseResult {
       continue;
     }
     if (!KNOWN_BRANDS.has(parent)) {
-      errors.push(`subbrands.json["${key}"]: материнский бренд "${parentValue}" не входит в KNOWN_BRANDS`);
+      errors.push(
+        `subbrands.json["${key}"]: материнский бренд "${parentValue}" не входит в KNOWN_BRANDS`,
+      );
       continue;
     }
     if (subbrand === parent) {

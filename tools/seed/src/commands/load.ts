@@ -1,4 +1,8 @@
-import { DEFAULT_INVARIANT_QUARANTINE_RATIO_THRESHOLD, DEFAULT_REPORTS_DIR, DEFAULT_SNAPSHOT_PATH } from '../defaults';
+import {
+  DEFAULT_INVARIANT_QUARANTINE_RATIO_THRESHOLD,
+  DEFAULT_REPORTS_DIR,
+  DEFAULT_SNAPSHOT_PATH,
+} from '../defaults';
 import { connectToMongo, disconnectFromMongo } from '../mongo/connection';
 import { loadDevices } from '../mongo/load-devices';
 import type { PipelinePaths } from '../pipeline/pipeline-runner';

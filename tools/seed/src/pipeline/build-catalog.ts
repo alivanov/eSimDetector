@@ -1,4 +1,8 @@
-import type { CatalogInvariantCode, CatalogInvariantViolation, Device } from '@esim-detector/contracts';
+import type {
+  CatalogInvariantCode,
+  CatalogInvariantViolation,
+  Device,
+} from '@esim-detector/contracts';
 import { validateCatalogInvariants } from '@esim-detector/contracts';
 
 import type { QuarantineCode, DeviceCandidate, QuarantineEntry, RowNotice } from '../domain/types';

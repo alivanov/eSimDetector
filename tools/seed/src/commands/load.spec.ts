@@ -118,9 +118,10 @@ describe('runLoadCommand (интеграция, withTestDatabase)', () => {
     );
     writeText(
       join(root, 'import/llm-model-b/02.csv'),
-      [DEVICES_HEADER, 'Samsung,Galaxy A21s,SM-A217F,android,phone,2020,no,,,,,,official,,high,'].join(
-        '\n',
-      ),
+      [
+        DEVICES_HEADER,
+        'Samsung,Galaxy A21s,SM-A217F,android,phone,2020,no,,,,,,official,,high,',
+      ].join('\n'),
     );
 
     const exitCode = await runLoadCommand({
@@ -149,9 +150,10 @@ describe('runLoadCommand (интеграция, withTestDatabase)', () => {
     );
     writeText(
       join(root, 'import/llm-model-b/02.csv'),
-      [DEVICES_HEADER, 'Samsung,Galaxy A21s,SM-A217F,android,phone,2020,no,,,,,,official,,high,'].join(
-        '\n',
-      ),
+      [
+        DEVICES_HEADER,
+        'Samsung,Galaxy A21s,SM-A217F,android,phone,2020,no,,,,,,official,,high,',
+      ].join('\n'),
     );
 
     const exitCode = await runLoadCommand({

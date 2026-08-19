@@ -226,8 +226,10 @@ const QUARANTINE_CODE_LABELS: Readonly<Record<QuarantineCode, string>> = {
   CONDITIONAL_CLARIFYING_QUESTION_MISSING:
     'Инвариант §5.8 п.5: "conditional" без esim.clarifyingQuestion',
   SUPPORTED_SOURCES_MISSING: 'Инвариант §5.8 п.6: "supported"+"verified" без sources',
-  SCREEN_SIGNATURE_CONSENSUS_MISMATCH: 'Инвариант §5.8 п.7: esimConsensus не совпадает с кандидатами',
-  SCREEN_SIGNATURE_UNKNOWN_CANDIDATE: 'Инвариант §5.8 п.7: сигнатура ссылается на неизвестное устройство',
+  SCREEN_SIGNATURE_CONSENSUS_MISMATCH:
+    'Инвариант §5.8 п.7: esimConsensus не совпадает с кандидатами',
+  SCREEN_SIGNATURE_UNKNOWN_CANDIDATE:
+    'Инвариант §5.8 п.7: сигнатура ссылается на неизвестное устройство',
 };
 
 function isKnownQuarantineCode(code: string): code is QuarantineCode {

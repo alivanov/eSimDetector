@@ -167,9 +167,7 @@ describe('buildCatalog', () => {
     const quarantinedIds = result.quarantine
       .filter((entry) => entry.code === 'DUPLICATE_MODEL_CODE')
       .map((entry) => entry.rawMarketingName);
-    expect(quarantinedIds).toEqual(
-      expect.arrayContaining(['Galaxy A21', 'Galaxy A21s']),
-    );
+    expect(quarantinedIds).toEqual(expect.arrayContaining(['Galaxy A21', 'Galaxy A21s']));
   });
 
   it('запись без нарушений остаётся в devices рядом с карантинированной парой', () => {
