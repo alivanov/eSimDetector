@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "rootDir": "../..",
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
@@ -11,5 +12,5 @@
     "emitDecoratorMetadata": false,
     "types": ["node", "jest"]
   },
-  "include": ["src", "jest.setup.ts"]
+  "include": ["src", "example", "vite.config.mts", "jest.setup.ts"]
 }

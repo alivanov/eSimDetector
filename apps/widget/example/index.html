@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Пример: виджет eSIM Detector на странице заказчика</title>
+    <style>
+      /*
+        Намеренно агрессивное правило стилей хост-страницы (docs/09-decisions.md, ADR-040;
+        критерий готовности этапа 6.3): проверяет, что теневой DOM виджета изолирован от стилей
+        страницы заказчика. Если текст ВНУТРИ виджета ниже стал красным и рукописным — изоляция
+        нарушена, это дефект. Текст этой страницы (СНАРУЖИ виджета) намеренно окрашен — это и есть
+        то самое правило, а не ошибка примера.
+      */
+      * {
+        color: #b00020 !important;
+        font-family: 'Comic Sans MS', cursive !important;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Страница заказчика (кросс-домен относительно API)</h1>
+    <p>
+      Этот абзац принадлежит странице заказчика, а не виджету — агрессивное правило выше окрашивает
+      его в красный намеренно, это ожидаемо. Единственный блок ниже, который должен остаться НЕ
+      окрашенным этим правилом, — сам виджет: он живёт в собственном теневом DOM.
+    </p>
+
+    <div id="esim-checker"></div>
+
+    <h2>Журнал событий виджета (docs/07 §7.2, ADR-040)</h2>
+    <pre id="event-log" style="color: initial; font-family: monospace"></pre>
+
+    <script>
+      // Слушатели навешаны на КОНТЕЙНЕР (`data-target`), ровно как в примере docs/07 §7.2 — до
+      // подключения скрипта виджета, поэтому ни одно из шести событий не пропущено.
+      (function () {
+        var log = document.getElementById('event-log');
+        var container = document.querySelector('#esim-checker');
+        [
+          'esim:ready',
+          'esim:detected',
+          'esim:clarification',
+          'esim:result',
+          'esim:error',
+          'esim:action',
+        ].forEach(function (type) {
+          container.addEventListener(type, function (event) {
+            var line = type + ' ' + JSON.stringify(event.detail);
+            log.textContent += line + '\n';
+            window.__esimEvents = window.__esimEvents || [];
+            window.__esimEvents.push({ type: type, detail: event.detail });
+          });
+        });
+      })();
+    </script>
+    <script
+      src="/widget/v1/esim-widget.js"
+      data-target="#esim-checker"
+      data-api-base="http://localhost:3000"
+      data-theme="sbermobile"
+      data-channel="landing-esim"
+      defer
+    ></script>
+  </body>
+</html>

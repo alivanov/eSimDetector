@@ -1,10 +1,10 @@
 import type { CollectedSignals } from '@esim-detector/signals-collector';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import type { DetectRequestContext, DetectResponse } from '../api/detect';
+import type { DetectionInfo, DetectRequestContext, DetectResponse } from '../api/detect';
 import { detect } from '../api/detect';
 import type { ResultStatus, DeviceType } from '../api/enums';
-import { ApiNetworkError, ApiRequestError } from '../api/error';
+import { ApiNetworkError, ApiParseError, ApiRequestError } from '../api/error';
 import type { PresentationAction, Presentation } from '../api/presentation';
 import type { Clarification } from '../api/clarification';
 import type { CandidateSummary } from '../api/device-summary';
@@ -45,6 +45,21 @@ export interface EsimCheckerProps {
   readonly onResult?: (result: EsimCheckerResult) => void;
   /** Клик по действию `kind: 'continue'` («Подключить eSIM») — точка перехода в сценарий подключения. */
   readonly onPrimaryAction?: (action: PresentationAction) => void;
+  /**
+   * Ответ `/detect` получен и разобран — независимо от того, требуется ли после этого уточнение
+   * (событие `esim:detected`, docs/07 §7.2, ADR-040). НЕ вызывается для результатов
+   * `/devices/search` (ручной поиск/выбор варианта уточнения): событие про автоматическое
+   * определение по сигналам браузера, а не про ручной ввод.
+   */
+  readonly onDetected?: (detection: DetectionInfo) => void;
+  /**
+   * Ответ (от `/detect` либо `/devices/search`) содержит блок `clarification` — вызывается
+   * ДОПОЛНИТЕЛЬНО к `onResult`, поскольку форма результата фиксирована документом и не включает
+   * подробности уточнения (событие `esim:clarification`, docs/07 §7.2, ADR-040).
+   */
+  readonly onClarification?: (clarification: Clarification) => void;
+  /** Показан экран ошибки взаимодействия — сеть или ответ сервиса кодом 4xx/5xx (событие `esim:error`, docs/07 §7.2, ADR-040). */
+  readonly onError?: (error: { readonly code: string; readonly message: string }) => void;
 }
 
 interface ResultState {
@@ -94,6 +109,25 @@ function resolveErrorMessage(error: unknown): string {
   return interactionErrorTexts.other;
 }
 
+/**
+ * Стабильный код ошибки взаимодействия для внешнего наблюдателя (`onError`, событие `esim:error`
+ * будущего Web Component, docs/07 §7.2, ADR-040) — в отличие от `resolveErrorMessage`, который
+ * возвращает утверждённый русскоязычный текст, здесь код нужен для машинной обработки (аналитика
+ * заказчика), поэтому `ApiRequestError.code` передаётся как есть, а не переводится в текст.
+ */
+function resolveErrorCode(error: unknown): string {
+  if (error instanceof ApiNetworkError) {
+    return 'NETWORK';
+  }
+  if (error instanceof ApiRequestError) {
+    return error.code;
+  }
+  if (error instanceof ApiParseError) {
+    return 'PARSE_ERROR';
+  }
+  return 'UNKNOWN';
+}
+
 function detectResponseToResult(response: DetectResponse): ResultState {
   return {
     status: response.status,
@@ -140,6 +174,9 @@ export function EsimChecker({
   locale,
   onResult,
   onPrimaryAction,
+  onDetected,
+  onClarification,
+  onError,
 }: EsimCheckerProps) {
   const [screen, setScreen] = useState<Screen>({
     kind: 'loading',
@@ -165,6 +202,10 @@ export function EsimChecker({
   const applyDetectResult = useCallback(
     (response: DetectResponse) => {
       const result = detectResponseToResult(response);
+      onDetected?.(response.detection);
+      if (result.clarification !== undefined) {
+        onClarification?.(result.clarification);
+      }
       onResult?.({
         status: result.status,
         deviceId: result.deviceId,
@@ -173,12 +214,15 @@ export function EsimChecker({
       });
       setScreen({ kind: 'result', result, showCandidatesPicker: false });
     },
-    [onResult],
+    [onClarification, onDetected, onResult],
   );
 
   const applySearchResult = useCallback(
     (response: SearchResponse) => {
       const result = searchResponseToResult(response);
+      if (result.clarification !== undefined) {
+        onClarification?.(result.clarification);
+      }
       onResult?.({
         status: result.status,
         deviceId: result.deviceId,
@@ -187,7 +231,7 @@ export function EsimChecker({
       });
       setScreen({ kind: 'result', result, showCandidatesPicker: false });
     },
-    [onResult],
+    [onClarification, onResult],
   );
 
   const initialDetect = useCallback(async () => {
@@ -202,6 +246,7 @@ export function EsimChecker({
       });
       applyDetectResult(response);
     } catch (error) {
+      onError?.({ code: resolveErrorCode(error), message: resolveErrorMessage(error) });
       setScreen({
         kind: 'error',
         message: resolveErrorMessage(error),
@@ -210,7 +255,7 @@ export function EsimChecker({
         },
       });
     }
-  }, [apiBase, applyDetectResult, buildContext]);
+  }, [apiBase, applyDetectResult, buildContext, onError]);
 
   const followupDetect = useCallback(
     async (region: string) => {
@@ -228,6 +273,7 @@ export function EsimChecker({
         });
         applyDetectResult(response);
       } catch (error) {
+        onError?.({ code: resolveErrorCode(error), message: resolveErrorMessage(error) });
         setScreen({
           kind: 'error',
           message: resolveErrorMessage(error),
@@ -237,7 +283,7 @@ export function EsimChecker({
         });
       }
     },
-    [apiBase, applyDetectResult, buildContext, initialDetect],
+    [apiBase, applyDetectResult, buildContext, initialDetect, onError],
   );
 
   const searchByQuery = useCallback(
@@ -247,6 +293,7 @@ export function EsimChecker({
       void searchDevices(apiBase, query, region)
         .then(applySearchResult)
         .catch((error: unknown) => {
+          onError?.({ code: resolveErrorCode(error), message: resolveErrorMessage(error) });
           setScreen({
             kind: 'error',
             message: resolveErrorMessage(error),
@@ -256,7 +303,7 @@ export function EsimChecker({
           });
         });
     },
-    [apiBase, applySearchResult],
+    [apiBase, applySearchResult, onError],
   );
 
   const searchByLabel = useCallback(
@@ -289,6 +336,7 @@ export function EsimChecker({
       void searchDevices(apiBase, query)
         .then(applySearchResult)
         .catch((error: unknown) => {
+          onError?.({ code: resolveErrorCode(error), message: resolveErrorMessage(error) });
           setScreen({
             kind: 'error',
             message: resolveErrorMessage(error),
@@ -301,7 +349,7 @@ export function EsimChecker({
           setIsSearchSubmitting(false);
         });
     },
-    [apiBase, applySearchResult],
+    [apiBase, applySearchResult, onError],
   );
 
   useEffect(() => {

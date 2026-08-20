@@ -16,6 +16,10 @@ const config: Config = {
     '\\.module\\.css$': 'identity-obj-proxy',
     '^@esim-detector/ui-tokens$': '<rootDir>/../../packages/ui-tokens/src/index.ts',
     '^@esim-detector/signals-collector$': '<rootDir>/../../packages/signals-collector/src/index.ts',
+    // Существует только внутри `vite build` (`vite-plugin-css-injected-by-js`, ADR-040) — см.
+    // комментарий в файле дублёра.
+    '^virtual:css-injected-by-js$':
+      '<rootDir>/src/web-component/test-utils/virtual-css-injected-by-js-mock.ts',
   },
   transform: {
     '^.+\\.tsx?$': [
@@ -33,10 +37,12 @@ const config: Config = {
     '!src/**/*.spec.{ts,tsx}',
     '!src/**/*.d.ts',
     '!src/test-utils/**',
+    '!src/web-component/test-utils/**',
     // Барреллы — только реэкспорт без собственной логики, покрытие каждого отдельного
     // экспорта уже проверено тестами модулей, на которые они ссылаются.
     '!src/index.ts',
     '!src/api/index.ts',
+    '!src/web-component/index.ts',
   ],
   // Целевой порог docs/08-testing-and-quality.md §8.2, строка «UI-компоненты»: «≥ 80%».
   coverageThreshold: {

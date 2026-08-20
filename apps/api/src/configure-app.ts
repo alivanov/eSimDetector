@@ -1,10 +1,13 @@
 import type { INestApplication } from '@nestjs/common';
 import { HttpStatus, ValidationPipe } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
+import { parseCorsOrigins } from './common/cors-origins';
 import { ApiError } from './common/errors/api-error';
 import { ApiExceptionFilter } from './common/filters/api-exception.filter';
 import { ClientHintsInterceptor } from './common/interceptors/client-hints.interceptor';
-import { requestIdMiddleware } from './common/middleware/request-id.middleware';
+import { REQUEST_ID_HEADER, requestIdMiddleware } from './common/middleware/request-id.middleware';
+import type { EnvConfig } from './config/env.schema';
 
 /**
  * Общая настройка приложения (middleware, фильтры, префикс маршрутов),
@@ -20,6 +23,19 @@ import { requestIdMiddleware } from './common/middleware/request-id.middleware';
  * лишнее в будущих версиях клиента, и это не должно приводить к ошибке валидации.
  */
 export function configureApp(app: INestApplication): void {
+  // CORS — единственное разрешённое вторжение этого этапа в `apps/api` (docs/09-decisions.md
+  // ADR-040, найденный дефект закрытого этапа: `CORS_ORIGINS` был объявлен в конфигурации
+  // (docs/07 §7.8, `.env.example`) с этапа 5, но `app.enableCors` не вызывался — виджет на чужом
+  // домене не мог обратиться к API вовсе, браузер отклонял ответ до попадания в код виджета.
+  // `exposedHeaders` обязателен ОТДЕЛЬНО от разрешения источника: без него заказчик не прочитает
+  // сквозной `X-Request-Id` из кросс-доменного ответа, даже когда сам запрос разрешён.
+  const configService = app.get<ConfigService<EnvConfig, true>>(ConfigService);
+  const corsOrigins = configService.get('CORS_ORIGINS', { infer: true });
+  app.enableCors({
+    origin: parseCorsOrigins(corsOrigins),
+    exposedHeaders: [REQUEST_ID_HEADER],
+  });
+
   app.use(requestIdMiddleware);
   app.useGlobalFilters(new ApiExceptionFilter());
   app.useGlobalInterceptors(new ClientHintsInterceptor());
