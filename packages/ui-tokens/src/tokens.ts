@@ -38,12 +38,12 @@ export const designTokens: DesignTokens = {
   typography: {
     fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
     fontSize: {
-      xs: '12px',
-      sm: '14px',
-      md: '16px',
-      lg: '20px',
-      xl: '24px',
-      xxl: '32px',
+      xs: '0.75rem',
+      sm: '0.875rem',
+      md: '1rem',
+      lg: '1.25rem',
+      xl: '1.5rem',
+      xxl: '2rem',
     },
     lineHeight: {
       tight: '1.2',
@@ -63,19 +63,19 @@ export const designTokens: DesignTokens = {
     },
   },
   spacing: {
-    xxs: '4px',
-    xs: '8px',
-    sm: '12px',
-    md: '16px',
-    lg: '24px',
-    xl: '32px',
-    xxl: '48px',
+    xxs: '0.25rem',
+    xs: '0.5rem',
+    sm: '0.75rem',
+    md: '1rem',
+    lg: '1.5rem',
+    xl: '2rem',
+    xxl: '3rem',
   },
   shape: {
     radius: {
-      sm: '4px',
-      md: '8px',
-      lg: '16px',
+      sm: '0.25rem',
+      md: '0.5rem',
+      lg: '1rem',
       full: '999px',
     },
     borderWidth: {
@@ -106,19 +106,19 @@ export const designTokens: DesignTokens = {
         background: '#25303b',
         foreground: '#fbfcfd',
         border: 'transparent',
-        radius: '8px',
+        radius: '0.5rem',
       },
       secondary: {
         background: '#ffffff',
         foreground: '#1a2027',
         border: '#d8dce1',
-        radius: '8px',
+        radius: '0.5rem',
       },
       text: {
         background: 'transparent',
         foreground: '#2b6cb0',
         border: 'transparent',
-        radius: '4px',
+        radius: '0.25rem',
       },
     },
     input: {
@@ -127,14 +127,14 @@ export const designTokens: DesignTokens = {
       borderFocus: '#2b6cb0',
       hintColor: '#4b5563',
       errorBorder: '#c53030',
-      radius: '8px',
+      radius: '0.5rem',
     },
     listItem: {
       background: '#ffffff',
       hoverBackground: '#f4f6f8',
       selectedBackground: '#e8f1fa',
       foreground: '#1a2027',
-      radius: '4px',
+      radius: '0.25rem',
     },
     resultCard: {
       supported: {
@@ -159,7 +159,7 @@ export const designTokens: DesignTokens = {
     loadingIndicator: {
       color: '#2b6cb0',
       trackColor: '#d8dce1',
-      size: '24px',
+      size: '1.5rem',
       duration: '900ms',
     },
   },

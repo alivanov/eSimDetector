@@ -1,10 +1,10 @@
 import type { Config } from 'jest';
 
 /**
- * Браузерное тестовое окружение для будущего Web Component (docs/07-integration.md, этап 6.3):
- * Jest + jsdom + Testing Library, второй прогонщик тестов не заводится (AGENTS.md). Самого
- * компонента и тестов на него в объёме этого агента нет (docs/11 §11.2а, этап 6.1: основание, а
- * не сборка виджета) — `passWithNoTests` не даёт пустому набору тестов уронить общий `pnpm test`.
+ * Браузерное тестовое окружение для компонентов интерфейса (docs/13-branding.md, этап 6.2):
+ * Jest + jsdom + Testing Library, второй прогонщик тестов не заводится (AGENTS.md).
+ * `apps/widget/src` — единственный исходник компонентов для `apps/web` и будущего Web Component
+ * (ADR-038, ADR-039), поэтому здесь и живут тесты компонентов, а не в `apps/web`.
  */
 const config: Config = {
   displayName: 'widget',
@@ -14,6 +14,8 @@ const config: Config = {
   passWithNoTests: true,
   moduleNameMapper: {
     '\\.module\\.css$': 'identity-obj-proxy',
+    '^@esim-detector/ui-tokens$': '<rootDir>/../../packages/ui-tokens/src/index.ts',
+    '^@esim-detector/signals-collector$': '<rootDir>/../../packages/signals-collector/src/index.ts',
   },
   transform: {
     '^.+\\.tsx?$': [
@@ -25,7 +27,26 @@ const config: Config = {
       },
     ],
   },
-  collectCoverage: false,
+  collectCoverage: true,
+  collectCoverageFrom: [
+    'src/**/*.{ts,tsx}',
+    '!src/**/*.spec.{ts,tsx}',
+    '!src/**/*.d.ts',
+    '!src/test-utils/**',
+    // Барреллы — только реэкспорт без собственной логики, покрытие каждого отдельного
+    // экспорта уже проверено тестами модулей, на которые они ссылаются.
+    '!src/index.ts',
+    '!src/api/index.ts',
+  ],
+  // Целевой порог docs/08-testing-and-quality.md §8.2, строка «UI-компоненты»: «≥ 80%».
+  coverageThreshold: {
+    global: {
+      statements: 80,
+      branches: 80,
+      functions: 80,
+      lines: 80,
+    },
+  },
 };
 
 export default config;

@@ -129,6 +129,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@esim-detector/widget':
+        specifier: workspace:*
+        version: link:../widget
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -136,6 +139,12 @@ importers:
         specifier: 19.2.8
         version: 19.2.8(react@19.2.8)
     devDependencies:
+      '@esim-detector/signals-collector':
+        specifier: workspace:*
+        version: link:../../packages/signals-collector
+      '@esim-detector/ui-tokens':
+        specifier: workspace:*
+        version: link:../../packages/ui-tokens
       '@types/react':
         specifier: 19.2.18
         version: 19.2.18
@@ -149,7 +158,27 @@ importers:
         specifier: 8.2.1
         version: 8.2.1(@types/node@26.2.0)(jiti@2.7.0)(yaml@2.9.0)
 
-  apps/widget: {}
+  apps/widget:
+    dependencies:
+      '@esim-detector/signals-collector':
+        specifier: workspace:*
+        version: link:../../packages/signals-collector
+      '@esim-detector/ui-tokens':
+        specifier: workspace:*
+        version: link:../../packages/ui-tokens
+      react:
+        specifier: 19.2.8
+        version: 19.2.8
+      react-dom:
+        specifier: 19.2.8
+        version: 19.2.8(react@19.2.8)
+    devDependencies:
+      '@types/react':
+        specifier: 19.2.18
+        version: 19.2.18
+      '@types/react-dom':
+        specifier: 19.2.4
+        version: 19.2.4(@types/react@19.2.18)
 
   packages/contracts:
     dependencies:

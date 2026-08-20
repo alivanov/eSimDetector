@@ -351,6 +351,8 @@ GET /api/v1/devices/search?q=galaxy%20s23
 | `GET /api/docs`, `GET /api/docs-json`        | Swagger UI и спецификация OpenAPI                                                                         |
 | `GET /metrics`                               | Метрики в формате Prometheus                                                                              |
 
+**Не реализованы (проверено по коду, этап 6.2): `POST /api/v1/clarify`, `GET /api/v1/devices/{id}`, `GET /api/v1/devices`, `GET /api/v1/brands`, `POST /api/v1/feedback`.** Интерфейс (`apps/widget/src`, docs/09-decisions.md ADR-039) обходится без первых двух: выбор кандидата уточнения (`clarification.kind === 'choose_candidate'`, а также выбор из `candidates[]` при определённом статусе группы) отправляет `POST /api/v1/devices/search` с `q`, равным подписи выбранного варианта, вместо вызова `/clarify` с `requestId`/`deviceId` — поиск по точному названию модели детерминированно возвращает определённый статус той же формы, которую уже умеет показывать интерфейс, без обращения к `/devices/{id}` за карточкой устройства (она уже есть в ответе `/devices/search` полем `device`). Реализация этих пяти эндпоинтов остаётся объёмом дорожки API (агент 5 или последующий), а не интерфейса.
+
 Форма ответа `GET /api/v1/catalog/meta` (реализация агента 3, `apps/api/src/modules/catalog`):
 
 ```json

@@ -1,0 +1,27 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-md);
+}
+
+.question {
+  margin: 0;
+  font-size: var(--esim-typography-font-size-md);
+  color: var(--esim-colors-text-primary);
+}
+
+.giveUpButton {
+  align-self: flex-start;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--esim-components-button-text-foreground);
+  font-size: var(--esim-typography-font-size-sm);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.giveUpButton:focus-visible {
+  outline: var(--esim-states-focus-outline-width) solid var(--esim-states-focus-outline-color);
+  outline-offset: var(--esim-states-focus-outline-offset);
+}

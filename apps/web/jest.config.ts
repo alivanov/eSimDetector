@@ -15,8 +15,14 @@ const config: Config = {
   passWithNoTests: true,
   // CSS-модули (`*.module.css`) в jsdom не обрабатываются сборщиком — тестам достаточно того,
   // что импорт возвращает объект строк-классов, а не реальных стилей (identity-obj-proxy).
+  // `@esim-detector/widget` сопоставлен с исходником (не `dist/`, которого у него нет — пакет
+  // собирается бандлером апстрима, docs/09 ADR-038/ADR-039) по тому же образцу, что и у чистых
+  // пакетов в `apps/api/jest.config.ts`.
   moduleNameMapper: {
     '\\.module\\.css$': 'identity-obj-proxy',
+    '^@esim-detector/widget$': '<rootDir>/../widget/src/index.ts',
+    '^@esim-detector/ui-tokens$': '<rootDir>/../../packages/ui-tokens/src/index.ts',
+    '^@esim-detector/signals-collector$': '<rootDir>/../../packages/signals-collector/src/index.ts',
   },
   transform: {
     '^.+\\.tsx?$': [

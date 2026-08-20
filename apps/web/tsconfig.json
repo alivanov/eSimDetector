@@ -8,7 +8,8 @@
     "noEmit": true,
     "isolatedModules": true,
     "experimentalDecorators": false,
-    "emitDecoratorMetadata": false
+    "emitDecoratorMetadata": false,
+    "types": ["node", "jest"]
   },
   "include": ["src", "vite.config.ts", "jest.setup.ts"]
 }

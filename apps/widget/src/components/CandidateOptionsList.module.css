@@ -1,0 +1,27 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-xs);
+}
+
+.option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: var(--esim-spacing-sm) var(--esim-spacing-md);
+  border-radius: var(--esim-components-list-item-radius);
+  border: var(--esim-shape-border-width-thin) solid var(--esim-colors-border);
+  background: var(--esim-components-list-item-background);
+  color: var(--esim-components-list-item-foreground);
+  font-size: var(--esim-typography-font-size-md);
+  cursor: pointer;
+}
+
+.option:hover {
+  background: var(--esim-components-list-item-hover-background);
+}
+
+.option:focus-visible {
+  outline: var(--esim-states-focus-outline-width) solid var(--esim-states-focus-outline-color);
+  outline-offset: var(--esim-states-focus-outline-offset);
+}

@@ -44,7 +44,7 @@ describe('generateCssVariablesText', () => {
     const lines = text.split('\n');
     expect(lines.every((line) => line.startsWith('  ') && line.endsWith(';'))).toBe(true);
     expect(text).toContain('--esim-colors-primary: #25303b;');
-    expect(text).toContain('--esim-typography-font-size-md: 16px;');
+    expect(text).toContain('--esim-typography-font-size-md: 1rem;');
   });
 });
 

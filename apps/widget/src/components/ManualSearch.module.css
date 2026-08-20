@@ -1,0 +1,119 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-sm);
+}
+
+.fieldWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-xxs);
+}
+
+.label {
+  font-size: var(--esim-typography-font-size-sm);
+  font-weight: var(--esim-typography-font-weight-medium);
+  color: var(--esim-colors-text-primary);
+}
+
+.hint {
+  margin: 0;
+  font-size: var(--esim-typography-font-size-sm);
+  color: var(--esim-components-input-hint-color);
+}
+
+.input {
+  padding: var(--esim-spacing-sm) var(--esim-spacing-md);
+  border-radius: var(--esim-components-input-radius);
+  border: var(--esim-shape-border-width-thin) solid var(--esim-components-input-border);
+  background: var(--esim-components-input-background);
+  color: var(--esim-colors-text-primary);
+  font-size: var(--esim-typography-font-size-md);
+}
+
+.input:focus-visible {
+  outline: var(--esim-states-focus-outline-width) solid var(--esim-states-focus-outline-color);
+  outline-offset: var(--esim-states-focus-outline-offset);
+  border-color: var(--esim-components-input-border-focus);
+}
+
+.listbox {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  margin: var(--esim-spacing-xxs) 0 0;
+  padding: var(--esim-spacing-xxs) 0;
+  list-style: none;
+  border-radius: var(--esim-components-input-radius);
+  border: var(--esim-shape-border-width-thin) solid var(--esim-colors-border);
+  background: var(--esim-components-list-item-background);
+  box-shadow: var(--esim-shape-shadow-md);
+}
+
+.listboxOption {
+  padding: var(--esim-spacing-xs) var(--esim-spacing-md);
+  color: var(--esim-components-list-item-foreground);
+  font-size: var(--esim-typography-font-size-md);
+  cursor: pointer;
+}
+
+.listboxOptionActive {
+  background: var(--esim-components-list-item-selected-background);
+}
+
+.emptyState {
+  margin: 0;
+  font-size: var(--esim-typography-font-size-sm);
+  color: var(--esim-colors-text-secondary);
+}
+
+.error {
+  margin: 0;
+  font-size: var(--esim-typography-font-size-sm);
+  color: var(--esim-colors-state-error);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--esim-spacing-md);
+}
+
+.submitButton {
+  padding: var(--esim-spacing-xs) var(--esim-spacing-md);
+  border-radius: var(--esim-components-button-primary-radius);
+  border: var(--esim-shape-border-width-thin) solid var(--esim-components-button-primary-border);
+  background: var(--esim-components-button-primary-background);
+  color: var(--esim-components-button-primary-foreground);
+  font-size: var(--esim-typography-font-size-md);
+  font-weight: var(--esim-typography-font-weight-medium);
+  cursor: pointer;
+}
+
+.submitButton:disabled {
+  opacity: var(--esim-states-disabled-opacity);
+  cursor: default;
+}
+
+.submitButton:focus-visible {
+  outline: var(--esim-states-focus-outline-width) solid var(--esim-states-focus-outline-color);
+  outline-offset: var(--esim-states-focus-outline-offset);
+}
+
+.backLink {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--esim-components-button-text-foreground);
+  font-size: var(--esim-typography-font-size-sm);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.backLink:focus-visible {
+  outline: var(--esim-states-focus-outline-width) solid var(--esim-states-focus-outline-color);
+  outline-offset: var(--esim-states-focus-outline-offset);
+}

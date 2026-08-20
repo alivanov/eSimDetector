@@ -3,35 +3,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f4f5f7;
-  color: #1a1d21;
-  font-family:
-    'Inter',
-    system-ui,
-    -apple-system,
-    sans-serif;
-  padding: 24px;
+  background-color: var(--esim-colors-background);
+  color: var(--esim-colors-text-primary);
+  font-family: var(--esim-typography-font-family);
+  padding: var(--esim-spacing-lg);
 }
 
 .card {
-  max-width: 480px;
+  max-width: 32rem;
   width: 100%;
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 40px;
-  box-shadow: 0 10px 30px rgba(15, 15, 20, 0.08);
-  text-align: center;
-}
-
-.title {
-  font-size: 28px;
-  font-weight: 700;
-  margin: 0 0 12px;
-}
-
-.description {
-  font-size: 16px;
-  line-height: 1.5;
-  color: #52575c;
-  margin: 0;
+  background: var(--esim-colors-surface);
+  border-radius: var(--esim-shape-radius-lg);
+  padding: var(--esim-spacing-xl);
+  box-shadow: var(--esim-shape-shadow-lg);
 }

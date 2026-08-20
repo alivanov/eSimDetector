@@ -1,0 +1,104 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-sm);
+  padding: var(--esim-spacing-lg);
+  border-radius: var(--esim-shape-radius-lg);
+  border: var(--esim-shape-border-width-regular) solid transparent;
+  color: var(--esim-colors-text-primary);
+}
+
+.supported {
+  background: var(--esim-components-result-card-supported-background);
+  border-color: var(--esim-components-result-card-supported-border);
+}
+
+.notSupported {
+  background: var(--esim-components-result-card-not-supported-background);
+  border-color: var(--esim-components-result-card-not-supported-border);
+}
+
+.clarification {
+  background: var(--esim-components-result-card-clarification-background);
+  border-color: var(--esim-components-result-card-clarification-border);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--esim-typography-font-size-lg);
+  font-weight: var(--esim-typography-font-weight-bold);
+  line-height: var(--esim-typography-line-height-tight);
+}
+
+.description {
+  margin: 0;
+  font-size: var(--esim-typography-font-size-md);
+  line-height: var(--esim-typography-line-height-normal);
+  color: var(--esim-colors-text-secondary);
+}
+
+.notice {
+  margin: 0;
+  font-size: var(--esim-typography-font-size-sm);
+  line-height: var(--esim-typography-line-height-normal);
+  color: var(--esim-colors-text-secondary);
+}
+
+.badge {
+  align-self: flex-start;
+  padding: var(--esim-spacing-xxs) var(--esim-spacing-xs);
+  border-radius: var(--esim-shape-radius-sm);
+  background: var(--esim-colors-surface);
+  color: var(--esim-colors-text-secondary);
+  font-size: var(--esim-typography-font-size-xs);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esim-spacing-sm);
+  margin-top: var(--esim-spacing-xs);
+}
+
+.primaryButton {
+  padding: var(--esim-spacing-xs) var(--esim-spacing-md);
+  border-radius: var(--esim-components-button-primary-radius);
+  border: var(--esim-shape-border-width-thin) solid var(--esim-components-button-primary-border);
+  background: var(--esim-components-button-primary-background);
+  color: var(--esim-components-button-primary-foreground);
+  font-size: var(--esim-typography-font-size-md);
+  font-weight: var(--esim-typography-font-weight-medium);
+  cursor: pointer;
+}
+
+.primaryButton:hover {
+  opacity: var(--esim-states-hover-opacity);
+}
+
+.primaryButton:active {
+  opacity: var(--esim-states-pressed-opacity);
+}
+
+.secondaryButton {
+  padding: var(--esim-spacing-xs) var(--esim-spacing-md);
+  border-radius: var(--esim-components-button-secondary-radius);
+  border: var(--esim-shape-border-width-thin) solid var(--esim-components-button-secondary-border);
+  background: var(--esim-components-button-secondary-background);
+  color: var(--esim-components-button-secondary-foreground);
+  font-size: var(--esim-typography-font-size-md);
+  cursor: pointer;
+}
+
+.secondaryButton:hover {
+  opacity: var(--esim-states-hover-opacity);
+}
+
+.secondaryButton:active {
+  opacity: var(--esim-states-pressed-opacity);
+}
+
+.primaryButton:focus-visible,
+.secondaryButton:focus-visible {
+  outline: var(--esim-states-focus-outline-width) solid var(--esim-states-focus-outline-color);
+  outline-offset: var(--esim-states-focus-outline-offset);
+}

@@ -1,0 +1,73 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-lg);
+  font-family: var(--esim-typography-font-family);
+  color: var(--esim-colors-text-primary);
+}
+
+.heading {
+  margin: 0;
+  font-size: var(--esim-typography-font-size-xl);
+  font-weight: var(--esim-typography-font-weight-bold);
+  text-transform: var(--esim-typography-heading-text-transform);
+  letter-spacing: var(--esim-typography-heading-letter-spacing);
+}
+
+.subtitle {
+  margin: 0;
+  font-size: var(--esim-typography-font-size-md);
+  color: var(--esim-colors-text-secondary);
+}
+
+.liveRegion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-md);
+}
+
+.errorBox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-sm);
+  padding: var(--esim-spacing-md);
+  border-radius: var(--esim-shape-radius-md);
+  border: var(--esim-shape-border-width-thin) solid var(--esim-colors-state-error);
+}
+
+.errorMessage {
+  margin: 0;
+  color: var(--esim-colors-text-primary);
+}
+
+.retryButton {
+  align-self: flex-start;
+  padding: var(--esim-spacing-xs) var(--esim-spacing-md);
+  border-radius: var(--esim-components-button-secondary-radius);
+  border: var(--esim-shape-border-width-thin) solid var(--esim-components-button-secondary-border);
+  background: var(--esim-components-button-secondary-background);
+  color: var(--esim-components-button-secondary-foreground);
+  font-size: var(--esim-typography-font-size-md);
+  cursor: pointer;
+}
+
+.retryButton:focus-visible {
+  outline: var(--esim-states-focus-outline-width) solid var(--esim-states-focus-outline-color);
+  outline-offset: var(--esim-states-focus-outline-offset);
+}
+
+.manualLink {
+  align-self: flex-start;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--esim-components-button-text-foreground);
+  font-size: var(--esim-typography-font-size-sm);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.manualLink:focus-visible {
+  outline: var(--esim-states-focus-outline-width) solid var(--esim-states-focus-outline-color);
+  outline-offset: var(--esim-states-focus-outline-offset);
+}
