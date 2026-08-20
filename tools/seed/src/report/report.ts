@@ -1,6 +1,11 @@
 import type { DataConfidence, Device } from '@esim-detector/contracts';
 
-import type { QuarantineEntry, QuarantineCode, RowNotice } from '../domain/types';
+import type {
+  CodeSuffixBatchReport,
+  QuarantineEntry,
+  QuarantineCode,
+  RowNotice,
+} from '../domain/types';
 import type { FamilyAggregateReportEntry } from '../pipeline/family-aggregate';
 
 /**
@@ -40,6 +45,8 @@ export interface ImportReportInput {
   readonly invariantViolationsCount: number;
   /** Устройств, исключённых из `devices` за нарушение инвариантов §5.8 (docs/09 ADR-029). */
   readonly invariantQuarantinedCount: number;
+  /** Партия 16 — разбор подключён к отчёту, но не к консенсусу (agent 5.7, docs/appendix-a §А.10). */
+  readonly codeSuffixBatch: CodeSuffixBatchReport;
   readonly previousSnapshot?: readonly PreviousSnapshotEntry[];
 }
 
@@ -75,6 +82,7 @@ export interface ImportReportData {
   }[];
   readonly invariantViolationsCount: number;
   readonly invariantQuarantinedCount: number;
+  readonly codeSuffixBatch: CodeSuffixBatchReport;
   readonly diffFromPrevious?: {
     readonly added: number;
     readonly removed: number;
@@ -196,6 +204,7 @@ export function buildImportReport(input: ImportReportInput): ImportReportData {
     })),
     invariantViolationsCount: input.invariantViolationsCount,
     invariantQuarantinedCount: input.invariantQuarantinedCount,
+    codeSuffixBatch: input.codeSuffixBatch,
     ...(diffFromPrevious !== undefined ? { diffFromPrevious } : {}),
   };
 }
@@ -328,6 +337,21 @@ export function renderMarkdown(report: ImportReportData): string {
       `| ${rule.brand} | ${rule.family} | ${rule.status} | ${rule.dataConfidence} | ${rule.recordCount} | ${rule.resolvedAnswer} |`,
     );
   }
+  lines.push('');
+
+  lines.push('## Партия 16: суффиксы сервисных кодов (docs/appendix-a §А.10)');
+  lines.push('');
+  lines.push(
+    'Разбор партии 16 подключён к отчёту конвейера, но её строки НЕ входят в правило консенсуса ' +
+      '§14.5 и не влияют на `devices`/карантин выше — партия 16 остаётся генератором перечня ' +
+      'кандидатов «суффикс → регион» для ручной сверки (docs/09-decisions.md ADR-013/ADR-026/ADR-028); ' +
+      'проверенные вручную связки ведутся отдельно в `data/catalog/code-suffixes.json`.',
+  );
+  lines.push('');
+  lines.push(`- Файлов партии 16 разобрано: ${report.codeSuffixBatch.filesProcessed}`);
+  lines.push(`- Строк разобрано: ${report.codeSuffixBatch.rowsParsed}`);
+  lines.push(`- Строк в карантине формата: ${report.codeSuffixBatch.rowsQuarantined}`);
+  lines.push(`- Источников: ${report.codeSuffixBatch.sources.join(', ') || '—'}`);
   lines.push('');
 
   lines.push('## Сравнение с предыдущим импортом');

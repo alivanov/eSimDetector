@@ -106,3 +106,18 @@ export interface ValidateRowResult {
   readonly quarantine?: QuarantineEntry;
   readonly notices: readonly RowNotice[];
 }
+
+/**
+ * Сводка по разбору партии 16 (`16-code-suffixes.csv`, docs/appendix-a §А.10) в отчёте конвейера
+ * (agent 5.7). Партия 16 разбирается парсером `parseCodeSuffixesCsv`, но НЕ входит в правило
+ * консенсуса §14.5 и не влияет на `devices`/`quarantine` итогового каталога (docs/appendix-a
+ * §А.10, п.3: партия — генератор перечня кандидатов «суффикс → регион» для РУЧНОЙ сверки, а не
+ * вход консенсуса) — эта сводка только фиксирует факт разбора и его объём в отчёте, как того
+ * требует объём агента 5.7 ("достаточно разбора и строки в отчёте").
+ */
+export interface CodeSuffixBatchReport {
+  readonly filesProcessed: number;
+  readonly rowsParsed: number;
+  readonly rowsQuarantined: number;
+  readonly sources: readonly string[];
+}

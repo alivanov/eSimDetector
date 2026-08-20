@@ -1,0 +1,182 @@
+[
+  {
+    "brand": "samsung",
+    "codeSuffix": "0",
+    "codeExample": "SM-S9280",
+    "region": "cn",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Samsung_Galaxy",
+        "title": "Samsung Galaxy — раздел \"Model numbers\", регионы (E) — \"0: China mainland (phones)\"",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://swappa.com/blog/samsung-galaxy-s22-compatibility-guide/",
+        "title": "Samsung Galaxy S22 Compatibility Guide — Swappa Blog: \"the '0' is for China\"",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "notes": "Материковый Китай, телефоны (для планшетов та же схема использует суффикс C, не проверялся — вне объёма этого агента). Регион записан здесь только как факт региона продажи: влияние на статус eSIM конкретного устройства и его актуальность после регуляторной реформы КНР октября 2025 года не входят в эту таблицу (ADR-028) — см. docs/10-assumptions-and-limitations.md."
+  },
+  {
+    "brand": "samsung",
+    "codeSuffix": "U",
+    "codeExample": "SM-S928U",
+    "region": "us",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Samsung_Galaxy",
+        "title": "Samsung Galaxy — раздел \"Model numbers\": \"U: USA carrier locked\"",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://swappa.com/blog/samsung-galaxy-s22-compatibility-guide/",
+        "title": "Samsung Galaxy S22 Compatibility Guide — Swappa Blog: \"'U' signifies the Carrier version for the US market\"",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "notes": "Операторская версия для США (SIM-lock конкретному оператору)."
+  },
+  {
+    "brand": "samsung",
+    "codeSuffix": "U1",
+    "codeExample": "SM-S928U1",
+    "region": "us",
+    "sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Samsung_Galaxy",
+        "title": "Samsung Galaxy — раздел \"Model numbers\": \"U1: USA (factory unlocked variant)\"",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://swappa.com/blog/samsung-galaxy-s22-compatibility-guide/",
+        "title": "Samsung Galaxy S22 Compatibility Guide — Swappa Blog: \"'U1' signifies the Factory Unlocked version for the US market\"",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "notes": "Разблокированная версия для США, продаётся без привязки к оператору."
+  },
+  {
+    "brand": "huawei",
+    "codeSuffix": "AL00",
+    "codeExample": "CFR-AL00",
+    "region": "cn",
+    "sources": [
+      {
+        "url": "https://github.com/KHwang9883/MobileModels/blob/master/misc/naming-rules.md",
+        "title": "MobileModels — правила именования Huawei: \"AL — 全网通4G公开版\" (全网通 = омниоператорская версия для внутреннего рынка КНР)",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "notes": "Внутренний («全网通», омниоператорский) 4G-код для материкового Китая. Регион записан только как факт региона продажи — влияние на статус eSIM конкретного устройства сюда не входит (ADR-028); актуальность вывода «КНР → eSIM отсутствует» устарела после реформы октября 2025 года, см. docs/10-assumptions-and-limitations.md."
+  },
+  {
+    "brand": "huawei",
+    "codeSuffix": "AN00",
+    "codeExample": "CFR-AN00",
+    "region": "cn",
+    "sources": [
+      {
+        "url": "https://github.com/KHwang9883/MobileModels/blob/master/misc/naming-rules.md",
+        "title": "MobileModels — правила именования Huawei: \"AN — 全网通5G版\" (омниоператорский 5G-код для внутреннего рынка КНР)",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "notes": "Внутренний омниоператорский 5G-код для материкового Китая. Тот же факт региона и то же примечание об устаревшей связи с отсутствием eSIM, что и у AL00."
+  },
+  {
+    "brand": "honor",
+    "codeSuffix": "AL00",
+    "codeExample": "COL-AL00",
+    "region": "cn",
+    "sources": [
+      {
+        "url": "https://khwang9883.github.io/MobileModels/misc/naming-rules.html",
+        "title": "MobileModels — правила именования Honor: тот же принцип AL/AN, что у Huawei, применён к линейке Honor",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://khwang9883.github.io/MobileModels/brands/honor_cn.html",
+        "title": "MobileModels — таблица моделей Honor для материкового Китая, коды с суффиксом AL00",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "notes": "Honor использует ту же схему кодов, что и Huawei (общее происхождение до выделения бренда в 2020 году)."
+  },
+  {
+    "brand": "honor",
+    "codeSuffix": "AN00",
+    "codeExample": "NTH-AN00",
+    "region": "cn",
+    "sources": [
+      {
+        "url": "https://khwang9883.github.io/MobileModels/misc/naming-rules.html",
+        "title": "MobileModels — правила именования Honor: \"AN — 全网通5G版\"",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://khwang9883.github.io/MobileModels/brands/honor_cn.html",
+        "title": "MobileModels — таблица моделей Honor для материкового Китая, коды с суффиксом AN00",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "notes": "5G-версия того же внутреннего кода, что и AL00."
+  },
+  {
+    "brand": "xiaomi",
+    "codeSuffix": "G",
+    "codeExample": "M2001J2G",
+    "region": "global",
+    "sources": [
+      {
+        "url": "https://github.com/KHwang9883/MobileModels/blob/master/brands/xiaomi_en.md",
+        "title": "MobileModels — модели Xiaomi: \"M2001J2G: Mi 10 Global\"",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://xiaomiwiki.github.io/wiki/Regional_versions_of_Xiaomi_devices.html",
+        "title": "XiaomiWiki — Regional versions of Xiaomi devices: описание глобальной версии (суффикс G)",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "notes": "Глобальная версия (не Китай, не Индия) — распространяется в большинстве стран, включая Европу и Россию (параллельный импорт). Проверено этим агентом по корпусу выгрузок (docs/appendix-a §А.10.4, зацепка deepseek-3-1) и внешним источникам, а не согласием источников выгрузки (ADR-026)."
+  },
+  {
+    "brand": "xiaomi",
+    "codeSuffix": "C",
+    "codeExample": "M2001J2C",
+    "region": "cn",
+    "sources": [
+      {
+        "url": "https://github.com/KHwang9883/MobileModels/blob/master/brands/xiaomi_en.md",
+        "title": "MobileModels — модели Xiaomi: \"M2001J2C: Mi 10 China\"",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://xiaomiwiki.github.io/wiki/Regional_versions_of_Xiaomi_devices.html",
+        "title": "XiaomiWiki — Regional versions of Xiaomi devices: описание китайской версии (суффикс C)",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "notes": "Материковый Китай. Регион записан только как факт региона продажи (ADR-028); связь «КНР → eSIM отсутствует» устарела после реформы октября 2025 года, см. docs/10-assumptions-and-limitations.md."
+  },
+  {
+    "brand": "xiaomi",
+    "codeSuffix": "I",
+    "codeExample": "M2001J2I",
+    "region": "in",
+    "sources": [
+      {
+        "url": "https://github.com/KHwang9883/MobileModels/blob/master/brands/xiaomi_en.md",
+        "title": "MobileModels — модели Xiaomi: \"M2001J2I: Mi 10 India\"",
+        "checkedAt": "2026-08-19"
+      },
+      {
+        "url": "https://xiaomiwiki.github.io/wiki/Regional_versions_of_Xiaomi_devices.html",
+        "title": "XiaomiWiki — Regional versions of Xiaomi devices: описание индийской версии (суффикс I)",
+        "checkedAt": "2026-08-19"
+      }
+    ],
+    "notes": "Индия."
+  }
+]

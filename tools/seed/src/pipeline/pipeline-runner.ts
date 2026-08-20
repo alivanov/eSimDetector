@@ -1,10 +1,16 @@
 import type { NormalizationDictionary } from '@esim-detector/text-normalizer';
 import { parseNormalizationDictionary } from '@esim-detector/text-normalizer';
 
+import { parseCodeSuffixesCsv } from '../csv/parse-code-suffixes-csv';
 import { parseCodePatterns, type CodePatternMap } from '../domain/code-patterns';
 import { parseOsVersionCeilings, type OsVersionCeilings } from '../domain/os-version-ceiling';
 import { parseSubbrands, type SubbrandMap } from '../domain/subbrands';
-import type { DeviceCandidate, QuarantineEntry, RowNotice } from '../domain/types';
+import type {
+  CodeSuffixBatchReport,
+  DeviceCandidate,
+  QuarantineEntry,
+  RowNotice,
+} from '../domain/types';
 import { serializeCandidates } from '../io/candidate-cache';
 import {
   discoverImportCsvFiles,
@@ -13,6 +19,7 @@ import {
   readJson,
   readText,
   writeJson,
+  type DiscoveredCsvFile,
 } from '../io/files';
 import { buildCatalog, type BuildCatalogResult } from './build-catalog';
 import { parseCuratedDevices } from './merge';
@@ -116,6 +123,8 @@ export interface RunPipelineResult extends BuildCatalogResult {
   readonly referenceMatched: number;
   readonly referenceFileMissing: boolean;
   readonly sourcesProcessed: readonly string[];
+  /** Партия 16 — разбор подключён к отчёту, но не к правилу консенсуса (docs/appendix-a §А.10, п.3). */
+  readonly codeSuffixBatch: CodeSuffixBatchReport;
 }
 
 /**
@@ -186,6 +195,33 @@ function importOneSource(
 }
 
 /**
+ * Разбирает ВСЕ найденные файлы партии 16 (`16-code-suffixes.csv`, `parseCodeSuffixesCsv`,
+ * docs/appendix-a §А.10) и сводит результат в отчёт (agent 5.7). Разбирается КАЖДЫЙ найденный
+ * файл независимо от `excludedSources`/`options.sources` устройств: партия 16 не входит в
+ * консенсус §14.5 и не проходит через ту же фильтрацию источников, что и `devices.csv` — её роль
+ * (docs/appendix-a §А.10, п.3) — генератор перечня кандидатов «суффикс → регион» для РУЧНОЙ
+ * сверки, поэтому даже файл источника, исключённого из консенсуса (`gigachat-3-5-ultra`), учтён
+ * здесь как есть: исключение из консенсуса не означает исключения из перечня кандидатов.
+ */
+function parseCodeSuffixBatch(files: readonly DiscoveredCsvFile[]): CodeSuffixBatchReport {
+  let rowsParsed = 0;
+  let rowsQuarantined = 0;
+  const sources = new Set<string>();
+  for (const file of files) {
+    const result = parseCodeSuffixesCsv(readText(file.filePath));
+    rowsParsed += result.rows.length;
+    rowsQuarantined += result.quarantine.length;
+    sources.add(file.source);
+  }
+  return {
+    filesProcessed: files.length,
+    rowsParsed,
+    rowsQuarantined,
+    sources: [...sources].sort(),
+  };
+}
+
+/**
  * Полный конвейер (docs/14-catalog-ingestion.md §14.4, шаги 1–7) от файлов на диске до готовых
  * `Device[]` — общее ядро для команд `import`/`consensus`/`load` (они отличаются только тем,
  * какой срез отчёта печатают и пишут ли результат в MongoDB, а не логикой разбора).
@@ -201,8 +237,10 @@ export function runPipeline(options: RunPipelineOptions): RunPipelineResult {
   const subbrands = tryLoadSubbrands(paths.subbrandsPath);
   const { reference, missing: referenceFileMissing } = tryLoadReference(paths.referencePath);
 
-  const discovered = discoverImportCsvFiles(paths.importDir).filter(
-    (file) => file.kind === 'devices',
+  const discoveredAll = discoverImportCsvFiles(paths.importDir);
+  const discovered = discoveredAll.filter((file) => file.kind === 'devices');
+  const codeSuffixBatch = parseCodeSuffixBatch(
+    discoveredAll.filter((file) => file.kind === 'code-suffixes'),
   );
   const filesBySource = new Map<string, { batchId: string; filePath: string }[]>();
   for (const file of discovered) {
@@ -277,5 +315,6 @@ export function runPipeline(options: RunPipelineOptions): RunPipelineResult {
     referenceMatched,
     referenceFileMissing,
     sourcesProcessed: [...filesBySource.keys()],
+    codeSuffixBatch,
   };
 }

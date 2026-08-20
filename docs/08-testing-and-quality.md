@@ -41,7 +41,9 @@
 - при признаках эмуляции устройства однозначный ответ не выдаётся;
 - строка выгрузки, не прошедшая валидацию, не попадает в рабочий справочник ни при каких настройках;
 - запись, противоречащая контрольной выборке подтверждённых фактов, не даёт ответа пользователю;
-- повторный импорт не затирает решение модератора.
+- повторный импорт не затирает решение модератора;
+- регион по суффиксу сервисного кода выводится только при точном совпадении с проверенной связкой курируемого ядра (`data/catalog/code-suffixes.json`) — частичное или похожее совпадение региона не даёт (`tools/seed/src/domain/code-suffixes.spec.ts`, docs/09-decisions.md ADR-028/ADR-035);
+- неподтверждённый либо неизвестный суффикс сервисного кода никогда не даёт отрицательного ответа — только уточнение: `resolveSuffixOutcome` возвращает дискриминированный тип без варианта, из которого можно получить `not_supported` за пределами известного региона (`tools/seed/src/domain/code-suffixes.spec.ts`, `code-suffixes-data.spec.ts` — воспроизводит спорный суффикс `W`, §А.10.4 приложения А, как пример).
 
 ## 8.3. Тесты e2e
 
@@ -64,6 +66,64 @@
 Реальные наборы сигналов с ожидаемым результатом. Сбор: с доступных команде устройств через страницу отладки, из открытых баз User-Agent, из эмуляции устройств в браузерах. Целевой объём — не менее 120 записей.
 
 Обязательные группы: iPhone разных поколений и версий iOS; Android разных вендоров с UA-CH; Android без UA-CH; браузеры, отличные от Chrome и Safari; WebView внутри приложений; десктопные браузеры; эмуляция мобильного устройства в средствах разработчика; планшеты; заведомо неоднозначные сигнатуры.
+
+**Схема одной записи (агент 5.7, `tools/eval/src/signals-golden.ts`, docs/09-decisions.md ADR-037).** До этого агента документ фиксировал только прозу выше — ни типа, ни разборщика, ни теста не существовало, и наполнить файл без выдуманного на ходу формата было невозможно. Девять категорий ниже — те же девять групп из абзаца выше, буквально переведённые в значения перечисления:
+
+```ts
+interface SignalsGoldenEntry {
+  readonly id: string; // уникален по всему файлу, формат "<category>-NNN"
+  readonly category:
+    | 'iphone-generations' // "iPhone разных поколений и версий iOS"
+    | 'android-vendor-ua-ch' // "Android разных вендоров с UA-CH"
+    | 'android-no-ua-ch' // "Android без UA-CH"
+    | 'non-standard-browser' // "браузеры, отличные от Chrome и Safari"
+    | 'webview' // "WebView внутри приложений"
+    | 'desktop-browser' // "десктопные браузеры"
+    | 'devtools-emulation' // "эмуляция мобильного устройства в средствах разработчика"
+    | 'tablet' // "планшеты"
+    | 'ambiguous-signature'; // "заведомо неоднозначные сигнатуры"
+  readonly description: string; // человекочитаемое описание устройства/браузера
+  readonly source: 'real-device' | 'public-ua-database' | 'browser-emulation'; // три канала сбора из абзаца выше
+  readonly signals: {
+    // Ровно форма `signals` тела запроса POST /api/v1/detect (docs/06-api-contract.md §6.2),
+    // а НЕ внутренний тип DetectionSignals модуля apps/api/src/modules/detection — выборка
+    // описывает то, что реально отправил бы клиент на границу API, версионируемую и
+    // переживающую рефакторинг внутреннего типа модуля.
+    readonly userAgent?: string;
+    readonly uaData?: {
+      readonly platform?: string;
+      readonly mobile?: boolean;
+      readonly model?: string;
+      readonly platformVersion?: string;
+      readonly brands?: readonly { readonly brand: string; readonly version: string }[];
+    };
+    readonly screen?: {
+      readonly width?: number;
+      readonly height?: number;
+      readonly dpr?: number;
+      readonly orientation?: string;
+    };
+    readonly hardware?: {
+      readonly maxTouchPoints?: number;
+      readonly hardwareConcurrency?: number;
+      readonly deviceMemory?: number;
+    };
+    readonly webgl?: { readonly vendor?: string; readonly renderer?: string };
+  };
+  readonly headers?: Readonly<Record<string, string>>; // Sec-CH-UA-* заголовки, наблюдавшиеся при сборе (docs/03 §3.2)
+  readonly region?: string; // ответ на адресный вопрос уточнения, если сигнатура собрана после его разрешения (docs/06 §6.2)
+  readonly expected: {
+    readonly platform: 'ios' | 'android' | 'harmonyos' | 'other';
+    readonly deviceType: 'phone' | 'tablet' | 'watch' | 'laptop' | 'other';
+    readonly status: 'supported' | 'not_supported' | 'clarification_required';
+    readonly exactModelKnown: boolean;
+    readonly deviceId: string | null; // непусто, только когда exactModelKnown === true
+  };
+  readonly notes?: string;
+}
+```
+
+**Что проверяется и чем.** `tools/eval/src/signals-golden.ts` — тип и разборщик (`parseSignalsGolden`) без утверждений `as` на границе (ADR-016): каждое перечислимое поле проверяется отдельной функцией-предикатом. `tools/eval/src/signals-golden.spec.ts` — модульные тесты разборщика на синтетических данных. `tools/eval/src/signals-golden-data.spec.ts` — тест файла данных по образцу `tools/seed/src/pipeline/reference-data.spec.ts` (`catalog.reference.json`), с одним отличием: на момент агента 5.7 `data/fixtures/signals.golden.json` физически не существует (наполнение — канал сбора сигналов реальных устройств, единственно практический — виджет и стенд отладки, объём агента 6, docs/11 §11.2а), поэтому файл не импортируется статически, а читается в рантайме через `node:fs`; отдельная проверка теста явно печатает предупреждение и фиксирует отсутствие файла утверждением (`expect(fileIsPresent).toBe(false)`), а не пропускает секцию тихим пустым `describe`, неотличимым в выводе Jest от «тесты не написаны». Когда файл появится, оставшиеся шесть проверок (форма записи, объём ≥ 120, все девять групп непусты, уникальность `id`, согласованность `exactModelKnown`↔`deviceId`, отсутствие определённого статуса в группе `ambiguous-signature`) включатся автоматически без правки теста.
 
 ### `queries.golden.json` — текстовые запросы
 

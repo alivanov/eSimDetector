@@ -59,6 +59,7 @@ describe('buildImportReport', () => {
       appleRuleAppliedCount: 0,
       invariantViolationsCount: 0,
       invariantQuarantinedCount: 0,
+      codeSuffixBatch: { filesProcessed: 0, rowsParsed: 0, rowsQuarantined: 0, sources: [] },
     });
 
     expect(report.totals).toEqual({
@@ -99,6 +100,7 @@ describe('buildImportReport', () => {
       appleRuleAppliedCount: 0,
       invariantViolationsCount: 0,
       invariantQuarantinedCount: 0,
+      codeSuffixBatch: { filesProcessed: 0, rowsParsed: 0, rowsQuarantined: 0, sources: [] },
     });
     expect(report.reference).toEqual({
       fileMissing: true,
@@ -127,6 +129,7 @@ describe('buildImportReport', () => {
       appleRuleAppliedCount: 0,
       invariantViolationsCount: 0,
       invariantQuarantinedCount: 0,
+      codeSuffixBatch: { filesProcessed: 0, rowsParsed: 0, rowsQuarantined: 0, sources: [] },
       previousSnapshot: [
         { id: 'a', esimSupport: 'not_supported', dataConfidence: 'derived' },
         { id: 'removed', esimSupport: 'supported', dataConfidence: 'derived' },
@@ -152,6 +155,7 @@ describe('buildImportReport', () => {
       appleRuleAppliedCount: 0,
       invariantViolationsCount: 0,
       invariantQuarantinedCount: 0,
+      codeSuffixBatch: { filesProcessed: 0, rowsParsed: 0, rowsQuarantined: 0, sources: [] },
       previousSnapshot: [],
     });
     expect(report.diffFromPrevious).toEqual({ added: 1, removed: 0, changedStatus: 0 });
@@ -173,6 +177,7 @@ describe('buildImportReport', () => {
       appleRuleAppliedCount: 0,
       invariantViolationsCount: 0,
       invariantQuarantinedCount: 0,
+      codeSuffixBatch: { filesProcessed: 0, rowsParsed: 0, rowsQuarantined: 0, sources: [] },
     });
     expect(report.codePatternRejectionsByBrand).toEqual({});
   });
@@ -195,6 +200,7 @@ describe('renderMarkdown', () => {
       appleRuleAppliedCount: 0,
       invariantViolationsCount: 0,
       invariantQuarantinedCount: 0,
+      codeSuffixBatch: { filesProcessed: 0, rowsParsed: 0, rowsQuarantined: 0, sources: [] },
     });
     const markdown = renderMarkdown(report);
     expect(markdown).toContain('# Отчёт об импорте справочника');
@@ -238,6 +244,12 @@ describe('renderMarkdown', () => {
       appleRuleAppliedCount: 1,
       invariantViolationsCount: 0,
       invariantQuarantinedCount: 0,
+      codeSuffixBatch: {
+        filesProcessed: 5,
+        rowsParsed: 125,
+        rowsQuarantined: 0,
+        sources: ['deepseek-3-1', 'gemini-3-6-flash'],
+      },
       previousSnapshot: [{ id: 'a', esimSupport: 'not_supported', dataConfidence: 'unverified' }],
     });
 
@@ -247,6 +259,9 @@ describe('renderMarkdown', () => {
     expect(markdown).toContain('Пересечение с эталоном: 5');
     expect(markdown).toContain('xiaomi | redmi-a | not_supported');
     expect(markdown).toContain('Добавлено записей: 0');
+    expect(markdown).toContain('Партия 16');
+    expect(markdown).toContain('Файлов партии 16 разобрано: 5');
+    expect(markdown).toContain('Строк разобрано: 125');
   });
 
   it('подставляет сырой код нарушения, если для него нет русской подписи', () => {
@@ -275,6 +290,7 @@ describe('renderMarkdown', () => {
       appleRuleAppliedCount: 0,
       invariantViolationsCount: 0,
       invariantQuarantinedCount: 0,
+      codeSuffixBatch: { filesProcessed: 0, rowsParsed: 0, rowsQuarantined: 0, sources: [] },
     });
     expect(renderMarkdown(report)).toContain('Один сервисный код у двух разных устройств');
   });
