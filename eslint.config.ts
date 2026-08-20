@@ -36,19 +36,23 @@ export default tseslint.config(
             'packages/signals-collector/jest.config.ts',
             'apps/web/jest.config.ts',
             'apps/widget/jest.config.ts',
+            'apps/e2e/playwright.config.ts',
             'tools/eval/jest.config.ts',
             'tools/seed/jest.config.ts',
           ],
           // Список выше превысил встроенный лимит (8) — агент 4 добавил девятый файл
           // (tools/seed/jest.config.ts), этап 6.1 добавил четыре файла тестового окружения
           // интерфейса (packages/ui-tokens, packages/signals-collector, apps/web, apps/widget) —
-          // итого 13. `apps/widget/vite.config.ts` (этап 6.3) сюда НЕ добавлен: он входит в
+          // итого 13, этап 6.5 добавил `apps/e2e/playwright.config.ts` — итого 14.
+          // `apps/widget/vite.config.ts` (этап 6.3) сюда НЕ добавлен: он входит в
           // `include` `apps/widget/tsconfig.json` напрямую (тот же приём, что `apps/web/
           // vite.config.ts` уже применял) — присутствие в обоих местах одновременно конфликтует
-          // (`projectService` требует объявления ровно в одном). Список файлов конечен и не растёт
-          // с объёмом кода приложения (по одному конфигурационному файлу на пакет/приложение/
-          // инструмент), поэтому предупреждение о производительности линтинга не применимо.
-          maximumDefaultProjectFileMatchCount_THIS_WILL_SLOW_DOWN_LINTING: 13,
+          // (`projectService` требует объявления ровно в одном). По тому же принципу
+          // `apps/e2e/tsconfig.json` НЕ включает `playwright.config.ts` в свой `include`.
+          // Список файлов конечен и не растёт с объёмом кода приложения (по одному
+          // конфигурационному файлу на пакет/приложение/инструмент), поэтому предупреждение о
+          // производительности линтинга не применимо.
+          maximumDefaultProjectFileMatchCount_THIS_WILL_SLOW_DOWN_LINTING: 14,
           defaultProject: 'tsconfig.eslint.json',
         },
         tsconfigRootDir: process.cwd(),

@@ -1,0 +1,13 @@
+{
+  "name": "@esim-detector/e2e",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Сквозные тесты интерфейса в настоящем браузере (Playwright) — docs/08-testing-and-quality.md §8.3, этап 6.5",
+  "scripts": {
+    "test:e2e": "playwright test",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1"
+  }
+}

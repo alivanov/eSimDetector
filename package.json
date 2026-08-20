@@ -17,6 +17,7 @@
     "format:check": "prettier --check .",
     "typecheck": "pnpm -r --if-present run typecheck",
     "test": "pnpm -r --if-present run test",
+    "test:e2e": "pnpm --filter @esim-detector/e2e run test:e2e",
     "seed": "pnpm --filter @esim-detector/tools-seed run start"
   },
   "lint-staged": {

@@ -29,3 +29,8 @@ pnpm-debug.log*
 
 # mongodb-memory-server кэш бинарников
 .cache/
+
+# Артефакты прогонов Playwright (apps/e2e) — трассы, скриншоты, HTML-отчёт
+test-results/
+playwright-report/
+blob-report/
