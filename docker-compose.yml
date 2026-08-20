@@ -38,5 +38,17 @@ services:
     ports:
       - '3000:3000'
 
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - api
+    environment:
+      API_UPSTREAM: ${API_UPSTREAM:-api:3000}
+    ports:
+      - '8080:8080'
+
 volumes:
   mongo-data:

@@ -1,0 +1,95 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-sm);
+}
+
+.requestIdRow {
+  display: flex;
+  align-items: center;
+  gap: var(--esim-spacing-sm);
+  font-size: var(--esim-typography-font-size-sm);
+}
+
+.requestIdLabel {
+  color: var(--esim-colors-text-secondary);
+}
+
+.requestIdValue {
+  font-family: monospace;
+}
+
+.statusValue {
+  font-size: var(--esim-typography-font-size-lg);
+  font-weight: var(--esim-typography-font-weight-bold);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--esim-spacing-xxs) var(--esim-spacing-md);
+  font-size: var(--esim-typography-font-size-sm);
+}
+
+.grid dt {
+  color: var(--esim-colors-text-secondary);
+}
+
+.grid dd {
+  margin: 0;
+}
+
+.subheading {
+  margin: 0;
+  font-size: var(--esim-typography-font-size-md);
+  font-weight: var(--esim-typography-font-weight-medium);
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-xxs);
+  font-size: var(--esim-typography-font-size-sm);
+}
+
+.listItem {
+  padding: var(--esim-spacing-xxs) var(--esim-spacing-sm);
+  border-radius: var(--esim-components-list-item-radius);
+  background: var(--esim-components-list-item-background);
+}
+
+.emptyState {
+  margin: 0;
+  color: var(--esim-colors-text-secondary);
+  font-size: var(--esim-typography-font-size-sm);
+}
+
+.optionButton {
+  padding: var(--esim-spacing-xs) var(--esim-spacing-md);
+  border-radius: var(--esim-components-button-secondary-radius);
+  border: var(--esim-shape-border-width-thin) solid var(--esim-components-button-secondary-border);
+  background: var(--esim-components-button-secondary-background);
+  color: var(--esim-components-button-secondary-foreground);
+  font-size: var(--esim-typography-font-size-sm);
+  cursor: pointer;
+}
+
+.optionButton:focus-visible {
+  outline: var(--esim-states-focus-outline-width) solid var(--esim-states-focus-outline-color);
+  outline-offset: var(--esim-states-focus-outline-offset);
+}
+
+.optionsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esim-spacing-xs);
+}
+
+.hint {
+  margin: 0;
+  font-size: var(--esim-typography-font-size-xs);
+  color: var(--esim-colors-text-secondary);
+}

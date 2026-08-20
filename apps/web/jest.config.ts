@@ -23,6 +23,10 @@ const config: Config = {
     '^@esim-detector/widget$': '<rootDir>/../widget/src/index.ts',
     '^@esim-detector/ui-tokens$': '<rootDir>/../../packages/ui-tokens/src/index.ts',
     '^@esim-detector/signals-collector$': '<rootDir>/../../packages/signals-collector/src/index.ts',
+    // Только для типов (`import type`, стенд отладки `src/debug`, этап 6.4) — Vite стирает такие
+    // импорты при сборке и не резолвит модуль вовсе, но тест `golden-export.spec.ts` реально
+    // вызывает `parseSignalsGolden` в рантайме, чтобы проверить экспортируемую запись фактически.
+    '^@esim-detector/tools-eval$': '<rootDir>/../../tools/eval/src/index.ts',
   },
   transform: {
     '^.+\\.tsx?$': [

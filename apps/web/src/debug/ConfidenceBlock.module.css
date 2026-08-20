@@ -1,0 +1,31 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--esim-spacing-md);
+}
+
+.value {
+  font-size: var(--esim-typography-font-size-lg);
+  font-weight: var(--esim-typography-font-weight-bold);
+  font-family: monospace;
+}
+
+.track {
+  flex: 1;
+  height: var(--esim-spacing-xs);
+  border-radius: var(--esim-shape-radius-full);
+  background: var(--esim-states-focus-outline-color, var(--esim-colors-border));
+  background: var(--esim-colors-border);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  background: var(--esim-colors-state-info);
+}
+
+.emptyState {
+  margin: 0;
+  color: var(--esim-colors-text-secondary);
+  font-size: var(--esim-typography-font-size-sm);
+}

@@ -12,7 +12,8 @@
       "@esim-detector/signals-collector": ["./packages/signals-collector/src/index.ts"],
       "@esim-detector/ui-tokens": ["./packages/ui-tokens/src/index.ts"],
       "@esim-detector/widget": ["./apps/widget/src/index.ts"],
-      "@esim-detector/test-utils": ["./packages/test-utils/src/index.ts"]
+      "@esim-detector/test-utils": ["./packages/test-utils/src/index.ts"],
+      "@esim-detector/tools-eval": ["./tools/eval/src/index.ts"]
     },
 
     "strict": true,

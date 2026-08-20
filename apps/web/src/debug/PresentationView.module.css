@@ -1,0 +1,29 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-xs);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--esim-typography-font-size-lg);
+  font-weight: var(--esim-typography-font-weight-bold);
+}
+
+.description {
+  margin: 0;
+  font-size: var(--esim-typography-font-size-md);
+}
+
+.actions {
+  display: flex;
+  gap: var(--esim-spacing-md);
+  font-size: var(--esim-typography-font-size-sm);
+  color: var(--esim-colors-text-secondary);
+}
+
+.emptyState {
+  margin: 0;
+  color: var(--esim-colors-text-secondary);
+  font-size: var(--esim-typography-font-size-sm);
+}

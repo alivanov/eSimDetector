@@ -1,0 +1,35 @@
+# Конфигурация nginx демонстрационного контура (docs/07-integration.md §7.6). Шаблон, а не готовый
+# конфиг: образ nginx подставляет переменные окружения в файлы `/etc/nginx/templates/*.template`
+# через `envsubst` при старте контейнера (встроенный `docker-entrypoint.sh` образа nginx),
+# заменяя только реально заданные переменные окружения по ИМЕНИ — переменные самого nginx
+# ($uri, $host, $remote_addr и т. п.) не совпадают с именами переменных окружения и не трогаются.
+server {
+    listen 8080;
+    server_name _;
+    root /usr/share/nginx/html;
+    index index.html;
+
+    # /api проксируется на сервис api (docs/07 §7.6, задача этапа 6.4 п.3): демонстрационный
+    # контур работает независимо от значения CORS_ORIGINS, поскольку браузер обращается к тому же
+    # origin, что и сама страница (8080), а не к порту API напрямую — тот же приём, что `apps/web/
+    # vite.config.ts` уже применяет в разработке через `server.proxy`.
+    location /api/ {
+        proxy_pass http://${API_UPSTREAM}/api/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # /widget/v1/esim-widget.js (тот же путь, что docs/07 §7.2) и /widget-example/ (статическая
+    # страница-пример, apps/widget/example/) — обычные статические файлы, скопированные в образ
+    # (apps/web/Dockerfile) рядом со сборкой apps/web; отдельный `location` не нужен — они
+    # существуют на диске и `try_files` ниже находит их раньше, чем откатывается на `index.html`.
+
+    # SPA из двух страниц (docs/07 §7.6, задача этапа 6.4 п.1): маршрутизация — по
+    # `location.pathname` в самом приложении (`apps/web/src/main.tsx`), поэтому любой путь без
+    # физического файла (в т.ч. `/debug`) отдаёт `index.html`, а не 404.
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}

@@ -1,0 +1,100 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-sm);
+}
+
+.fieldWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-xxs);
+}
+
+.label {
+  font-size: var(--esim-typography-font-size-sm);
+  font-weight: var(--esim-typography-font-weight-medium);
+  color: var(--esim-colors-text-primary);
+}
+
+.input,
+.select,
+.textarea {
+  padding: var(--esim-spacing-xs) var(--esim-spacing-sm);
+  border-radius: var(--esim-components-input-radius);
+  border: var(--esim-shape-border-width-thin) solid var(--esim-components-input-border);
+  background: var(--esim-components-input-background);
+  color: var(--esim-colors-text-primary);
+  font-size: var(--esim-typography-font-size-sm);
+}
+
+.expectedBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-xs);
+  padding: var(--esim-spacing-sm);
+  border-radius: var(--esim-shape-radius-md);
+  border: var(--esim-shape-border-width-thin) solid var(--esim-colors-state-warning);
+}
+
+.warning {
+  margin: 0;
+  font-size: var(--esim-typography-font-size-sm);
+  color: var(--esim-colors-state-warning);
+}
+
+.expectedGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: var(--esim-spacing-sm);
+}
+
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  gap: var(--esim-spacing-xs);
+}
+
+.copyButton {
+  align-self: flex-start;
+  padding: var(--esim-spacing-xs) var(--esim-spacing-md);
+  border-radius: var(--esim-components-button-primary-radius);
+  border: var(--esim-shape-border-width-thin) solid var(--esim-components-button-primary-border);
+  background: var(--esim-components-button-primary-background);
+  color: var(--esim-components-button-primary-foreground);
+  font-size: var(--esim-typography-font-size-md);
+  font-weight: var(--esim-typography-font-weight-medium);
+  cursor: pointer;
+}
+
+.copyButton:disabled {
+  opacity: var(--esim-states-disabled-opacity);
+  cursor: default;
+}
+
+.copyButton:focus-visible {
+  outline: var(--esim-states-focus-outline-width) solid var(--esim-states-focus-outline-color);
+  outline-offset: var(--esim-states-focus-outline-offset);
+}
+
+.status {
+  margin: 0;
+  font-size: var(--esim-typography-font-size-sm);
+  color: var(--esim-colors-state-success);
+}
+
+.preview {
+  max-height: 16rem;
+  overflow: auto;
+  padding: var(--esim-spacing-sm);
+  border-radius: var(--esim-shape-radius-md);
+  background: var(--esim-colors-background);
+  font-family: monospace;
+  font-size: var(--esim-typography-font-size-xs);
+  white-space: pre-wrap;
+}
+
+.unavailable {
+  margin: 0;
+  color: var(--esim-colors-text-secondary);
+  font-size: var(--esim-typography-font-size-sm);
+}

@@ -1,0 +1,29 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--esim-typography-font-size-sm);
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: var(--esim-spacing-xs) var(--esim-spacing-sm);
+  border-bottom: var(--esim-shape-border-width-thin) solid var(--esim-colors-border);
+  vertical-align: top;
+}
+
+.table th {
+  color: var(--esim-colors-text-secondary);
+  font-weight: var(--esim-typography-font-weight-medium);
+}
+
+.code {
+  font-family: monospace;
+  white-space: nowrap;
+}
+
+.empty {
+  margin: 0;
+  color: var(--esim-colors-text-secondary);
+  font-size: var(--esim-typography-font-size-sm);
+}

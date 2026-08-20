@@ -1,0 +1,25 @@
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--esim-spacing-xs);
+}
+
+.button {
+  padding: var(--esim-spacing-xxs) var(--esim-spacing-sm);
+  border-radius: var(--esim-components-button-secondary-radius);
+  border: var(--esim-shape-border-width-thin) solid var(--esim-components-button-secondary-border);
+  background: var(--esim-components-button-secondary-background);
+  color: var(--esim-components-button-secondary-foreground);
+  font-size: var(--esim-typography-font-size-sm);
+  cursor: pointer;
+}
+
+.button:focus-visible {
+  outline: var(--esim-states-focus-outline-width) solid var(--esim-states-focus-outline-color);
+  outline-offset: var(--esim-states-focus-outline-offset);
+}
+
+.status {
+  font-size: var(--esim-typography-font-size-sm);
+  color: var(--esim-colors-state-success);
+}

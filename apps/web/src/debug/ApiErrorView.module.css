@@ -1,0 +1,38 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-xs);
+  padding: var(--esim-spacing-md);
+  border-radius: var(--esim-shape-radius-md);
+  border: var(--esim-shape-border-width-thin) solid var(--esim-colors-state-error);
+}
+
+.row {
+  display: flex;
+  gap: var(--esim-spacing-sm);
+  font-size: var(--esim-typography-font-size-sm);
+}
+
+.label {
+  color: var(--esim-colors-text-secondary);
+}
+
+.code {
+  font-family: monospace;
+}
+
+.detailsTitle {
+  margin: 0;
+  font-size: var(--esim-typography-font-size-sm);
+  color: var(--esim-colors-text-secondary);
+}
+
+.detailsList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--esim-typography-font-size-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-xxs);
+}

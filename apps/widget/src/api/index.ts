@@ -30,3 +30,6 @@ export { searchDevices, parseSearchResponse } from './search';
 
 export type { SuggestItem, SuggestResponse } from './suggest';
 export { suggestDevices, parseSuggestResponse, MAX_SUGGEST_LIMIT } from './suggest';
+
+export type { CatalogMeta } from './catalog-meta';
+export { getCatalogMeta, parseCatalogMeta } from './catalog-meta';
