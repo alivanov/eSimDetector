@@ -10,7 +10,7 @@ alwaysApply: false
 
 ## Запрещённые зависимости
 
-В `text-normalizer`, `fuzzy-matcher`, `esim-rules`, `signals-collector` нельзя импортировать `@nestjs/*`, `mongoose`, `express`, `node:http`, `node:fs` и обращаться к `process.env`.
+В `text-normalizer`, `fuzzy-matcher`, `esim-rules`, `signals-collector`, `ui-tokens` нельзя импортировать `@nestjs/*`, `mongoose`, `express`, `node:http`, `node:fs` и обращаться к `process.env`.
 
 ```ts
 // ❌ пакет перестаёт тестироваться в памяти

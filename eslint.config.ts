@@ -32,14 +32,20 @@ export default tseslint.config(
             'packages/fuzzy-matcher/jest.config.ts',
             'packages/contracts/jest.config.ts',
             'packages/esim-rules/jest.config.ts',
+            'packages/ui-tokens/jest.config.ts',
+            'packages/signals-collector/jest.config.ts',
+            'apps/web/jest.config.ts',
+            'apps/widget/jest.config.ts',
             'tools/eval/jest.config.ts',
             'tools/seed/jest.config.ts',
           ],
-          // Список выше превысил встроенный лимит (8) — agent 4 добавил девятый файл
-          // (tools/seed/jest.config.ts). Список файлов конечен и не растёт с объёмом кода
-          // приложения (по одному jest.config.ts на пакет/инструмент), поэтому предупреждение
-          // о производительности линтинга не применимо к этому случаю.
-          maximumDefaultProjectFileMatchCount_THIS_WILL_SLOW_DOWN_LINTING: 9,
+          // Список выше превысил встроенный лимит (8) — агент 4 добавил девятый файл
+          // (tools/seed/jest.config.ts), этап 6.1 добавил четыре файла тестового окружения
+          // интерфейса (packages/ui-tokens, packages/signals-collector, apps/web, apps/widget) —
+          // итого 13. Список файлов конечен и не растёт с объёмом кода приложения (по одному
+          // jest.config.ts на пакет/приложение/инструмент), поэтому предупреждение о
+          // производительности линтинга не применимо к этому случаю.
+          maximumDefaultProjectFileMatchCount_THIS_WILL_SLOW_DOWN_LINTING: 13,
           defaultProject: 'tsconfig.eslint.json',
         },
         tsconfigRootDir: process.cwd(),
@@ -59,7 +65,7 @@ export default tseslint.config(
     },
   },
   {
-    files: ['**/*.spec.ts', '**/*.e2e-spec.ts', '**/test/**/*.ts'],
+    files: ['**/*.spec.ts', '**/*.spec.tsx', '**/*.e2e-spec.ts', '**/test/**/*.ts'],
     rules: {
       // В тестах допустимы прямые обращения к приватным деталям реализации.
       '@typescript-eslint/no-unsafe-assignment': 'off',

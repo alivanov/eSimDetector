@@ -1,0 +1,13 @@
+{
+  "name": "@esim-detector/ui-tokens",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Слой токенов дизайна: цвета, типографика, отступы, формы, состояния, компоненты (docs/13-branding.md §13.2, ADR-012)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "jest"
+  }
+}

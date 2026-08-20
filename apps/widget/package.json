@@ -4,6 +4,7 @@
   "private": true,
   "description": "Встраиваемый виджет eSIM Detector (Web Component, docs/07-integration.md)",
   "scripts": {
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "jest"
   }
 }

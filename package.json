@@ -20,8 +20,11 @@
     "seed": "pnpm --filter @esim-detector/tools-seed run start"
   },
   "lint-staged": {
-    "*.ts": [
+    "*.{ts,tsx}": [
       "eslint --fix",
+      "prettier --write"
+    ],
+    "*.css": [
       "prettier --write"
     ],
     "*.{json,md,yml,yaml}": [
@@ -30,12 +33,16 @@
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
+    "@testing-library/jest-dom": "7.0.1",
+    "@testing-library/react": "16.3.2",
     "@types/jest": "30.0.0",
     "@types/node": "26.2.0",
     "eslint": "10.8.1",
     "eslint-config-prettier": "10.1.8",
     "husky": "9.1.7",
+    "identity-obj-proxy": "3.0.0",
     "jest": "30.4.2",
+    "jest-environment-jsdom": "30.4.1",
     "jiti": "2.7.0",
     "lint-staged": "17.3.0",
     "prettier": "3.9.6",

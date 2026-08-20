@@ -12,6 +12,11 @@
     "packages/fuzzy-matcher/jest.config.ts",
     "packages/contracts/jest.config.ts",
     "packages/esim-rules/jest.config.ts",
-    "tools/eval/jest.config.ts"
+    "packages/ui-tokens/jest.config.ts",
+    "packages/signals-collector/jest.config.ts",
+    "apps/web/jest.config.ts",
+    "apps/widget/jest.config.ts",
+    "tools/eval/jest.config.ts",
+    "tools/seed/jest.config.ts"
   ]
 }
