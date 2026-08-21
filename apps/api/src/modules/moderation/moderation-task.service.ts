@@ -14,6 +14,7 @@ import type {
 } from '@esim-detector/contracts';
 import { moderationTaskSchema } from '@esim-detector/contracts';
 import type { Model } from 'mongoose';
+import { isValidObjectId } from 'mongoose';
 
 import { ApiError } from '../../common/errors/api-error';
 
@@ -170,7 +171,19 @@ export class ModerationTaskService {
     return { items, total, page: options.page, pageSize: options.pageSize };
   }
 
+  /**
+   * `id`, не являющийся 24-символьным hex, — не ошибка сервера: это тот же самый случай
+   * «неизвестный идентификатор», что и настоящий, но отсутствующий `ObjectId` (docs/06 §6.5,
+   * реестр ошибок; через интерфейс не воспроизводится, идентификатор всегда приходит из списка
+   * задач, но контракт документирован и для прямых вызовов API). Без этой проверки Mongoose
+   * бросает `CastError` внутри `findById`, который `ApiExceptionFilter` не распознаёт и отдаёт
+   * как 500 `INTERNAL_ERROR` — тот же класс дефекта, что ADR-044 уже устранил для повреждённых
+   * документов, но здесь причина не в данных, а во входном идентификаторе.
+   */
   public async getByIdOrThrow(id: string): Promise<ModerationTask> {
+    if (!isValidObjectId(id)) {
+      throw new ApiError('TASK_NOT_FOUND', 'Задача модерации не найдена', HttpStatus.NOT_FOUND);
+    }
     const raw = await this.model.findById(id).lean().exec();
     if (raw === null) {
       throw new ApiError('TASK_NOT_FOUND', 'Задача модерации не найдена', HttpStatus.NOT_FOUND);

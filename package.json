@@ -18,7 +18,10 @@
     "typecheck": "pnpm -r --if-present run typecheck",
     "test": "pnpm -r --if-present run test",
     "test:e2e": "pnpm --filter @esim-detector/e2e run test:e2e",
-    "seed": "pnpm --filter @esim-detector/tools-seed run start"
+    "seed": "pnpm --filter @esim-detector/tools-seed run start",
+    "eval": "pnpm --filter @esim-detector/tools-eval run eval",
+    "eval:detection": "pnpm --filter @esim-detector/tools-eval run eval:detection",
+    "eval:matching": "pnpm --filter @esim-detector/tools-eval run eval:matching"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

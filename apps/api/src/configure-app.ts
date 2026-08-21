@@ -8,6 +8,7 @@ import { ApiExceptionFilter } from './common/filters/api-exception.filter';
 import { ClientHintsInterceptor } from './common/interceptors/client-hints.interceptor';
 import { REQUEST_ID_HEADER, requestIdMiddleware } from './common/middleware/request-id.middleware';
 import type { EnvConfig } from './config/env.schema';
+import { setupSwagger } from './swagger.config';
 
 /**
  * Общая настройка приложения (middleware, фильтры, префикс маршрутов),
@@ -58,4 +59,9 @@ export function configureApp(app: INestApplication): void {
     }),
   );
   app.setGlobalPrefix('api/v1', { exclude: ['health/live', 'health/ready'] });
+
+  // `SwaggerModule.setup` регистрирует маршруты напрямую на HTTP-адаптере и не затрагивается
+  // `setGlobalPrefix` выше — поэтому пути документации остаются `/api/docs`/`/api/docs-json`,
+  // а не `/api/v1/api/docs` (docs/06-api-contract.md §6.4).
+  setupSwagger(app);
 }

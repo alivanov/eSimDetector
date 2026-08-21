@@ -7,6 +7,8 @@ export type {
   MatchSummary,
 } from './device-summary';
 export { toDeviceSummary, toCandidateSummary, toMatchSummary } from './device-summary';
+export type { DeviceCard } from './device-card';
+export { toDeviceCard } from './device-card';
 export type {
   PresentationActionKind,
   PresentationAction,

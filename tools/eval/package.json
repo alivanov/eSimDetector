@@ -5,10 +5,16 @@
   "description": "Стенд оценки качества автоопределения и обработки ввода на эталонных выборках (docs/08-testing-and-quality.md, раздел 8.6)",
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "test": "jest"
+    "test": "jest",
+    "eval": "ts-node -T src/run-eval.ts",
+    "eval:detection": "ts-node -T src/run-detection-eval.ts",
+    "eval:matching": "ts-node -T src/run-matching-eval.ts"
   },
   "dependencies": {
     "@esim-detector/text-normalizer": "workspace:*",
     "@esim-detector/fuzzy-matcher": "workspace:*"
+  },
+  "devDependencies": {
+    "ts-node": "10.9.2"
   }
 }

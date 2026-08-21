@@ -240,6 +240,163 @@ describe('CatalogWriteService (интеграция, withTestDatabase)', () => {
     expect(catalogService.getSnapshot().devices.has('moderator-created-device')).toBe(true);
   });
 
+  it('отклоняет привязку кода, уже принадлежащего другому устройству (инвариант 2)', async () => {
+    await deviceModel.create([
+      buildSampleDevice({ _id: 'samsung-galaxy-s24-ultra', modelCodes: ['SM-S928B'] }),
+      buildSampleDevice({
+        _id: 'samsung-galaxy-s24-plus',
+        marketingName: 'Galaxy S24+',
+        aliases: ['galaxy s24+'],
+        modelCodes: ['SM-S926B'],
+      }),
+    ]);
+    await catalogService.reload();
+
+    await expect(
+      service.linkModelCode({
+        deviceId: 'samsung-galaxy-s24-plus',
+        code: 'SM-S928B',
+        reason: 'опечатка модератора',
+        decidedBy: 'moderator-1',
+        taskId: null,
+      }),
+    ).rejects.toThrow('инвариант 2');
+
+    // Решение не применилось ни к одной из затронутых записей.
+    expect(catalogService.getSnapshot().devices.get('samsung-galaxy-s24-plus')?.modelCodes).toEqual(
+      ['SM-S926B'],
+    );
+  });
+
+  it('отклоняет псевдоним, уже указывающий на устройство с другим статусом eSIM (инвариант 3)', async () => {
+    await deviceModel.create([
+      buildSampleDevice({
+        _id: 'samsung-galaxy-a54',
+        marketingName: 'Galaxy A54',
+        aliases: ['galaxy a54'],
+        esim: {
+          support: 'not_supported',
+          dualSim: 'none',
+          maxProfiles: null,
+          conditions: [],
+          clarifyingQuestion: null,
+          notes: '',
+        },
+      }),
+      buildSampleDevice({
+        _id: 'samsung-galaxy-s24-ultra',
+        aliases: ['galaxy s24 ultra', 's24 ultra'],
+      }),
+    ]);
+    await catalogService.reload();
+
+    await expect(
+      service.addAlias(
+        'samsung-galaxy-s24-ultra',
+        'galaxy a54',
+        'пользователь так называет устройство',
+        'moderator-1',
+      ),
+    ).rejects.toThrow('инвариант 3');
+
+    expect(
+      catalogService.getSnapshot().devices.get('samsung-galaxy-s24-ultra')?.aliases,
+    ).not.toContain('galaxy a54');
+  });
+
+  it('отклоняет создание устройства conditional без conditions/clarifyingQuestion (инвариант 5)', async () => {
+    await catalogService.reload();
+
+    await expect(
+      service.createDevice({
+        device: buildSampleDevice({
+          _id: 'unknown-brand-conditional-device',
+          esim: {
+            support: 'conditional',
+            dualSim: 'physical+esim',
+            maxProfiles: null,
+            conditions: [],
+            clarifyingQuestion: null,
+            notes: '',
+          },
+        }),
+        reason: 'создано вручную специалистом',
+        decidedBy: 'moderator-1',
+      }),
+    ).rejects.toThrow('инвариант 5');
+
+    expect(catalogService.getSnapshot().devices.has('unknown-brand-conditional-device')).toBe(
+      false,
+    );
+  });
+
+  it('createDevice отклоняет повторное создание с уже существующим идентификатором', async () => {
+    await catalogService.reload();
+    await service.createDevice({
+      device: buildSampleDevice({ _id: 'duplicate-device-test' }),
+      reason: 'первое создание',
+      decidedBy: 'moderator-1',
+    });
+
+    await expect(
+      service.createDevice({
+        device: buildSampleDevice({ _id: 'duplicate-device-test' }),
+        reason: 'повторное создание',
+        decidedBy: 'moderator-1',
+      }),
+    ).rejects.toThrow('уже существует');
+  });
+
+  it('действия на неизвестном устройстве бросают DEVICE_NOT_FOUND (requireDevice)', async () => {
+    await catalogService.reload();
+
+    await expect(
+      service.changeEsimStatus(
+        'unknown-device',
+        { support: 'supported' },
+        'derived',
+        undefined,
+        'причина',
+        'moderator-1',
+        null,
+      ),
+    ).rejects.toThrow('не найдено');
+  });
+
+  it('повторная привязка ТОЙ ЖЕ сигнатуры не создаёт дубликат в screenSignatures', async () => {
+    await deviceModel.create(
+      buildSampleDevice({
+        _id: 'apple-iphone-15',
+        brand: 'apple',
+        platform: 'ios',
+        modelCodes: [],
+        aliases: [],
+        screenSignatures: [],
+        os: { minVersion: '17.0', maxVersion: '18.5' },
+      }),
+    );
+    await catalogService.reload();
+    await screenSignatureService.reload();
+
+    const signature = { cssWidth: 393, cssHeight: 852, dpr: 3, zoomed: false };
+    await service.linkScreenSignature({
+      deviceId: 'apple-iphone-15',
+      signature,
+      reason: 'первая привязка',
+      decidedBy: 'moderator-1',
+      taskId: null,
+    });
+    const secondCall = await service.linkScreenSignature({
+      deviceId: 'apple-iphone-15',
+      signature,
+      reason: 'повторная привязка той же сигнатуры',
+      decidedBy: 'moderator-1',
+      taskId: null,
+    });
+
+    expect(secondCall.screenSignatures).toEqual([signature]);
+  });
+
   it('genericPatch применяет изменение deviceType и логирует действие mark_not_phone', async () => {
     await deviceModel.create(buildSampleDevice({ _id: 'samsung-galaxy-tab', deviceType: 'phone' }));
     await catalogService.reload();

@@ -1,0 +1,47 @@
+{
+  "deviceId": "apple-iphone-13-mini",
+  "patch": {
+    "dataConfidence": "verified",
+    "sources": [
+      {
+        "url": "https://support.apple.com/en-us/118569",
+        "title": "Learn which type SIM your iPhone or iPad uses — Apple Support",
+        "checkedAt": "2026-08-19T00:00:00.000Z"
+      },
+      {
+        "url": "https://support.apple.com/en-us/100100",
+        "title": "Apple security releases — Apple Support",
+        "checkedAt": "2026-08-19T00:00:00.000Z"
+      },
+      {
+        "url": "https://support.apple.com/en-us/108898",
+        "title": "Using Dual SIM with two nano-SIM cards — Apple Support",
+        "checkedAt": "2026-08-19T00:00:00.000Z"
+      },
+      {
+        "url": "https://support.apple.com/ru-ru/111845",
+        "title": "Технические характеристики iPhone 13 mini",
+        "checkedAt": "2026-08-21T11:07:19.943Z"
+      }
+    ],
+    "screenSignatures": [
+      {
+        "cssWidth": 375,
+        "cssHeight": 812,
+        "dpr": 3,
+        "zoomed": false
+      },
+      {
+        "cssWidth": 375,
+        "cssHeight": 813,
+        "dpr": 3,
+        "zoomed": false
+      }
+    ]
+  },
+  "reason": "Подтверждено модератором со ссылкой на официальную страницу поддержки Apple; вторая сигнатура экрана 375x813@3 — наблюдаемый вариант округления высоты вьюпорта у того же устройства",
+  "decidedBy": "agent-7-demo",
+  "decidedAt": "2026-08-21T11:07:19.944Z",
+  "createdAt": "2026-08-21T07:07:07.180Z",
+  "updatedAt": "2026-08-21T11:07:19.952Z"
+}

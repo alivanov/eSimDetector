@@ -1,4 +1,5 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { ModerationTaskService } from '../moderation/moderation-task.service';
 
 import { FeedbackRequestDto } from './dto/feedback-request.dto';
@@ -16,6 +17,7 @@ export interface FeedbackResponse {
  * транспортной ошибкой» применён и здесь) — само обращение попадает в очередь модерации, а не
  * получает мгновенную оценку правоты пользователя.
  */
+@ApiTags('feedback')
 @Controller('feedback')
 export class FeedbackController {
   public constructor(private readonly taskService: ModerationTaskService) {}

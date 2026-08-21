@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import type { ModerationTask } from '@esim-detector/contracts';
 
 import { AdminTokenGuard } from './admin-token.guard';
@@ -33,6 +34,7 @@ const DEFAULT_PAGE_SIZE = 20;
  * ответа. За `AdminTokenGuard` (ADR-025 п.5) на уровне контроллера — распространяется на все
  * маршруты класса.
  */
+@ApiTags('admin')
 @Controller('admin/moderation/tasks')
 @UseGuards(AdminTokenGuard)
 export class ModerationTasksController {

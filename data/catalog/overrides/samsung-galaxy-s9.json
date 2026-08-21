@@ -1,0 +1,18 @@
+{
+  "deviceId": "samsung-galaxy-s9",
+  "patch": {
+    "dataConfidence": "verified",
+    "modelCodes": [
+      "SM-G960F",
+      "SM-G965F",
+      "SM-G960",
+      "SM-G965",
+      "SM-G9600"
+    ]
+  },
+  "reason": "https://www.samsung.com/ru/support/mobile-devices/galaxy-s9-sm-g9600/",
+  "decidedBy": "agent-7-demo",
+  "decidedAt": "2026-08-21T07:05:16.766Z",
+  "createdAt": "2026-08-21T07:05:16.766Z",
+  "updatedAt": "2026-08-21T07:05:16.766Z"
+}

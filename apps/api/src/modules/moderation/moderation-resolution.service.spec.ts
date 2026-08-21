@@ -1,5 +1,6 @@
 import { buildSampleDevice, type ModerationTask } from '@esim-detector/contracts';
 
+import type { CatalogChangeLogService } from './catalog-change-log.service';
 import type { CatalogWriteService } from './catalog-write.service';
 import { ModerationResolutionService } from './moderation-resolution.service';
 import type { ModerationTaskService } from './moderation-task.service';
@@ -60,14 +61,24 @@ function buildCatalogWriteService(): {
   };
 }
 
+/** Журнал `catalog_changes` (docs/15 §15.6) — фейк без базы, только для проверки, что действие оставило след. */
+function buildChangeLogService(): { service: CatalogChangeLogService; append: jest.Mock } {
+  const append = jest.fn(() => Promise.resolve());
+  const fake: Pick<CatalogChangeLogService, 'append'> = { append };
+  return { service: fake as CatalogChangeLogService, append };
+}
+
 /**
  * `ModerationResolutionService` (docs/15-moderation.md §15.4) — диспетчер «действие × тип
  * задачи»: проверяет допустимость сочетания и обязательные поля, без обращения к реальной базе
  * (зависимости — фейки). `reason` (обоснование для журнала) и `sourceUrl` (ссылка на источник,
- * от которой зависит уровень `verified`) — разные поля, ADR-044.
+ * от которой зависит уровень `verified`) — разные поля, ADR-044. Действия, не касающиеся
+ * `devices` (`reject`/`reject_quarantine`), тем не менее пишут `catalog_changes`
+ * (docs/09-decisions.md, п.2 объёма этапа 8 — `reject_task`/`confirm_quarantine`/
+ * `reject_quarantine` объявлены схемой и обязаны реально писаться).
  */
 describe('ModerationResolutionService', () => {
-  it('reject закрывает ЛЮБУЮ задачу без вызова CatalogWriteService', async () => {
+  it('reject закрывает ЛЮБУЮ задачу без вызова CatalogWriteService и пишет catalog_changes с action "reject_task"', async () => {
     const task: ModerationTask = {
       ...buildTaskCommon(),
       kind: 'unknown_model_code',
@@ -76,7 +87,12 @@ describe('ModerationResolutionService', () => {
     };
     const { service: taskService, markRejected } = buildTaskService(task);
     const { service: catalogWriteService, linkModelCode } = buildCatalogWriteService();
-    const resolution = new ModerationResolutionService(taskService, catalogWriteService);
+    const { service: changeLogService, append } = buildChangeLogService();
+    const resolution = new ModerationResolutionService(
+      taskService,
+      catalogWriteService,
+      changeLogService,
+    );
 
     const outcome = await resolution.resolve('task-1', {
       action: 'reject',
@@ -87,6 +103,16 @@ describe('ModerationResolutionService', () => {
     expect(outcome.taskStatus).toBe('rejected');
     expect(linkModelCode).not.toHaveBeenCalled();
     expect(markRejected).toHaveBeenCalledWith('task-1', 'moderator-1', 'дубликат другой задачи');
+    expect(append).toHaveBeenCalledWith({
+      deviceId: null,
+      taskId: 'task-1',
+      action: 'reject_task',
+      field: null,
+      previousValue: null,
+      newValue: null,
+      reason: 'дубликат другой задачи',
+      decidedBy: 'moderator-1',
+    });
   });
 
   it('link_model_code на задаче unknown_model_code вызывает CatalogWriteService.linkModelCode с кодом из payload', async () => {
@@ -98,7 +124,12 @@ describe('ModerationResolutionService', () => {
     };
     const { service: taskService, markResolved } = buildTaskService(task);
     const { service: catalogWriteService, linkModelCode } = buildCatalogWriteService();
-    const resolution = new ModerationResolutionService(taskService, catalogWriteService);
+    const { service: changeLogService } = buildChangeLogService();
+    const resolution = new ModerationResolutionService(
+      taskService,
+      catalogWriteService,
+      changeLogService,
+    );
 
     const outcome = await resolution.resolve('task-1', {
       action: 'link_model_code',
@@ -133,7 +164,12 @@ describe('ModerationResolutionService', () => {
     };
     const { service: taskService } = buildTaskService(task);
     const { service: catalogWriteService, linkModelCode } = buildCatalogWriteService();
-    const resolution = new ModerationResolutionService(taskService, catalogWriteService);
+    const { service: changeLogService } = buildChangeLogService();
+    const resolution = new ModerationResolutionService(
+      taskService,
+      catalogWriteService,
+      changeLogService,
+    );
 
     await resolution.resolve('task-1', {
       action: 'link_model_code',
@@ -160,7 +196,12 @@ describe('ModerationResolutionService', () => {
     };
     const { service: taskService } = buildTaskService(task);
     const { service: catalogWriteService } = buildCatalogWriteService();
-    const resolution = new ModerationResolutionService(taskService, catalogWriteService);
+    const { service: changeLogService } = buildChangeLogService();
+    const resolution = new ModerationResolutionService(
+      taskService,
+      catalogWriteService,
+      changeLogService,
+    );
 
     await expect(
       resolution.resolve('task-1', {
@@ -181,7 +222,12 @@ describe('ModerationResolutionService', () => {
     };
     const { service: taskService } = buildTaskService(task);
     const { service: catalogWriteService, linkModelCode } = buildCatalogWriteService();
-    const resolution = new ModerationResolutionService(taskService, catalogWriteService);
+    const { service: changeLogService } = buildChangeLogService();
+    const resolution = new ModerationResolutionService(
+      taskService,
+      catalogWriteService,
+      changeLogService,
+    );
 
     await expect(
       resolution.resolve('task-1', {
@@ -209,7 +255,12 @@ describe('ModerationResolutionService', () => {
     };
     const { service: taskService, markResolved } = buildTaskService(task);
     const { service: catalogWriteService, linkScreenSignature } = buildCatalogWriteService();
-    const resolution = new ModerationResolutionService(taskService, catalogWriteService);
+    const { service: changeLogService } = buildChangeLogService();
+    const resolution = new ModerationResolutionService(
+      taskService,
+      catalogWriteService,
+      changeLogService,
+    );
 
     const outcome = await resolution.resolve('task-1', {
       action: 'link_screen_signature',
@@ -235,7 +286,7 @@ describe('ModerationResolutionService', () => {
     expect(markResolved).toHaveBeenCalled();
   });
 
-  it('confirm_quarantine на csv_quarantine добавляет псевдоним из rawMarketingName', async () => {
+  it('confirm_quarantine на csv_quarantine добавляет псевдоним из rawMarketingName с действием "confirm_quarantine"', async () => {
     const task: ModerationTask = {
       ...buildTaskCommon(),
       kind: 'csv_quarantine',
@@ -251,7 +302,12 @@ describe('ModerationResolutionService', () => {
     };
     const { service: taskService } = buildTaskService(task);
     const { service: catalogWriteService, addAlias } = buildCatalogWriteService();
-    const resolution = new ModerationResolutionService(taskService, catalogWriteService);
+    const { service: changeLogService } = buildChangeLogService();
+    const resolution = new ModerationResolutionService(
+      taskService,
+      catalogWriteService,
+      changeLogService,
+    );
 
     const outcome = await resolution.resolve('task-1', {
       action: 'confirm_quarantine',
@@ -266,10 +322,45 @@ describe('ModerationResolutionService', () => {
       'Galaxy Z Fold 6',
       'https://www.samsung.com/galaxy-z-fold6',
       'moderator-1',
+      'confirm_quarantine',
+      'task-1',
     );
   });
 
-  it('reject_quarantine на csv_quarantine отклоняет задачу без изменения справочника', async () => {
+  it('confirm_quarantine без распознанного названия (нечего добавить как псевдоним) отклоняется без вызова CatalogWriteService', async () => {
+    const task: ModerationTask = {
+      ...buildTaskCommon(),
+      kind: 'csv_quarantine',
+      key: 'FIELD_COUNT_MISMATCH:gpt-5-6-luna:02:9',
+      payload: {
+        code: 'FIELD_COUNT_MISMATCH',
+        source: 'gpt-5-6-luna',
+        batchId: '02',
+        lineNumber: 9,
+        detail: 'неверное число полей в строке',
+      },
+    };
+    const { service: taskService } = buildTaskService(task);
+    const { service: catalogWriteService, addAlias } = buildCatalogWriteService();
+    const { service: changeLogService } = buildChangeLogService();
+    const resolution = new ModerationResolutionService(
+      taskService,
+      catalogWriteService,
+      changeLogService,
+    );
+
+    await expect(
+      resolution.resolve('task-1', {
+        action: 'confirm_quarantine',
+        decidedBy: 'moderator-1',
+        deviceId: 'samsung-galaxy-z-fold-6',
+        reason: 'нет распознанного названия',
+      }),
+    ).rejects.toThrow('распознанного названия');
+    expect(addAlias).not.toHaveBeenCalled();
+  });
+
+  it('reject_quarantine на csv_quarantine отклоняет задачу без изменения справочника и пишет catalog_changes с action "reject_quarantine"', async () => {
     const task: ModerationTask = {
       ...buildTaskCommon(),
       kind: 'csv_quarantine',
@@ -284,7 +375,12 @@ describe('ModerationResolutionService', () => {
     };
     const { service: taskService, markRejected } = buildTaskService(task);
     const { service: catalogWriteService, addAlias } = buildCatalogWriteService();
-    const resolution = new ModerationResolutionService(taskService, catalogWriteService);
+    const { service: changeLogService, append } = buildChangeLogService();
+    const resolution = new ModerationResolutionService(
+      taskService,
+      catalogWriteService,
+      changeLogService,
+    );
 
     const outcome = await resolution.resolve('task-1', {
       action: 'reject_quarantine',
@@ -295,6 +391,16 @@ describe('ModerationResolutionService', () => {
     expect(outcome.taskStatus).toBe('rejected');
     expect(addAlias).not.toHaveBeenCalled();
     expect(markRejected).toHaveBeenCalledWith('task-1', 'moderator-1', 'строка признана мусором');
+    expect(append).toHaveBeenCalledWith({
+      deviceId: null,
+      taskId: 'task-1',
+      action: 'reject_quarantine',
+      field: null,
+      previousValue: null,
+      newValue: null,
+      reason: 'строка признана мусором',
+      decidedBy: 'moderator-1',
+    });
   });
 
   it('acknowledge_feedback без deviceId/esimSupport просто закрывает задачу с комментарием', async () => {
@@ -312,7 +418,12 @@ describe('ModerationResolutionService', () => {
     };
     const { service: taskService, markResolved } = buildTaskService(task);
     const { service: catalogWriteService, changeEsimStatus } = buildCatalogWriteService();
-    const resolution = new ModerationResolutionService(taskService, catalogWriteService);
+    const { service: changeLogService } = buildChangeLogService();
+    const resolution = new ModerationResolutionService(
+      taskService,
+      catalogWriteService,
+      changeLogService,
+    );
 
     const outcome = await resolution.resolve('task-1', {
       action: 'acknowledge_feedback',
@@ -344,7 +455,12 @@ describe('ModerationResolutionService', () => {
     };
     const { service: taskService } = buildTaskService(task);
     const { service: catalogWriteService, changeEsimStatus } = buildCatalogWriteService();
-    const resolution = new ModerationResolutionService(taskService, catalogWriteService);
+    const { service: changeLogService } = buildChangeLogService();
+    const resolution = new ModerationResolutionService(
+      taskService,
+      catalogWriteService,
+      changeLogService,
+    );
 
     await resolution.resolve('task-1', {
       action: 'acknowledge_feedback',
@@ -381,7 +497,12 @@ describe('ModerationResolutionService', () => {
     };
     const { service: taskService } = buildTaskService(task);
     const { service: catalogWriteService, addAlias } = buildCatalogWriteService();
-    const resolution = new ModerationResolutionService(taskService, catalogWriteService);
+    const { service: changeLogService } = buildChangeLogService();
+    const resolution = new ModerationResolutionService(
+      taskService,
+      catalogWriteService,
+      changeLogService,
+    );
 
     await resolution.resolve('task-1', {
       action: 'link_model_code',
@@ -413,7 +534,12 @@ describe('ModerationResolutionService', () => {
     };
     const { service: taskService } = buildTaskService(task);
     const { service: catalogWriteService, changeEsimStatus } = buildCatalogWriteService();
-    const resolution = new ModerationResolutionService(taskService, catalogWriteService);
+    const { service: changeLogService } = buildChangeLogService();
+    const resolution = new ModerationResolutionService(
+      taskService,
+      catalogWriteService,
+      changeLogService,
+    );
 
     await resolution.resolve('task-1', {
       action: 'resolve_source_disagreement',

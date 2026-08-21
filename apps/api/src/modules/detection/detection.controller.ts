@@ -1,4 +1,5 @@
 import { Body, Controller, HttpCode, HttpStatus, Post, Req } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import type { Request } from 'express';
 
 import { getRequestId } from '../../common/middleware/request-id.middleware';
@@ -34,6 +35,7 @@ function extractHeaders(req: Request): RequestHeaderSignals {
   };
 }
 
+@ApiTags('detect')
 @Controller('detect')
 export class DetectionController {
   public constructor(private readonly detectionService: DetectionService) {}

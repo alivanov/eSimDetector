@@ -10,6 +10,7 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import type { CatalogOverridePatch, Device } from '@esim-detector/contracts';
 
 import { AdminDeviceQueryService } from './admin-device-query.service';
@@ -37,6 +38,7 @@ const DEFAULT_PAGE_SIZE = 20;
  * справочника, перечитывание кэша. Контроллер без бизнес-логики
  * (.cursor/rules/api-boundaries.mdc); за `AdminTokenGuard` (ADR-025 п.5).
  */
+@ApiTags('admin')
 @Controller('admin')
 @UseGuards(AdminTokenGuard)
 export class AdminCatalogController {

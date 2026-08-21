@@ -147,4 +147,39 @@ describe('Search (e2e)', () => {
     expect(response.status).toBe(200);
     expect(Array.isArray(response.body.suggestions)).toBe(true);
   });
+
+  it('GET /api/v1/devices/{id} возвращает полную карточку устройства (docs/06 §6.4)', async () => {
+    const response = await request(httpServer).get('/api/v1/devices/samsung-galaxy-s24-ultra');
+
+    expect(response.status).toBe(200);
+    expect(response.body.id).toBe('samsung-galaxy-s24-ultra');
+    expect(response.body.marketingName).toBe('Galaxy S24 Ultra');
+    expect(response.body.sources).toBeDefined();
+    expect(response.body.provenance).toBeUndefined();
+  });
+
+  it('GET /api/v1/devices/{id} на неизвестном идентификаторе → 404 DEVICE_NOT_FOUND', async () => {
+    const response = await request(httpServer).get('/api/v1/devices/unknown-device-id');
+
+    expect(response.status).toBe(404);
+    expect(response.body.error.code).toBe('DEVICE_NOT_FOUND');
+  });
+
+  it('GET /api/v1/devices?brand= возвращает постраничный перечень (docs/06 §6.4)', async () => {
+    const response = await request(httpServer).get('/api/v1/devices').query({ brand: 'samsung' });
+
+    expect(response.status).toBe(200);
+    const items = response.body.items as { id: string }[];
+    expect(items.some((item) => item.id === 'samsung-galaxy-s24-ultra')).toBe(true);
+    expect(response.body.total).toBeGreaterThan(0);
+  });
+
+  it('GET /api/v1/brands возвращает перечень брендов (docs/06 §6.4)', async () => {
+    const response = await request(httpServer).get('/api/v1/brands');
+
+    expect(response.status).toBe(200);
+    expect(Array.isArray(response.body)).toBe(true);
+    const brands = response.body as { brand: string }[];
+    expect(brands.some((entry) => entry.brand === 'samsung')).toBe(true);
+  });
 });

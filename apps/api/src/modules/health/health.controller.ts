@@ -1,5 +1,6 @@
 import { Controller, Get, Res } from '@nestjs/common';
 import { InjectConnection } from '@nestjs/mongoose';
+import { ApiTags } from '@nestjs/swagger';
 import type { Response } from 'express';
 import { ConnectionStates, type Connection } from 'mongoose';
 
@@ -23,6 +24,7 @@ interface ReadinessBody {
  * `degraded` и 503, если MongoDB не подключена ИЛИ справочник ещё не прогрет/не загрузился
  * (ADR-005: «прогрев учтён в проверке готовности `/health/ready`»).
  */
+@ApiTags('health')
 @Controller('health')
 export class HealthController {
   public constructor(

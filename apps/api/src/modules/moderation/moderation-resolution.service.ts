@@ -3,6 +3,7 @@ import type { Device, DeviceSource } from '@esim-detector/contracts';
 
 import { ApiError } from '../../common/errors/api-error';
 
+import { CatalogChangeLogService } from './catalog-change-log.service';
 import { CatalogWriteService } from './catalog-write.service';
 import type { ResolveModerationTaskDto } from './dto/resolve-task.dto';
 import { ModerationTaskService } from './moderation-task.service';
@@ -55,6 +56,7 @@ export class ModerationResolutionService {
   public constructor(
     private readonly taskService: ModerationTaskService,
     private readonly catalogWriteService: CatalogWriteService,
+    private readonly changeLogService: CatalogChangeLogService,
   ) {}
 
   public async resolve(taskId: string, dto: ResolveModerationTaskDto): Promise<ResolveOutcome> {
@@ -62,7 +64,22 @@ export class ModerationResolutionService {
     const source = buildSource(dto, new Date());
 
     if (dto.action === 'reject') {
-      await this.taskService.markRejected(taskId, dto.decidedBy, requireField(dto.note, 'note'));
+      const note = requireField(dto.note, 'note');
+      await this.taskService.markRejected(taskId, dto.decidedBy, note);
+      // Единственное действие таблицы §15.4, не касающееся `devices` — журналу всё равно нужен
+      // след (§15.6: «каждое действие пишется в catalog_changes»), поэтому `deviceId`/`field`
+      // остаются пустыми, а не пропускается запись целиком (ADR-043 п.2 сделал их необязательными
+      // именно для этого случая).
+      await this.changeLogService.append({
+        deviceId: null,
+        taskId,
+        action: 'reject_task',
+        field: null,
+        previousValue: null,
+        newValue: null,
+        reason: note,
+        decidedBy: dto.decidedBy,
+      });
       return { taskStatus: 'rejected' };
     }
 
@@ -107,12 +124,31 @@ export class ModerationResolutionService {
 
     if (task.kind === 'csv_quarantine' && dto.action === 'confirm_quarantine') {
       const deviceId = requireField(dto.deviceId, 'deviceId');
-      const aliasSource = task.payload.rawMarketingName ?? task.payload.detail;
+      /**
+       * «Подтвердить строку карантина» = «эта строка выгрузки на самом деле про устройство
+       * `deviceId`» (docs/15 §15.4) — единственное поле строки карантина, пригодное как
+       * псевдоним, — распознанное маркетинговое название (`rawMarketingName`). `task.payload.detail`
+       * НЕ подходит: это текст нарушения валидации конвейера (например, «дублирующийся код»), а
+       * не что-либо, сказанное о самом устройстве, — записать его в `aliases` означало бы
+       * положить служебную строку отчёта об импорте в данные, которые участвуют в сопоставлении
+       * пользовательского ввода. Строка карантина без распознанного названия (например,
+       * `FIELD_COUNT_MISMATCH` без `rawMarketingName`) этим действием подтверждена быть не может —
+       * у модератора остаётся `reject_quarantine`.
+       */
+      if (task.payload.rawMarketingName === undefined) {
+        throw new ApiError(
+          'VALIDATION_ERROR',
+          'Строка карантина не содержит распознанного названия устройства — подтвердить её как псевдоним нечем; используйте "Отклонить строку карантина"',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
       const device = await this.catalogWriteService.addAlias(
         deviceId,
-        aliasSource,
+        task.payload.rawMarketingName,
         requireField(dto.reason, 'reason'),
         dto.decidedBy,
+        'confirm_quarantine',
+        taskId,
       );
       await this.taskService.markResolved(
         taskId,
@@ -123,7 +159,18 @@ export class ModerationResolutionService {
     }
 
     if (task.kind === 'csv_quarantine' && dto.action === 'reject_quarantine') {
-      await this.taskService.markRejected(taskId, dto.decidedBy, requireField(dto.note, 'note'));
+      const note = requireField(dto.note, 'note');
+      await this.taskService.markRejected(taskId, dto.decidedBy, note);
+      await this.changeLogService.append({
+        deviceId: null,
+        taskId,
+        action: 'reject_quarantine',
+        field: null,
+        previousValue: null,
+        newValue: null,
+        reason: note,
+        decidedBy: dto.decidedBy,
+      });
       return { taskStatus: 'rejected' };
     }
 

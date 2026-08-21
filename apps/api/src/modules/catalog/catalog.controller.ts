@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 import { CatalogService } from './catalog.service';
 import type { CatalogMeta } from './catalog.snapshot';
@@ -10,6 +11,7 @@ import type { CatalogMeta } from './catalog.snapshot';
  * `ApiError('CATALOG_UNAVAILABLE', ...)`, перехватываемый `ApiExceptionFilter` — здесь
  * никакой обработки ошибки не требуется (контроллеры без бизнес-логики, api-boundaries.mdc).
  */
+@ApiTags('catalog')
 @Controller('catalog')
 export class CatalogController {
   public constructor(private readonly catalogService: CatalogService) {}

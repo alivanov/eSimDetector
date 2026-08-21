@@ -10,7 +10,12 @@ import type {
   DeviceSource,
   ScreenSignatureRecord,
 } from '@esim-detector/contracts';
-import { catalogOverrideSchema, deviceSchema } from '@esim-detector/contracts';
+import {
+  applyCatalogOverride,
+  catalogOverrideSchema,
+  deviceSchema,
+  validateCatalogInvariants,
+} from '@esim-detector/contracts';
 import type { Model } from 'mongoose';
 
 import { ApiError } from '../../common/errors/api-error';
@@ -154,6 +159,47 @@ export class CatalogWriteService {
   }
 
   /**
+   * Решение модератора не должно тихо создавать нарушение инвариантов справочника
+   * (docs/05-data-model.md §5.8; ADR по этому пункту передачи) — без этой проверки коллизия
+   * сервисного кода/псевдонима просто перестаёт резолвиться в ответах пользователю
+   * (`buildAliasIndex`, `packages/fuzzy-matcher/src/exact-index.ts`, снимает коллизионный ключ
+   * с точного индекса), а сам модератор не получает ни одного сигнала о том, что его решение не
+   * подействовало. Проверка строится на снимке справочника ПОСЛЕ применения решения, но ДО
+   * записи в MongoDB: нарушение отклоняет решение целиком (400, `VALIDATION_ERROR`) с указанием
+   * номера инварианта — по аналогии с тем, как `requireSourceForVerified`/`catalogOverrideSchema`
+   * уже отклоняют решение до записи, а не карантинят его постфактум (ADR-029 карантинит только
+   * НЕДОВЕРЕННЫЕ данные конвейера импорта; здесь же решение принимает человек синхронно и обязан
+   * увидеть отказ сразу, а не тихую деградацию).
+   */
+  private assertNoNewInvariantViolations(
+    candidateDeviceId: string,
+    candidateDevices: readonly Device[],
+  ): void {
+    const { violations } = validateCatalogInvariants(
+      candidateDevices,
+      this.screenSignatureService.entries(),
+    );
+    const affecting = violations.filter(
+      (violation) =>
+        violation.deviceId === candidateDeviceId ||
+        (violation.deviceIds?.includes(candidateDeviceId) ?? false),
+    );
+    if (affecting.length === 0) {
+      return;
+    }
+    const detail = affecting
+      .map(
+        (violation) => `инвариант ${violation.invariant} (${violation.code}): ${violation.message}`,
+      )
+      .join('; ');
+    throw new ApiError(
+      'VALIDATION_ERROR',
+      `Решение нарушает инвариант(ы) справочника (docs/05-data-model.md §5.8) — ${detail}`,
+      HttpStatus.BAD_REQUEST,
+    );
+  }
+
+  /**
    * Часть патча, отвечающая за достоверность решения о привязке. Ссылка указана — уровень
    * поднимается до `verified`, а сама ссылка ДОБАВЛЯЕТСЯ к уже известным источникам записи (не
    * заменяет их: прежняя сверка вендорской страницы остаётся частью происхождения данных). Ссылки
@@ -184,6 +230,21 @@ export class CatalogWriteService {
     this.requireSourceForVerified(device, input, mergedPatch);
 
     const now = new Date();
+    const candidateDevice = applyCatalogOverride(device, {
+      deviceId: input.deviceId,
+      patch: input.patch,
+      reason: input.reason,
+      decidedBy: input.decidedBy,
+      decidedAt: now,
+      createdAt: now,
+      updatedAt: now,
+    });
+    const snapshot = this.catalogService.getSnapshot();
+    const candidateDevices = [...snapshot.devices.values()].map((existing) =>
+      existing._id === input.deviceId ? candidateDevice : existing,
+    );
+    this.assertNoNewInvariantViolations(input.deviceId, candidateDevices);
+
     /**
      * Разбирается ДОКУМЕНТ ЦЕЛИКОМ, а не только `patch`: `catalog_overrides` читается обратно
      * `catalogOverrideSchema` (`CatalogService.reload()`), поэтому запись, которую эта схема не
@@ -319,12 +380,23 @@ export class CatalogWriteService {
     });
   }
 
-  /** «Добавить псевдоним или синоним» (docs/15 §15.4) — применяется без перезапуска. */
+  /**
+   * «Добавить псевдоним или синоним» (docs/15 §15.4) — применяется без перезапуска.
+   *
+   * `action`/`taskId` параметризованы (по умолчанию `add_alias`/`null`), потому что то же
+   * поведение переиспользуется тремя разными записями таблицы §15.4: собственно «добавить
+   * псевдоним» (`POST /api/v1/admin/aliases`, вне задачи очереди), решение по `unmatched_query`/
+   * `ambiguous_query` (тоже `add_alias` — по смыслу это ровно то же действие) и «подтвердить
+   * строку карантина» (`confirm_quarantine`, docs/09-decisions.md — журнал обязан различать это
+   * действие от обычного добавления псевдонима, а не терять код действия при том же коде поля).
+   */
   public async addAlias(
     deviceId: string,
     alias: string,
     reason: string,
     decidedBy: string,
+    action: CatalogChangeAction = 'add_alias',
+    taskId: string | null = null,
   ): Promise<Device> {
     const device = this.requireDevice(deviceId);
     const normalizedAlias = alias.trim().toLowerCase();
@@ -335,8 +407,8 @@ export class CatalogWriteService {
       patch: { aliases },
       reason,
       decidedBy,
-      taskId: null,
-      action: 'add_alias',
+      taskId,
+      action,
       field: 'aliases',
       previousValue: device.aliases,
     });
@@ -483,6 +555,9 @@ export class CatalogWriteService {
         HttpStatus.BAD_REQUEST,
       );
     }
+
+    const snapshot = this.catalogService.getSnapshot();
+    this.assertNoNewInvariantViolations(validated._id, [...snapshot.devices.values(), validated]);
 
     await this.deviceModel.create(validated);
     await this.catalogService.reload();

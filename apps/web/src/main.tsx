@@ -1,10 +1,23 @@
 import { injectDesignTokensStyle } from '@esim-detector/widget';
-import { StrictMode } from 'react';
+import { lazy, StrictMode, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { AdminPage } from './admin/AdminPage';
 import { App } from './App';
 import { DebugPage } from './debug/DebugPage';
+
+/**
+ * `AdminPage` подключён ДИНАМИЧЕСКИМ импортом, а не статическим, как две другие страницы
+ * (docs/09-decisions.md ADR-047 п.11): её ветвь (`admin/admin-api.ts`) переиспользует схемы
+ * `@esim-detector/contracts`, которые тянут `zod` как рантайм-зависимость — до этой правки
+ * `zod` и весь раздел модерации попадали в единственный публичный чанк (641 кБ, выше порога
+ * предупреждения Vite) и скачивались КАЖДЫМ обычным пользователем экрана проверки, которому
+ * они никогда не понадобятся (раздел закрыт `ADMIN_TOKEN`, ADR-025 п.5). Маршрутизация здесь
+ * по `location.pathname`, без библиотеки-роутера (§7.6) — динамический импорт подключается
+ * без неё, `import()` — часть языка, а не роутера.
+ */
+const AdminPage = lazy(() =>
+  import('./admin/AdminPage').then((module) => ({ default: module.AdminPage })),
+);
 
 // Демонстрационное приложение не имеет теневого DOM — переменные токенов (`--esim-*`, ADR-012)
 // публикуются в `:root` документа один раз при старте (`injectDesignTokensStyle`, ADR-038/ADR-039).
@@ -29,7 +42,11 @@ function selectPage() {
     return <DebugPage />;
   }
   if (window.location.pathname === '/admin') {
-    return <AdminPage />;
+    return (
+      <Suspense fallback={null}>
+        <AdminPage />
+      </Suspense>
+    );
   }
   return <App />;
 }

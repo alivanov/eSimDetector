@@ -3,6 +3,8 @@ import { Module } from '@nestjs/common';
 import { CatalogModule } from '../catalog/catalog.module';
 import { ModerationModule } from '../moderation/moderation.module';
 
+import { BrandsController } from './brands.controller';
+import { DeviceCatalogQueryService } from './device-catalog-query.service';
 import { normalizationDictionaryProvider } from './dictionary/normalization-dictionary.provider';
 import { MatchingController } from './matching.controller';
 import { MatchingService } from './matching.service';
@@ -17,8 +19,8 @@ import { MatchingService } from './matching.service';
  */
 @Module({
   imports: [CatalogModule, ModerationModule],
-  controllers: [MatchingController],
-  providers: [MatchingService, normalizationDictionaryProvider],
+  controllers: [MatchingController, BrandsController],
+  providers: [MatchingService, DeviceCatalogQueryService, normalizationDictionaryProvider],
   exports: [MatchingService],
 })
 export class MatchingModule {}

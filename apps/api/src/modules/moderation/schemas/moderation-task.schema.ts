@@ -43,5 +43,30 @@ moderationTaskMongooseSchema.index({ kind: 1, key: 1 }, { unique: true });
 /** Очередь, отсортированная по частоте обращений (docs/05 §5.7, docs/15 §15.2). */
 moderationTaskMongooseSchema.index({ status: 1, occurrences: -1 });
 
+/**
+ * TTL-индекс (docs/05-data-model.md §5.6/§5.7, дополнение к пункту объёма 6 передачи 7→8):
+ * без него `moderation_tasks` растёт неограниченно от ПУБЛИЧНЫХ источников задач
+ * (`unmatched_query`/`ambiguous_query` дедуплицируются по нормализованному тексту запроса,
+ * `user_feedback` — по клиентскому `requestId`) — те же входы, для которых введён
+ * `RateLimitGuard`, ограничивают ЧАСТОТУ создания задач, но не их суммарное число за месяцы
+ * работы стенда.
+ *
+ * Индекс ЧАСТИЧНЫЙ и стоит на `resolvedAt`, а не на `createdAt`: открытая задача (`resolvedAt:
+ * null`) не должна исчезать из очереди по возрасту — специалист обязан успеть её увидеть и
+ * разобрать независимо от того, сколько она провисела (docs/15 §15.2: сортировка по частоте
+ * обращений, а не по времени, — молчаливое устаревание нарушило бы этот принцип). `$type: "date"`
+ * в `partialFilterExpression` включает в индекс только документы, где `resolvedAt` РЕАЛЬНО
+ * заполнен (задача решена/отклонена) — `null` этому типу не соответствует.
+ */
+const MODERATION_TASK_RESOLVED_TTL_DAYS = 180;
+const SECONDS_PER_DAY = 24 * 60 * 60;
+moderationTaskMongooseSchema.index(
+  { resolvedAt: 1 },
+  {
+    expireAfterSeconds: MODERATION_TASK_RESOLVED_TTL_DAYS * SECONDS_PER_DAY,
+    partialFilterExpression: { resolvedAt: { $type: 'date' } },
+  },
+);
+
 export type ModerationTaskDocument = HydratedDocument<ModerationTask>;
 export type ModerationTaskModel = Model<ModerationTask>;

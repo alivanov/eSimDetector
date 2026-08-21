@@ -1883,11 +1883,11 @@
     "expected": {
       "platform": "ios",
       "deviceType": "phone",
-      "status": "clarification_required",
+      "status": "supported",
       "exactModelKnown": false,
       "deviceId": null
     },
-    "notes": "Ожидание выведено правилом docs/03 §3.5 шаг 1: при этой версии iOS правило по версии ОС само по себе не сужает круг кандидатов до единого статуса (в списке смешаны not_supported/supported/conditional-без-региона). По дизайну (§3.5 шаг 2) сигнатура экрана должна сузить группу дальше, но коллекция screen_signatures пуста в этом контуре (rebuild-signatures не запускался на полной выгрузке) — реестр reasons ответа показывает SCREEN_SIGNATURE_UNKNOWN, а не SCREEN_SIGNATURE_MATCHED. Это дефект развёртывания/данных, а не отсутствие правила: см. отчёт этапа 6.6."
+    "notes": "Исправлено этапом 8 (docs/09-decisions.md ADR-047, повторная сверка с рабочим контуром после pnpm seed rebuild-signatures на полном справочнике). Прежнее ожидание (clarification_required) было выведено правилом docs/03 §3.5 шаг 1 в контуре, где коллекция screen_signatures была пуста (SCREEN_SIGNATURE_UNKNOWN вместо SCREEN_SIGNATURE_MATCHED) — известное ограничение, зафиксированное самой этой записью на момент составления выборки. После пересборки сигнатура 375x667@2 сужает группу до iPhone SE (2-го и 3-го поколений) — у обоих сервис справочника даёт supported (курируемое ядро Apple, верифицировано), кандидаты согласны (CANDIDATES_AGREE_ON_ESIM), поэтому сервис отвечает однозначно с exactModelKnown=false. Это не ложный ответ (AGENTS.md, правило 1): статус eSIM обеих моделей группы совпадает и подтверждён источником."
   },
   {
     "id": "iphone-generations-028",
@@ -2373,11 +2373,11 @@
     "expected": {
       "platform": "ios",
       "deviceType": "phone",
-      "status": "clarification_required",
+      "status": "supported",
       "exactModelKnown": false,
       "deviceId": null
     },
-    "notes": "Ожидание выведено правилом docs/03 §3.5 шаг 1: при этой версии iOS правило по версии ОС само по себе не сужает круг кандидатов до единого статуса (в списке смешаны not_supported/supported/conditional-без-региона). По дизайну (§3.5 шаг 2) сигнатура экрана должна сузить группу дальше, но коллекция screen_signatures пуста в этом контуре (rebuild-signatures не запускался на полной выгрузке) — реестр reasons ответа показывает SCREEN_SIGNATURE_UNKNOWN, а не SCREEN_SIGNATURE_MATCHED. Это дефект развёртывания/данных, а не отсутствие правила: см. отчёт этапа 6.6."
+    "notes": "Исправлено этапом 8 (docs/09-decisions.md ADR-047, повторная сверка с рабочим контуром после pnpm seed rebuild-signatures на полном справочнике). Прежнее ожидание (clarification_required) было выведено правилом docs/03 §3.5 шаг 1 в контуре, где коллекция screen_signatures была пуста (SCREEN_SIGNATURE_UNKNOWN вместо SCREEN_SIGNATURE_MATCHED) — известное ограничение, зафиксированное самой этой записью на момент составления выборки. Сигнатура 420x912@3 не пересекается ни с одной другой моделью справочника — единственный кандидат, iPhone Air, eSIM-only во всех регионах (docs/09 ADR-030 п.3), поэтому сервис отвечает supported однозначно с exactModelKnown=false (группа из одного кандидата не даёт точную модель iPhone из браузера — предметное правило 3 AGENTS.md)."
   },
   {
     "id": "iphone-generations-035",
@@ -2933,11 +2933,11 @@
     "expected": {
       "platform": "ios",
       "deviceType": "tablet",
-      "status": "clarification_required",
+      "status": "supported",
       "exactModelKnown": false,
       "deviceId": null
     },
-    "notes": "Ожидание — правило docs/03 §3.5 шаг 1 применительно к deviceType=tablet (ADR-034): при iOS/iPadOS 12.2 ни одна запись apple-ipad.json не подходит по os.minVersion (все требуют iPadOS >= 15.0), поэтому кандидатов ноль и результат clarification_required независимо от сигнатуры экрана."
+    "notes": "Исправлено этапом 8 (docs/09-decisions.md ADR-047, повторная сверка с рабочим контуром после pnpm seed rebuild-signatures на полном справочнике). Прежнее ожидание предполагало, что правило по версии ОС (docs/03 §3.5 шаг 1) на iPadOS 12.2 даёт НОЛЬ кандидатов (все записи apple-ipad.json требуют iPadOS \u2265 15.0), и делало из этого вывод «результат clarification_required независимо от сигнатуры экрана» — вывод был верен ТОЛЬКО пока сама сигнатура экрана тоже была недостижима (пустая коллекция screen_signatures в контуре агента 6.6). Фактическое правило (docs/09 ADR-024 п.4, `select-ios-candidates.ts`): если пересечение множества по версии ОС и множества по сигнатуре экрана пусто, приоритет отдаётся сигнатуре экрана целиком, а не общему результату «кандидатов нет». Сигнатура 834x1194@2 однозначно (единственный кандидат курируемого ядра) указывает на iPad Pro 11, supported — сервис отвечает определённо, что не является ложным ответом (AGENTS.md, правило 1): устройство и его статус eSIM корректно подтверждены курируемым ядром."
   },
   {
     "id": "tablet-004",
