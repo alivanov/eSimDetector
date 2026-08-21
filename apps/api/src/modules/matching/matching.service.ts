@@ -106,6 +106,7 @@ export class MatchingService {
     const decision = matchQuery(normalized.slots, snapshot.matchIndex, {
       queryText: normalized.normalized,
       thresholds: this.thresholds(),
+      constraints: { knownBrands: this.knownBrands(snapshot.devices) },
       // docs/04 §4.7: «если статус eSIM у всех кандидатов совпадает, ответ выдаётся сразу» —
       // кандидаты, иначе давшие бы уточнение по разрыву оценок, эквивалентны, когда конвейер
       // вывода статуса дал бы им один и тот же итоговый статус (с учётом того же региона).
@@ -121,6 +122,10 @@ export class MatchingService {
       policy,
       esimContext,
     );
+  }
+
+  private knownBrands(devices: ReadonlyMap<string, Device>): ReadonlySet<string> {
+    return new Set([...devices.values()].map((device) => device.brand.toLowerCase()));
   }
 
   private resolveEquivalenceKey(
@@ -311,6 +316,7 @@ export class MatchingService {
         gapThreshold: 0,
         maxClarificationCandidates: limit,
       },
+      constraints: { knownBrands: this.knownBrands(snapshot.devices) },
     });
 
     const suggestions: SuggestItem[] = [];

@@ -14,6 +14,7 @@ import {
   lookupModelCode,
   rejectCandidate,
   computeBrandSimilarity,
+  isStricterVariantThanQuery,
   DEFAULT_SCORING_WEIGHTS,
   scoreCandidate,
   buildComparableQueryText,
@@ -89,6 +90,7 @@ describe('index — публичная поверхность пакета fuzzy
 
     expect(rejectCandidate(slots, device)).toBeNull();
     expect(computeBrandSimilarity(slots, device)).toBeGreaterThan(0.9);
+    expect(isStricterVariantThanQuery(slots, device)).toBe(false);
   });
 
   it('экспортирует оценку кандидата (scoring.ts)', () => {

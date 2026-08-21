@@ -22,7 +22,7 @@ export type {
   ConstraintRejection,
   ConstraintOptions,
 } from './constraints';
-export { rejectCandidate, computeBrandSimilarity } from './constraints';
+export { rejectCandidate, computeBrandSimilarity, isStricterVariantThanQuery } from './constraints';
 
 export type {
   ScoringWeights,

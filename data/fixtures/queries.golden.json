@@ -412,7 +412,7 @@
     "query": "Honor Magic 5 Pro",
     "category": "canonical",
     "expectedOutcome": "match",
-    "expectedDeviceId": "honor-magic-5-pro",
+    "expectedDeviceId": "honor-magic5-pro",
     "expectedSlots": {
       "brand": "honor",
       "family": "magic",
@@ -423,7 +423,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "В справочнике запись honor-magic5-pro (маркетинг Magic5 Pro), не honor-magic-5-pro. Сверено GET /devices/honor-magic5-pro, этап 6 пункт 3."
   },
   {
     "id": "canonical-025",
@@ -498,7 +499,7 @@
     "query": "Oppo Reno 10 Pro",
     "category": "canonical",
     "expectedOutcome": "match",
-    "expectedDeviceId": "oppo-reno-10-pro",
+    "expectedDeviceId": "oppo-reno10-pro",
     "expectedSlots": {
       "brand": "oppo",
       "family": "reno",
@@ -509,7 +510,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "В справочнике запись oppo-reno10-pro (Reno10 Pro 5G, CPH2525), не oppo-reno-10-pro. Сверено GET /devices/oppo-reno10-pro."
   },
   {
     "id": "canonical-030",
@@ -1017,7 +1019,7 @@
     "query": "OPPO RENO 10 PRO",
     "category": "case-and-separators",
     "expectedOutcome": "match",
-    "expectedDeviceId": "oppo-reno-10-pro",
+    "expectedDeviceId": "oppo-reno10-pro",
     "expectedSlots": {
       "brand": "oppo",
       "family": "reno",
@@ -1028,14 +1030,15 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Тот же слаг, что canonical-029: oppo-reno10-pro. Сверено по снимку справочника, 1057 устройств."
   },
   {
     "id": "case-and-separators-027",
     "query": "oppo-reno-10-pro",
     "category": "case-and-separators",
     "expectedOutcome": "match",
-    "expectedDeviceId": "oppo-reno-10-pro",
+    "expectedDeviceId": "oppo-reno10-pro",
     "expectedSlots": {
       "brand": "oppo",
       "family": "reno",
@@ -1046,7 +1049,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Тот же слаг, что canonical-029: oppo-reno10-pro. Сверено по снимку справочника, 1057 устройств."
   },
   {
     "id": "case-and-separators-028",
@@ -1537,7 +1541,7 @@
     "query": "оппо рино 10 про",
     "category": "cyrillic",
     "expectedOutcome": "match",
-    "expectedDeviceId": "oppo-reno-10-pro",
+    "expectedDeviceId": "oppo-reno10-pro",
     "expectedSlots": {
       "brand": "oppo",
       "family": "reno",
@@ -1548,7 +1552,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Тот же слаг, что canonical-029: oppo-reno10-pro. Сверено по снимку справочника, 1057 устройств."
   },
   {
     "id": "cyrillic-024",
@@ -2567,7 +2572,7 @@
     "query": "opoo reno 10 pro",
     "category": "typos",
     "expectedOutcome": "match",
-    "expectedDeviceId": "oppo-reno-10-pro",
+    "expectedDeviceId": "oppo-reno10-pro",
     "expectedSlots": {
       "brand": "opoo",
       "family": "reno",
@@ -2578,7 +2583,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Тот же слаг, что canonical-029: oppo-reno10-pro. Сверено по снимку справочника, 1057 устройств."
   },
   {
     "id": "typos-018",
@@ -2725,7 +2731,7 @@
     "query": "honor magik 5 pro",
     "category": "typos",
     "expectedOutcome": "match",
-    "expectedDeviceId": "honor-magic-5-pro",
+    "expectedDeviceId": "honor-magic5-pro",
     "expectedSlots": {
       "brand": "honor",
       "family": "magik",
@@ -2736,7 +2742,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Тот же слаг, что canonical-024: honor-magic5-pro. Сверено GET /devices/honor-magic5-pro."
   },
   {
     "id": "typos-027",
@@ -3103,7 +3110,7 @@
     "query": "щззщ reno 10 pro",
     "category": "wrong-layout",
     "expectedOutcome": "match",
-    "expectedDeviceId": "oppo-reno-10-pro",
+    "expectedDeviceId": "oppo-reno10-pro",
     "expectedSlots": {
       "brand": "oppo",
       "family": "reno",
@@ -3114,7 +3121,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Тот же слаг, что canonical-029: oppo-reno10-pro. Сверено по снимку справочника, 1057 устройств."
   },
   {
     "id": "wrong-layout-016",
@@ -3611,7 +3619,7 @@
     "query": "SM-N986B",
     "category": "model-codes",
     "expectedOutcome": "match",
-    "expectedDeviceId": "samsung-galaxy-note-20-ultra",
+    "expectedDeviceId": "samsung-galaxy-note20-ultra",
     "expectedSlots": {
       "brand": null,
       "family": null,
@@ -3620,7 +3628,8 @@
       "modelCode": "SM-N986B",
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Код SM-N986B в справочнике у samsung-galaxy-note20-ultra (unverified). Параллельная запись samsung-galaxy-note-20-ultra несёт SM-N986/SM-N985, не SM-N986B. Сверено GET /devices обоих id."
   },
   {
     "id": "model-codes-012",
@@ -3674,8 +3683,8 @@
     "id": "model-codes-015",
     "query": "CPH2173",
     "category": "model-codes",
-    "expectedOutcome": "not_found",
-    "expectedDeviceId": null,
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oppo-find-x3-pro",
     "expectedSlots": {
       "brand": null,
       "family": null,
@@ -3684,14 +3693,15 @@
       "modelCode": "CPH2173",
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Код CPH2173 есть в справочнике у oppo-find-x3-pro. Ожидание not_found было от пустого каталога на момент составления выборки. Сверено GET /devices/oppo-find-x3-pro."
   },
   {
     "id": "model-codes-016",
     "query": "CPH2409",
     "category": "model-codes",
-    "expectedOutcome": "not_found",
-    "expectedDeviceId": null,
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oneplus-nord-ce-2-lite",
     "expectedSlots": {
       "brand": null,
       "family": null,
@@ -3700,7 +3710,8 @@
       "modelCode": "CPH2409",
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Код CPH2409 есть в справочнике у oneplus-nord-ce-2-lite. Сверено по индексу modelCodes снимка, 1057 устройств."
   },
   {
     "id": "model-codes-017",
@@ -3802,8 +3813,8 @@
     "id": "model-codes-023",
     "query": "SM-X716B",
     "category": "model-codes",
-    "expectedOutcome": "not_found",
-    "expectedDeviceId": null,
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-tab-s9-5g",
     "expectedSlots": {
       "brand": null,
       "family": null,
@@ -3812,14 +3823,15 @@
       "modelCode": "SM-X716B",
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Код SM-X716B есть в справочнике у samsung-galaxy-tab-s9-5g (verified). Сверено GET /devices/samsung-galaxy-tab-s9-5g."
   },
   {
     "id": "model-codes-024",
     "query": "SM-M336B",
     "category": "model-codes",
-    "expectedOutcome": "not_found",
-    "expectedDeviceId": null,
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-m33",
     "expectedSlots": {
       "brand": null,
       "family": null,
@@ -3828,7 +3840,8 @@
       "modelCode": "SM-M336B",
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Код SM-M336B есть в справочнике у samsung-galaxy-m33. Сверено по индексу modelCodes снимка."
   },
   {
     "id": "model-codes-025",
@@ -3866,8 +3879,8 @@
     "id": "model-codes-027",
     "query": "SM-A047F",
     "category": "model-codes",
-    "expectedOutcome": "not_found",
-    "expectedDeviceId": null,
+    "expectedOutcome": "match",
+    "expectedDeviceId": "samsung-galaxy-a04s",
     "expectedSlots": {
       "brand": null,
       "family": null,
@@ -3876,7 +3889,8 @@
       "modelCode": "SM-A047F",
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Код SM-A047F есть в справочнике у samsung-galaxy-a04s. Сверено по индексу modelCodes снимка."
   },
   {
     "id": "model-codes-028",
@@ -3898,8 +3912,8 @@
     "id": "model-codes-029",
     "query": "CPH2371",
     "category": "model-codes",
-    "expectedOutcome": "not_found",
-    "expectedDeviceId": null,
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oppo-reno7",
     "expectedSlots": {
       "brand": null,
       "family": null,
@@ -3908,14 +3922,15 @@
       "modelCode": "CPH2371",
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Код CPH2371 есть в справочнике у oppo-reno7. Сверено по индексу modelCodes снимка."
   },
   {
     "id": "model-codes-030",
     "query": "CPH2333",
     "category": "model-codes",
-    "expectedOutcome": "not_found",
-    "expectedDeviceId": null,
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oppo-a96",
     "expectedSlots": {
       "brand": null,
       "family": null,
@@ -3924,7 +3939,8 @@
       "modelCode": "CPH2333",
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Код CPH2333 есть в справочнике у oppo-a96. Сверено по индексу modelCodes снимка."
   },
   {
     "id": "model-codes-031",
@@ -3946,8 +3962,8 @@
     "id": "model-codes-032",
     "query": "CPH2525",
     "category": "model-codes",
-    "expectedOutcome": "not_found",
-    "expectedDeviceId": null,
+    "expectedOutcome": "match",
+    "expectedDeviceId": "oppo-reno10-pro",
     "expectedSlots": {
       "brand": null,
       "family": null,
@@ -3956,7 +3972,8 @@
       "modelCode": "CPH2525",
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Код CPH2525 есть в справочнике у oppo-reno10-pro (тот же id, что canonical-029). Сверено GET /devices/oppo-reno10-pro."
   },
   {
     "id": "model-codes-033",
@@ -4074,7 +4091,7 @@
     "id": "ambiguous-007",
     "query": "redmi note 12",
     "category": "ambiguous",
-    "expectedOutcome": "clarification",
+    "expectedOutcome": "match",
     "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "redmi",
@@ -4084,7 +4101,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Точное маркетинговое имя «Redmi Note 12» после расширения линейки оставляет варианты с одним статусом eSIM (not_supported, derived: note-12 и note-12-pro). docs/04 §4.7: уточнение не запрашивается, если не меняет результат. expectedDeviceId у ambiguous запрещён схемой §8.4."
   },
   {
     "id": "ambiguous-008",
@@ -4278,7 +4296,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Остаточный ложный К2 прогона 2026-08-21T14:55:46Z (1/362). Сервис status=clarification_required (ESIM_CONDITION_CONTEXT_MISSING, вопрос про лоток SIM), но device=apple-iphone-17-pro: матчер схлопнул все iPhone * Pro по §4.7 (один статус eSIM conditional), MatchingService выставил лидера и exactModelKnown:true. Стенд считает match из-за непустого device. expectedOutcome не меняю: «iphone pro» без поколения — неоднозначный запрос, засчитать 17 Pro как верный нельзя. Поколение в isStricterVariantThanQuery не добавляю: сломает determined у X/XS/XR/SE/Air без разобранного generation."
   },
   {
     "id": "ambiguous-020",
@@ -4334,7 +4353,7 @@
     "id": "ambiguous-023",
     "query": "redmi note 13",
     "category": "ambiguous",
-    "expectedOutcome": "clarification",
+    "expectedOutcome": "match",
     "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "redmi",
@@ -4344,7 +4363,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Точное маркетинговое имя «Redmi Note 13»: в семействе redmi-note поколения 13 одна запись xiaomi-redmi-note-13 (not_supported, derived). Соседи note-13r имеют другое family. docs/04 §4.7. expectedDeviceId у ambiguous запрещён схемой §8.4."
   },
   {
     "id": "ambiguous-024",
@@ -4858,7 +4878,7 @@
     "query": "Oppo Reno 10 Pro 256GB золотой",
     "category": "extra-attributes",
     "expectedOutcome": "match",
-    "expectedDeviceId": "oppo-reno-10-pro",
+    "expectedDeviceId": "oppo-reno10-pro",
     "expectedSlots": {
       "brand": "oppo",
       "family": "reno",
@@ -4872,7 +4892,8 @@
         "color": "zolotoj"
       },
       "unparsed": []
-    }
+    },
+    "notes": "Тот же слаг, что canonical-029: oppo-reno10-pro. Сверено GET /devices/oppo-reno10-pro."
   },
   {
     "id": "extra-attributes-019",
@@ -5020,7 +5041,7 @@
     "query": "Honor Magic 5 Pro 512GB черный",
     "category": "extra-attributes",
     "expectedOutcome": "match",
-    "expectedDeviceId": "honor-magic-5-pro",
+    "expectedDeviceId": "honor-magic5-pro",
     "expectedSlots": {
       "brand": "honor",
       "family": "magic",
@@ -5034,7 +5055,8 @@
         "color": "chernyj"
       },
       "unparsed": []
-    }
+    },
+    "notes": "Тот же слаг, что canonical-024: honor-magic5-pro. Сверено GET /devices/honor-magic5-pro."
   },
   {
     "id": "extra-attributes-027",
@@ -5291,7 +5313,7 @@
     "query": "Redmi 9A",
     "category": "no-esim-devices",
     "expectedOutcome": "match",
-    "expectedDeviceId": "xiaomi-redmi-9a",
+    "expectedDeviceId": "redmi-redmi-9a",
     "expectedSlots": {
       "brand": "redmi",
       "family": "redmi",
@@ -5302,14 +5324,15 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "ADR-029: рабочая запись с кодом M2006C3LG — redmi-redmi-9a. Параллельная xiaomi-redmi-9a без modelCodes. Сверено GET /devices обоих id."
   },
   {
     "id": "no-esim-devices-008",
     "query": "Redmi 10A",
     "category": "no-esim-devices",
     "expectedOutcome": "match",
-    "expectedDeviceId": "xiaomi-redmi-10a",
+    "expectedDeviceId": "redmi-redmi-10a",
     "expectedSlots": {
       "brand": "redmi",
       "family": "redmi",
@@ -5320,14 +5343,15 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "ADR-029: рабочая запись — redmi-redmi-10a, не xiaomi-redmi-10a. Сверено GET /devices обоих id."
   },
   {
     "id": "no-esim-devices-009",
     "query": "Redmi 9C",
     "category": "no-esim-devices",
     "expectedOutcome": "match",
-    "expectedDeviceId": "xiaomi-redmi-9c",
+    "expectedDeviceId": "redmi-redmi-9c",
     "expectedSlots": {
       "brand": "redmi",
       "family": "c",
@@ -5336,14 +5360,15 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "ADR-029: рабочая запись — redmi-redmi-9c, не xiaomi-redmi-9c. Сверено GET /devices обоих id."
   },
   {
     "id": "no-esim-devices-010",
     "query": "Redmi 12C",
     "category": "no-esim-devices",
     "expectedOutcome": "match",
-    "expectedDeviceId": "xiaomi-redmi-12c",
+    "expectedDeviceId": "redmi-redmi-12c",
     "expectedSlots": {
       "brand": "redmi",
       "family": "c",
@@ -5352,7 +5377,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "В справочнике redmi-redmi-12c (код 22120RN86G), xiaomi-redmi-12c отсутствует (GET 404). ADR-029. Сверено GET /devices/redmi-redmi-12c."
   },
   {
     "id": "no-esim-devices-011",
@@ -5569,7 +5595,7 @@
     "query": "редми 9а",
     "category": "no-esim-devices",
     "expectedOutcome": "match",
-    "expectedDeviceId": "xiaomi-redmi-9a",
+    "expectedDeviceId": "redmi-redmi-9a",
     "expectedSlots": {
       "brand": "redmi",
       "family": "redmi",
@@ -5580,7 +5606,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Тот же слаг, что no-esim-devices-007: redmi-redmi-9a (ADR-029). Сверено GET /devices/redmi-redmi-9a."
   },
   {
     "id": "no-esim-devices-024",
@@ -5689,7 +5716,7 @@
     "query": "Xiaomi Redmi A2",
     "category": "no-esim-devices",
     "expectedOutcome": "match",
-    "expectedDeviceId": "xiaomi-redmi-a2",
+    "expectedDeviceId": "redmi-a2",
     "expectedSlots": {
       "brand": "xiaomi",
       "family": "redmi",
@@ -5700,7 +5727,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "В справочнике redmi-a2, не xiaomi-redmi-a2. Сверено GET /devices/redmi-a2."
   },
   {
     "id": "no-esim-devices-031",
@@ -5723,7 +5751,7 @@
     "query": "POCO C65",
     "category": "no-esim-devices",
     "expectedOutcome": "match",
-    "expectedDeviceId": "xiaomi-poco-c65",
+    "expectedDeviceId": "poco-c65",
     "expectedSlots": {
       "brand": "poco",
       "family": "c",
@@ -5732,7 +5760,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "В справочнике poco-c65, не xiaomi-poco-c65. Сверено GET /devices/poco-c65."
   },
   {
     "id": "no-esim-devices-033",

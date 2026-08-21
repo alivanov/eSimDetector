@@ -4,7 +4,7 @@ import type {
   ConstraintRejection,
   ConstraintRejectionCode,
 } from './constraints';
-import { rejectCandidate } from './constraints';
+import { isStricterVariantThanQuery, rejectCandidate } from './constraints';
 import type { ScoredCandidate, ScoringWeights } from './scoring';
 import { DEFAULT_SCORING_WEIGHTS, buildComparableQueryText, scoreCandidate } from './scoring';
 import { rankCandidates } from './ranking';
@@ -99,7 +99,7 @@ function retrieveCandidates(
   if (options.queryText !== undefined) {
     const device = lookupAlias(index.aliasIndex, options.queryText);
     if (device !== undefined) {
-      return { devices: [device], reason: 'MATCH_EXACT_ALIAS' };
+      return { devices: expandExactAliasHit(device, slots, index), reason: 'MATCH_EXACT_ALIAS' };
     }
   }
 
@@ -118,6 +118,34 @@ function retrieveCandidates(
   }
 
   return devices.length === 0 ? { devices: [] } : { devices, reason: 'MATCH_FUZZY_FAMILY' };
+}
+
+/**
+ * Точный индекс срабатывает на маркетинговое имя вроде «Pixel» или «Redmi Note 12» и возвращает
+ * одну запись. Если запрос не назвал модификатор, в справочнике почти наверняка есть соседние
+ * варианты той же линейки (Pixel 8, Note 12 Pro, iPhone SE 2020) — молча отдать базовую модель
+ * запрещено docs/04 §4.7. Расширяем попадание до всех устройств того же семейства (и того же
+ * поколения, если запрос его назвал); при одном-единственном совпадении список не меняется.
+ */
+function expandExactAliasHit(
+  hit: MatcherDevice,
+  slots: QuerySlots,
+  index: MatchIndex,
+): readonly MatcherDevice[] {
+  if (slots.modifiers.length > 0) {
+    return [hit];
+  }
+  const related: MatcherDevice[] = [];
+  for (const candidate of index.devicesById.values()) {
+    if (candidate.family !== hit.family) {
+      continue;
+    }
+    if (slots.generation !== undefined && candidate.generation !== slots.generation) {
+      continue;
+    }
+    related.push(candidate);
+  }
+  return related.length > 1 ? related : [hit];
 }
 
 function applyConstraints(
@@ -140,13 +168,17 @@ function applyConstraints(
   return { passing, rejected };
 }
 
-function buildDecisionOptions(options: MatchOptions): DecisionOptions {
+function buildDecisionOptions(options: MatchOptions, slots: QuerySlots): DecisionOptions {
   const thresholds = options.thresholds ?? DEFAULT_DECISION_THRESHOLDS;
+  // Неразобранный остаток (испорченный модификатор `amx`/`rpo`, docs/04 §4.10.1) уже снижает
+  // tokenCoverage ниже порога уверенности. Ветка «ниже порога + все эквивалентны → determined»
+  // иначе снова выдала бы догадку: на живом справочнике iPhone 15 Pro / 15 Pro Max имеют один
+  // статус eSIM. Эквивалентность не должна перекрывать штраф за unparsed.
+  const allowEquivalence =
+    options.resolveEquivalenceKey !== undefined && slots.unparsed.length === 0;
   return {
     ...thresholds,
-    ...(options.resolveEquivalenceKey !== undefined
-      ? { resolveEquivalenceKey: options.resolveEquivalenceKey }
-      : {}),
+    ...(allowEquivalence ? { resolveEquivalenceKey: options.resolveEquivalenceKey } : {}),
   };
 }
 
@@ -168,19 +200,40 @@ export function matchQuery(
 
   const scored = passing.map((device) => scoreCandidate(slots, device, weights));
   const ranked = rankCandidates(scored);
-  const decision: Decision = decide(ranked, buildDecisionOptions(options));
+  const decision: Decision = decide(ranked, buildDecisionOptions(options, slots));
+  const resolved = downgradeOverspecifiedLeader(slots, decision);
 
   const rejectionCodes = [...new Set(rejected.map((entry) => entry.rejection.code))];
   const reasons: MatchReasonCode[] = [
     ...(retrieved.reason !== undefined ? [retrieved.reason] : []),
     ...rejectionCodes,
-    ...decision.reasons,
+    ...resolved.reasons,
   ];
 
   return {
-    status: decision.status,
-    candidates: decision.candidates,
+    status: resolved.status,
+    candidates: resolved.candidates,
     rejectedCandidates: rejected,
     reasons,
+  };
+}
+
+/**
+ * `rejectCandidate` не исключает Ultra/Pro/11R, когда запрос их не назвал — иначе «galaxy s23»
+ * потерял бы варианты для уточнения. Но `determined` с таким лидером — догадка более узкой
+ * модели (правило 1). Опускаем статус до уточнения, кандидатов оставляем.
+ */
+function downgradeOverspecifiedLeader(slots: QuerySlots, decision: Decision): Decision {
+  if (decision.status !== 'determined') {
+    return decision;
+  }
+  const leader = decision.candidates[0];
+  if (leader === undefined || !isStricterVariantThanQuery(slots, leader.device)) {
+    return decision;
+  }
+  return {
+    status: 'clarification_required',
+    candidates: decision.candidates,
+    reasons: ['DECISION_GAP_TOO_SMALL'],
   };
 }

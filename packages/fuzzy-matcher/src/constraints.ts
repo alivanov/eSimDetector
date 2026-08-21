@@ -36,6 +36,17 @@ export interface ConstraintOptions {
    * По умолчанию `0.5` — отсекает явно другой бренд (`xiaomi` vs `apple`), но не типографскую опечатку.
    */
   readonly minBrandSimilarity?: number;
+  /**
+   * Известные бренды справочника (слаги, в нижнем регистре). Если и бренд запроса, и бренд
+   * устройства входят в это множество и это РАЗНЫЕ бренды, кандидат отклоняется, даже когда
+   * мера Джаро—Винклера выше порога: `poco` vs `oppo` даёт ≈0.72 при пороге 0.5 и иначе
+   * пропускает Find X5 Pro на запрос «poco x5 pro». Опечатка неизвестного токена (`oneplu`,
+   * `samsng`) по-прежнему идёт через нечёткий порог. Запрос `iphone` не является слагом бренда
+   * (`apple`) — проверка не срабатывает, остаётся сравнение с `device.family`. Запрос
+   * `xiaomi redmi` называет подбренд в `family` — тоже не отклоняется. Множество передаёт
+   * вызывающая сторона из снимка справочника: пакет не читает каталог сам.
+   */
+  readonly knownBrands?: ReadonlySet<string>;
 }
 
 const DEFAULT_MIN_BRAND_SIMILARITY = 0.5;
@@ -60,14 +71,75 @@ export function computeBrandSimilarity(
   );
 }
 
+function normalizeBrandKey(value: string): string {
+  return value.toLowerCase();
+}
+
+function queryNamesDeviceBrand(slots: QuerySlots, device: MatcherDevice): boolean {
+  const deviceBrand = normalizeBrandKey(device.brand);
+  const familyAnchor = normalizeBrandKey(device.family.split('-')[0] ?? '');
+  const queryTokens = [slots.brand, ...(slots.family?.split('-') ?? [])].filter(
+    (token): token is string => token !== undefined && token.length > 0,
+  );
+  return queryTokens.some((token) => {
+    const key = normalizeBrandKey(token);
+    return key === deviceBrand || (familyAnchor.length > 1 && key === familyAnchor);
+  });
+}
+
+const KNOWN_BRAND_TYPO_SIMILARITY = 0.85;
+
+function resolveQueryBrandKey(queryBrand: string, knownBrands: ReadonlySet<string>): string {
+  const normalized = normalizeBrandKey(queryBrand);
+  if (normalized.length === 0 || knownBrands.has(normalized)) {
+    return normalized;
+  }
+  let bestKey: string | undefined;
+  let bestSimilarity = 0;
+  for (const known of knownBrands) {
+    const similarity = jaroWinklerSimilarity(normalized, known);
+    if (similarity > bestSimilarity) {
+      bestSimilarity = similarity;
+      bestKey = known;
+    }
+  }
+  return bestSimilarity >= KNOWN_BRAND_TYPO_SIMILARITY && bestKey !== undefined
+    ? bestKey
+    : normalized;
+}
+
+function isKnownDistinctBrand(
+  slots: QuerySlots,
+  device: MatcherDevice,
+  knownBrands: ReadonlySet<string>,
+): boolean {
+  const queryBrand = resolveQueryBrandKey(slots.brand ?? '', knownBrands);
+  const deviceBrand = normalizeBrandKey(device.brand);
+  if (queryBrand.length === 0 || queryBrand === deviceBrand) {
+    return false;
+  }
+  if (!knownBrands.has(queryBrand) || !knownBrands.has(deviceBrand)) {
+    return false;
+  }
+  return !queryNamesDeviceBrand(slots, device);
+}
+
 function checkBrand(
   slots: QuerySlots,
   device: MatcherDevice,
   minBrandSimilarity: number,
+  knownBrands: ReadonlySet<string> | undefined,
 ): ConstraintRejection | null {
   const similarity = computeBrandSimilarity(slots, device);
   if (similarity === undefined) {
     return null;
+  }
+  if (knownBrands !== undefined && isKnownDistinctBrand(slots, device, knownBrands)) {
+    return {
+      code: 'REJECT_BRAND_MISMATCH',
+      deviceId: device.id,
+      detail: `бренд запроса "${slots.brand}" и бренд устройства "${device.brand}" — разные известные бренды`,
+    };
   }
   if (similarity < minBrandSimilarity) {
     return {
@@ -224,6 +296,44 @@ function checkLineDesignator(slots: QuerySlots, device: MatcherDevice): Constrai
  * независимы), но фиксирован для детерминированности кода причины при нескольких одновременных
  * нарушениях.
  */
+/**
+ * Модификаторы линейки длиннее одной буквы — те, что в `LINE_MODIFIERS` text-normalizer кроме `a`.
+ * Если запрос их не назвал, а лидер их несёт, это догадка более узкой модели (Spark 10 → Spark 10 Pro).
+ */
+const MULTI_LETTER_LINE_MODIFIERS: ReadonlySet<string> = new Set([
+  'pro',
+  'max',
+  'plus',
+  'ultra',
+  'mini',
+  'fe',
+  'lite',
+  'air',
+  'fold',
+  'flip',
+]);
+
+/**
+ * Лидер определённого ответа уже, чем запрос: запрос не назвал обозначение линейки / многобуквенный
+ * модификатор, а устройство его несёт. Такие пары не отклоняются в `rejectCandidate` (docs/04 §4.7:
+ * «galaxy s23» должен оставить Ultra в кандидатах на уточнение), но и не могут стать `determined`
+ * — иначе отсутствующая базовая модель молча подменяется Pro/11R/C-серией (AGENTS.md, правило 1).
+ */
+export function isStricterVariantThanQuery(slots: QuerySlots, device: MatcherDevice): boolean {
+  if (slots.modelCode !== undefined) {
+    return false;
+  }
+  const queryDesignators = lineDesignators(slots.family, slots.modifiers);
+  const deviceDesignators = lineDesignators(device.family, device.modifiers);
+  if (queryDesignators.size === 0 && deviceDesignators.size > 0) {
+    return true;
+  }
+  if (slots.modifiers.length === 0) {
+    return device.modifiers.some((modifier) => MULTI_LETTER_LINE_MODIFIERS.has(modifier));
+  }
+  return false;
+}
+
 export function rejectCandidate(
   slots: QuerySlots,
   device: MatcherDevice,
@@ -232,7 +342,7 @@ export function rejectCandidate(
   const minBrandSimilarity = options.minBrandSimilarity ?? DEFAULT_MIN_BRAND_SIMILARITY;
 
   return (
-    checkBrand(slots, device, minBrandSimilarity) ??
+    checkBrand(slots, device, minBrandSimilarity, options.knownBrands) ??
     checkGeneration(slots, device) ??
     checkModifierSet(slots, device) ??
     checkLineDesignator(slots, device)

@@ -59,6 +59,7 @@ interface GoldenEntry {
   readonly expectedOutcome: string;
   readonly expectedDeviceId: string | null;
   readonly expectedSlots: GoldenSlots;
+  readonly notes?: string;
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -254,7 +255,21 @@ function parseGoldenEntry(
     return undefined;
   }
 
-  return { id, query, category, expectedOutcome, expectedDeviceId, expectedSlots };
+  const notes = value['notes'];
+  if (notes !== undefined && !isString(notes)) {
+    errors.push(`${path}.notes: ожидалась строка`);
+    return undefined;
+  }
+
+  return {
+    id,
+    query,
+    category,
+    expectedOutcome,
+    expectedDeviceId,
+    expectedSlots,
+    ...(isString(notes) ? { notes } : {}),
+  };
 }
 
 function parseGoldenEntries(value: unknown): {

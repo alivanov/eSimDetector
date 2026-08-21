@@ -92,6 +92,94 @@ describe('matchQuery — точный индекс (docs/04 §4.6, ступен�
     expect(result.reasons).toContain('MATCH_EXACT_ALIAS');
   });
 
+  it('точный псевдоним без модификатора в запросе расширяется на соседние варианты линейки', () => {
+    const base = buildDevice({
+      id: 'pixel-1',
+      brand: 'google',
+      family: 'pixel',
+      generation: null,
+      modifiers: [],
+      aliases: ['pixel'],
+      marketingName: 'Pixel',
+    });
+    const pixel8 = buildDevice({
+      id: 'pixel-8',
+      brand: 'google',
+      family: 'pixel',
+      generation: 8,
+      modifiers: [],
+    });
+    const index = buildMatchIndex([base, pixel8]);
+
+    const result = matchQuery(
+      buildSlots({
+        brand: 'pixel',
+        family: 'pixel',
+        generation: undefined,
+        modifiers: [],
+      }),
+      index,
+      { queryText: 'pixel' },
+    );
+
+    expect(result.reasons).toContain('MATCH_EXACT_ALIAS');
+    expect(result.status).not.toBe('determined');
+    expect(result.candidates.map((candidate) => candidate.device.id)).toEqual(
+      expect.arrayContaining(['pixel-1', 'pixel-8']),
+    );
+  });
+
+  it('точный псевдоним с поколением не подмешивает другие поколения и чужие семейства', () => {
+    const note12 = buildDevice({
+      id: 'note-12',
+      brand: 'xiaomi',
+      family: 'redmi-note',
+      generation: 12,
+      modifiers: [],
+      aliases: ['redmi note 12'],
+      marketingName: 'Redmi Note 12',
+    });
+    const note12Pro = buildDevice({
+      id: 'note-12-pro',
+      brand: 'xiaomi',
+      family: 'redmi-note',
+      generation: 12,
+      modifiers: ['pro'],
+    });
+    const note13 = buildDevice({
+      id: 'note-13',
+      brand: 'xiaomi',
+      family: 'redmi-note',
+      generation: 13,
+      modifiers: [],
+    });
+    const otherFamily = buildDevice({
+      id: 'redmi-12',
+      brand: 'xiaomi',
+      family: 'redmi',
+      generation: 12,
+      modifiers: [],
+    });
+    const index = buildMatchIndex([note12, note12Pro, note13, otherFamily]);
+
+    const result = matchQuery(
+      buildSlots({
+        brand: 'redmi',
+        family: 'note',
+        generation: 12,
+        modifiers: [],
+      }),
+      index,
+      { queryText: 'redmi note 12' },
+    );
+
+    const ids = result.candidates.map((candidate) => candidate.device.id);
+    expect(ids).toContain('note-12');
+    expect(ids).not.toContain('note-13');
+    expect(ids).not.toContain('redmi-12');
+    expect(result.reasons).toContain('MATCH_EXACT_ALIAS');
+  });
+
   it('без queryText первая ступень пропускается — сразу используется триграммный отбор', () => {
     const device = buildDevice({ aliases: ['iphone 13 pro'] });
     const index = buildMatchIndex([device]);

@@ -37,7 +37,9 @@
 - `iPhone 1` не сопоставляется с `iPhone 11`, `iPhone 12` — с `iPhone 13`;
 - `Pro` не сопоставляется с `Pro Max`;
 - `galaxy s23` не сопоставляется с Galaxy A23 и Galaxy M23 — однобуквенное обозначение линейки сравнивается точно (`packages/fuzzy-matcher/src/impossible-matches.spec.ts`);
-- испорченный (на одну правку) модификатор (`amx`, `rpo`, `por`, `ultr`) не даёт ложного `determined` ни с базовой моделью, ни с `Pro`/`Pro Max`-версией (docs/04 §4.10.1) — `packages/fuzzy-matcher/src/impossible-matches.spec.ts`;
+- `poco x5 pro` не сопоставляется с Oppo Find X5 Pro — два известных слага бренда не считаются опечаткой, даже если Джаро—Винклер выше порога (`impossible-matches.spec.ts`);
+- отсутствующая базовая модель не подменяется более узкой (`Tecno Spark 10` ↛ Spark 10 Pro, `OnePlus 11` ↛ 11R);
+- испорченный (на одну правку) модификатор (`amx`, `rpo`, `por`, `ultr`) не даёт ложного `determined` ни с базовой моделью, ни с `Pro`/`Pro Max`-версией (docs/04 §4.10.1) — в том числе когда вызывающая сторона передаёт `resolveEquivalenceKey` (`packages/fuzzy-matcher/src/impossible-matches.spec.ts`);
 - набор кандидатов с несовпадающими статусами eSIM всегда даёт `clarification_required`;
 - при признаках эмуляции устройства однозначный ответ не выдаётся;
 - строка выгрузки, не прошедшая валидацию, не попадает в рабочий справочник ни при каких настройках;
@@ -224,6 +226,7 @@ interface GoldenQueryEntry {
     readonly attributes: QueryAttributes; // как есть, без null-заглушек — поля просто отсутствуют
     readonly unparsed: readonly string[];
   };
+  readonly notes?: string; // необязательная причина правки записи после сверки со справочником
 }
 ```
 

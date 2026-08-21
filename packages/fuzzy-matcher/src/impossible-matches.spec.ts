@@ -419,7 +419,7 @@ describe('ЗАПРЕЩЕНО: испорченный модификатор в u
     ];
     const index = buildMatchIndex(devices);
 
-    const result = matchQuery(slots, index);
+    const result = matchQuery(slots, index, { resolveEquivalenceKey: () => 'same-esim' });
 
     expect(result.status).not.toBe('determined');
   });
@@ -450,7 +450,7 @@ describe('ЗАПРЕЩЕНО: испорченный модификатор в u
     ];
     const index = buildMatchIndex(devices);
 
-    const result = matchQuery(slots, index);
+    const result = matchQuery(slots, index, { resolveEquivalenceKey: () => 'same-esim' });
 
     expect(result.status).not.toBe('determined');
   });
@@ -481,7 +481,7 @@ describe('ЗАПРЕЩЕНО: испорченный модификатор в u
     ];
     const index = buildMatchIndex(devices);
 
-    const result = matchQuery(slots, index);
+    const result = matchQuery(slots, index, { resolveEquivalenceKey: () => 'same-esim' });
 
     expect(result.status).not.toBe('determined');
   });
@@ -512,8 +512,125 @@ describe('ЗАПРЕЩЕНО: испорченный модификатор в u
     ];
     const index = buildMatchIndex(devices);
 
+    const result = matchQuery(slots, index, { resolveEquivalenceKey: () => 'same-esim' });
+
+    expect(result.status).not.toBe('determined');
+  });
+});
+
+describe('ЗАПРЕЩЕНО: poco x5 pro не сопоставляется с Oppo Find X5 Pro', () => {
+  it('Джаро—Винклер сам по себе считает poco и oppo похожими', () => {
+    expect(jaroWinklerSimilarity('poco', 'oppo')).toBeGreaterThan(0.5);
+  });
+
+  it('при известных брендах matchQuery не определяет Find X5 Pro', () => {
+    const slots = buildSlots({
+      brand: 'poco',
+      family: 'x',
+      generation: 5,
+      modifiers: ['pro'],
+    });
+    const findX5Pro = buildDevice({
+      id: 'oppo-find-x5-pro',
+      brand: 'oppo',
+      family: 'find-x',
+      generation: 5,
+      modifiers: ['pro'],
+    });
+    const index = buildMatchIndex([findX5Pro]);
+
+    const result = matchQuery(slots, index, {
+      constraints: { knownBrands: new Set(['poco', 'oppo']) },
+    });
+
+    expect(result.candidates.map((candidate) => candidate.device.id)).not.toContain(
+      'oppo-find-x5-pro',
+    );
+    expect(result.status).not.toBe('determined');
+  });
+
+  it('опечатка poko тоже не определяет Find X5 Pro', () => {
+    const slots = buildSlots({
+      brand: 'poko',
+      family: 'x',
+      generation: 5,
+      modifiers: ['pro'],
+    });
+    const findX5Pro = buildDevice({
+      id: 'oppo-find-x5-pro',
+      brand: 'oppo',
+      family: 'find-x',
+      generation: 5,
+      modifiers: ['pro'],
+    });
+    const index = buildMatchIndex([findX5Pro]);
+
+    const result = matchQuery(slots, index, {
+      constraints: { knownBrands: new Set(['poco', 'oppo']) },
+    });
+
+    expect(result.status).not.toBe('determined');
+    expect(result.candidates.map((candidate) => candidate.device.id)).not.toContain(
+      'oppo-find-x5-pro',
+    );
+  });
+});
+
+describe('ЗАПРЕЩЕНО: отсутствующая базовая модель не подменяется более узкой', () => {
+  it('Tecno Spark 10 не определяется как Spark 10 Pro', () => {
+    const slots = buildSlots({
+      brand: 'tecno',
+      family: 'spark',
+      generation: 10,
+      modifiers: [],
+    });
+    const pro = buildDevice({
+      id: 'tecno-spark-10-pro',
+      brand: 'tecno',
+      family: 'spark',
+      generation: 10,
+      modifiers: ['pro'],
+    });
+    const index = buildMatchIndex([pro]);
+
     const result = matchQuery(slots, index);
 
     expect(result.status).not.toBe('determined');
+    expect(result.candidates.map((candidate) => candidate.device.id)).toContain(
+      'tecno-spark-10-pro',
+    );
+  });
+
+  it('OnePlus 11 не определяется как 11R', () => {
+    const slots = buildSlots({
+      brand: 'oneplus',
+      family: 'oneplus',
+      generation: 11,
+      modifiers: [],
+    });
+    const eleven = buildDevice({
+      id: 'oneplus-11',
+      brand: 'oneplus',
+      family: 'oneplus',
+      generation: 11,
+      modifiers: [],
+    });
+    const elevenR = buildDevice({
+      id: 'oneplus-11r',
+      brand: 'oneplus',
+      family: 'r',
+      generation: 11,
+      modifiers: [],
+      popularity: 90,
+    });
+    const index = buildMatchIndex([eleven, elevenR]);
+
+    const result = matchQuery(slots, index, { resolveEquivalenceKey: () => 'same' });
+
+    if (result.status === 'determined') {
+      expect(result.candidates[0]?.device.id).toBe('oneplus-11');
+    } else {
+      expect(result.status).toBe('clarification_required');
+    }
   });
 });

@@ -1,5 +1,6 @@
 import type { MatcherDevice, QuerySlots } from './types';
-import { computeBrandSimilarity, rejectCandidate } from './constraints';
+import { computeBrandSimilarity, isStricterVariantThanQuery, rejectCandidate } from './constraints';
+import { jaroWinklerSimilarity } from './distance/jaro-winkler';
 
 function buildDevice(overrides: Partial<MatcherDevice> = {}): MatcherDevice {
   return {
@@ -108,6 +109,93 @@ describe('rejectCandidate — бренд (docs/04 §4.2: жёсткий филь
     // family без однобуквенного обозначения, иначе REJECT_LINE_DESIGNATOR_MISMATCH сработал бы
     // раньше, чем проверяемый порог бренда (galaxy-s → {s} против iphone → {}).
     expect(rejectCandidate(slots, device, { minBrandSimilarity: 0 })).toBeNull();
+  });
+
+  it('отклоняет пару известных разных брендов, даже если Джаро—Винклер выше порога (poco vs oppo)', () => {
+    const slots = buildSlots({
+      brand: 'poco',
+      family: 'x',
+      generation: 5,
+      modifiers: ['pro'],
+    });
+    const device = buildDevice({
+      brand: 'oppo',
+      family: 'find-x',
+      generation: 5,
+      modifiers: ['pro'],
+    });
+
+    expect(jaroWinklerSimilarity('poco', 'oppo')).toBeGreaterThan(0.5);
+    expect(rejectCandidate(slots, device, { knownBrands: new Set(['poco', 'oppo']) })?.code).toBe(
+      'REJECT_BRAND_MISMATCH',
+    );
+    expect(rejectCandidate(slots, device)).toBeNull();
+
+    const typoSlots = buildSlots({
+      brand: 'poko',
+      family: 'x',
+      generation: 5,
+      modifiers: ['pro'],
+    });
+    expect(
+      rejectCandidate(typoSlots, device, { knownBrands: new Set(['poco', 'oppo']) })?.code,
+    ).toBe('REJECT_BRAND_MISMATCH');
+  });
+
+  it('не отклоняет тот же известный бренд и опечатку, которой нет в множестве слагов', () => {
+    const knownBrands = new Set(['samsung', 'oppo']);
+    const sameBrand = rejectCandidate(
+      buildSlots({
+        brand: 'samsung',
+        family: 'galaxy',
+        generation: 12,
+        modifiers: [],
+      }),
+      buildDevice({
+        brand: 'samsung',
+        family: 'galaxy',
+        generation: 12,
+        modifiers: [],
+      }),
+      { knownBrands },
+    );
+    const typo = rejectCandidate(
+      buildSlots({
+        brand: 'samsng',
+        family: 'galaxy',
+        generation: 12,
+        modifiers: [],
+      }),
+      buildDevice({
+        brand: 'samsung',
+        family: 'galaxy',
+        generation: 12,
+        modifiers: [],
+      }),
+      { knownBrands },
+    );
+
+    expect(sameBrand).toBeNull();
+    expect(typo).toBeNull();
+  });
+
+  it('не отклоняет запрос xiaomi redmi к устройству бренда redmi — подбренд назван в family', () => {
+    const slots = buildSlots({
+      brand: 'xiaomi',
+      family: 'redmi',
+      generation: 2,
+      modifiers: ['a'],
+    });
+    const device = buildDevice({
+      brand: 'redmi',
+      family: 'redmi',
+      generation: 2,
+      modifiers: ['a'],
+    });
+
+    expect(
+      rejectCandidate(slots, device, { knownBrands: new Set(['xiaomi', 'redmi']) }),
+    ).toBeNull();
   });
 });
 
@@ -463,5 +551,55 @@ describe('rejectCandidate — порядок проверок и возврат 
   it('возвращает null, когда все ограничения пройдены', () => {
     const slots = buildSlots();
     expect(rejectCandidate(slots, buildDevice())).toBeNull();
+  });
+});
+
+describe('isStricterVariantThanQuery', () => {
+  it('OnePlus 11R (family r) строже запроса oneplus 11 без обозначения', () => {
+    const slots = buildSlots({
+      brand: 'oneplus',
+      family: 'oneplus',
+      generation: 11,
+      modifiers: [],
+    });
+    const elevenR = buildDevice({
+      brand: 'oneplus',
+      family: 'r',
+      generation: 11,
+      modifiers: [],
+    });
+    const eleven = buildDevice({
+      brand: 'oneplus',
+      family: 'oneplus',
+      generation: 11,
+      modifiers: [],
+    });
+
+    expect(isStricterVariantThanQuery(slots, elevenR)).toBe(true);
+    expect(isStricterVariantThanQuery(slots, eleven)).toBe(false);
+  });
+
+  it('Spark 10 Pro строже запроса без модификатора, базовая модель — нет', () => {
+    const slots = buildSlots({
+      brand: 'tecno',
+      family: 'spark',
+      generation: 10,
+      modifiers: [],
+    });
+    const pro = buildDevice({
+      brand: 'tecno',
+      family: 'spark',
+      generation: 10,
+      modifiers: ['pro'],
+    });
+    const base = buildDevice({
+      brand: 'tecno',
+      family: 'spark',
+      generation: 10,
+      modifiers: [],
+    });
+
+    expect(isStricterVariantThanQuery(slots, pro)).toBe(true);
+    expect(isStricterVariantThanQuery(slots, base)).toBe(false);
   });
 });
