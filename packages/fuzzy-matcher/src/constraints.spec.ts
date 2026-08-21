@@ -98,13 +98,15 @@ describe('rejectCandidate — бренд (docs/04 §4.2: жёсткий филь
   it('порог можно настроить параметром minBrandSimilarity', () => {
     const slots = buildSlots({
       brand: 'samsung',
-      family: 'galaxy-s',
+      family: 'galaxy',
       generation: 12,
       modifiers: [],
     });
     const device = buildDevice({ brand: 'apple', family: 'iphone', generation: 12, modifiers: [] });
 
     // Порог 0 пропускает вообще любой бренд — параметр действительно влияет на поведение.
+    // family без однобуквенного обозначения, иначе REJECT_LINE_DESIGNATOR_MISMATCH сработал бы
+    // раньше, чем проверяемый порог бренда (galaxy-s → {s} против iphone → {}).
     expect(rejectCandidate(slots, device, { minBrandSimilarity: 0 })).toBeNull();
   });
 });
@@ -206,8 +208,259 @@ describe('rejectCandidate — набор модификаторов (docs/04 §4
   });
 });
 
+describe('rejectCandidate — однобуквенное обозначение линейки (docs/04 §4.2: точное сравнение)', () => {
+  const s23Query = buildSlots({
+    brand: 'samsung',
+    family: 'galaxy-s',
+    generation: 23,
+    modifiers: [],
+  });
+
+  it('не применяет ограничение, если запрос не назвал однобуквенного обозначения', () => {
+    const slots = buildSlots({
+      brand: 'samsung',
+      family: 'galaxy',
+      generation: 23,
+      modifiers: [],
+    });
+    const a23 = buildDevice({
+      brand: 'samsung',
+      family: 'galaxy',
+      generation: 23,
+      modifiers: ['a'],
+    });
+    expect(rejectCandidate(slots, a23)).toBeNull();
+  });
+
+  it('пропускает точное совпадение обозначения (galaxy-s ↔ Galaxy S23)', () => {
+    const s23 = buildDevice({
+      id: 'samsung-galaxy-s23',
+      brand: 'samsung',
+      family: 'galaxy-s',
+      generation: 23,
+      modifiers: [],
+    });
+    expect(rejectCandidate(s23Query, s23)).toBeNull();
+  });
+
+  it('ОТКЛОНЯЕТ galaxy s23 против Galaxy A23 — обозначение из modifiers устройства', () => {
+    const a23 = buildDevice({
+      id: 'samsung-galaxy-a23',
+      brand: 'samsung',
+      family: 'galaxy',
+      generation: 23,
+      modifiers: ['a'],
+    });
+
+    const rejection = rejectCandidate(s23Query, a23);
+
+    expect(rejection).not.toBeNull();
+    expect(rejection?.code).toBe('REJECT_LINE_DESIGNATOR_MISMATCH');
+    expect(rejection?.deviceId).toBe('samsung-galaxy-a23');
+  });
+
+  it('ОТКЛОНЯЕТ galaxy s23 против Galaxy M23 — обозначение из последнего сегмента семейства', () => {
+    const m23 = buildDevice({
+      id: 'samsung-galaxy-m23',
+      brand: 'samsung',
+      family: 'galaxy-m',
+      generation: 23,
+      modifiers: [],
+    });
+
+    const rejection = rejectCandidate(s23Query, m23);
+
+    expect(rejection?.code).toBe('REJECT_LINE_DESIGNATOR_MISMATCH');
+  });
+
+  it('запрос без бренда (family: "s", как у «галакси с23») тоже отклоняет A23', () => {
+    const slots = buildSlots({
+      brand: 'galaxy',
+      family: 's',
+      generation: 23,
+      modifiers: [],
+    });
+    const a23 = buildDevice({
+      id: 'samsung-galaxy-a23',
+      brand: 'samsung',
+      family: 'galaxy',
+      generation: 23,
+      modifiers: ['a'],
+    });
+
+    const rejection = rejectCandidate(slots, a23);
+
+    expect(rejection?.code).toBe('REJECT_LINE_DESIGNATOR_MISMATCH');
+  });
+
+  it('собственный запрос Galaxy M01s (family galaxy-m-s → {m,s}) проходит', () => {
+    const slots = buildSlots({
+      brand: 'samsung',
+      family: 'galaxy-m-s',
+      generation: 1,
+      modifiers: [],
+    });
+    const device = buildDevice({
+      id: 'samsung-galaxy-m01s',
+      brand: 'samsung',
+      family: 'galaxy-m-s',
+      generation: 1,
+      modifiers: [],
+    });
+    expect(rejectCandidate(slots, device)).toBeNull();
+  });
+
+  it('собственный запрос Galaxy S10e (family galaxy-s-e → {s,e}) проходит', () => {
+    const slots = buildSlots({
+      brand: 'samsung',
+      family: 'galaxy-s-e',
+      generation: 10,
+      modifiers: [],
+    });
+    const device = buildDevice({
+      id: 'samsung-galaxy-s10e',
+      brand: 'samsung',
+      family: 'galaxy-s-e',
+      generation: 10,
+      modifiers: [],
+    });
+    expect(rejectCandidate(slots, device)).toBeNull();
+  });
+
+  it('собственный запрос Galaxy M01 Core (family galaxy-m-core → {m}) проходит', () => {
+    const slots = buildSlots({
+      brand: 'samsung',
+      family: 'galaxy-m-core',
+      generation: 1,
+      modifiers: [],
+    });
+    const device = buildDevice({
+      id: 'samsung-galaxy-m01-core',
+      brand: 'samsung',
+      family: 'galaxy-m-core',
+      generation: 1,
+      modifiers: [],
+    });
+    expect(rejectCandidate(slots, device)).toBeNull();
+  });
+
+  it('собственный запрос Galaxy M21 2021 Edition (family galaxy-m-edition → {m}) проходит', () => {
+    const slots = buildSlots({
+      brand: 'samsung',
+      family: 'galaxy-m-edition',
+      generation: 21,
+      modifiers: [],
+    });
+    const device = buildDevice({
+      id: 'samsung-galaxy-m21-2021-edition',
+      brand: 'samsung',
+      family: 'galaxy-m-edition',
+      generation: 21,
+      modifiers: [],
+    });
+    expect(rejectCandidate(slots, device)).toBeNull();
+  });
+
+  it('запрос galaxy-s ({s}) отклоняет galaxy-s-e ({s,e}) — множества не равны', () => {
+    const slots = buildSlots({
+      brand: 'samsung',
+      family: 'galaxy-s',
+      generation: 10,
+      modifiers: [],
+    });
+    const s10e = buildDevice({
+      id: 'samsung-galaxy-s10e',
+      brand: 'samsung',
+      family: 'galaxy-s-e',
+      generation: 10,
+      modifiers: [],
+    });
+
+    const rejection = rejectCandidate(slots, s10e);
+
+    expect(rejection?.code).toBe('REJECT_LINE_DESIGNATOR_MISMATCH');
+  });
+
+  it('запрос без бренда (family: "m-s", как у «Galaxy M01s») совпадает с записью galaxy-m-s', () => {
+    const slots = buildSlots({
+      brand: 'galaxy',
+      family: 'm-s',
+      generation: 1,
+      modifiers: [],
+    });
+    const device = buildDevice({
+      id: 'samsung-galaxy-m01s',
+      brand: 'samsung',
+      family: 'galaxy-m-s',
+      generation: 1,
+      modifiers: [],
+    });
+    expect(rejectCandidate(slots, device)).toBeNull();
+  });
+
+  it('запрос без бренда (family: "s-e", как у «Galaxy S10e») совпадает с записью galaxy-s-e', () => {
+    const slots = buildSlots({
+      brand: 'galaxy',
+      family: 's-e',
+      generation: 10,
+      modifiers: [],
+    });
+    const device = buildDevice({
+      id: 'samsung-galaxy-s10e',
+      brand: 'samsung',
+      family: 'galaxy-s-e',
+      generation: 10,
+      modifiers: [],
+    });
+    expect(rejectCandidate(slots, device)).toBeNull();
+  });
+
+  it('первая буква многосегментного семейства — не обозначение («погода в москве» → v-moskve)', () => {
+    const slots = buildSlots({
+      brand: 'honor',
+      family: 'v-moskve',
+      generation: undefined,
+      modifiers: [],
+    });
+    const device = buildDevice({
+      id: 'honor-magic-5',
+      brand: 'honor',
+      family: 'magic',
+      generation: null,
+      modifiers: [],
+    });
+    expect(rejectCandidate(slots, device)).toBeNull();
+  });
+
+  it('запрос galaxy-m ({m}) не ломает собственные линейки galaxy-m-core и galaxy-m-edition', () => {
+    const slots = buildSlots({
+      brand: 'samsung',
+      family: 'galaxy-m',
+      generation: 1,
+      modifiers: [],
+    });
+    const mCore = buildDevice({
+      id: 'samsung-galaxy-m01-core',
+      brand: 'samsung',
+      family: 'galaxy-m-core',
+      generation: 1,
+      modifiers: [],
+    });
+    const mEdition = buildDevice({
+      id: 'samsung-galaxy-m21-2021-edition',
+      brand: 'samsung',
+      family: 'galaxy-m-edition',
+      generation: 21,
+      modifiers: [],
+    });
+
+    expect(rejectCandidate(slots, mCore)).toBeNull();
+    expect(rejectCandidate(buildSlots({ ...slots, generation: 21 }), mEdition)).toBeNull();
+  });
+});
+
 describe('rejectCandidate — порядок проверок и возврат null', () => {
-  it('возвращает null, когда все три ограничения пройдены', () => {
+  it('возвращает null, когда все ограничения пройдены', () => {
     const slots = buildSlots();
     expect(rejectCandidate(slots, buildDevice())).toBeNull();
   });

@@ -178,6 +178,91 @@ describe('ЗАПРЕЩЕНО: S23 не сопоставляется с S23 FE', 
   });
 });
 
+describe('ЗАПРЕЩЕНО: galaxy s23 не сопоставляется с Galaxy A23 и Galaxy M23', () => {
+  const s23Slots: QuerySlots = {
+    brand: 'samsung',
+    family: 'galaxy-s',
+    generation: 23,
+    modifiers: [],
+    attributes: {},
+    unparsed: [],
+  };
+
+  it('мера Джаро—Винклера сама по себе посчитала бы "galaxy-s" похожим на "galaxy" и "galaxy-m"', () => {
+    expect(jaroWinklerSimilarity('galaxy-s', 'galaxy')).toBeGreaterThan(FUZZY_MATCH_THRESHOLD);
+    expect(jaroWinklerSimilarity('galaxy-s', 'galaxy-m')).toBeGreaterThan(FUZZY_MATCH_THRESHOLD);
+  });
+
+  it('rejectCandidate отклоняет A23 и M23 с кодом REJECT_LINE_DESIGNATOR_MISMATCH', () => {
+    const a23 = buildDevice({
+      id: 'samsung-galaxy-a23',
+      brand: 'samsung',
+      family: 'galaxy',
+      generation: 23,
+      modifiers: ['a'],
+    });
+    const m23 = buildDevice({
+      id: 'samsung-galaxy-m23',
+      brand: 'samsung',
+      family: 'galaxy-m',
+      generation: 23,
+      modifiers: [],
+    });
+
+    expect(rejectCandidate(s23Slots, a23)?.code).toBe('REJECT_LINE_DESIGNATOR_MISMATCH');
+    expect(rejectCandidate(s23Slots, m23)?.code).toBe('REJECT_LINE_DESIGNATOR_MISMATCH');
+  });
+
+  it('полный конвейер matchQuery не определяет Galaxy A23 и Galaxy M23 для запроса "galaxy s23"', () => {
+    const a23 = buildDevice({
+      id: 'samsung-galaxy-a23',
+      brand: 'samsung',
+      family: 'galaxy',
+      generation: 23,
+      modifiers: ['a'],
+      marketingName: 'Galaxy A23',
+    });
+    const m23 = buildDevice({
+      id: 'samsung-galaxy-m23',
+      brand: 'samsung',
+      family: 'galaxy-m',
+      generation: 23,
+      modifiers: [],
+      marketingName: 'Galaxy M23',
+    });
+    const s23 = buildDevice({
+      id: 'samsung-galaxy-s23',
+      brand: 'samsung',
+      family: 'galaxy-s',
+      generation: 23,
+      modifiers: [],
+      marketingName: 'Galaxy S23',
+    });
+    const indexWithoutS23 = buildMatchIndex([a23, m23]);
+    const indexWithS23 = buildMatchIndex([a23, m23, s23]);
+
+    const withoutS23 = matchQuery(s23Slots, indexWithoutS23);
+    expect(withoutS23.status).not.toBe('determined');
+    expect(withoutS23.candidates.map((candidate) => candidate.device.id)).not.toContain(
+      'samsung-galaxy-a23',
+    );
+    expect(withoutS23.candidates.map((candidate) => candidate.device.id)).not.toContain(
+      'samsung-galaxy-m23',
+    );
+
+    const withS23 = matchQuery(s23Slots, indexWithS23);
+    expect(withS23.candidates.map((candidate) => candidate.device.id)).not.toContain(
+      'samsung-galaxy-a23',
+    );
+    expect(withS23.candidates.map((candidate) => candidate.device.id)).not.toContain(
+      'samsung-galaxy-m23',
+    );
+    expect(withS23.candidates.map((candidate) => candidate.device.id)).toContain(
+      'samsung-galaxy-s23',
+    );
+  });
+});
+
 describe('ЗАПРЕЩЕНО: Redmi Note 12 не сопоставляется с Redmi Note 13', () => {
   it('нечёткая мера расстояния сама по себе посчитала бы "redmi-note 12" и "redmi-note 13" похожими', () => {
     const similarity = editSimilarity('redmi-note 12', 'redmi-note 13');

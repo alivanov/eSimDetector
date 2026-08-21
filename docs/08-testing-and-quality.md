@@ -36,6 +36,7 @@
 - запись справочника со `dataConfidence: unverified` не даёт однозначного ответа при отключённом `ALLOW_UNVERIFIED_CATALOG_ANSWERS`;
 - `iPhone 1` не сопоставляется с `iPhone 11`, `iPhone 12` — с `iPhone 13`;
 - `Pro` не сопоставляется с `Pro Max`;
+- `galaxy s23` не сопоставляется с Galaxy A23 и Galaxy M23 — однобуквенное обозначение линейки сравнивается точно (`packages/fuzzy-matcher/src/impossible-matches.spec.ts`);
 - испорченный (на одну правку) модификатор (`amx`, `rpo`, `por`, `ultr`) не даёт ложного `determined` ни с базовой моделью, ни с `Pro`/`Pro Max`-версией (docs/04 §4.10.1) — `packages/fuzzy-matcher/src/impossible-matches.spec.ts`;
 - набор кандидатов с несовпадающими статусами eSIM всегда даёт `clarification_required`;
 - при признаках эмуляции устройства однозначный ответ не выдаётся;

@@ -6,13 +6,17 @@ import { jaroWinklerSimilarity } from './distance/jaro-winkler';
  * AGENTS.md, предметное правило 2). `rejectCandidate` выполняется ДО оценки и ранжирования
  * и ИСКЛЮЧАЕТ кандидата целиком, а не понижает его оценку: расстояние между `iPhone 12` и
  * `iPhone 13` равно единице (docs/04 §4.2), поэтому никакая настройка весов не может защитить
- * от ложного сопоставления, если сравнение цифр и модификаторов реализовано как составляющая
- * оценки, а не как предикат отбора — только исключение кандидата гарантирует нулевую долю
- * ложных определений независимо от конфигурации (К1, вес 0,40, ADR-003).
+ * от ложного сопоставления, если сравнение цифр, модификаторов и однобуквенного обозначения
+ * линейки реализовано как составляющая оценки, а не как предикат отбора — только исключение
+ * кандидата гарантирует нулевую долю ложных определений независимо от конфигурации (К1, вес
+ * 0,40, ADR-003).
  */
 
 export type ConstraintRejectionCode =
-  'REJECT_BRAND_MISMATCH' | 'REJECT_GENERATION_MISMATCH' | 'REJECT_MODIFIER_SET_MISMATCH';
+  | 'REJECT_BRAND_MISMATCH'
+  | 'REJECT_GENERATION_MISMATCH'
+  | 'REJECT_MODIFIER_SET_MISMATCH'
+  | 'REJECT_LINE_DESIGNATOR_MISMATCH';
 
 export interface ConstraintRejection {
   readonly code: ConstraintRejectionCode;
@@ -133,6 +137,87 @@ function checkModifierSet(slots: QuerySlots, device: MatcherDevice): ConstraintR
   return null;
 }
 
+function sameStringSet(a: ReadonlySet<string>, b: ReadonlySet<string>): boolean {
+  if (a.size !== b.size) {
+    return false;
+  }
+  for (const value of a) {
+    if (!b.has(value)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+/**
+ * Однобуквенное обозначение линейки (docs/04 §4.2): однобуквенные сегменты `family` после
+ * первого плюс однобуквенные `modifiers`. A-серия хранится как `family: "galaxy"` +
+ * `modifiers: ["a"]`, S/M/Z — как последний сегмент `galaxy-s` / `galaxy-m` / `galaxy-z`; без
+ * сбора из обоих источников A и S остались бы неразличимы. Многобуквенный сегмент (`note`,
+ * `core`, `edition`) обозначением не считается.
+ *
+ * Первый сегмент по умолчанию пропускается (якорь семейства в справочнике). Два исключения,
+ * когда имя семейства заняло `brand` и в `family` остались только обозначения:
+ * - `family` целиком из одной буквы (`галакси с23` → `s`);
+ * - первый сегмент — буква, и дальше есть ещё буква (`Galaxy M01s` → `m-s`, не `{s}`).
+ * Иначе предлог в «погода в москве» (`v-moskve`) стал бы ложным обозначением `{v}`.
+ */
+function lineDesignators(
+  family: string | undefined,
+  modifiers: readonly string[],
+): ReadonlySet<string> {
+  const designators = new Set<string>();
+  if (family !== undefined && family.length > 0) {
+    for (const segment of familyDesignatorSegments(family)) {
+      designators.add(segment);
+    }
+  }
+  for (const modifier of modifiers) {
+    if (modifier.length === 1) {
+      designators.add(modifier);
+    }
+  }
+  return designators;
+}
+
+function familyDesignatorSegments(family: string): readonly string[] {
+  const [first = '', ...afterFirst] = family.split('-');
+  if (afterFirst.length === 0) {
+    return first.length === 1 ? [first] : [];
+  }
+  const singleAfterFirst = afterFirst.filter((segment) => segment.length === 1);
+  if (first.length === 1 && singleAfterFirst.length > 0) {
+    return [first, ...singleAfterFirst];
+  }
+  return singleAfterFirst;
+}
+
+function formatDesignators(designators: ReadonlySet<string>): string {
+  return [...designators].join(', ');
+}
+
+/**
+ * Точное сравнение однобуквенного обозначения линейки. Ограничение применяется, ТОЛЬКО когда
+ * запрос назвал хотя бы одно такое обозначение — симметрично поколению и набору модификаторов.
+ * Если запрос назвал обозначение, а у устройства оно другое либо отсутствует — отклонение
+ * (ADR-020: исключение кандидата, а не понижение оценки).
+ */
+function checkLineDesignator(slots: QuerySlots, device: MatcherDevice): ConstraintRejection | null {
+  const queryDesignators = lineDesignators(slots.family, slots.modifiers);
+  if (queryDesignators.size === 0) {
+    return null;
+  }
+  const deviceDesignators = lineDesignators(device.family, device.modifiers);
+  if (sameStringSet(queryDesignators, deviceDesignators)) {
+    return null;
+  }
+  return {
+    code: 'REJECT_LINE_DESIGNATOR_MISMATCH',
+    deviceId: device.id,
+    detail: `обозначение линейки запроса {${formatDesignators(queryDesignators)}} не равно обозначению устройства {${formatDesignators(deviceDesignators)}}`,
+  };
+}
+
 /**
  * Предикат отбора кандидата (ADR-020): возвращает причину отклонения либо `null`, если ни
  * одно жёсткое ограничение не сработало. Порядок проверок не влияет на корректность (ограничения
@@ -149,6 +234,7 @@ export function rejectCandidate(
   return (
     checkBrand(slots, device, minBrandSimilarity) ??
     checkGeneration(slots, device) ??
-    checkModifierSet(slots, device)
+    checkModifierSet(slots, device) ??
+    checkLineDesignator(slots, device)
   );
 }
