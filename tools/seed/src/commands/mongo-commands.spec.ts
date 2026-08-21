@@ -79,6 +79,48 @@ describe('команды rebuild-signatures/export-overrides/verify (интег�
     );
   });
 
+  it('export-overrides выгружает устройство, созданное модератором, в data/catalog/curated (этап 7)', async () => {
+    await loadDevices(db.connection, [
+      buildSampleDevice({
+        _id: 'moderator-created-device',
+        provenance: {
+          source: 'moderator:test-moderator',
+          batchId: null,
+          importedAt: new Date('2026-08-20'),
+          agreementCount: null,
+        },
+      }),
+    ]);
+
+    const exitCode = await runExportOverridesCommand({
+      mongoUri: db.uri,
+      overridesDir: root,
+      curatedDir: root,
+    });
+    expect(exitCode).toBe(0);
+
+    const exported: unknown = readJson(join(root, 'moderator-moderator-created-device.json'));
+    expect(exported).toEqual(
+      expect.objectContaining({
+        _id: 'moderator-created-device',
+        provenance: expect.objectContaining({ source: 'moderator:test-moderator' }),
+      }),
+    );
+  });
+
+  it('export-overrides не выгружает импортированные/курируемые устройства в data/catalog/curated', async () => {
+    await loadDevices(db.connection, [buildSampleDevice({ _id: 'samsung-galaxy-s24-ultra' })]);
+
+    const exitCode = await runExportOverridesCommand({
+      mongoUri: db.uri,
+      overridesDir: root,
+      curatedDir: root,
+    });
+    expect(exitCode).toBe(0);
+
+    expect(() => readJson(join(root, 'moderator-samsung-galaxy-s24-ultra.json'))).toThrow();
+  });
+
   it('verify возвращает 0 на валидном справочнике без файла эталона', async () => {
     await loadDevices(db.connection, [buildSampleDevice({ _id: 'samsung-galaxy-s24-ultra' })]);
     const exitCode = await runVerifyCommand({ mongoUri: db.uri });

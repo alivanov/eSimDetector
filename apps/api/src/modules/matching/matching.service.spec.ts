@@ -10,11 +10,20 @@ import {
   DEFAULT_ALIASES_PATH,
 } from './dictionary/normalization-dictionary.provider';
 import { MatchingService } from './matching.service';
+import type { ModerationTaskService } from '../moderation/moderation-task.service';
 
 const dictionary = loadNormalizationDictionaryFromFile(DEFAULT_ALIASES_PATH);
 
 function buildEnv(overrides: Partial<Record<string, string>> = {}): EnvConfig {
   return validateEnv({ NODE_ENV: 'test', ...overrides });
+}
+
+function buildFakeModerationTaskService(): ModerationTaskService {
+  const fake: Pick<ModerationTaskService, 'recordUnmatchedQuery' | 'recordAmbiguousQuery'> = {
+    recordUnmatchedQuery: async () => {},
+    recordAmbiguousQuery: async () => {},
+  };
+  return fake as ModerationTaskService;
 }
 
 function buildService(devices: readonly Device[], env: EnvConfig = buildEnv()): MatchingService {
@@ -26,6 +35,7 @@ function buildService(devices: readonly Device[], env: EnvConfig = buildEnv()): 
     fakeCatalogService as CatalogService,
     dictionary,
     new ConfigService<EnvConfig, true>(env),
+    buildFakeModerationTaskService(),
   );
 }
 
@@ -242,6 +252,7 @@ describe('MatchingService.search — защитные ветки на расси
       brokenCatalog as CatalogService,
       dictionary,
       new ConfigService<EnvConfig, true>(buildEnv()),
+      buildFakeModerationTaskService(),
     );
 
     const result = brokenService.search('galaxy s24 ultra');
@@ -258,6 +269,7 @@ describe('MatchingService.search — защитные ветки на расси
       brokenCatalog as CatalogService,
       dictionary,
       new ConfigService<EnvConfig, true>(buildEnv()),
+      buildFakeModerationTaskService(),
     );
 
     const result = brokenService.search('samsung galaxy s23');
@@ -272,6 +284,7 @@ describe('MatchingService.search — защитные ветки на расси
       brokenCatalog as CatalogService,
       dictionary,
       new ConfigService<EnvConfig, true>(buildEnv()),
+      buildFakeModerationTaskService(),
     );
 
     const result = brokenService.suggest('galaxy s24 ultra', 5);

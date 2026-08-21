@@ -12,6 +12,7 @@ import type { CatalogService } from '../catalog/catalog.service';
 import { DetectionService } from './detection.service';
 import type { ScreenSignatureService } from './ios/screen-signature.service';
 import type { ResolutionLogService } from '../resolution-log/resolution-log.service';
+import type { ModerationTaskService } from '../moderation/moderation-task.service';
 
 function buildEnv(overrides: Partial<Record<string, string>> = {}): EnvConfig {
   return validateEnv({ NODE_ENV: 'test', ...overrides });
@@ -41,6 +42,17 @@ function buildFakeResolutionLogService(): ResolutionLogService {
   return fake as ResolutionLogService;
 }
 
+function buildFakeModerationTaskService(): ModerationTaskService {
+  const fake: Pick<
+    ModerationTaskService,
+    'recordUnknownModelCode' | 'recordUnknownScreenSignature'
+  > = {
+    recordUnknownModelCode: async () => {},
+    recordUnknownScreenSignature: async () => {},
+  };
+  return fake as ModerationTaskService;
+}
+
 function buildService(
   devices: readonly Device[],
   records: readonly ScreenSignatureRecord[] = [],
@@ -51,6 +63,7 @@ function buildService(
     buildFakeScreenSignatureService(records),
     new ConfigService<EnvConfig, true>(env),
     buildFakeResolutionLogService(),
+    buildFakeModerationTaskService(),
   );
 }
 

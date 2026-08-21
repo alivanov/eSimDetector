@@ -19,6 +19,7 @@ export function defaultPipelinePaths(): PipelinePaths {
 }
 
 export const DEFAULT_OVERRIDES_DIR = join(REPO_ROOT, 'data/catalog/overrides');
+export const DEFAULT_CURATED_DIR = join(REPO_ROOT, 'data/catalog/curated');
 export const DEFAULT_REPORTS_DIR = join(REPO_ROOT, 'reports');
 export const DEFAULT_SNAPSHOT_PATH = join(REPO_ROOT, 'reports/.previous-snapshot.json');
 

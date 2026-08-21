@@ -15,7 +15,15 @@ export default defineConfig({
   // экспортов. `optimizeDeps.include` заставляет Vite пре-бандлить их так же, как обычную зависимость
   // из `node_modules`, — исправление относится только к режиму разработки/сборки, не к самим пакетам.
   optimizeDeps: {
-    include: ['@esim-detector/signals-collector', '@esim-detector/ui-tokens'],
+    include: [
+      '@esim-detector/signals-collector',
+      '@esim-detector/ui-tokens',
+      // Этап 7 (docs/15-moderation.md §15.7) — раздел `/admin` использует типы и схемы `zod`
+      // напрямую из `@esim-detector/contracts` (единственный пакет CommonJS, от которого
+      // `apps/web` зависит НЕ через `@esim-detector/widget`) — тот же приём CJS→ESM интеропа,
+      // что и у двух пакетов выше.
+      '@esim-detector/contracts',
+    ],
   },
   server: {
     port: 8080,

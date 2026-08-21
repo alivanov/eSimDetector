@@ -38,6 +38,7 @@ function consensusDevice(overrides: Partial<ConsensusDevice> = {}): ConsensusDev
     agreementCount: 2,
     contributingSources: ['llm:model-a', 'llm:model-b'],
     sourceDisagreement: false,
+    sourceVariants: [],
     ...overrides,
   };
 }

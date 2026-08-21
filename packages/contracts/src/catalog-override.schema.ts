@@ -1,7 +1,13 @@
 import { z } from 'zod';
 
-import { dataConfidenceSchema, deviceStatusSchema } from './enums';
-import { type Device, type EsimInfo, deviceSourceSchema, esimInfoSchema } from './device.schema';
+import { dataConfidenceSchema, deviceStatusSchema, deviceTypeSchema } from './enums';
+import {
+  type Device,
+  type EsimInfo,
+  deviceScreenSignatureSchema,
+  deviceSourceSchema,
+  esimInfoSchema,
+} from './device.schema';
 
 /**
  * Слой решений модератора (docs/05-data-model.md, §5.6: коллекция `catalog_overrides`) —
@@ -12,11 +18,22 @@ import { type Device, type EsimInfo, deviceSourceSchema, esimInfoSchema } from '
  *
  * `patch` — частичное переопределение ТОЛЬКО тех полей записи, которые реально решает
  * модератор (ADR-014: подтверждение статуса eSIM со ссылкой на источник, повышение
- * достоверности, деактивация устаревшей записи). Остальные поля записи (название, коды,
- * псевдонимы и т. п.) через этот слой не переопределяются намеренно: их источник истины —
- * курируемое ядро и импорт, а не ручное решение по конкретному полю (.cursor/rules/catalog-data.mdc:
- * «Приоритет источников при слиянии... порядок не менять»). Расширение перечня
- * переопределяемых полей — решение потребителя очереди модерации (агент 7), а не этого пакета.
+ * достоверности, деактивация устаревшей записи). Название, семейство и поколение через этот
+ * слой не переопределяются намеренно: их источник истины — курируемое ядро и импорт, а не
+ * ручное решение по конкретному полю (.cursor/rules/catalog-data.mdc: «Приоритет источников
+ * при слиянии... порядок не менять»).
+ *
+ * **Расширение этапом 7 (docs/15-moderation.md §15.4, ADR-014).** `modelCodes`/`aliases`/
+ * `screenSignatures` добавлены как раз тем «потребителем очереди модерации», на которого
+ * ссылался комментарий выше: без них действия «привязать код к существующему устройству» и
+ * «привязать сигнатуру» (§15.4) невозможно выразить решением модератора, не нарушив приоритет
+ * источников при слиянии (правка самой записи `devices` была бы решением конвейера импорта, а
+ * не отдельным слоем). Семантика всех трёх, как и у `sources` ниже, — ПОЛНАЯ ЗАМЕНА массива, а
+ * не добавление одного элемента: вызывающая сторона (`ModerationService`,
+ * `apps/api/src/modules/moderation`) сама вычисляет объединение с уже действующим (то есть уже
+ * прошедшим предыдущие overrides) значением поля перед записью патча — это даёт видимый эффект
+ * «добавления» без спецсинтаксиса diff/append в самом формате патча. `deviceType` добавлен для
+ * действия «Отметить "не телефон"» (§15.4).
  */
 /**
  * Тип патча `esim` выделен в отдельную схему (а не инлайн `esimInfoSchema.partial()`), чтобы
@@ -34,6 +51,10 @@ export const catalogOverridePatchSchema = z
     dataConfidence: dataConfidenceSchema,
     sources: z.array(deviceSourceSchema),
     status: deviceStatusSchema,
+    modelCodes: z.array(z.string().min(1)),
+    aliases: z.array(z.string().min(1)),
+    screenSignatures: z.array(deviceScreenSignatureSchema),
+    deviceType: deviceTypeSchema,
   })
   .partial()
   .refine((patch) => Object.keys(patch).length > 0, {
@@ -97,5 +118,9 @@ export function applyCatalogOverride(device: Device, override?: CatalogOverride)
     ...(patch.dataConfidence !== undefined ? { dataConfidence: patch.dataConfidence } : {}),
     ...(patch.sources !== undefined ? { sources: patch.sources } : {}),
     ...(patch.status !== undefined ? { status: patch.status } : {}),
+    ...(patch.modelCodes !== undefined ? { modelCodes: patch.modelCodes } : {}),
+    ...(patch.aliases !== undefined ? { aliases: patch.aliases } : {}),
+    ...(patch.screenSignatures !== undefined ? { screenSignatures: patch.screenSignatures } : {}),
+    ...(patch.deviceType !== undefined ? { deviceType: patch.deviceType } : {}),
   };
 }

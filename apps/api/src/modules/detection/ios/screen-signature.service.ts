@@ -56,4 +56,15 @@ export class ScreenSignatureService implements OnModuleInit {
   public getBySignature(signature: string): ScreenSignatureRecord | undefined {
     return this.cache.get(signature);
   }
+
+  /**
+   * Все загруженные записи (этап 7, docs/15-moderation.md §15.3: «по сигнатуре экрана —
+   * показываются известные сигнатуры с наименьшим отличием») — модерации нужен перебор всей
+   * коллекции для поиска ближайших сигнатур к неизвестной, `getBySignature` для этого не подходит
+   * (точный поиск по одному ключу). Не расширяет резолюцию детекции — только читает уже
+   * прогретый кэш этого сервиса.
+   */
+  public entries(): readonly ScreenSignatureRecord[] {
+    return [...this.cache.values()];
+  }
 }

@@ -21,6 +21,19 @@ export interface ConsensusDevice {
   readonly contributingSources: readonly string[];
   /** `true` — запись разрешена правилом осторожности и заводит задачу модерации `source_disagreement` (docs/14 §14.5). */
   readonly sourceDisagreement: boolean;
+  /**
+   * Значение каждого голосовавшего источника по отдельности (docs/15-moderation.md §15.2,
+   * столбец «unknown_model_code»... строка `source_disagreement`: «все варианты статуса eSIM с
+   * указанием источника») — заполняется для ЛЮБОГО исхода с более чем одним голосующим
+   * источником (не только `sourceDisagreement: true`), а не досчитывается заново вызывающей
+   * стороной: сравнение уже выполнено здесь (`voting`), пересчитывать его отдельно в
+   * `tools/seed/src/commands/*` означало бы дублировать саму логику консенсуса, а не только
+   * читать её результат.
+   */
+  readonly sourceVariants: readonly {
+    readonly source: string;
+    readonly esimSupport: 'yes' | 'no' | 'conditional';
+  }[];
 }
 
 export interface ConsensusResult {
@@ -185,6 +198,10 @@ export function resolveConsensus(candidates: readonly DeviceCandidate[]): Consen
 
     const distinctStatuses = new Set(voting.map((candidate) => candidate.esimSupport));
     const contributingSources = voting.map((candidate) => candidate.provenance.source);
+    const sourceVariants = voting.map((candidate) => ({
+      source: candidate.provenance.source,
+      esimSupport: candidate.esimSupport,
+    }));
     const representative = buildRepresentative([...voting, ...abstaining]);
 
     if (voting.length === 1) {
@@ -200,6 +217,7 @@ export function resolveConsensus(candidates: readonly DeviceCandidate[]): Consen
         agreementCount: 1,
         contributingSources,
         sourceDisagreement: false,
+        sourceVariants,
       });
       continue;
     }
@@ -217,6 +235,7 @@ export function resolveConsensus(candidates: readonly DeviceCandidate[]): Consen
         agreementCount: voting.length,
         contributingSources,
         sourceDisagreement: false,
+        sourceVariants,
       });
       continue;
     }
@@ -233,6 +252,7 @@ export function resolveConsensus(candidates: readonly DeviceCandidate[]): Consen
         agreementCount: voting.length,
         contributingSources,
         sourceDisagreement: true,
+        sourceVariants,
       });
       continue;
     }

@@ -61,6 +61,28 @@ describe('ScreenSignatureService (интеграция, withTestDatabase)', () =
     expect(record?.esimConsensus).toBe('supported');
   });
 
+  it('entries() возвращает все загруженные записи (этап 7, docs/15 §15.3)', async () => {
+    await model.create([
+      {
+        signature: '393x852@3',
+        zoomed: false,
+        candidates: ['apple-iphone-14-pro'],
+        esimConsensus: 'supported',
+      },
+      {
+        signature: '375x812@3',
+        zoomed: false,
+        candidates: ['apple-iphone-x'],
+        esimConsensus: 'not_supported',
+      },
+    ]);
+
+    await service.reload();
+
+    const signatures = service.entries().map((record) => record.signature);
+    expect(signatures.sort()).toEqual(['375x812@3', '393x852@3']);
+  });
+
   it('сбой прогрева (запись не проходит валидацию contracts) переводит сервис в статус "не готов", но не бросает исключение', async () => {
     // Отдельный модуль/база — без этого тест зависел бы от порядка выполнения соседних `it`,
     // которые уже могли успешно прогреть `service` из describe-блока (кэш при ошибке

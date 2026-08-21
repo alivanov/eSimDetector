@@ -68,6 +68,40 @@ export {
 } from './catalog-override.schema';
 
 export type {
+  ModerationTaskKind,
+  ModerationTaskStatus,
+  UnknownModelCodePayload,
+  UnknownScreenSignaturePayload,
+  UnmatchedQueryPayload,
+  AmbiguousQueryPayload,
+  CsvQuarantinePayload,
+  SourceDisagreementPayload,
+  UserFeedbackPayload,
+  ModerationTask,
+} from './moderation-task.schema';
+export {
+  moderationTaskKindSchema,
+  moderationTaskStatusSchema,
+  unknownModelCodePayloadSchema,
+  unknownScreenSignaturePayloadSchema,
+  unmatchedQueryPayloadSchema,
+  ambiguousQueryPayloadSchema,
+  csvQuarantinePayloadSchema,
+  sourceDisagreementVariantSchema,
+  sourceDisagreementPayloadSchema,
+  userFeedbackPayloadSchema,
+  moderationTaskSchema,
+  parseModerationTask,
+} from './moderation-task.schema';
+
+export type { CatalogChangeAction, CatalogChangeEntry } from './catalog-change.schema';
+export {
+  catalogChangeActionSchema,
+  catalogChangeEntrySchema,
+  parseCatalogChangeEntry,
+} from './catalog-change.schema';
+
+export type {
   CatalogInvariantNumber,
   CatalogInvariantCode,
   CatalogInvariantViolation,

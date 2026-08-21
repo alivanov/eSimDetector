@@ -30,6 +30,20 @@ export interface BuildCatalogOptions {
   readonly familyMinRecords: number;
 }
 
+/**
+ * Запись консенсуса, разрешённая правилом осторожности (docs/14 §14.5) — заводит задачу
+ * модерации `source_disagreement` (docs/15-moderation.md §15.2). Поверхностно читает уже
+ * посчитанный `ConsensusDevice.sourceVariants` (`consensus.ts`) — не пересчитывает согласие
+ * заново, только собирает записи, для которых оно оказалось `sourceDisagreement: true`.
+ */
+export interface SourceDisagreementReportEntry {
+  readonly deviceId: string;
+  readonly variants: readonly {
+    readonly source: string;
+    readonly esimSupport: 'yes' | 'no' | 'conditional';
+  }[];
+}
+
 export interface BuildCatalogResult {
   /** Устройства, ГОТОВЫЕ к загрузке — нарушители инвариантов §5.8 уже исключены (ADR-029). */
   readonly devices: readonly Device[];
@@ -43,6 +57,8 @@ export interface BuildCatalogResult {
   readonly invariantQuarantinedCount: number;
   readonly curatedAppliedCount: number;
   readonly appleRuleAppliedCount: number;
+  /** Этап 7 (docs/15-moderation.md §15.2) — источник данных для задачи `source_disagreement`. */
+  readonly sourceDisagreements: readonly SourceDisagreementReportEntry[];
 }
 
 /**
@@ -134,12 +150,20 @@ export function buildCatalog(options: BuildCatalogOptions): BuildCatalogResult {
   const originByDeviceId = new Map<string, DeviceOrigin>();
   let curatedAppliedCount = 0;
   let appleRuleAppliedCount = 0;
+  const sourceDisagreements: SourceDisagreementReportEntry[] = [];
   // Идентификаторы курируемого ядра, уже применённые слиянием ниже — остаток (устройства
   // курируемого ядра без единой строки CSV, например всё ядро Apple при пустом импорте,
   // docs/appendix-a §А.8.3) добавляется отдельным проходом ПОСЛЕ основного цикла, см. ниже.
   const appliedCuratedIds = new Set<string>();
 
   for (const consensusDevice of consensusResult.accepted) {
+    if (consensusDevice.sourceDisagreement) {
+      sourceDisagreements.push({
+        deviceId: consensusDevice.representative.id,
+        variants: consensusDevice.sourceVariants,
+      });
+    }
+
     const decision = decideMergeSource(consensusDevice, curatedDevices);
     notices.push(...decision.notices);
 
@@ -236,6 +260,8 @@ export function buildCatalog(options: BuildCatalogOptions): BuildCatalogResult {
   }));
   const familyAggregates = computeFamilyAggregates(familyInputs, familyMinRecords);
 
+  const loadedDeviceIds = new Set(quarantinedByInvariants.devices.map((device) => device._id));
+
   return {
     devices: quarantinedByInvariants.devices,
     quarantine: [...quarantine, ...quarantinedByInvariants.quarantine],
@@ -246,5 +272,8 @@ export function buildCatalog(options: BuildCatalogOptions): BuildCatalogResult {
     invariantQuarantinedCount: devices.length - quarantinedByInvariants.devices.length,
     curatedAppliedCount,
     appleRuleAppliedCount,
+    // Запись, которая позже карантинирована за нарушение инварианта §5.8, не должна заводить
+    // задачу модерации на устройство, которого не будет в справочнике (ADR-029).
+    sourceDisagreements: sourceDisagreements.filter((entry) => loadedDeviceIds.has(entry.deviceId)),
   };
 }

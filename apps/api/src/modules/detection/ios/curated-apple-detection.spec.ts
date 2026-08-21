@@ -5,6 +5,7 @@ import appleCuratedJson from '../../../../../../data/catalog/curated/apple-iphon
 import { validateEnv, type EnvConfig } from '../../../config/env.schema';
 import { buildCatalogSnapshot } from '../../catalog/catalog.snapshot';
 import type { CatalogService } from '../../catalog/catalog.service';
+import type { ModerationTaskService } from '../../moderation/moderation-task.service';
 import type { ResolutionLogService } from '../../resolution-log/resolution-log.service';
 import { DetectionService } from '../detection.service';
 import type { ScreenSignatureService } from './screen-signature.service';
@@ -62,11 +63,20 @@ function buildService(): DetectionService {
 
   const env: EnvConfig = validateEnv({ NODE_ENV: 'test' });
 
+  const moderationTasks: Pick<
+    ModerationTaskService,
+    'recordUnknownModelCode' | 'recordUnknownScreenSignature'
+  > = {
+    recordUnknownModelCode: async () => {},
+    recordUnknownScreenSignature: async () => {},
+  };
+
   return new DetectionService(
     catalog as CatalogService,
     signatures as ScreenSignatureService,
     new ConfigService<EnvConfig, true>(env),
     log as ResolutionLogService,
+    moderationTasks as ModerationTaskService,
   );
 }
 

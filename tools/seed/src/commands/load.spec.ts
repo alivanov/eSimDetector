@@ -2,7 +2,11 @@ import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
-import { validateCatalogInvariants, screenSignatureRecordSchema } from '@esim-detector/contracts';
+import {
+  validateCatalogInvariants,
+  screenSignatureRecordSchema,
+  type Device,
+} from '@esim-detector/contracts';
 import { withTestDatabase, type TestDatabaseHandle } from '@esim-detector/test-utils';
 
 import { DEVICES_COLLECTION, SCREEN_SIGNATURES_COLLECTION } from '../mongo/collections';
@@ -225,6 +229,127 @@ describe('runLoadCommand (интеграция, withTestDatabase)', () => {
 
     // Инвариант §5.8 п.7: `esimConsensus` каждой сигнатуры согласован со статусами кандидатов.
     expect(validateCatalogInvariants(devices, signatures).violations).toEqual([]);
+  });
+
+  it('заводит задачи модерации csv_quarantine и source_disagreement (этап 7, docs/15 §15.2)', async () => {
+    writeText(
+      join(root, 'import/llm-model-a/02.csv'),
+      [
+        DEVICES_HEADER,
+        'Samsung,Galaxy S24 Ultra,SM-S928B,android,phone,2024,yes,,,,,,official,https://www.samsung.com,high,',
+        'Samsung,Galaxy A21,SM-A217F,android,phone,2020,no,,,,,,official,,high,',
+        'Samsung,Galaxy S23,,android,phone,2023,yes,,,,,,official,,high,',
+      ].join('\n'),
+    );
+    writeText(
+      join(root, 'import/llm-model-b/02.csv'),
+      [
+        DEVICES_HEADER,
+        'Samsung,Galaxy A21s,SM-A217F,android,phone,2020,no,,,,,,official,,high,',
+        'Samsung,Galaxy S23,,android,phone,2023,no,,,,,,official,,high,',
+      ].join('\n'),
+    );
+    writeText(
+      join(root, 'import/llm-model-c/02.csv'),
+      [
+        DEVICES_HEADER,
+        'Samsung,Galaxy S23,,android,phone,2023,conditional,region:CN=no,,,,,official,,high,',
+      ].join('\n'),
+    );
+
+    const commonOptions = {
+      dryRun: false,
+      mongoUri: db.uri,
+      paths: makePaths(root),
+      reportsDir: join(root, 'reports'),
+      snapshotPath: join(root, 'snapshot.json'),
+      invariantQuarantineRatioThreshold: 0.9,
+    };
+
+    const first = await runLoadCommand(commonOptions);
+    expect(first).toBe(0);
+
+    const quarantineTasks = await db.connection
+      .collection('moderation_tasks')
+      .find({ kind: 'csv_quarantine' })
+      .toArray();
+    expect(quarantineTasks.length).toBeGreaterThan(0);
+    expect(quarantineTasks.every((task) => task['occurrences'] === 1)).toBe(true);
+
+    const disagreementTasks = await db.connection
+      .collection('moderation_tasks')
+      .find({ kind: 'source_disagreement' })
+      .toArray();
+    expect(disagreementTasks).toHaveLength(1);
+    expect(disagreementTasks[0]?.['payload']).toEqual({
+      deviceId: 'samsung-galaxy-s23',
+      variants: [
+        { source: 'llm-model-a', esimSupport: 'yes' },
+        { source: 'llm-model-b', esimSupport: 'no' },
+        { source: 'llm-model-c', esimSupport: 'conditional' },
+      ],
+    });
+
+    // Повторный `load` с тем же входом увеличивает счётчик обращений, а не создаёт дубликаты
+    // (docs/15 §15.2: «дедуплицируются... повторное обращение увеличивает счётчик»).
+    const second = await runLoadCommand(commonOptions);
+    expect(second).toBe(0);
+
+    const disagreementTasksAfterSecondRun = await db.connection
+      .collection('moderation_tasks')
+      .find({ kind: 'source_disagreement' })
+      .toArray();
+    expect(disagreementTasksAfterSecondRun).toHaveLength(1);
+    expect(disagreementTasksAfterSecondRun[0]?.['occurrences']).toBe(2);
+  });
+
+  it('повторный load не затирает решение модератора (catalog_overrides) — переживает переимпорт (docs/14 §14.5, ADR-014)', async () => {
+    const commonOptions = {
+      dryRun: false,
+      mongoUri: db.uri,
+      paths: makePaths(root),
+      reportsDir: join(root, 'reports'),
+      snapshotPath: join(root, 'snapshot.json'),
+    };
+
+    const first = await runLoadCommand(commonOptions);
+    expect(first).toBe(0);
+
+    const decidedAt = new Date('2026-08-20T00:00:00.000Z');
+    await db.connection.collection('catalog_overrides').insertOne({
+      deviceId: 'samsung-galaxy-s24-ultra',
+      patch: { dataConfidence: 'verified', esim: { support: 'not_supported' } },
+      reason: 'https://www.samsung.com/verified-manually',
+      decidedBy: 'moderator-1',
+      decidedAt,
+      createdAt: decidedAt,
+      updatedAt: decidedAt,
+    });
+
+    // Тот же самый вход загружается ЕЩЁ РАЗ — `loadDevices` только upsert-ит `devices` по своему
+    // детерминированному `_id` и никогда не трогает `catalog_overrides` (`tools/seed/src/mongo/
+    // load-devices.ts`).
+    const second = await runLoadCommand(commonOptions);
+    expect(second).toBe(0);
+
+    const override = await db.connection
+      .collection('catalog_overrides')
+      .findOne({ deviceId: 'samsung-galaxy-s24-ultra' });
+    expect(override).toEqual(
+      expect.objectContaining({
+        deviceId: 'samsung-galaxy-s24-ultra',
+        patch: { dataConfidence: 'verified', esim: { support: 'not_supported' } },
+        reason: 'https://www.samsung.com/verified-manually',
+      }),
+    );
+
+    // Устройство в `devices` осталось "сырым" (не переписанным overrides) — слой применяется
+    // только при чтении (`CatalogModule.applyCatalogOverride`, апробировано на реальной базе
+    // отдельным интеграционным тестом `apps/api`), а не при записи `devices` этим инструментом.
+    const rawDevice = await db.connection
+      .collection<Device>(DEVICES_COLLECTION)
+      .findOne({ _id: 'samsung-galaxy-s24-ultra' });
+    expect(rawDevice?.esim.support).toBe('supported');
   });
 
   it('--dry-run не подключается к MongoDB и не пишет устройства', async () => {

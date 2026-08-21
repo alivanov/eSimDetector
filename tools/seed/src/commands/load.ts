@@ -5,6 +5,10 @@ import {
 } from '../defaults';
 import { connectToMongo, disconnectFromMongo } from '../mongo/connection';
 import { loadDevices } from '../mongo/load-devices';
+import {
+  writeCsvQuarantineTasks,
+  writeSourceDisagreementTasks,
+} from '../mongo/write-moderation-tasks';
 import type { PipelinePaths } from '../pipeline/pipeline-runner';
 import { runAndBuildReport } from './shared';
 import { writeReportFiles, writeSnapshot } from './report-helpers';
@@ -84,6 +88,23 @@ export async function runLoadCommand(options: LoadCommandOptions): Promise<numbe
     process.stdout.write(
       `Загружено в MongoDB: ${stats.upserted} новых, ${stats.matched} обновлено (всего ${result.devices.length})\n`,
     );
+
+    // Этап 7 (docs/15-moderation.md §15.2) — карантин импорта и расхождения источников заводят
+    // задачи очереди модерации напрямую при загрузке, а не только попадают в отчёт: без этого
+    // строки, отброшенные конвейером, были бы видны исключительно в `reports/import-*.md`, а не
+    // в рабочем инструменте специалиста (docs/15 §15.7). `catalog_overrides` этим шагом не
+    // трогается — решения модератора не могут быть затронуты повторным `load` (docs/14 §14.5:
+    // «идемпотентность... не затирает решения модератора»).
+    const quarantineTasksCount = await writeCsvQuarantineTasks(connection, result.quarantine);
+    const disagreementTasksCount = await writeSourceDisagreementTasks(
+      connection,
+      result.sourceDisagreements,
+    );
+    if (quarantineTasksCount > 0 || disagreementTasksCount > 0) {
+      process.stdout.write(
+        `Задачи модерации обновлены: ${quarantineTasksCount} карантин, ${disagreementTasksCount} расхождение источников\n`,
+      );
+    }
   } finally {
     await disconnectFromMongo(connection);
   }

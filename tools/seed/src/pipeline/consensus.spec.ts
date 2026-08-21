@@ -100,6 +100,11 @@ describe('resolveConsensus', () => {
     );
     expect(result.accepted[0]?.esimConditions).toEqual(conditions);
     expect(result.quarantined).toEqual([]);
+    expect(result.accepted[0]?.sourceVariants).toEqual([
+      { source: 'llm:model-a', esimSupport: 'yes' },
+      { source: 'llm:model-b', esimSupport: 'no' },
+      { source: 'llm:model-c', esimSupport: 'conditional' },
+    ]);
   });
 
   it('"yes" против "no" без единого "conditional" уходит в карантин целиком (не разрешается автоматически)', () => {

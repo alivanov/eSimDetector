@@ -126,7 +126,60 @@ flowchart LR
 }
 ```
 
-`patch` переопределяет ТОЛЬКО перечисленные поля намеренно (не название, не коды, не псевдонимы) — источник истины для остальных полей записи остаётся курируемым ядром/импортом (.cursor/rules/catalog-data.mdc: «приоритет источников при слиянии... порядок не менять»). Применение слоя — чистая функция `applyCatalogOverride(device, override)` (`packages/contracts`), используемая и `CatalogModule` при прогреве кэша, и (в будущем) очередью модерации для предпросмотра решения до сохранения.
+`patch` переопределяет ТОЛЬКО перечисленные поля намеренно (не название, не семейство, не поколение) — источник истины для остальных полей записи остаётся курируемым ядром/импортом (.cursor/rules/catalog-data.mdc: «приоритет источников при слиянии... порядок не менять»). Применение слоя — чистая функция `applyCatalogOverride(device, override)` (`packages/contracts`), используемая и `CatalogModule` при прогреве кэша, и очередью модерации (агент 7) для предпросмотра решения до сохранения.
+
+**Расширение `patch` этапом 7 (docs/15-moderation.md §15.4, docs/09-decisions.md ADR-043).** Добавлены `modelCodes`, `aliases`, `screenSignatures` (полная замена массива — вызывающая сторона, `CatalogWriteService`, сама вычисляет объединение с уже действующим значением перед записью) и `deviceType` (для действия «Отметить "не телефон"») — без них действия «привязать код/сигнатуру к существующему устройству» физически невозможно выразить решением модератора.
+
+**Форма документа `moderation_tasks` (реализация агента 7, `packages/contracts/src/moderation-task.schema.ts`).** Docs фиксировали типы задач (§15.2) и назначение полей, не буквальную форму — она введена этим агентом как дискриминированное объединение по `kind`, а не `Record<string, unknown>`:
+
+```ts
+{
+  _id: string;
+  kind: 'unknown_model_code' |
+    'unknown_screen_signature' |
+    'unmatched_query' |
+    'ambiguous_query' |
+    'csv_quarantine' |
+    'source_disagreement' |
+    'user_feedback';
+  key: string; // дедупликация в пределах kind — уникальный составной индекс kind+key
+  payload: /* форма зависит от kind, см. moderation-task.schema.ts */ ;
+  occurrences: number;
+  status: 'open' | 'resolved' | 'rejected';
+  createdAt: Date;
+  updatedAt: Date;
+  lastSeenAt: Date;
+  resolvedAt: Date | null;
+  resolvedBy: string | null;
+  resolutionNote: string | null;
+}
+```
+
+**Форма документа `catalog_changes` (реализация агента 7, `packages/contracts/src/catalog-change.schema.ts`) — журнал только для чтения:**
+
+```ts
+{
+  _id: string;
+  deviceId: string | null; // null для действий без конкретной записи (например, "отклонить задачу")
+  taskId: string | null; // задача очереди, по мотивам которой принято решение (если применимо)
+  action: 'link_model_code' |
+    'link_screen_signature' |
+    'create_device' |
+    'update_device' |
+    'change_esim_status' |
+    'add_alias' |
+    'mark_not_phone' |
+    'confirm_quarantine' |
+    'reject_quarantine' |
+    'reject_task';
+  field: string | null; // затронутое поле записи (null при действиях без правки devices)
+  previousValue: unknown;
+  newValue: unknown;
+  reason: string; // ссылка на источник решения
+  decidedBy: string;
+  createdAt: Date;
+}
+```
 
 Журналы не содержат персональных данных: сохраняются класс устройства и хеш сигнатуры, а не «сырой» набор сигналов, который потенциально мог бы использоваться для отслеживания. Срок хранения ограничен TTL-индексом.
 

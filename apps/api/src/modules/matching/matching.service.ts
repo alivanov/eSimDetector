@@ -26,6 +26,7 @@ import type {
 } from '../../common/response';
 import { buildPresentation, toDeviceSummary, toMatchSummary } from '../../common/response';
 import { CatalogService } from '../catalog/catalog.service';
+import { ModerationTaskService } from '../moderation/moderation-task.service';
 
 import { NORMALIZATION_DICTIONARY } from './dictionary/normalization-dictionary.provider';
 import type { SuggestItem } from './search-response';
@@ -71,6 +72,7 @@ export class MatchingService {
     private readonly catalogService: CatalogService,
     @Inject(NORMALIZATION_DICTIONARY) private readonly dictionary: NormalizationDictionary,
     private readonly configService: ConfigService<EnvConfig, true>,
+    private readonly moderationTaskService: ModerationTaskService,
   ) {}
 
   private policy(): CatalogAnswerPolicy {
@@ -156,6 +158,10 @@ export class MatchingService {
     }
 
     if (decision.status === 'not_found') {
+      void this.moderationTaskService.recordUnmatchedQuery({
+        rawQuery: query.raw,
+        normalizedQuery: query.normalized,
+      });
       return {
         query,
         status: 'clarification_required',
@@ -268,6 +274,12 @@ export class MatchingService {
       }
     }
     const leaderScore = candidates[0]?.score ?? 0;
+
+    void this.moderationTaskService.recordAmbiguousQuery({
+      rawQuery: query.raw,
+      normalizedQuery: query.normalized,
+      candidateIds: matches.map((match) => match.id),
+    });
 
     return {
       query,

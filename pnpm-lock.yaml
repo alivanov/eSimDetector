@@ -135,6 +135,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@esim-detector/contracts':
+        specifier: workspace:*
+        version: link:../../packages/contracts
       '@esim-detector/widget':
         specifier: workspace:*
         version: link:../widget

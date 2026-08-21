@@ -1,0 +1,158 @@
+.page {
+  min-height: 100vh;
+  background-color: var(--esim-colors-background);
+  color: var(--esim-colors-text-primary);
+  font-family: var(--esim-typography-font-family);
+  padding: var(--esim-spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-lg);
+  max-width: 70rem;
+  margin: 0 auto;
+}
+
+.heading {
+  margin: 0;
+  font-size: var(--esim-typography-font-size-xl);
+  font-weight: var(--esim-typography-font-weight-bold);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-sm);
+  background: var(--esim-colors-surface);
+  border-radius: var(--esim-shape-radius-lg);
+  padding: var(--esim-spacing-lg);
+  box-shadow: var(--esim-shape-shadow-sm);
+}
+
+.fieldLabel {
+  font-size: var(--esim-typography-font-size-sm);
+  font-weight: var(--esim-typography-font-weight-medium);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.input {
+  padding: var(--esim-spacing-xs) var(--esim-spacing-sm);
+  border-radius: var(--esim-components-input-radius);
+  border: var(--esim-shape-border-width-thin) solid var(--esim-components-input-border);
+  background: var(--esim-components-input-background);
+  color: var(--esim-colors-text-primary);
+  font-size: var(--esim-typography-font-size-md);
+}
+
+.buttonRow {
+  display: flex;
+  gap: var(--esim-spacing-sm);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.primaryButton {
+  padding: var(--esim-spacing-xs) var(--esim-spacing-md);
+  border-radius: var(--esim-components-button-primary-radius);
+  border: var(--esim-shape-border-width-thin) solid var(--esim-components-button-primary-border);
+  background: var(--esim-components-button-primary-background);
+  color: var(--esim-components-button-primary-foreground);
+  font-size: var(--esim-typography-font-size-md);
+  font-weight: var(--esim-typography-font-weight-medium);
+  cursor: pointer;
+}
+
+.primaryButton:disabled {
+  opacity: var(--esim-states-disabled-opacity);
+  cursor: default;
+}
+
+.secondaryButton {
+  padding: var(--esim-spacing-xs) var(--esim-spacing-md);
+  border-radius: var(--esim-components-button-secondary-radius);
+  border: var(--esim-shape-border-width-thin) solid var(--esim-components-button-secondary-border);
+  background: var(--esim-components-button-secondary-background);
+  color: var(--esim-components-button-secondary-foreground);
+  font-size: var(--esim-typography-font-size-md);
+  cursor: pointer;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--esim-spacing-sm);
+  flex-wrap: wrap;
+}
+
+.tabs {
+  display: flex;
+  gap: var(--esim-spacing-sm);
+  border-bottom: var(--esim-shape-border-width-thin) solid var(--esim-components-input-border);
+  padding-bottom: var(--esim-spacing-sm);
+}
+
+.tab {
+  padding: var(--esim-spacing-xs) var(--esim-spacing-md);
+  border-radius: var(--esim-components-button-secondary-radius);
+  border: none;
+  background: transparent;
+  color: var(--esim-colors-text-secondary);
+  cursor: pointer;
+  font-size: var(--esim-typography-font-size-md);
+}
+
+.tabActive {
+  background: var(--esim-components-button-secondary-background);
+  color: var(--esim-colors-text-primary);
+  font-weight: var(--esim-typography-font-weight-medium);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--esim-typography-font-size-sm);
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: var(--esim-spacing-xs) var(--esim-spacing-sm);
+  border-bottom: var(--esim-shape-border-width-thin) solid var(--esim-components-input-border);
+}
+
+.tableRowClickable {
+  cursor: pointer;
+}
+
+.tableRowClickable:hover {
+  background: var(--esim-components-input-background);
+}
+
+.errorMessage {
+  margin: 0;
+  color: var(--esim-colors-state-error);
+  font-size: var(--esim-typography-font-size-sm);
+}
+
+.successMessage {
+  margin: 0;
+  color: var(--esim-colors-state-success);
+  font-size: var(--esim-typography-font-size-sm);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: var(--esim-spacing-sm);
+}
+
+.jsonBlock {
+  background: var(--esim-components-input-background);
+  border-radius: var(--esim-shape-radius-md);
+  padding: var(--esim-spacing-sm);
+  font-family: monospace;
+  font-size: var(--esim-typography-font-size-sm);
+  overflow-x: auto;
+  white-space: pre-wrap;
+}

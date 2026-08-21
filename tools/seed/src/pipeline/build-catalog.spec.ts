@@ -53,6 +53,49 @@ describe('buildCatalog', () => {
     expect(result.quarantine).toEqual([]);
   });
 
+  it('запись, разрешённая правилом осторожности, попадает в sourceDisagreements (этап 7, docs/15 §15.2)', () => {
+    const conditions = [
+      {
+        scope: 'region' as const,
+        value: 'CN',
+        support: 'not_supported' as const,
+        note: 'region:CN=no',
+      },
+    ];
+    const result = buildCatalog({
+      candidates: [
+        candidate({
+          esimSupport: 'yes',
+          provenance: { ...candidate().provenance, source: 'llm:model-a' },
+        }),
+        candidate({
+          esimSupport: 'no',
+          provenance: { ...candidate().provenance, source: 'llm:model-b' },
+        }),
+        candidate({
+          esimSupport: 'conditional',
+          esimConditions: conditions,
+          provenance: { ...candidate().provenance, source: 'llm:model-c' },
+        }),
+      ],
+      curatedDevices: new Map(),
+      now: NOW,
+      familyMinRecords: 3,
+    });
+
+    expect(result.devices).toHaveLength(1);
+    expect(result.sourceDisagreements).toEqual([
+      {
+        deviceId: 'samsung-galaxy-s24-ultra',
+        variants: [
+          { source: 'llm:model-a', esimSupport: 'yes' },
+          { source: 'llm:model-b', esimSupport: 'no' },
+          { source: 'llm:model-c', esimSupport: 'conditional' },
+        ],
+      },
+    ]);
+  });
+
   it('курируемое ядро побеждает и не пересобирается', () => {
     const curated = buildSampleDevice({ _id: 'samsung-galaxy-s24-ultra' });
     const result = buildCatalog({

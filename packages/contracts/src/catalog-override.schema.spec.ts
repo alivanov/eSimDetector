@@ -126,4 +126,36 @@ describe('applyCatalogOverride', () => {
     expect(merged.esim.maxProfiles).toBeNull();
     expect(merged.esim.clarifyingQuestion).toBeNull();
   });
+
+  it('заменяет modelCodes/aliases/screenSignatures/deviceType целиком (этап 7, docs/15 §15.4)', () => {
+    const device = buildSampleDevice({
+      modelCodes: ['SM-S928B'],
+      aliases: ['galaxy s24 ultra'],
+      screenSignatures: [],
+      deviceType: 'phone',
+    });
+    const override = buildOverride({
+      deviceId: device._id,
+      patch: {
+        modelCodes: ['SM-S928B', 'SM-S9280'],
+        aliases: ['galaxy s24 ultra', 'галакси с24 ультра'],
+        screenSignatures: [{ cssWidth: 393, cssHeight: 852, dpr: 3, zoomed: false }],
+        deviceType: 'tablet',
+      },
+      reason: 'модератор: привязка нового кода/сигнатуры',
+      decidedBy: 'moderator-4',
+      decidedAt: new Date(),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    const merged = applyCatalogOverride(device, override);
+
+    expect(merged.modelCodes).toEqual(['SM-S928B', 'SM-S9280']);
+    expect(merged.aliases).toEqual(['galaxy s24 ultra', 'галакси с24 ультра']);
+    expect(merged.screenSignatures).toEqual([
+      { cssWidth: 393, cssHeight: 852, dpr: 3, zoomed: false },
+    ]);
+    expect(merged.deviceType).toBe('tablet');
+  });
 });

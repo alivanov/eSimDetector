@@ -20,6 +20,7 @@ const config: Config = {
   // пакетов в `apps/api/jest.config.ts`.
   moduleNameMapper: {
     '\\.module\\.css$': 'identity-obj-proxy',
+    '^@esim-detector/contracts$': '<rootDir>/../../packages/contracts/src/index.ts',
     '^@esim-detector/widget$': '<rootDir>/../widget/src/index.ts',
     '^@esim-detector/ui-tokens$': '<rootDir>/../../packages/ui-tokens/src/index.ts',
     '^@esim-detector/signals-collector$': '<rootDir>/../../packages/signals-collector/src/index.ts',

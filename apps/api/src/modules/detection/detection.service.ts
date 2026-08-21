@@ -16,6 +16,7 @@ import type { ApiReason, Clarification } from '../../common/response';
 import { buildPresentation, toCandidateSummary, toDeviceSummary } from '../../common/response';
 import type { EnvConfig } from '../../config/env.schema';
 import { CatalogService } from '../catalog/catalog.service';
+import { ModerationTaskService } from '../moderation/moderation-task.service';
 import { ResolutionLogService } from '../resolution-log/resolution-log.service';
 
 import { resolveAndroidDevice } from './android/resolve-android';
@@ -75,6 +76,7 @@ export class DetectionService {
     private readonly screenSignatureService: ScreenSignatureService,
     private readonly configService: ConfigService<EnvConfig, true>,
     private readonly resolutionLogService: ResolutionLogService,
+    private readonly moderationTaskService: ModerationTaskService,
   ) {}
 
   private policy(): CatalogAnswerPolicy {
@@ -272,6 +274,7 @@ export class DetectionService {
       // ADR-034): владелец планшета без совпавшего кода должен услышать "это планшет" вместо
       // безликого "модель устройства не найдена", а владелец часов — не получить ответ про
       // телефон вовсе.
+      this.recordUnknownModelCodes(androidResolution.reasons, platform);
       return this.buildClarificationOnly(
         platform,
         deviceTypeClassification.deviceType,
@@ -365,6 +368,10 @@ export class DetectionService {
     const screenKey = buildScreenSignatureKey(signals?.screen);
     const screenSignature =
       screenKey === undefined ? undefined : this.screenSignatureService.getBySignature(screenKey);
+
+    if (screenKey !== undefined && screenSignature === undefined) {
+      this.recordUnknownScreenSignature(screenKey, iosVersion);
+    }
 
     const selection = selectIosCandidates(
       snapshot.devices,
@@ -519,6 +526,52 @@ export class DetectionService {
       };
     }
     return undefined;
+  }
+
+  /**
+   * `unknown_model_code` (docs/15-moderation.md §15.2, §15.9 п.1—2) — фиксируется, когда
+   * `resolveAndroidDevice` не нашёл устройства ни по `Sec-CH-UA-Model`, ни по разбору легаси
+   * User-Agent. Код читается из уже вычисленных `reasons` (`CATALOG_MODEL_CODE_UNKNOWN`) —
+   * не повторяет разбор сигналов заново (не переписывает `resolve-android.ts`, AGENTS.md).
+   * Запись — побочный эффект без ожидания (`void`, симметрично `resolutionLogService.record`):
+   * сбой очереди модерации не должен замедлять или ломать ответ пользователю.
+   */
+  private recordUnknownModelCodes(reasons: readonly ApiReason[], platform: Platform): void {
+    for (const reason of reasons) {
+      if (reason.code === 'CATALOG_MODEL_CODE_UNKNOWN' && reason.detail !== undefined) {
+        void this.moderationTaskService.recordUnknownModelCode(reason.detail, platform);
+      }
+    }
+  }
+
+  /**
+   * `unknown_screen_signature` (docs/15 §15.2, §15.9 демонстрационный сценарий, ветка iOS) —
+   * `screenKey` уже в формате `"<cssWidth>x<cssHeight>@<dpr>"` (портретная ориентация,
+   * `buildScreenSignatureKey`) — разбирается обратно на числа, а не пересчитывается из сырых
+   * `signals.screen`, чтобы значение задачи гарантированно совпадало с ключом, по которому
+   * модератор впоследствии свяжет сигнатуру (`CatalogWriteService.linkScreenSignature`,
+   * `buildSignatureString` в `apps/api/src/modules/moderation/screen-signature-rebuild.ts`
+   * использует ТОТ ЖЕ формат). `zoomed` сигналом браузера не передаётся (docs/05 §5.5: это
+   * свойство КАТАЛОЖНОЙ записи, а не сигнал устройства) — по умолчанию `false`, модератор при
+   * необходимости учитывает это при выборе устройства для привязки.
+   */
+  private recordUnknownScreenSignature(screenKey: string, iosVersion: string | undefined): void {
+    const [dimensions, dprPart] = screenKey.split('@');
+    const [widthPart, heightPart] = (dimensions ?? '').split('x');
+    const cssWidth = Number(widthPart);
+    const cssHeight = Number(heightPart);
+    const dpr = Number(dprPart);
+    if (!Number.isFinite(cssWidth) || !Number.isFinite(cssHeight) || !Number.isFinite(dpr)) {
+      return;
+    }
+    void this.moderationTaskService.recordUnknownScreenSignature({
+      signature: screenKey,
+      cssWidth,
+      cssHeight,
+      dpr,
+      zoomed: false,
+      osVersion: iosVersion ?? null,
+    });
   }
 
   private buildClarificationOnly(
