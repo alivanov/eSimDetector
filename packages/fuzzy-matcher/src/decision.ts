@@ -30,6 +30,11 @@ export interface DecisionOptions extends DecisionThresholds {
    * кандидаты, которые иначе привели бы к `clarification_required`, отображаются в один и тот же
    * ключ, `decide` возвращает `determined` вместо уточнения — пользователю незачем отвечать на
    * вопрос, который не повлияет на результат.
+   *
+   * Согласие проверяется по полному набору кандидатов, прошедших отбор (близкие к лидеру — в
+   * ветке «разрыв мал»; все отранжированные — в ветке «ниже порога»). `maxClarificationCandidates`
+   * усекает только список, который кладётся в `Decision.candidates` для показа, и на проверку
+   * согласия не влияет: иначе пять верхних с одним ключом скрыли бы шестого с другим.
    */
   readonly resolveEquivalenceKey?: (deviceId: string) => string;
 }
@@ -46,11 +51,13 @@ export const DEFAULT_DECISION_THRESHOLDS: DecisionThresholds = {
 export interface Decision {
   readonly status: DecisionStatus;
   /**
-   * Для `determined` — единственный кандидат (либо группа эквивалентных, если решение получено
-   * через `resolveEquivalenceKey` — тогда причина содержит `DECISION_RESOLVED_BY_EQUIVALENCE`,
-   * и вызывающая сторона может судить о числе кандидатов сама). Для `clarification_required` —
+   * Набор для показа, а не набор, по которому проверялось согласие. Для `determined` — единственный
+   * кандидат (либо усечённая группа эквивалентных, если решение получено через
+   * `resolveEquivalenceKey` — тогда причина содержит `DECISION_RESOLVED_BY_EQUIVALENCE`, и
+   * вызывающая сторона может судить о числе кандидатов сама). Для `clarification_required` —
    * кандидаты, которые стоит показать пользователю (не более `maxClarificationCandidates`). Для
-   * `not_found` — пустой массив.
+   * `not_found` — пустой массив. Согласие по `resolveEquivalenceKey` считается по полному отобранному
+   * набору до этого усечения.
    */
   readonly candidates: readonly ScoredCandidate[];
   readonly reasons: readonly DecisionReasonCode[];
@@ -95,35 +102,36 @@ export function decide(
   }
 
   if (meetsConfidence) {
-    const closeCandidates = rankedCandidates
-      .filter((candidate) => leader.score - candidate.score < options.gapThreshold)
-      .slice(0, maxCandidates);
+    const closeCandidates = rankedCandidates.filter(
+      (candidate) => leader.score - candidate.score < options.gapThreshold,
+    );
+    const shown = closeCandidates.slice(0, maxCandidates);
 
     if (haveSameEquivalenceKey(closeCandidates, options.resolveEquivalenceKey)) {
       return {
         status: 'determined',
-        candidates: closeCandidates,
+        candidates: shown,
         reasons: ['DECISION_RESOLVED_BY_EQUIVALENCE'],
       };
     }
     return {
       status: 'clarification_required',
-      candidates: closeCandidates,
+      candidates: shown,
       reasons: ['DECISION_GAP_TOO_SMALL'],
     };
   }
 
-  const limited = rankedCandidates.slice(0, maxCandidates);
-  if (haveSameEquivalenceKey(limited, options.resolveEquivalenceKey)) {
+  const shown = rankedCandidates.slice(0, maxCandidates);
+  if (haveSameEquivalenceKey(rankedCandidates, options.resolveEquivalenceKey)) {
     return {
       status: 'determined',
-      candidates: limited,
+      candidates: shown,
       reasons: ['DECISION_RESOLVED_BY_EQUIVALENCE'],
     };
   }
   return {
     status: 'clarification_required',
-    candidates: limited,
+    candidates: shown,
     reasons: ['DECISION_BELOW_THRESHOLD'],
   };
 }

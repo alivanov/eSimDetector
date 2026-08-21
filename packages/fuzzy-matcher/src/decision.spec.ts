@@ -123,4 +123,42 @@ describe('decide — resolveEquivalenceKey (docs/04 §4.7: "если стату�
     expect(decision.status).toBe('determined');
     expect(decision.reasons).toEqual(['DECISION_RESOLVED_BY_EQUIVALENCE']);
   });
+
+  it('шесть близких кандидатов выше порога: первые пять с одним ключом, шестой с другим, при maxClarificationCandidates: 5 не дают determined', () => {
+    const close = [
+      candidate('a', 0.9),
+      candidate('b', 0.89),
+      candidate('c', 0.88),
+      candidate('d', 0.87),
+      candidate('e', 0.86),
+      candidate('f', 0.85),
+    ];
+    const decision = decide(close, {
+      ...THRESHOLDS,
+      maxClarificationCandidates: 5,
+      resolveEquivalenceKey: (deviceId) => (deviceId === 'f' ? 'other' : 'same-group'),
+    });
+
+    expect(decision.status).not.toBe('determined');
+    expect(decision.candidates).toHaveLength(5);
+  });
+
+  it('шесть кандидатов ниже порога: первые пять с одним ключом, шестой с другим, при maxClarificationCandidates: 5 не дают determined', () => {
+    const below = [
+      candidate('a', 0.5),
+      candidate('b', 0.49),
+      candidate('c', 0.48),
+      candidate('d', 0.47),
+      candidate('e', 0.46),
+      candidate('f', 0.45),
+    ];
+    const decision = decide(below, {
+      ...THRESHOLDS,
+      maxClarificationCandidates: 5,
+      resolveEquivalenceKey: (deviceId) => (deviceId === 'f' ? 'other' : 'same-group'),
+    });
+
+    expect(decision.status).not.toBe('determined');
+    expect(decision.candidates).toHaveLength(5);
+  });
 });
