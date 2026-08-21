@@ -145,27 +145,24 @@ describe('CatalogModule (интеграция, withTestDatabase)', () => {
   });
 
   it('переходит в статус error и бросает CATALOG_UNAVAILABLE при сбое чтения из MongoDB', async () => {
-    const brokenDb = await withTestDatabase('catalog-module-read-failure');
-    const brokenModuleRef = await Test.createTestingModule({
-      imports: [MongooseModule.forRoot(brokenDb.uri), CatalogModule],
-    }).compile();
-    const brokenCatalogService = brokenModuleRef.get(CatalogService);
-    const brokenDeviceModel = brokenModuleRef.get<Model<Device>>(getModelToken(DEVICE_MODEL_NAME));
-    jest.spyOn(brokenDeviceModel, 'find').mockImplementation(() => {
+    // Именно НЕДОСТУПНОСТЬ базы, а не содержимое отдельного документа, оставляет справочник в
+    // статусе error (ADR-044). Подмена `find` — единственный способ воспроизвести сбой чтения на
+    // работающем экземпляре, не поднимая ради этого второй (каждый лишний экземпляр
+    // `mongodb-memory-server` — реальный процесс `mongod`, замедляющий весь прогон).
+    catalogService = moduleRef.get(CatalogService);
+    const findSpy = jest.spyOn(deviceModel, 'find').mockImplementation(() => {
       throw new Error('MongoDB недоступна');
     });
 
     try {
-      await brokenCatalogService.reload();
+      await catalogService.reload();
 
-      expect(brokenCatalogService.getStatus()).toBe('error');
-      expect(brokenCatalogService.isReady()).toBe(false);
-      expect(() => brokenCatalogService.getMeta()).toThrow('Справочник не загружен');
-      expect(() => brokenCatalogService.getSnapshot()).toThrow('Справочник не загружен');
+      expect(catalogService.getStatus()).toBe('error');
+      expect(catalogService.isReady()).toBe(false);
+      expect(() => catalogService.getMeta()).toThrow('Справочник не загружен');
+      expect(() => catalogService.getSnapshot()).toThrow('Справочник не загружен');
     } finally {
-      jest.restoreAllMocks();
-      await brokenModuleRef.close();
-      await brokenDb.close();
+      findSpy.mockRestore();
     }
   });
 
