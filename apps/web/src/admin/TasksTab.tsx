@@ -236,6 +236,14 @@ function TaskDetail({ session, taskId, onBack }: TaskDetailProps) {
   const needsReason = action !== 'reject' && action !== 'reject_quarantine';
   const needsNote = action === 'reject' || action === 'reject_quarantine';
   const needsEsimSupport = action === 'resolve_source_disagreement';
+  /**
+   * Поле источника показывается для КАЖДОГО действия, меняющего справочник, а не только для
+   * «изменить статус eSIM»: уровень достоверности `verified` даёт именно ссылка (docs/15 §15.4),
+   * и без этого поля модератор физически не мог выполнить пункт 3 сценария §15.9 («указывает
+   * источник и подтверждает привязку») — оставалось вписать ссылку в обоснование, которое
+   * источником не считается.
+   */
+  const needsSource = needsReason;
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -250,8 +258,8 @@ function TaskDetail({ session, taskId, onBack }: TaskDetailProps) {
       ...(needsReason && reason.length > 0 ? { reason } : {}),
       ...(needsDeviceId && deviceId.length > 0 ? { deviceId } : {}),
       ...(needsEsimSupport ? { esimSupport } : {}),
-      ...(sourceUrl.length > 0 ? { sourceUrl } : {}),
-      ...(sourceTitle.length > 0 ? { sourceTitle } : {}),
+      ...(needsSource && sourceUrl.length > 0 ? { sourceUrl } : {}),
+      ...(needsSource && sourceTitle.length > 0 ? { sourceTitle } : {}),
       ...(needsNote && note.length > 0 ? { note } : {}),
     };
     void resolveTask(session.token, taskId, body)
@@ -349,7 +357,7 @@ function TaskDetail({ session, taskId, onBack }: TaskDetailProps) {
           </label>
         ) : null}
 
-        {needsEsimSupport ? (
+        {needsSource ? (
           <>
             <label className={styles.fieldLabel}>
               {adminTexts.taskDetailSourceUrlLabel}

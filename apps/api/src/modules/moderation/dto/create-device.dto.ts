@@ -4,6 +4,7 @@ import {
   IsArray,
   IsIn,
   IsInt,
+  IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
@@ -23,10 +24,12 @@ import {
  */
 export class DeviceSourceDto {
   @IsString()
+  @IsNotEmpty()
   @MaxLength(2000)
   public url!: string;
 
   @IsString()
+  @IsNotEmpty()
   @MaxLength(300)
   public title!: string;
 }
@@ -39,18 +42,22 @@ export class CreateDeviceDto {
   public id!: string;
 
   @IsString()
+  @IsNotEmpty()
   @MaxLength(100)
   public brand!: string;
 
   @IsString()
+  @IsNotEmpty()
   @MaxLength(100)
   public brandTitle!: string;
 
   @IsString()
+  @IsNotEmpty()
   @MaxLength(200)
   public marketingName!: string;
 
   @IsString()
+  @IsNotEmpty()
   @MaxLength(100)
   public family!: string;
 
@@ -61,18 +68,21 @@ export class CreateDeviceDto {
   @IsOptional()
   @IsArray()
   @IsString({ each: true })
+  @IsNotEmpty({ each: true })
   @ArrayMaxSize(10)
   public modifiers?: string[];
 
   @IsOptional()
   @IsArray()
   @IsString({ each: true })
+  @IsNotEmpty({ each: true })
   @ArrayMaxSize(20)
   public modelCodes?: string[];
 
   @IsOptional()
   @IsArray()
   @IsString({ each: true })
+  @IsNotEmpty({ each: true })
   @ArrayMaxSize(20)
   public aliases?: string[];
 
@@ -102,17 +112,20 @@ export class CreateDeviceDto {
   public notes?: string;
 
   @IsString()
+  @IsNotEmpty()
   @MaxLength(200)
   public decidedBy!: string;
 
-  /** Ссылка на источник решения — журнал `catalog_changes` (docs/15 §15.6). */
+  /** Обоснование решения для журнала `catalog_changes` (docs/15 §15.6); источник — в `sources`. */
   @IsString()
+  @IsNotEmpty()
   @MaxLength(2000)
   public reason!: string;
 
   /** Если запись создаётся по мотивам задачи очереди — она закрывается автоматически. */
   @IsOptional()
   @IsString()
+  @IsNotEmpty()
   @MaxLength(100)
   public resolvesTaskId?: string;
 

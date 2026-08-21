@@ -10,7 +10,7 @@ import type {
   DeviceSource,
   ScreenSignatureRecord,
 } from '@esim-detector/contracts';
-import { catalogOverridePatchSchema, deviceSchema } from '@esim-detector/contracts';
+import { catalogOverrideSchema, deviceSchema } from '@esim-detector/contracts';
 import type { Model } from 'mongoose';
 
 import { ApiError } from '../../common/errors/api-error';
@@ -42,6 +42,28 @@ export interface CreateDeviceInput {
 }
 
 /**
+ * Общая часть решений «привязать код» и «привязать сигнатуру» (docs/15-moderation.md §15.4).
+ * `source` необязателен намеренно: его наличие — единственное, что даёт записи уровень
+ * `verified` (§15.4, ADR-026 п.1), а его отсутствие означает привязку без повышения
+ * достоверности, а не отказ выполнить решение.
+ */
+export interface LinkDecisionInput {
+  readonly deviceId: string;
+  readonly reason: string;
+  readonly decidedBy: string;
+  readonly taskId: string | null;
+  readonly source?: DeviceSource;
+}
+
+export interface LinkModelCodeInput extends LinkDecisionInput {
+  readonly code: string;
+}
+
+export interface LinkScreenSignatureInput extends LinkDecisionInput {
+  readonly signature: DeviceScreenSignature;
+}
+
+/**
  * Единственное место `apps/api`, которое ПИШЕТ в `devices`/`catalog_overrides`/`screen_signatures`
  * по решению модератора (docs/15-moderation.md §15.4—§15.5) — не расширяет и не переписывает
  * `CatalogModule`/`ScreenSignatureModule` (AGENTS.md, «чего не делать»), а вызывает их уже
@@ -54,6 +76,11 @@ export interface CreateDeviceInput {
  * кэша сигнатур → запись в журнал `catalog_changes`. Тот же порядок операций, что и у
  * `POST /api/v1/admin/catalog/reload` (docs/09-decisions.md, ADR по п.8 передачи), только
  * применённый к одному изменению сразу, без ожидания отдельного вызова.
+ *
+ * Два инварианта, за которые отвечает именно этот класс как единственный писатель
+ * (docs/09-decisions.md ADR-044): записанный документ обязан читаться обратно тем же контрактом
+ * (`applyPatch` разбирает `catalogOverrideSchema` ДО записи) и уровень `verified` обязан иметь
+ * ссылку на источник (`requireSourceForVerified`).
  */
 @Injectable()
 export class CatalogWriteService {
@@ -100,23 +127,98 @@ export class CatalogWriteService {
     };
   }
 
+  /**
+   * «Статус `verified` присваивается только при указании ссылки на источник» (docs/15 §15.4,
+   * ADR-026 п.1, инвариант docs/05 §5.8 п.6) — проверка стоит здесь, в единственной точке записи,
+   * а не в каждом действии по отдельности: любой путь, поднимающий уровень до `verified`, обязан
+   * принести с собой запись в `sources[]`. Смотрит на `input.patch`, а не на объединённый патч:
+   * отвечать за источник обязано именно ТЕКУЩЕЕ решение, а не действие, которое просто добавляет
+   * псевдоним записи, уже помеченной `verified` кем-то ранее.
+   */
+  private requireSourceForVerified(
+    device: Device,
+    input: ApplyPatchInput,
+    mergedPatch: CatalogOverridePatch,
+  ): void {
+    if (input.patch.dataConfidence !== 'verified') {
+      return;
+    }
+    const effectiveSources = mergedPatch.sources ?? device.sources;
+    if (effectiveSources.length === 0) {
+      throw new ApiError(
+        'VALIDATION_ERROR',
+        'Уровень достоверности "verified" требует хотя бы одной ссылки на источник (docs/15-moderation.md §15.4)',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
+
+  /**
+   * Часть патча, отвечающая за достоверность решения о привязке. Ссылка указана — уровень
+   * поднимается до `verified`, а сама ссылка ДОБАВЛЯЕТСЯ к уже известным источникам записи (не
+   * заменяет их: прежняя сверка вендорской страницы остаётся частью происхождения данных). Ссылки
+   * нет — `dataConfidence` не трогается вовсе, то есть решение применяется, но уверенность ответа
+   * пользователю от него не растёт (docs/15 §15.4: «Без источника максимум — `derived`»).
+   */
+  private confidenceFromSource(
+    device: Device,
+    source: DeviceSource | undefined,
+  ): Pick<CatalogOverridePatch, 'dataConfidence' | 'sources'> {
+    if (source === undefined) {
+      return {};
+    }
+    const alreadyKnown = device.sources.some((entry) => entry.url === source.url);
+    return {
+      dataConfidence: 'verified',
+      sources: alreadyKnown ? [...device.sources] : [...device.sources, source],
+    };
+  }
+
   private async applyPatch(input: ApplyPatchInput): Promise<Device> {
+    const device = this.requireDevice(input.deviceId);
     const existingOverride = await this.overrideModel
       .findOne({ deviceId: input.deviceId })
       .lean()
       .exec();
     const mergedPatch = this.mergePatch(existingOverride?.patch, input.patch);
-    const validatedPatch = catalogOverridePatchSchema.parse(mergedPatch);
+    this.requireSourceForVerified(device, input, mergedPatch);
+
     const now = new Date();
+    /**
+     * Разбирается ДОКУМЕНТ ЦЕЛИКОМ, а не только `patch`: `catalog_overrides` читается обратно
+     * `catalogOverrideSchema` (`CatalogService.reload()`), поэтому запись, которую эта схема не
+     * принимает, — это запись, после которой справочник перестаёт загружаться. Единственный
+     * способ гарантировать «записанное читается» — проверить тем же контрактом до записи, а не
+     * надеяться на валидаторы Mongoose (`findOneAndUpdate` их не запускает без `runValidators`).
+     */
+    const validated = catalogOverrideSchema.safeParse({
+      deviceId: input.deviceId,
+      patch: mergedPatch,
+      reason: input.reason,
+      decidedBy: input.decidedBy,
+      decidedAt: now,
+      createdAt: existingOverride?.createdAt ?? now,
+      updatedAt: now,
+    });
+    if (!validated.success) {
+      const detail = validated.error.issues
+        .map((issue) => `${issue.path.join('.')}: ${issue.message}`)
+        .join('; ');
+      throw new ApiError(
+        'VALIDATION_ERROR',
+        `Решение модератора не соответствует схеме catalog_overrides — ${detail}`,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
 
     await this.overrideModel.findOneAndUpdate(
       { deviceId: input.deviceId },
       {
         $set: {
-          patch: validatedPatch,
-          reason: input.reason,
-          decidedBy: input.decidedBy,
-          decidedAt: now,
+          patch: validated.data.patch,
+          reason: validated.data.reason,
+          decidedBy: validated.data.decidedBy,
+          decidedAt: validated.data.decidedAt,
         },
       },
       { upsert: true },
@@ -195,24 +297,22 @@ export class CatalogWriteService {
     });
   }
 
-  /** «Привязать код к существующему устройству» (docs/15 §15.4) — уровень достоверности становится `verified`. */
-  public async linkModelCode(
-    deviceId: string,
-    code: string,
-    reason: string,
-    decidedBy: string,
-    taskId: string | null,
-  ): Promise<Device> {
-    const device = this.requireDevice(deviceId);
-    const normalizedCode = code.trim();
+  /**
+   * «Привязать код к существующему устройству» (docs/15 §15.4). Уровень достоверности становится
+   * `verified` ТОЛЬКО при указанной ссылке на источник (`input.source`) — см.
+   * `confidenceFromSource`; без ссылки код привязывается, но достоверность записи не меняется.
+   */
+  public async linkModelCode(input: LinkModelCodeInput): Promise<Device> {
+    const device = this.requireDevice(input.deviceId);
+    const normalizedCode = input.code.trim();
     const modelCodes = [...new Set([...device.modelCodes, normalizedCode])];
 
     return this.applyPatch({
-      deviceId,
-      patch: { modelCodes, dataConfidence: 'verified' },
-      reason,
-      decidedBy,
-      taskId,
+      deviceId: input.deviceId,
+      patch: { modelCodes, ...this.confidenceFromSource(device, input.source) },
+      reason: input.reason,
+      decidedBy: input.decidedBy,
+      taskId: input.taskId,
       action: 'link_model_code',
       field: 'modelCodes',
       previousValue: device.modelCodes,
@@ -299,14 +399,9 @@ export class CatalogWriteService {
    * `POST /api/v1/detect` для пользователей с той же сигнатурой, потому что горячий путь ветки
    * iOS резолюции читает `screen_signatures`, а не `devices.screenSignatures` (docs/05 §5.5).
    */
-  public async linkScreenSignature(
-    deviceId: string,
-    signature: DeviceScreenSignature,
-    reason: string,
-    decidedBy: string,
-    taskId: string | null,
-  ): Promise<Device> {
-    const device = this.requireDevice(deviceId);
+  public async linkScreenSignature(input: LinkScreenSignatureInput): Promise<Device> {
+    const device = this.requireDevice(input.deviceId);
+    const { signature } = input;
     const alreadyLinked = device.screenSignatures.some(
       (entry) =>
         entry.cssWidth === signature.cssWidth &&
@@ -319,11 +414,11 @@ export class CatalogWriteService {
       : [...device.screenSignatures, signature];
 
     const updatedDevice = await this.applyPatch({
-      deviceId,
-      patch: { screenSignatures, dataConfidence: 'verified' },
-      reason,
-      decidedBy,
-      taskId,
+      deviceId: input.deviceId,
+      patch: { screenSignatures, ...this.confidenceFromSource(device, input.source) },
+      reason: input.reason,
+      decidedBy: input.decidedBy,
+      taskId: input.taskId,
       action: 'link_screen_signature',
       field: 'screenSignatures',
       previousValue: device.screenSignatures,

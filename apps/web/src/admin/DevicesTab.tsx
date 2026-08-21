@@ -249,8 +249,14 @@ function DeviceEditForm({ session, device, onBack }: DeviceEditFormProps) {
         </label>
         <label className={styles.fieldLabel}>
           {adminTexts.taskDetailReasonLabel}
+          {/*
+            `required` — не косметика: пустое обоснование сервер отклоняет (docs/09-decisions.md
+            ADR-044), и модератор должен узнать об этом до отправки формы, а не из сообщения об
+            ошибке.
+          */}
           <input
             className={styles.input}
+            required
             value={reason}
             onChange={(event) => {
               setReason(event.target.value);
@@ -481,6 +487,7 @@ function DeviceCreateForm({ session, onBack }: DeviceCreateFormProps) {
           {adminTexts.taskDetailReasonLabel}
           <input
             className={styles.input}
+            required
             value={reason}
             onChange={(event) => {
               setReason(event.target.value);

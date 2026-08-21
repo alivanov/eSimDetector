@@ -51,43 +51,122 @@ describe('CatalogWriteService (интеграция, withTestDatabase)', () => {
     await db.close();
   });
 
-  it('linkModelCode добавляет код, поднимает достоверность до verified и виден через CatalogService сразу же', async () => {
+  const VENDOR_SOURCE = {
+    url: 'https://www.samsung.com/verified',
+    title: 'Страница модели на сайте Samsung',
+    checkedAt: new Date('2026-08-21T00:00:00.000Z'),
+  };
+
+  it('linkModelCode со ссылкой на источник добавляет код, поднимает достоверность до verified и виден через CatalogService сразу же', async () => {
     await deviceModel.create(
-      buildSampleDevice({ _id: 'samsung-galaxy-s24-ultra', modelCodes: ['SM-S928B'] }),
+      buildSampleDevice({
+        _id: 'samsung-galaxy-s24-ultra',
+        modelCodes: ['SM-S928B'],
+        sources: [],
+        dataConfidence: 'derived',
+      }),
     );
     await catalogService.reload();
 
-    const updated = await service.linkModelCode(
-      'samsung-galaxy-s24-ultra',
-      'SM-S9280',
-      'https://www.samsung.com/verified',
-      'moderator-1',
-      null,
-    );
+    const updated = await service.linkModelCode({
+      deviceId: 'samsung-galaxy-s24-ultra',
+      code: 'SM-S9280',
+      source: VENDOR_SOURCE,
+      reason: 'префикс совпал с уже известным кодом',
+      decidedBy: 'moderator-1',
+      taskId: null,
+    });
 
     expect(updated.modelCodes).toEqual(['SM-S928B', 'SM-S9280']);
     expect(updated.dataConfidence).toBe('verified');
+    // Правило docs/15 §15.4: `verified` обязано иметь ссылку в `sources`, а не только в тексте.
+    expect(updated.sources).toEqual([VENDOR_SOURCE]);
 
     // Без повторного вызова reload() снаружи — reload уже выполнен внутри `applyPatch`.
     const fromSnapshot = catalogService.getSnapshot().devices.get('samsung-galaxy-s24-ultra');
     expect(fromSnapshot?.modelCodes).toEqual(['SM-S928B', 'SM-S9280']);
   });
 
+  it('linkModelCode без ссылки на источник привязывает код, но НЕ поднимает достоверность до verified', async () => {
+    await deviceModel.create(
+      buildSampleDevice({
+        _id: 'samsung-galaxy-s24-ultra',
+        modelCodes: ['SM-S928B'],
+        sources: [],
+        dataConfidence: 'derived',
+      }),
+    );
+    await catalogService.reload();
+
+    const updated = await service.linkModelCode({
+      deviceId: 'samsung-galaxy-s24-ultra',
+      code: 'SM-S9280',
+      reason: 'код совпадает по префиксу, вендорскую страницу найти не удалось',
+      decidedBy: 'moderator-1',
+      taskId: null,
+    });
+
+    expect(updated.modelCodes).toContain('SM-S9280');
+    expect(updated.dataConfidence).toBe('derived');
+    expect(updated.sources).toEqual([]);
+  });
+
+  it('отклоняет решение, поднимающее достоверность до verified без ссылки на источник', async () => {
+    await deviceModel.create(
+      buildSampleDevice({
+        _id: 'samsung-galaxy-s24-ultra',
+        sources: [],
+        dataConfidence: 'derived',
+      }),
+    );
+    await catalogService.reload();
+
+    await expect(
+      service.genericPatch(
+        'samsung-galaxy-s24-ultra',
+        { dataConfidence: 'verified' },
+        'проверил сам, ссылку не приложил',
+        'moderator-1',
+      ),
+    ).rejects.toThrow('ссылки на источник');
+
+    expect(
+      catalogService.getSnapshot().devices.get('samsung-galaxy-s24-ultra')?.dataConfidence,
+    ).toBe('derived');
+  });
+
+  it('отклоняет решение с пустым обоснованием и НЕ выводит справочник из строя (ADR-044)', async () => {
+    await deviceModel.create(buildSampleDevice({ _id: 'samsung-galaxy-s24-ultra' }));
+    await catalogService.reload();
+
+    await expect(
+      service.addAlias('samsung-galaxy-s24-ultra', 'галакси с24 ультра', '', 'moderator-1'),
+    ).rejects.toThrow('catalog_overrides');
+
+    // Ни одного документа не записано, справочник остался работоспособным: до ADR-044 такой
+    // документ проходил в базу и превращал КАЖДЫЙ последующий запрос сервиса в 503.
+    expect(await overrideModel.countDocuments().exec()).toBe(0);
+    expect(catalogService.isReady()).toBe(true);
+    await catalogService.reload();
+    expect(catalogService.isReady()).toBe(true);
+  });
+
   it('второй вызов на то же устройство объединяет патчи, а не затирает предыдущее решение', async () => {
     await deviceModel.create(buildSampleDevice({ _id: 'samsung-galaxy-s24-ultra' }));
     await catalogService.reload();
 
-    await service.linkModelCode(
-      'samsung-galaxy-s24-ultra',
-      'SM-S9280',
-      'https://www.samsung.com/verified',
-      'moderator-1',
-      null,
-    );
+    await service.linkModelCode({
+      deviceId: 'samsung-galaxy-s24-ultra',
+      code: 'SM-S9280',
+      source: VENDOR_SOURCE,
+      reason: 'префикс совпал с уже известным кодом',
+      decidedBy: 'moderator-1',
+      taskId: null,
+    });
     await service.addAlias(
       'samsung-galaxy-s24-ultra',
       'галакси с24 ультра',
-      'решение модератора',
+      'частая форма записи у пользователей',
       'moderator-1',
     );
 
@@ -117,13 +196,18 @@ describe('CatalogWriteService (интеграция, withTestDatabase)', () => {
 
     expect(screenSignatureService.getBySignature('393x852@3')).toBeUndefined();
 
-    await service.linkScreenSignature(
-      'apple-iphone-14-pro',
-      { cssWidth: 393, cssHeight: 852, dpr: 3, zoomed: false },
-      'измерено на живом контуре агентом 7',
-      'moderator-1',
-      'task-1',
-    );
+    await service.linkScreenSignature({
+      deviceId: 'apple-iphone-14-pro',
+      signature: { cssWidth: 393, cssHeight: 852, dpr: 3, zoomed: false },
+      source: {
+        url: 'https://support.apple.com/en-us/111850',
+        title: 'Технические характеристики iPhone 14 Pro',
+        checkedAt: new Date('2026-08-21T00:00:00.000Z'),
+      },
+      reason: 'измерено на живом контуре',
+      decidedBy: 'moderator-1',
+      taskId: 'task-1',
+    });
 
     const record = screenSignatureService.getBySignature('393x852@3');
     expect(record?.candidates).toEqual(['apple-iphone-14-pro']);

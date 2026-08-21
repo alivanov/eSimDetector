@@ -1,5 +1,5 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import type { Device } from '@esim-detector/contracts';
+import type { Device, DeviceSource } from '@esim-detector/contracts';
 
 import { ApiError } from '../../common/errors/api-error';
 
@@ -18,6 +18,22 @@ function requireField<T>(value: T | undefined, fieldName: string): T {
   return value;
 }
 
+/**
+ * Ссылка на источник, указанная модератором, — `undefined`, когда `sourceUrl` не заполнен.
+ * Именно от этого значения зависит, получит ли запись уровень `verified` (docs/15 §15.4):
+ * решение применяется в обоих случаях, но без ссылки достоверность записи не повышается.
+ */
+function buildSource(dto: ResolveModerationTaskDto, checkedAt: Date): DeviceSource | undefined {
+  if (dto.sourceUrl === undefined) {
+    return undefined;
+  }
+  return {
+    url: dto.sourceUrl,
+    title: dto.sourceTitle ?? 'Подтверждено модератором',
+    checkedAt,
+  };
+}
+
 export interface ResolveOutcome {
   readonly taskStatus: 'resolved' | 'rejected';
   readonly device?: Device;
@@ -27,11 +43,12 @@ export interface ResolveOutcome {
  * Диспетчер `POST /api/v1/admin/moderation/tasks/{id}/resolve` (docs/15-moderation.md §15.4) —
  * проверяет допустимость сочетания «действие × тип задачи» (бизнес-правило, поэтому здесь, а не
  * в контроллере или в декораторах DTO) и вызывает соответствующий метод `CatalogWriteService`.
- * `verified` присваивается ТОЛЬКО когда указан `reason` (ADR-014, docs/15 §15.4: «статус verified
- * присваивается только при указании ссылки на источник») — для действий, дающих любой другой
- * уровень достоверности неявно, дополнительная проверка не нужна: `CatalogWriteService` либо не
- * трогает `dataConfidence` совсем (`addAlias`, `markNotPhone`), либо получает уровень явно
- * (`changeEsimStatus`, где `derived`/`verified` выбирает сам вызывающий код на основе `sourceUrl`).
+ *
+ * `reason` (обоснование для журнала §15.6) и `sourceUrl` (ссылка на источник) — РАЗНЫЕ поля, и
+ * уровень `verified` даёт только второе: docs/15 §15.4 требует именно ссылку, а свободный текст
+ * обоснования ею не является (docs/09-decisions.md ADR-044). Само правило проверяется в
+ * `CatalogWriteService` — единственной точке записи, поэтому здесь достаточно передать источник
+ * дальше, не дублируя проверку.
  */
 @Injectable()
 export class ModerationResolutionService {
@@ -42,6 +59,7 @@ export class ModerationResolutionService {
 
   public async resolve(taskId: string, dto: ResolveModerationTaskDto): Promise<ResolveOutcome> {
     const task = await this.taskService.getByIdOrThrow(taskId);
+    const source = buildSource(dto, new Date());
 
     if (dto.action === 'reject') {
       await this.taskService.markRejected(taskId, dto.decidedBy, requireField(dto.note, 'note'));
@@ -49,13 +67,14 @@ export class ModerationResolutionService {
     }
 
     if (task.kind === 'unknown_model_code' && dto.action === 'link_model_code') {
-      const device = await this.catalogWriteService.linkModelCode(
-        requireField(dto.deviceId, 'deviceId'),
-        task.payload.code,
-        requireField(dto.reason, 'reason'),
-        dto.decidedBy,
+      const device = await this.catalogWriteService.linkModelCode({
+        deviceId: requireField(dto.deviceId, 'deviceId'),
+        code: task.payload.code,
+        reason: requireField(dto.reason, 'reason'),
+        decidedBy: dto.decidedBy,
         taskId,
-      );
+        ...(source !== undefined ? { source } : {}),
+      });
       await this.taskService.markResolved(
         taskId,
         dto.decidedBy,
@@ -65,18 +84,19 @@ export class ModerationResolutionService {
     }
 
     if (task.kind === 'unknown_screen_signature' && dto.action === 'link_screen_signature') {
-      const device = await this.catalogWriteService.linkScreenSignature(
-        requireField(dto.deviceId, 'deviceId'),
-        {
+      const device = await this.catalogWriteService.linkScreenSignature({
+        deviceId: requireField(dto.deviceId, 'deviceId'),
+        signature: {
           cssWidth: task.payload.cssWidth,
           cssHeight: task.payload.cssHeight,
           dpr: task.payload.dpr,
           zoomed: task.payload.zoomed,
         },
-        requireField(dto.reason, 'reason'),
-        dto.decidedBy,
+        reason: requireField(dto.reason, 'reason'),
+        decidedBy: dto.decidedBy,
         taskId,
-      );
+        ...(source !== undefined ? { source } : {}),
+      });
       await this.taskService.markResolved(
         taskId,
         dto.decidedBy,
@@ -110,18 +130,11 @@ export class ModerationResolutionService {
     if (task.kind === 'source_disagreement' && dto.action === 'resolve_source_disagreement') {
       const esimSupport = requireField(dto.esimSupport, 'esimSupport');
       const reason = requireField(dto.reason, 'reason');
-      const sourceUrl = requireField(dto.sourceUrl, 'sourceUrl');
       const device = await this.catalogWriteService.changeEsimStatus(
         task.payload.deviceId,
         { support: esimSupport },
         'verified',
-        [
-          {
-            url: sourceUrl,
-            title: dto.sourceTitle ?? 'Подтверждено модератором',
-            checkedAt: new Date(),
-          },
-        ],
+        [requireField(source, 'sourceUrl')],
         reason,
         dto.decidedBy,
         taskId,
@@ -133,18 +146,11 @@ export class ModerationResolutionService {
     if (task.kind === 'user_feedback' && dto.action === 'acknowledge_feedback') {
       if (dto.deviceId !== undefined && dto.esimSupport !== undefined) {
         const reason = requireField(dto.reason, 'reason');
-        const sourceUrl = requireField(dto.sourceUrl, 'sourceUrl');
         const device = await this.catalogWriteService.changeEsimStatus(
           dto.deviceId,
           { support: dto.esimSupport },
           'verified',
-          [
-            {
-              url: sourceUrl,
-              title: dto.sourceTitle ?? 'Подтверждено модератором',
-              checkedAt: new Date(),
-            },
-          ],
+          [requireField(source, 'sourceUrl')],
           reason,
           dto.decidedBy,
           taskId,

@@ -103,21 +103,70 @@ describe('CatalogModule (интеграция, withTestDatabase)', () => {
     expect(catalogService.getMeta()).toMatchObject({ deviceCount: 0, updatedAt: null });
   });
 
-  it('переходит в статус error и бросает CATALOG_UNAVAILABLE, если запись не проходит валидацию contracts при загрузке', async () => {
+  it('пропускает запись, не прошедшую валидацию contracts, и остаётся готовым (ADR-044)', async () => {
     // Сохранение с отключённой валидацией Mongoose — единственный способ воспроизвести
-    // рассинхронизацию данных, которую должна поймать `deviceSchema.parse` внутри
+    // рассинхронизацию данных, которую должна поймать `deviceSchema.safeParse` внутри
     // `CatalogService.reload()` (защита независимо от валидации на пути записи).
     await new deviceModel({ _id: 'broken-device', brand: 'test' }).save({
       validateBeforeSave: false,
     });
+    await deviceModel.create(buildSampleDevice({ _id: 'samsung-galaxy-s24-ultra' }));
 
     catalogService = moduleRef.get(CatalogService);
     await catalogService.reload();
 
-    expect(catalogService.getStatus()).toBe('error');
-    expect(catalogService.isReady()).toBe(false);
-    expect(() => catalogService.getMeta()).toThrow('Справочник не загружен');
-    expect(() => catalogService.getSnapshot()).toThrow('Справочник не загружен');
+    // До ADR-044 одна такая запись давала status: 'error' и 503 на КАЖДЫЙ запрос сервиса,
+    // неустранимый перезапуском: onModuleInit читал те же данные и падал так же.
+    expect(catalogService.isReady()).toBe(true);
+    expect(catalogService.getSnapshot().devices.has('broken-device')).toBe(false);
+    expect(catalogService.getSnapshot().devices.has('samsung-galaxy-s24-ultra')).toBe(true);
+  });
+
+  it('исключает устройство целиком, если его решение модератора не прошло разбор схемой (ADR-044)', async () => {
+    await deviceModel.create(buildSampleDevice({ _id: 'samsung-galaxy-s24-ultra' }));
+    await deviceModel.create(buildSampleDevice({ _id: 'apple-iphone-x' }));
+    // Пустой `reason` — ровно тот документ, который до ADR-044 мог записать сам раздел /admin.
+    await new overrideModel({
+      deviceId: 'apple-iphone-x',
+      patch: { dataConfidence: 'verified' },
+      reason: '',
+      decidedBy: 'moderator-1',
+      decidedAt: new Date(),
+    }).save({ validateBeforeSave: false });
+
+    catalogService = moduleRef.get(CatalogService);
+    await catalogService.reload();
+
+    expect(catalogService.isReady()).toBe(true);
+    // Устройство исключено целиком, а НЕ отдано с исходными значениями импорта: потерянное
+    // решение модератора иначе вернуло бы ответ, который он уже исправил (AGENTS.md, правило 1).
+    expect(catalogService.getSnapshot().devices.has('apple-iphone-x')).toBe(false);
+    expect(catalogService.getSnapshot().devices.has('samsung-galaxy-s24-ultra')).toBe(true);
+  });
+
+  it('переходит в статус error и бросает CATALOG_UNAVAILABLE при сбое чтения из MongoDB', async () => {
+    const brokenDb = await withTestDatabase('catalog-module-read-failure');
+    const brokenModuleRef = await Test.createTestingModule({
+      imports: [MongooseModule.forRoot(brokenDb.uri), CatalogModule],
+    }).compile();
+    const brokenCatalogService = brokenModuleRef.get(CatalogService);
+    const brokenDeviceModel = brokenModuleRef.get<Model<Device>>(getModelToken(DEVICE_MODEL_NAME));
+    jest.spyOn(brokenDeviceModel, 'find').mockImplementation(() => {
+      throw new Error('MongoDB недоступна');
+    });
+
+    try {
+      await brokenCatalogService.reload();
+
+      expect(brokenCatalogService.getStatus()).toBe('error');
+      expect(brokenCatalogService.isReady()).toBe(false);
+      expect(() => brokenCatalogService.getMeta()).toThrow('Справочник не загружен');
+      expect(() => brokenCatalogService.getSnapshot()).toThrow('Справочник не загружен');
+    } finally {
+      jest.restoreAllMocks();
+      await brokenModuleRef.close();
+      await brokenDb.close();
+    }
   });
 
   it('getMeta()/getSnapshot() бросают до первого reload() (статус "loading")', async () => {

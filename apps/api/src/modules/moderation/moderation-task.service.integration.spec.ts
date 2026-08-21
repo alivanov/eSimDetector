@@ -1,6 +1,8 @@
+import type { ModerationTask } from '@esim-detector/contracts';
 import { withTestDatabase, type TestDatabaseHandle } from '@esim-detector/test-utils';
-import { MongooseModule } from '@nestjs/mongoose';
+import { getModelToken, MongooseModule } from '@nestjs/mongoose';
 import { Test, type TestingModule } from '@nestjs/testing';
+import type { Model } from 'mongoose';
 
 import { ModerationTaskService } from './moderation-task.service';
 import {
@@ -16,6 +18,7 @@ describe('ModerationTaskService (интеграция, withTestDatabase)', () =>
   let db: TestDatabaseHandle;
   let moduleRef: TestingModule;
   let service: ModerationTaskService;
+  let model: Model<ModerationTask>;
 
   beforeAll(async () => {
     db = await withTestDatabase('moderation-task-service');
@@ -30,6 +33,7 @@ describe('ModerationTaskService (интеграция, withTestDatabase)', () =>
     }).compile();
 
     service = moduleRef.get(ModerationTaskService);
+    model = moduleRef.get<Model<ModerationTask>>(getModelToken(MODERATION_TASK_MODEL_NAME));
   });
 
   afterEach(async () => {
@@ -84,6 +88,35 @@ describe('ModerationTaskService (интеграция, withTestDatabase)', () =>
     await expect(service.getByIdOrThrow('000000000000000000000000')).rejects.toThrow(
       'Задача модерации не найдена',
     );
+  });
+
+  it('повреждённая задача пропускается в выдаче, а не обрушивает всю очередь (ADR-044)', async () => {
+    await service.recordUnknownModelCode('SM-DDD', 'android');
+    // Задача с пустым `comment` — ровно то, что до ADR-044 мог создать анонимный клиент через
+    // публичный POST /api/v1/feedback: схема `userFeedbackPayloadSchema` такой документ не
+    // принимает, и одна такая запись прятала от модератора очередь целиком.
+    await new model({
+      kind: 'user_feedback',
+      key: 'req-broken',
+      payload: {
+        requestId: 'req-broken',
+        reportedStatus: 'supported',
+        deviceId: null,
+        comment: '',
+        signalsSummary: null,
+      },
+      occurrences: 1,
+      status: 'open',
+      lastSeenAt: new Date(),
+    }).save({ validateBeforeSave: false });
+
+    const result = await service.list({ page: 1, pageSize: 10 });
+
+    expect(result.items).toHaveLength(1);
+    expect(result.items[0]?.kind).toBe('unknown_model_code');
+    // `total` считается запросом к базе и включает пропущенную задачу — расхождение видно, а не
+    // маскируется подогнанным числом.
+    expect(result.total).toBe(2);
   });
 
   it('фильтр по kind сужает выдачу', async () => {

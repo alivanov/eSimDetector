@@ -62,8 +62,9 @@ function buildCatalogWriteService(): {
 
 /**
  * `ModerationResolutionService` (docs/15-moderation.md §15.4) — диспетчер «действие × тип
- * задачи»: проверяет допустимость сочетания и обязательные поля (`reason` для действий,
- * дающих `verified`, ADR-014), без обращения к реальной базе (зависимости — фейки).
+ * задачи»: проверяет допустимость сочетания и обязательные поля, без обращения к реальной базе
+ * (зависимости — фейки). `reason` (обоснование для журнала) и `sourceUrl` (ссылка на источник,
+ * от которой зависит уровень `verified`) — разные поля, ADR-044.
  */
 describe('ModerationResolutionService', () => {
   it('reject закрывает ЛЮБУЮ задачу без вызова CatalogWriteService', async () => {
@@ -103,18 +104,51 @@ describe('ModerationResolutionService', () => {
       action: 'link_model_code',
       decidedBy: 'moderator-1',
       deviceId: 'samsung-galaxy-s24-ultra',
-      reason: 'https://www.samsung.com/verified',
+      reason: 'префикс совпал с уже известным кодом',
+      sourceUrl: 'https://www.samsung.com/verified',
     });
 
     expect(outcome.taskStatus).toBe('resolved');
-    expect(linkModelCode).toHaveBeenCalledWith(
-      'samsung-galaxy-s24-ultra',
-      'SM-S9280',
-      'https://www.samsung.com/verified',
-      'moderator-1',
-      'task-1',
-    );
+    expect(linkModelCode).toHaveBeenCalledWith({
+      deviceId: 'samsung-galaxy-s24-ultra',
+      code: 'SM-S9280',
+      reason: 'префикс совпал с уже известным кодом',
+      decidedBy: 'moderator-1',
+      taskId: 'task-1',
+      source: {
+        url: 'https://www.samsung.com/verified',
+        title: 'Подтверждено модератором',
+        checkedAt: expect.any(Date),
+      },
+    });
     expect(markResolved).toHaveBeenCalled();
+  });
+
+  it('link_model_code без sourceUrl передаёт решение БЕЗ источника — уровень verified не запрашивается', async () => {
+    const task: ModerationTask = {
+      ...buildTaskCommon(),
+      kind: 'unknown_model_code',
+      key: 'sm-s9280',
+      payload: { code: 'SM-S9280', platform: 'android', brandGuess: 'samsung' },
+    };
+    const { service: taskService } = buildTaskService(task);
+    const { service: catalogWriteService, linkModelCode } = buildCatalogWriteService();
+    const resolution = new ModerationResolutionService(taskService, catalogWriteService);
+
+    await resolution.resolve('task-1', {
+      action: 'link_model_code',
+      decidedBy: 'moderator-1',
+      deviceId: 'samsung-galaxy-s24-ultra',
+      reason: 'вендорской страницы для этого кода найти не удалось',
+    });
+
+    expect(linkModelCode).toHaveBeenCalledWith({
+      deviceId: 'samsung-galaxy-s24-ultra',
+      code: 'SM-S9280',
+      reason: 'вендорской страницы для этого кода найти не удалось',
+      decidedBy: 'moderator-1',
+      taskId: 'task-1',
+    });
   });
 
   it('отклоняет действие, неприменимое к типу задачи, с VALIDATION_ERROR', async () => {
@@ -181,17 +215,23 @@ describe('ModerationResolutionService', () => {
       action: 'link_screen_signature',
       decidedBy: 'moderator-1',
       deviceId: 'apple-iphone-13-mini',
-      reason: 'https://support.apple.com/111845',
+      reason: 'геометрия совпадает с известной моделью',
+      sourceUrl: 'https://support.apple.com/111845',
     });
 
     expect(outcome.taskStatus).toBe('resolved');
-    expect(linkScreenSignature).toHaveBeenCalledWith(
-      'apple-iphone-13-mini',
-      { cssWidth: 375, cssHeight: 813, dpr: 3, zoomed: false },
-      'https://support.apple.com/111845',
-      'moderator-1',
-      'task-1',
-    );
+    expect(linkScreenSignature).toHaveBeenCalledWith({
+      deviceId: 'apple-iphone-13-mini',
+      signature: { cssWidth: 375, cssHeight: 813, dpr: 3, zoomed: false },
+      reason: 'геометрия совпадает с известной моделью',
+      decidedBy: 'moderator-1',
+      taskId: 'task-1',
+      source: {
+        url: 'https://support.apple.com/111845',
+        title: 'Подтверждено модератором',
+        checkedAt: expect.any(Date),
+      },
+    });
     expect(markResolved).toHaveBeenCalled();
   });
 

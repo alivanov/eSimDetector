@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import type { CatalogOverride, Device } from '@esim-detector/contracts';
 import { catalogOverrideSchema, deviceSchema } from '@esim-detector/contracts';
 import type { Model } from 'mongoose';
+import type { ZodError } from 'zod';
 
 import { ApiError } from '../../common/errors/api-error';
 import { buildCatalogSnapshot, type CatalogMeta, type CatalogSnapshot } from './catalog.snapshot';
@@ -10,6 +11,11 @@ import { CATALOG_OVERRIDE_MODEL_NAME } from './schemas/catalog-override.schema';
 import { DEVICE_MODEL_NAME } from './schemas/device.schema';
 
 export type CatalogStatus = 'loading' | 'ready' | 'error';
+
+/** Краткое человекочитаемое описание нарушений схемы для журнала (без полного дампа документа). */
+function describeIssues(error: ZodError): string {
+  return error.issues.map((issue) => `${issue.path.join('.')}: ${issue.message}`).join('; ');
+}
 
 /**
  * Единственная точка доступа к справочнику для остальных модулей (.cursor/rules/api-boundaries.mdc:
@@ -40,7 +46,24 @@ export class CatalogService implements OnModuleInit {
     await this.reload();
   }
 
-  /** Перегружает справочник из MongoDB и перестраивает индексы (docs/05 §5.2: MongoDB → кэш в памяти). */
+  /**
+   * Перегружает справочник из MongoDB и перестраивает индексы (docs/05 §5.2: MongoDB → кэш в
+   * памяти).
+   *
+   * Отдельный документ, не прошедший разбор схемой, НЕ отменяет загрузку целиком (docs/09-decisions.md
+   * ADR-044) — тот же принцип, который ADR-029 уже применяет к нарушению инварианта при импорте:
+   * «нарушение карантинит запись, а не отменяет загрузку справочника целиком». Без этого одна
+   * повреждённая запись в базе означала бы 503 на КАЖДЫЙ запрос сервиса, причём неустранимый
+   * перезапуском: `onModuleInit` читает те же данные и падает так же.
+   *
+   * Устройство, чьё решение модератора (`catalog_overrides`) прочитать не удалось, исключается из
+   * снимка ЦЕЛИКОМ, а не отдаётся с исходными значениями импорта: молча потерянное решение вернуло
+   * бы пользователю ответ, который модератор уже исправил, а отсутствие записи даёт
+   * `clarification_required` (AGENTS.md: ложный ответ дороже отсутствия ответа).
+   *
+   * `status: 'error'` остаётся за настоящими сбоями чтения (недоступная MongoDB), а не за
+   * содержимым отдельных документов.
+   */
   public async reload(): Promise<void> {
     try {
       const [rawDevices, rawOverrides] = await Promise.all([
@@ -48,12 +71,43 @@ export class CatalogService implements OnModuleInit {
         this.overrideModel.find().lean().exec(),
       ]);
 
-      const devices = rawDevices.map((raw) => deviceSchema.parse(raw));
-      const overrides = rawOverrides.map((raw) => catalogOverrideSchema.parse(raw));
+      const devices: Device[] = [];
+      for (const raw of rawDevices) {
+        const parsed = deviceSchema.safeParse(raw);
+        if (parsed.success) {
+          devices.push(parsed.data);
+          continue;
+        }
+        this.logger.warn(
+          `Запись справочника не прошла разбор схемой и пропущена: ${describeIssues(parsed.error)}`,
+        );
+      }
 
-      this.snapshot = buildCatalogSnapshot(devices, overrides);
+      const overrides: CatalogOverride[] = [];
+      const excludedDeviceIds = new Set<string>();
+      for (const raw of rawOverrides) {
+        const parsed = catalogOverrideSchema.safeParse(raw);
+        if (parsed.success) {
+          overrides.push(parsed.data);
+          continue;
+        }
+        if (typeof raw.deviceId === 'string' && raw.deviceId.length > 0) {
+          excludedDeviceIds.add(raw.deviceId);
+        }
+        this.logger.warn(
+          `Решение модератора не прошло разбор схемой, устройство "${String(raw.deviceId)}" ` +
+            `исключено из справочника: ${describeIssues(parsed.error)}`,
+        );
+      }
+
+      const usableDevices =
+        excludedDeviceIds.size === 0
+          ? devices
+          : devices.filter((device) => !excludedDeviceIds.has(device._id));
+
+      this.snapshot = buildCatalogSnapshot(usableDevices, overrides);
       this.status = 'ready';
-      this.logger.log(`Справочник загружен: ${devices.length} записей`);
+      this.logger.log(`Справочник загружен: ${usableDevices.length} записей`);
     } catch (error) {
       this.status = 'error';
       this.logger.error(

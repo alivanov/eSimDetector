@@ -3,6 +3,7 @@ import {
   ArrayMaxSize,
   IsArray,
   IsIn,
+  IsNotEmpty,
   IsOptional,
   IsString,
   MaxLength,
@@ -50,12 +51,14 @@ export class UpdateDeviceDto {
   @IsOptional()
   @IsArray()
   @IsString({ each: true })
+  @IsNotEmpty({ each: true })
   @ArrayMaxSize(20)
   public modelCodes?: string[];
 
   @IsOptional()
   @IsArray()
   @IsString({ each: true })
+  @IsNotEmpty({ each: true })
   @ArrayMaxSize(20)
   public aliases?: string[];
 
@@ -64,10 +67,17 @@ export class UpdateDeviceDto {
   public deviceType?: 'phone' | 'tablet' | 'watch' | 'laptop' | 'other';
 
   @IsString()
+  @IsNotEmpty()
   @MaxLength(200)
   public decidedBy!: string;
 
+  /**
+   * Обоснование решения для журнала (docs/15 §15.6). Пустая строка недопустима: она проходила бы
+   * границу, но не проходила бы `catalogOverrideSchema` при чтении документа обратно
+   * (docs/09-decisions.md ADR-044).
+   */
   @IsString()
+  @IsNotEmpty()
   @MaxLength(2000)
   public reason!: string;
 }

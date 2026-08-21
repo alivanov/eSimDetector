@@ -12,7 +12,7 @@ import type {
   UnmatchedQueryPayload,
   UserFeedbackPayload,
 } from '@esim-detector/contracts';
-import { parseModerationTask } from '@esim-detector/contracts';
+import { moderationTaskSchema } from '@esim-detector/contracts';
 import type { Model } from 'mongoose';
 
 import { ApiError } from '../../common/errors/api-error';
@@ -121,6 +121,16 @@ export class ModerationTaskService {
     await this.upsert('user_feedback', payload.requestId, payload);
   }
 
+  /**
+   * Одна задача, которую не удалось разобрать схемой, не должна прятать от модератора ВСЮ очередь
+   * (docs/09-decisions.md ADR-044): такая задача пропускается с предупреждением в журнал. Пропуск
+   * безопасен — задача очереди не участвует в ответе пользователю, поэтому её отсутствие не может
+   * дать ложный результат определения, в отличие от потерянного решения модератора
+   * (`CatalogService.reload`, там такой документ исключает устройство целиком).
+   *
+   * `total` считается запросом `countDocuments` и поэтому включает пропущенные задачи — так
+   * расхождение видно модератору в интерфейсе, а не маскируется подогнанным числом.
+   */
   public async list(options: ListModerationTasksOptions): Promise<ListModerationTasksResult> {
     const filter: Record<string, unknown> = {};
     if (options.kind !== undefined) {
@@ -142,12 +152,22 @@ export class ModerationTaskService {
       this.model.countDocuments(filter).exec(),
     ]);
 
-    return {
-      items: rawItems.map((raw) => parseModerationTask(normalizeMongoId(raw))),
-      total,
-      page: options.page,
-      pageSize: options.pageSize,
-    };
+    const items: ModerationTask[] = [];
+    for (const raw of rawItems) {
+      const parsed = moderationTaskSchema.safeParse(normalizeMongoId(raw));
+      if (parsed.success) {
+        items.push(parsed.data);
+        continue;
+      }
+      this.logger.warn(
+        `Задача модерации не прошла разбор схемой и пропущена в выдаче очереди: ` +
+          parsed.error.issues
+            .map((issue) => `${issue.path.join('.')}: ${issue.message}`)
+            .join('; '),
+      );
+    }
+
+    return { items, total, page: options.page, pageSize: options.pageSize };
   }
 
   public async getByIdOrThrow(id: string): Promise<ModerationTask> {
@@ -155,7 +175,15 @@ export class ModerationTaskService {
     if (raw === null) {
       throw new ApiError('TASK_NOT_FOUND', 'Задача модерации не найдена', HttpStatus.NOT_FOUND);
     }
-    return parseModerationTask(normalizeMongoId(raw));
+    const parsed = moderationTaskSchema.safeParse(normalizeMongoId(raw));
+    if (!parsed.success) {
+      throw new ApiError(
+        'INTERNAL_ERROR',
+        `Задача модерации "${id}" повреждена и не может быть разобрана схемой`,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+    return parsed.data;
   }
 
   public async markResolved(id: string, resolvedBy: string, note: string): Promise<void> {
