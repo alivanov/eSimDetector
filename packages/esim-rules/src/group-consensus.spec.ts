@@ -48,7 +48,7 @@ describe('resolveCandidateGroupEsimStatus', () => {
     expect(result.reasons[0]?.code).toBe('CANDIDATES_DISAGREE_ON_ESIM');
   });
 
-  it('ВСЕ кандидаты по отдельности уходят в уточнение (unverified) — итог: тоже уточнение, не "согласие"', () => {
+  it('ВСЕ кандидаты по отдельности уходят в уточнение (unverified) — уточнение с кодом "согласны, что нужно уточнение" (ADR-045)', () => {
     const bothUnverified: EsimResolvableDevice[] = [
       { esim: esimWithSupport('supported'), dataConfidence: 'unverified' },
       { esim: esimWithSupport('not_supported'), dataConfidence: 'unverified' },
@@ -57,7 +57,72 @@ describe('resolveCandidateGroupEsimStatus', () => {
     const result = resolveCandidateGroupEsimStatus(bothUnverified);
 
     expect(result.status).toBe('clarification_required');
-    expect(result.reasons[0]?.code).toBe('CANDIDATES_DISAGREE_ON_ESIM');
+    // Статус eSIM в ответе один и тот же у всех кандидатов, поэтому утверждать «статус
+    // расходится» было бы неверным объяснением верного результата (ADR-010).
+    expect(result.reasons[0]?.code).toBe('CANDIDATES_AGREE_ON_CLARIFICATION');
+    expect(result.exactModelKnown).toBe(false);
+  });
+
+  it('все кандидаты conditional с одним нерешённым условием по региону — согласие на уточнение, а не расхождение', () => {
+    // Живой случай контура: сигнатура 393x852@3 — iPhone 14 Pro / 15 / 15 Pro, у всех одно и то
+    // же условие «версия для материкового Китая». Именно согласие кандидатов позволяет детекции
+    // задать один общий вопрос вместо выбора из списка (docs/03 §3.7 п.2).
+    const conditionalChinaVariant: EsimResolvableDevice = {
+      esim: {
+        support: 'conditional',
+        dualSim: 'physical+esim',
+        maxProfiles: 2,
+        conditions: [
+          { scope: 'region', value: 'CN', support: 'not_supported', note: 'версия для КНР' },
+        ],
+        clarifyingQuestion: {
+          kind: 'region',
+          question: 'Лоток для SIM-карты вашего iPhone вмещает одну nano-SIM или две?',
+          options: [
+            { value: 'CN', label: 'Две nano-SIM' },
+            { value: 'OTHER', label: 'Одну nano-SIM' },
+          ],
+        },
+        notes: '',
+      },
+      dataConfidence: 'verified',
+    };
+
+    const result = resolveCandidateGroupEsimStatus([
+      conditionalChinaVariant,
+      conditionalChinaVariant,
+      conditionalChinaVariant,
+    ]);
+
+    expect(result.status).toBe('clarification_required');
+    expect(result.reasons[0]?.code).toBe('CANDIDATES_AGREE_ON_CLARIFICATION');
+    expect(result.reasons[0]?.detail).toBe('3 кандидат(ов), всем требуется уточнение');
+  });
+
+  it('регион, известный из контекста, снимает уточнение у согласной группы conditional', () => {
+    // Обратная сторона предыдущего теста: код «согласны на уточнение» появляется именно из-за
+    // НЕХВАТКИ контекста, а не из-за самого статуса `conditional`.
+    const conditionalChinaVariant: EsimResolvableDevice = {
+      esim: {
+        support: 'conditional',
+        dualSim: 'physical+esim',
+        maxProfiles: 2,
+        conditions: [
+          { scope: 'region', value: 'CN', support: 'not_supported', note: 'версия для КНР' },
+        ],
+        clarifyingQuestion: null,
+        notes: '',
+      },
+      dataConfidence: 'verified',
+    };
+
+    const result = resolveCandidateGroupEsimStatus(
+      [conditionalChinaVariant, conditionalChinaVariant],
+      { region: 'CN' },
+    );
+
+    expect(result.status).toBe('not_supported');
+    expect(result.reasons[0]?.code).toBe('CANDIDATES_AGREE_ON_ESIM');
   });
 
   it('пустой список кандидатов — уточнение (защитная ветка)', () => {

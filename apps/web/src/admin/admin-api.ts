@@ -222,6 +222,7 @@ export interface CatalogStats {
   readonly byBrand: Readonly<Record<string, number>>;
   readonly byDataConfidence: Readonly<Record<string, number>>;
   readonly openTaskCount: number;
+  readonly screenSignatureCount: number;
 }
 
 function parseStats(body: unknown): CatalogStats | undefined {
@@ -238,6 +239,7 @@ function parseStats(body: unknown): CatalogStats | undefined {
       Object.entries(body['byDataConfidence']).map(([key, v]) => [key, readNumber(v)]),
     ),
     openTaskCount: readNumber(body['openTaskCount']),
+    screenSignatureCount: readNumber(body['screenSignatureCount']),
   };
 }
 

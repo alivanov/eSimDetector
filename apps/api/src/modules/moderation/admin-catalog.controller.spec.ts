@@ -167,6 +167,7 @@ describe('AdminCatalogController', () => {
       byBrand: {},
       byDataConfidence: { verified: 0, derived: 0, unverified: 0, quarantined: 0 },
       openTaskCount: 0,
+      screenSignatureCount: 0,
     };
     const reloadResult: ReloadResult = { deviceCount: 1, screenSignatureReady: true };
     const getStats = jest.fn(() => Promise.resolve(stats));

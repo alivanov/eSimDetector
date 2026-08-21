@@ -48,7 +48,15 @@ export type EsimReasonCode =
   | 'APPLE_RULE_UNKNOWN_MODEL'
   /** Согласие кандидатов группы iOS (ADR-002, AGENTS.md, предметное правило 3). */
   | 'CANDIDATES_AGREE_ON_ESIM'
-  | 'CANDIDATES_DISAGREE_ON_ESIM';
+  | 'CANDIDATES_DISAGREE_ON_ESIM'
+  /**
+   * Кандидаты группы СОГЛАСНЫ, но согласны в том, что нужно уточнение: у каждого статус
+   * разрешается в `clarification_required` (общее нерешённое условие по региону/версии ОС либо
+   * недостаточная достоверность записи). Отличается от `CANDIDATES_DISAGREE_ON_ESIM`, где
+   * статусы кандидатов действительно разные — без этого различия ответ утверждал «статус
+   * расходится» о группе с одинаковым статусом у всех кандидатов (ADR-045).
+   */
+  | 'CANDIDATES_AGREE_ON_CLARIFICATION';
 
 export interface EsimReason {
   readonly code: EsimReasonCode;

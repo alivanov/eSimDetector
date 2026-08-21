@@ -63,6 +63,27 @@ export function resolveCandidateGroupEsimStatus(
     };
   }
 
+  /**
+   * Единогласное «требуется уточнение» — это согласие кандидатов, а не расхождение (ADR-045).
+   * Итоговый статус и `exactModelKnown` те же, что и у ветки расхождения ниже: различается
+   * только объяснение, а объяснимость — часть контракта ответа (ADR-010). Типичный источник
+   * такой группы — iPhone одной геометрии экрана, у которых у ВСЕХ одно и то же нерешённое
+   * условие по региону: именно потому, что они согласны, детекция может задать один общий
+   * вопрос вместо выбора из списка (docs/03 §3.7 п.2).
+   */
+  if (isUnanimous) {
+    return {
+      status: 'clarification_required',
+      exactModelKnown: false,
+      reasons: [
+        {
+          code: 'CANDIDATES_AGREE_ON_CLARIFICATION',
+          detail: `${candidates.length} кандидат(ов), всем требуется уточнение`,
+        },
+      ],
+    };
+  }
+
   return {
     status: 'clarification_required',
     exactModelKnown: false,

@@ -50,6 +50,17 @@ export function StatsTab({ session }: StatsTabProps) {
       <p>
         {adminTexts.statsOpenTasks}: <strong>{stats.openTaskCount}</strong>
       </p>
+      <p>
+        {adminTexts.statsScreenSignatures}: <strong>{stats.screenSignatureCount}</strong>
+      </p>
+      {/*
+        Пустая производная коллекция при непустом справочнике — не ошибка, а незавершённая
+        операционная процедура (docs/07 §7.6), которую нечем было заметить в интерфейсе: сервис
+        отвечает и остаётся готовым, просто ветка iOS теряет сужение по экрану (ADR-045).
+      */}
+      {stats.deviceCount > 0 && stats.screenSignatureCount === 0 ? (
+        <p className={styles.errorMessage}>{adminTexts.statsScreenSignaturesEmpty}</p>
+      ) : null}
 
       <h3>{adminTexts.statsByBrand}</h3>
       <pre className={styles.jsonBlock}>{JSON.stringify(stats.byBrand, null, 2)}</pre>
