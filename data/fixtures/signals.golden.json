@@ -2937,7 +2937,7 @@
       "exactModelKnown": false,
       "deviceId": null
     },
-    "notes": "Исправлено этапом 8 (docs/09-decisions.md ADR-047, повторная сверка с рабочим контуром после pnpm seed rebuild-signatures на полном справочнике). Прежнее ожидание предполагало, что правило по версии ОС (docs/03 §3.5 шаг 1) на iPadOS 12.2 даёт НОЛЬ кандидатов (все записи apple-ipad.json требуют iPadOS \u2265 15.0), и делало из этого вывод «результат clarification_required независимо от сигнатуры экрана» — вывод был верен ТОЛЬКО пока сама сигнатура экрана тоже была недостижима (пустая коллекция screen_signatures в контуре агента 6.6). Фактическое правило (docs/09 ADR-024 п.4, `select-ios-candidates.ts`): если пересечение множества по версии ОС и множества по сигнатуре экрана пусто, приоритет отдаётся сигнатуре экрана целиком, а не общему результату «кандидатов нет». Сигнатура 834x1194@2 однозначно (единственный кандидат курируемого ядра) указывает на iPad Pro 11, supported — сервис отвечает определённо, что не является ложным ответом (AGENTS.md, правило 1): устройство и его статус eSIM корректно подтверждены курируемым ядром."
+    "notes": "Исправлено этапом 8 (docs/09-decisions.md ADR-047, повторная сверка с рабочим контуром после pnpm seed rebuild-signatures на полном справочнике). Прежнее ожидание предполагало, что правило по версии ОС (docs/03 §3.5 шаг 1) на iPadOS 12.2 даёт НОЛЬ кандидатов (все записи apple-ipad.json требуют iPadOS ≥ 15.0), и делало из этого вывод «результат clarification_required независимо от сигнатуры экрана» — вывод был верен ТОЛЬКО пока сама сигнатура экрана тоже была недостижима (пустая коллекция screen_signatures в контуре агента 6.6). Фактическое правило (docs/09 ADR-024 п.4, `select-ios-candidates.ts`): если пересечение множества по версии ОС и множества по сигнатуре экрана пусто, приоритет отдаётся сигнатуре экрана целиком, а не общему результату «кандидатов нет». Сигнатура 834x1194@2 однозначно (единственный кандидат курируемого ядра) указывает на iPad Pro 11, supported — сервис отвечает определённо, что не является ложным ответом (AGENTS.md, правило 1): устройство и его статус eSIM корректно подтверждены курируемым ядром."
   },
   {
     "id": "tablet-004",
@@ -5800,11 +5800,11 @@
     "expected": {
       "platform": "android",
       "deviceType": "phone",
-      "status": "clarification_required",
-      "exactModelKnown": false,
-      "deviceId": null
+      "status": "supported",
+      "exactModelKnown": true,
+      "deviceId": "samsung-galaxy-s24-ultra"
     },
-    "notes": "СОСТАВНАЯ запись, а не наблюдённая целиком (промпт этапа 6.6, группа android-vendor-ua-ch): Playwright не может подставить настоящий Sec-CH-UA-Model (getHighEntropyValues(['model']) в Chromium/Playwright всегда пуст — находка агента 6.5), поэтому userAgent — реальная официально документированная строка редуцированного Chrome для Android (MDN \"User-Agent reduction\", developer.mozilla.org/en-US/docs/Web/HTTP/Guides/User-agent_reduction), а signals.uaData.model — пример полного сервисного кода из курируемой таблицы суффиксов data/catalog/code-suffixes.json (запись samsung, регион США (операторская версия), уровень verified, ADR-035) — —. Код не входит в модельные коды НИ ОДНОЙ записи основного справочника (проверено прямым запросом к базе agent 6.6, устройства импортированы из CSV-выгрузок независимо от таблицы суффиксов, ADR-036 п.1: строки партии 16 не участвуют в консенсусе устройств) — правило docs/03 §3.4 п.2/AGENTS.md правило 1: неизвестный код не даёт догадки, только уточнение."
+    "notes": "СОСТАВНАЯ запись, а не наблюдённая целиком (промпт этапа 6.6, группа android-vendor-ua-ch): Playwright не может подставить настоящий Sec-CH-UA-Model (getHighEntropyValues(['model']) в Chromium/Playwright всегда пуст — находка агента 6.5), поэтому userAgent — реальная официально документированная строка редуцированного Chrome для Android (MDN \"User-Agent reduction\", developer.mozilla.org/en-US/docs/Web/HTTP/Guides/User-agent_reduction), а signals.uaData.model — сервисный код SM-S928U из курируемой таблицы суффиксов data/catalog/code-suffixes.json (samsung, США операторская версия, verified, ADR-035). После фазы C устранения остатков сдачи код входит в modelCodes записи samsung-galaxy-s24-ultra (data/catalog/curated/samsung-galaxy-s23-s24.json, dataConfidence verified); ожидание обновлено со снимком 2026-08-24 (version 0cf9311056f6): POST /detect → supported, exactModelKnown true, deviceId samsung-galaxy-s24-ultra (method ua_client_hints_model, CATALOG_EXACT_MATCH). Ранее (этап 6.6) код отсутствовал в справочнике и ожидание было clarification_required — это не регрессия алгоритма, а устаревшее aspirational-ожидание после наполнения каталога."
   },
   {
     "id": "android-vendor-ua-ch-010",
