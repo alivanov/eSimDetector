@@ -7,8 +7,18 @@ on:
 
 jobs:
   lint-and-test:
-    name: Линтер, проверка типов, модульные тесты
+    name: Линтер, проверка типов, справочник, модульные тесты
     runs-on: ubuntu-latest
+    services:
+      mongo:
+        image: mongo:7
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --eval 'db.adminCommand(\"ping\")'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
     steps:
       - name: Получение кода
         uses: actions/checkout@v7
@@ -43,11 +53,25 @@ jobs:
       - name: Проверка типов (TypeScript)
         run: pnpm typecheck
 
+      # tools/seed резолвит workspace-пакеты через dist/ (не через moduleNameMapper Jest).
+      - name: Сборка зависимостей tools-seed
+        run: pnpm --filter @esim-detector/tools-seed... --if-present run build
+
+      - name: Загрузка справочника (pnpm seed load)
+        env:
+          MONGODB_URI: mongodb://127.0.0.1:27017/esim
+        run: pnpm seed load
+
+      - name: Сверка справочника (pnpm seed verify)
+        env:
+          MONGODB_URI: mongodb://127.0.0.1:27017/esim
+        run: pnpm seed verify
+
       - name: Модульные и e2e-тесты (изолированная база MongoDB в памяти)
         run: pnpm test
 
   build-images:
-    name: Сборка Docker-образа API
+    name: Сборка Docker-образов API и web
     runs-on: ubuntu-latest
     needs: lint-and-test
     steps:
@@ -56,3 +80,6 @@ jobs:
 
       - name: Сборка образа api
         run: docker build -f apps/api/Dockerfile -t esim-detector-api:ci .
+
+      - name: Сборка образа web
+        run: docker build -f apps/web/Dockerfile -t esim-detector-web:ci .
