@@ -22,6 +22,12 @@ server {
         # на Render маршрутизация идёт по Host, и подмена на адрес веб-сервиса
         # отправила бы запрос не туда.
         proxy_set_header Host $proxy_host;
+        # Публичный https://…onrender.com резолвится в общий IP Render/Cloudflare.
+        # Без SNI рукопожатие идёт «на IP» и обрывается alert 40 → 502
+        # (docs/16-deployment.md §16.8). Для локального http://api:3000 директивы
+        # не участвуют в соединении.
+        proxy_ssl_server_name on;
+        proxy_ssl_name $proxy_host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;

@@ -89,7 +89,12 @@ docker compose build
 
 ## Публичный стенд
 
-Помимо локального запуска, предусмотрен публичный стенд на Render (render.com) — [ADR-027](./docs/09-decisions.md) с дополнением: API и веб — два Web Service из тех же Docker-образов, что `docker compose`, база — MongoDB Atlas. Пошаговая инструкция первого деплоя и обновления (для человека без опыта DevOps) — [docs/16-deployment.md](./docs/16-deployment.md). Краткая топология — [docs/07-integration.md](./docs/07-integration.md) §7.6а. Публичные адреса `onrender.com` появятся в §7.6а и здесь после выкладки.
+Помимо локального запуска, предусмотрен публичный стенд на Render (render.com) — [ADR-027](./docs/09-decisions.md) с дополнением: API и веб — два Web Service из тех же Docker-образов, что `docker compose`, база — MongoDB Atlas. Пошаговая инструкция первого деплоя и обновления — [docs/16-deployment.md](./docs/16-deployment.md), топология — [docs/07-integration.md](./docs/07-integration.md) §7.6а.
+
+| Адрес                                  | Назначение                  |
+| -------------------------------------- | --------------------------- |
+| https://esimdetector.onrender.com      | Демонстрационное приложение |
+| https://esim-detector-api.onrender.com | API                         |
 
 Captcha на демонстрационном стенде не подключается: достаточно `RATE_LIMIT_RPM`, `CORS_ORIGINS` и `ADMIN_TOKEN` (обоснование — docs/16 §16.3).
 
