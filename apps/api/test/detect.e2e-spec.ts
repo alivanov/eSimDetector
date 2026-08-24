@@ -161,6 +161,22 @@ describe('Detect (e2e)', () => {
     await db.close();
   });
 
+  it('два одинаковых POST /api/v1/detect подряд → одинаковые status, device.id, reasons[].code, exactModelKnown (идемпотентность)', async () => {
+    const body = { signals: { uaData: { platform: 'Android', model: 'SM-S928B' } } };
+
+    const first = await request(httpServer).post('/api/v1/detect').send(body);
+    const second = await request(httpServer).post('/api/v1/detect').send(body);
+
+    expect(first.status).toBe(200);
+    expect(second.status).toBe(200);
+    expect(second.body.status).toBe(first.body.status);
+    expect(second.body.device?.id ?? null).toBe(first.body.device?.id ?? null);
+    expect(second.body.detection.exactModelKnown).toBe(first.body.detection.exactModelKnown);
+    const firstCodes = (first.body.reasons as { code: string }[]).map((reason) => reason.code);
+    const secondCodes = (second.body.reasons as { code: string }[]).map((reason) => reason.code);
+    expect(secondCodes).toEqual(firstCodes);
+  });
+
   it('Android с известным сервисным кодом → 200, status supported, device известен', async () => {
     const response = await request(httpServer)
       .post('/api/v1/detect')

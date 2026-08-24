@@ -72,6 +72,24 @@ describe('Search (e2e)', () => {
     await db.close();
   });
 
+  it('два одинаковых GET /api/v1/devices/search подряд → одинаковые status, device.id, reasons[].code (идемпотентность)', async () => {
+    const first = await request(httpServer)
+      .get('/api/v1/devices/search')
+      .query({ q: 'galaxy s24 ultra' });
+    const second = await request(httpServer)
+      .get('/api/v1/devices/search')
+      .query({ q: 'galaxy s24 ultra' });
+
+    expect(first.status).toBe(200);
+    expect(second.status).toBe(200);
+    expect(second.body.status).toBe(first.body.status);
+    expect(second.body.device?.id ?? null).toBe(first.body.device?.id ?? null);
+    // SearchResponse (docs/06 §6.3) не отдаёт exactModelKnown — поле есть только у /detect.
+    const firstCodes = (first.body.reasons as { code: string }[]).map((reason) => reason.code);
+    const secondCodes = (second.body.reasons as { code: string }[]).map((reason) => reason.code);
+    expect(secondCodes).toEqual(firstCodes);
+  });
+
   it('GET /api/v1/devices/search?q=... находит устройство по кириллическому запросу', async () => {
     const response = await request(httpServer)
       .get('/api/v1/devices/search')

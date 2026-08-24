@@ -190,7 +190,7 @@ interface SignalsGoldenEntry {
 | Кириллица              | `cyrillic`               | `айфон 15 про`, `самсунг галакси с24`                        |
 | Сокращения             | `abbreviations`          | `s24u`, `нот 12`, `ipx`, `13 pm`                             |
 | Опечатки               | `typos`                  | `iphne 15`, `самсунк`, `xiomi`, `хуавей`                     |
-| Неверная раскладка     | `wrong-layout`           | `Ыфьыгте`, `шзрещте 15`                                      |
+| Неверная раскладка     | `wrong-layout`           | `Ыфьыгтп`, `шзрещте 15`                                      |
 | Сервисные коды         | `model-codes`            | `SM-S928B`, `CPH2451`, `23090RA98G`                          |
 | Неоднозначные          | `ambiguous`              | `galaxy s23`, `iphone`, `redmi note`, `самсунг`              |
 | Лишние атрибуты        | `extra-attributes`       | `iPhone 15 Pro 256Gb черный`, `Galaxy S24 Ultra 5G Dual SIM` |
