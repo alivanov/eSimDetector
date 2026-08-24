@@ -412,32 +412,52 @@
   {
     "id": "samsung-galaxy-s23",
     "esimSupport": "yes",
-    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-24, фаза C)"
+  },
+  {
+    "id": "samsung-galaxy-s23-plus",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — Galaxy S23+ в перечне (проверено 2026-08-24, фаза C); id с Plus, не «+» (docs/10 О-8)"
   },
   {
     "id": "samsung-galaxy-s23-ultra",
     "esimSupport": "yes",
-    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-24, фаза C)"
   },
   {
     "id": "samsung-galaxy-s23-fe",
     "esimSupport": "yes",
-    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-24, фаза C)"
   },
   {
     "id": "samsung-galaxy-s24",
     "esimSupport": "yes",
-    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-24, фаза C)"
+  },
+  {
+    "id": "samsung-galaxy-s24-plus",
+    "esimSupport": "yes",
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — Galaxy S24+ в перечне (проверено 2026-08-24, фаза C); id с Plus, не «+» (docs/10 О-8)"
   },
   {
     "id": "samsung-galaxy-s24-ultra",
     "esimSupport": "yes",
-    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-24, фаза C); код SM-S928B — doc.samsungmobile.com/sm-s928b/"
   },
   {
     "id": "samsung-galaxy-s24-fe",
     "esimSupport": "yes",
-    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-19)"
+    "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-24, фаза C)"
+  },
+  {
+    "id": "poco-x5-pro",
+    "esimSupport": "no",
+    "note": "https://www.mi.com/sg/support/faq/details/KA-12524/ — nano-SIM + nano-SIM, без eSIM (проверено 2026-08-24, фаза C)"
+  },
+  {
+    "id": "nokia-2-4",
+    "esimSupport": "no",
+    "note": "https://www.hmd.com/en_int/support/nokia-2-4-user-guide/insert-cards?locale=en-INT — только физические nano-SIM (проверено 2026-08-24, фаза C)"
   },
   {
     "id": "samsung-galaxy-s25",

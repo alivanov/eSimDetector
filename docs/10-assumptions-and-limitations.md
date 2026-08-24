@@ -88,14 +88,21 @@ _Отдельный обнаруженный риск (этап 5.4, ADR-032):_ 
 
 _Смягчение:_ комбинация явных записей для распространённых моделей и правил уровня семейства; вывод по правилу помечается пониженной уверенностью; неопознанные модели попадают в очередь пополнения.
 
-_Проверено на демонстрационном контуре этапа 6 (1057 устройств, `GET /catalog/meta` version `1cb7e5265059`). Справочник этим агентом не наполняется._ В загруженном снимке отсутствуют модели, на которые ссылается `data/fixtures/queries.golden.json`:
+_Проверено на демонстрационном контуре после фазы C устранения остатков сдачи (1068 устройств, `GET /catalog/meta` version `0cf9311056f6`, updatedAt `2026-08-24T07:57:11.581Z`)._
 
-- линейка Samsung Galaxy S23 / S23+ / S23 Ultra / S23 FE / S24 / S24+ / S24 Ultra (сервисные коды `SM-S911B`, `SM-S918B`, `SM-S921B`, `SM-S926B`, `SM-S928B`, `SM-S711B` в индексе кодов нет);
-- POCO X5 Pro (`xiaomi-poco-x5-pro` / `poco-x5-pro` нет; есть `poco-poco-x5` и `poco-x5-gt` без модификатора Pro);
-- Tecno Spark 10 без Pro (`tecno-spark-10` нет, есть только `tecno-spark-10-pro`);
-- Nokia 2.4 (`nokia-2-4` нет).
+**Закрыто курируемым ядром (фаза C):**
 
-Запрос к отсутствующей модели обязан давать `not_found` или уточнение, а не соседнюю запись. Идентификаторы в выборке, написанные до ADR-029 (`xiaomi-redmi-*`, `xiaomi-poco-*`, дефис в `reno-10` / `magic-5` / `note-20`), сверяются с фактическими слагами снимка (`redmi-redmi-*`, `poco-c65`, `oppo-reno10-pro`, `honor-magic5-pro`, `samsung-galaxy-note20-ultra`).
+- линейка Samsung Galaxy S23 / S23+ / S23 Ultra / S23 FE / S24 / S24+ / S24 Ultra / S24 FE — `data/catalog/curated/samsung-galaxy-s23-s24.json` (`provenance.source: curated`, `dataConfidence: verified`, источник eSIM — [samsung.com/sg/.../galaxy-esim-and-supported-network-carriers/](https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/); коды B — `doc.samsungmobile.com/sm-s*b/`, U/U1 — `data/catalog/code-suffixes.json`). На контуре: `GET /devices/samsung-galaxy-s23`, `POST /detect` и `GET /devices/search?q=SM-S928B` → `samsung-galaxy-s24-ultra` / `supported`;
+- POCO X5 Pro — `poco-x5-pro` (`data/catalog/curated/o8-holes-poco-nokia.json`), FAQ Xiaomi: nano-SIM + nano-SIM ([mi.com/sg/support/faq/details/KA-12524/](https://www.mi.com/sg/support/faq/details/KA-12524/));
+- Nokia 2.4 — `nokia-2-4`, руководство HMD только про физические nano-SIM ([hmd.com/.../nokia-2-4-user-guide/insert-cards](https://www.hmd.com/en_int/support/nokia-2-4-user-guide/insert-cards?locale=en-INT)).
+
+**Дубли id (ADR-029), обработаны в `data/catalog/curated/id-duplicates-adr029.json`:** канон `samsung-galaxy-note20-ultra` (коды SM-N986B/SM-N986/SM-N985) и `redmi-redmi-9a`; параллели `samsung-galaxy-note-20-ultra` и `xiaomi-redmi-9a` — `status: deprecated` (публичный `GET /devices/{id}` их не отдаёт — см. `device-catalog-query.service`).
+
+**Остаётся дырой:**
+
+- Tecno Spark 10 без Pro (`tecno-spark-10` нет, есть только `tecno-spark-10-pro`) — авторитетного вендорского URL про eSIM не найдено, запись не заводилась (ADR-026).
+
+Запрос к отсутствующей модели обязан давать `not_found` или уточнение, а не соседнюю запись. Идентификаторы в выборке, написанные до ADR-029 (`xiaomi-redmi-*`, `xiaomi-poco-*`, дефис в `reno-10` / `magic-5` / `note-20`), сверяются с фактическими слагами снимка (`redmi-redmi-*`, `poco-x5-pro`, `oppo-reno10-pro`, `honor-magic5-pro`, `samsung-galaxy-note20-ultra`).
 
 ### О-9. Данные устаревают
 

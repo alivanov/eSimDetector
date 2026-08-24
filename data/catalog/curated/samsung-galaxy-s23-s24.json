@@ -1,0 +1,496 @@
+[
+  {
+    "_id": "samsung-galaxy-s23",
+    "brand": "samsung",
+    "brandTitle": "Samsung",
+    "marketingName": "Galaxy S23",
+    "displayName": "Samsung Galaxy S23",
+    "family": "galaxy-s",
+    "generation": 23,
+    "modifiers": [],
+    "modelCodes": ["SM-S911B", "SM-S911U", "SM-S911U1"],
+    "aliases": [
+      "galaxy s23",
+      "samsung galaxy s23",
+      "s23"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "13",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "В перечне Galaxy devices that support eSIM (samsung.com/sg/support/.../galaxy-esim-and-supported-network-carriers/). База кодов SM-S911 — раздел Model numbers (en.wikipedia.org/wiki/Samsung_Galaxy); суффикс B — doc.samsungmobile.com/sm-s911b/; U/U1 — принятая таблица data/catalog/code-suffixes.json. Суффикс 0 (CN) намеренно не включается: на той же вендорской странице оговорено, что eSIM зависит от страны происхождения."
+    },
+    "releaseYear": 2023,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.72,
+    "sources": [
+      {
+        "url": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/",
+        "title": "Galaxy eSIM and supported network carriers — Samsung",
+        "checkedAt": "2026-08-24"
+      },
+      {
+        "url": "https://doc.samsungmobile.com/sm-s911b/eux/doc.html",
+        "title": "Notify Update — SM-S911B — Samsung Mobile",
+        "checkedAt": "2026-08-24"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Samsung_Galaxy",
+        "title": "Samsung Galaxy — Model numbers: S911x (Galaxy S23)",
+        "checkedAt": "2026-08-24"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-24T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-24T00:00:00.000Z",
+    "updatedAt": "2026-08-24T00:00:00.000Z"
+  },
+  {
+    "_id": "samsung-galaxy-s23-plus",
+    "brand": "samsung",
+    "brandTitle": "Samsung",
+    "marketingName": "Galaxy S23 Plus",
+    "displayName": "Samsung Galaxy S23+",
+    "family": "galaxy-s",
+    "generation": 23,
+    "modifiers": ["plus"],
+    "modelCodes": ["SM-S916B", "SM-S916U", "SM-S916U1"],
+    "aliases": [
+      "galaxy s23+",
+      "galaxy s23 plus",
+      "samsung galaxy s23+",
+      "samsung galaxy s23 plus",
+      "s23+",
+      "s23 plus"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "13",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "В перечне Galaxy devices that support eSIM как Galaxy S23+. marketingName с словом Plus (не «+»), иначе buildDeviceId схлопывает с базовым S23 (docs/10 О-8, риск «+»). База SM-S916 — Model numbers; B — doc.samsungmobile.com/sm-s916b/; U/U1 — code-suffixes.json."
+    },
+    "releaseYear": 2023,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.68,
+    "sources": [
+      {
+        "url": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/",
+        "title": "Galaxy eSIM and supported network carriers — Samsung",
+        "checkedAt": "2026-08-24"
+      },
+      {
+        "url": "https://doc.samsungmobile.com/sm-s916b/eux/doc.html",
+        "title": "Notify Update — SM-S916B — Samsung Mobile",
+        "checkedAt": "2026-08-24"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Samsung_Galaxy",
+        "title": "Samsung Galaxy — Model numbers: S916x (Galaxy S23+)",
+        "checkedAt": "2026-08-24"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-24T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-24T00:00:00.000Z",
+    "updatedAt": "2026-08-24T00:00:00.000Z"
+  },
+  {
+    "_id": "samsung-galaxy-s23-ultra",
+    "brand": "samsung",
+    "brandTitle": "Samsung",
+    "marketingName": "Galaxy S23 Ultra",
+    "displayName": "Samsung Galaxy S23 Ultra",
+    "family": "galaxy-s",
+    "generation": 23,
+    "modifiers": ["ultra"],
+    "modelCodes": ["SM-S918B", "SM-S918U", "SM-S918U1"],
+    "aliases": [
+      "galaxy s23 ultra",
+      "samsung galaxy s23 ultra",
+      "s23 ultra"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "13",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "В перечне Galaxy devices that support eSIM. База SM-S918 — Model numbers; B — doc.samsungmobile.com/sm-s918b/; U/U1 — code-suffixes.json."
+    },
+    "releaseYear": 2023,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.78,
+    "sources": [
+      {
+        "url": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/",
+        "title": "Galaxy eSIM and supported network carriers — Samsung",
+        "checkedAt": "2026-08-24"
+      },
+      {
+        "url": "https://doc.samsungmobile.com/sm-s918b/eux/doc.html",
+        "title": "Notify Update — SM-S918B — Samsung Mobile",
+        "checkedAt": "2026-08-24"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Samsung_Galaxy",
+        "title": "Samsung Galaxy — Model numbers: S918x (Galaxy S23 Ultra)",
+        "checkedAt": "2026-08-24"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-24T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-24T00:00:00.000Z",
+    "updatedAt": "2026-08-24T00:00:00.000Z"
+  },
+  {
+    "_id": "samsung-galaxy-s23-fe",
+    "brand": "samsung",
+    "brandTitle": "Samsung",
+    "marketingName": "Galaxy S23 FE",
+    "displayName": "Samsung Galaxy S23 FE",
+    "family": "galaxy-s",
+    "generation": 23,
+    "modifiers": ["fe"],
+    "modelCodes": ["SM-S711B", "SM-S711U", "SM-S711U1"],
+    "aliases": [
+      "galaxy s23 fe",
+      "samsung galaxy s23 fe",
+      "s23 fe"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "13",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "В перечне Galaxy devices that support eSIM отдельной строкой (Galaxy S23 FE). База SM-S711 — Model numbers; B — doc.samsungmobile.com/sm-s711b/; U/U1 — code-suffixes.json."
+    },
+    "releaseYear": 2023,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.55,
+    "sources": [
+      {
+        "url": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/",
+        "title": "Galaxy eSIM and supported network carriers — Samsung",
+        "checkedAt": "2026-08-24"
+      },
+      {
+        "url": "https://doc.samsungmobile.com/sm-s711b/eux/doc.html",
+        "title": "Notify Update — SM-S711B — Samsung Mobile",
+        "checkedAt": "2026-08-24"
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Samsung_Galaxy",
+        "title": "Samsung Galaxy — Model numbers: S711x (Galaxy S23 FE)",
+        "checkedAt": "2026-08-24"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-24T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-24T00:00:00.000Z",
+    "updatedAt": "2026-08-24T00:00:00.000Z"
+  },
+  {
+    "_id": "samsung-galaxy-s24",
+    "brand": "samsung",
+    "brandTitle": "Samsung",
+    "marketingName": "Galaxy S24",
+    "displayName": "Samsung Galaxy S24",
+    "family": "galaxy-s",
+    "generation": 24,
+    "modifiers": [],
+    "modelCodes": ["SM-S921B", "SM-S921U", "SM-S921U1"],
+    "aliases": [
+      "galaxy s24",
+      "samsung galaxy s24",
+      "s24"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "14",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "В перечне Galaxy devices that support eSIM. База SM-S921 — Model numbers; B — doc.samsungmobile.com/sm-s921b/ и samsung.com/uk/support/model/SM-S921BZKGEUB/; U/U1 — code-suffixes.json (пример SM-S928U/U1 на той же схеме)."
+    },
+    "releaseYear": 2024,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.8,
+    "sources": [
+      {
+        "url": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/",
+        "title": "Galaxy eSIM and supported network carriers — Samsung",
+        "checkedAt": "2026-08-24"
+      },
+      {
+        "url": "https://doc.samsungmobile.com/sm-s921b/eux/doc.html",
+        "title": "Notify Update — SM-S921B — Samsung Mobile",
+        "checkedAt": "2026-08-24"
+      },
+      {
+        "url": "https://www.samsung.com/uk/support/model/SM-S921BZKGEUB/",
+        "title": "Galaxy S24 (SM-S921B…) — Samsung UK Support",
+        "checkedAt": "2026-08-24"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-24T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-24T00:00:00.000Z",
+    "updatedAt": "2026-08-24T00:00:00.000Z"
+  },
+  {
+    "_id": "samsung-galaxy-s24-plus",
+    "brand": "samsung",
+    "brandTitle": "Samsung",
+    "marketingName": "Galaxy S24 Plus",
+    "displayName": "Samsung Galaxy S24+",
+    "family": "galaxy-s",
+    "generation": 24,
+    "modifiers": ["plus"],
+    "modelCodes": ["SM-S926B", "SM-S926U", "SM-S926U1"],
+    "aliases": [
+      "galaxy s24+",
+      "galaxy s24 plus",
+      "samsung galaxy s24+",
+      "samsung galaxy s24 plus",
+      "s24+",
+      "s24 plus"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "14",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "В перечне Galaxy devices that support eSIM как Galaxy S24+. marketingName с словом Plus (не «+»). База SM-S926 — Model numbers; B — doc.samsungmobile.com/sm-s926b/; U/U1 — code-suffixes.json."
+    },
+    "releaseYear": 2024,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.75,
+    "sources": [
+      {
+        "url": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/",
+        "title": "Galaxy eSIM and supported network carriers — Samsung",
+        "checkedAt": "2026-08-24"
+      },
+      {
+        "url": "https://doc.samsungmobile.com/sm-s926b/eux/doc.html",
+        "title": "Notify Update — SM-S926B — Samsung Mobile",
+        "checkedAt": "2026-08-24"
+      },
+      {
+        "url": "https://www.samsung.com/uk/support/model/SM-S926BZKGEUB/",
+        "title": "Galaxy S24+ (SM-S926B…) — Samsung UK Support",
+        "checkedAt": "2026-08-24"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-24T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-24T00:00:00.000Z",
+    "updatedAt": "2026-08-24T00:00:00.000Z"
+  },
+  {
+    "_id": "samsung-galaxy-s24-ultra",
+    "brand": "samsung",
+    "brandTitle": "Samsung",
+    "marketingName": "Galaxy S24 Ultra",
+    "displayName": "Samsung Galaxy S24 Ultra",
+    "family": "galaxy-s",
+    "generation": 24,
+    "modifiers": ["ultra"],
+    "modelCodes": ["SM-S928B", "SM-S928U", "SM-S928U1"],
+    "aliases": [
+      "galaxy s24 ultra",
+      "samsung galaxy s24 ultra",
+      "s24 ultra"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "14",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "В перечне Galaxy devices that support eSIM. База SM-S928 — Model numbers и code-suffixes.json (codeExample SM-S928U/U1/0); B — doc.samsungmobile.com/sm-s928b/ и samsung.com/uk/support/model/SM-S928BZKHEUB/. Суффикс 0 (CN) не включается."
+    },
+    "releaseYear": 2024,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.85,
+    "sources": [
+      {
+        "url": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/",
+        "title": "Galaxy eSIM and supported network carriers — Samsung",
+        "checkedAt": "2026-08-24"
+      },
+      {
+        "url": "https://doc.samsungmobile.com/sm-s928b/eux/doc.html",
+        "title": "Notify Update — SM-S928B — Samsung Mobile",
+        "checkedAt": "2026-08-24"
+      },
+      {
+        "url": "https://www.samsung.com/uk/support/model/SM-S928BZKHEUB/",
+        "title": "Galaxy S24 Ultra (SM-S928B…) — Samsung UK Support",
+        "checkedAt": "2026-08-24"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-24T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-24T00:00:00.000Z",
+    "updatedAt": "2026-08-24T00:00:00.000Z"
+  },
+  {
+    "_id": "samsung-galaxy-s24-fe",
+    "brand": "samsung",
+    "brandTitle": "Samsung",
+    "marketingName": "Galaxy S24 FE",
+    "displayName": "Samsung Galaxy S24 FE",
+    "family": "galaxy-s",
+    "generation": 24,
+    "modifiers": ["fe"],
+    "modelCodes": ["SM-S721B", "SM-S721U", "SM-S721U1"],
+    "aliases": [
+      "galaxy s24 fe",
+      "samsung galaxy s24 fe",
+      "s24 fe"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "14",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "В перечне Galaxy devices that support eSIM отдельной строкой (Galaxy S24 FE). База SM-S721 — Model numbers; B — doc.samsungmobile.com/sm-s721b/ и samsung.com/uk/support/model/SM-S721BZKDEUB/; U/U1 — code-suffixes.json."
+    },
+    "releaseYear": 2024,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.6,
+    "sources": [
+      {
+        "url": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/",
+        "title": "Galaxy eSIM and supported network carriers — Samsung",
+        "checkedAt": "2026-08-24"
+      },
+      {
+        "url": "https://doc.samsungmobile.com/sm-s721b/eux/doc.html",
+        "title": "Notify Update — SM-S721B — Samsung Mobile",
+        "checkedAt": "2026-08-24"
+      },
+      {
+        "url": "https://www.samsung.com/uk/support/model/SM-S721BZKDEUB/",
+        "title": "Galaxy S24 FE (SM-S721B…) — Samsung UK Support",
+        "checkedAt": "2026-08-24"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-24T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-24T00:00:00.000Z",
+    "updatedAt": "2026-08-24T00:00:00.000Z"
+  }
+]

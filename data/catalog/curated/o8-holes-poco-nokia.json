@@ -1,0 +1,105 @@
+[
+  {
+    "_id": "poco-x5-pro",
+    "brand": "poco",
+    "brandTitle": "POCO",
+    "marketingName": "X5 Pro",
+    "displayName": "POCO X5 Pro",
+    "family": "poco-x",
+    "generation": 5,
+    "modifiers": ["pro"],
+    "modelCodes": [],
+    "aliases": [
+      "poco x5 pro",
+      "poco x5 pro 5g",
+      "xiaomi poco x5 pro",
+      "x5 pro"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "12",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Официальный FAQ Xiaomi/POCO (mi.com/sg/support/faq/details/KA-12524/): слот nano-SIM + nano-SIM, eSIM не упоминается и не поддерживается. Сервисный код в курируемое ядро не заводится — на FAQ его нет (ADR-026)."
+    },
+    "releaseYear": 2023,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.4,
+    "sources": [
+      {
+        "url": "https://www.mi.com/sg/support/faq/details/KA-12524/",
+        "title": "POCO X5 Pro 5G FAQ — What kind of SIM card (nano-SIM + nano-SIM) — Xiaomi",
+        "checkedAt": "2026-08-24"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-24T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-24T00:00:00.000Z",
+    "updatedAt": "2026-08-24T00:00:00.000Z"
+  },
+  {
+    "_id": "nokia-2-4",
+    "brand": "nokia",
+    "brandTitle": "Nokia",
+    "marketingName": "2.4",
+    "displayName": "Nokia 2.4",
+    "family": "nokia",
+    "generation": 2,
+    "modifiers": [],
+    "modelCodes": [],
+    "aliases": [
+      "nokia 2.4",
+      "nokia 2 4",
+      "2.4"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "10",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Официальное руководство HMD (hmd.com/.../nokia-2-4-user-guide/insert-cards): только физические nano-SIM (SIM / SIM2) и microSD; eSIM не описан и не поддерживается. marketingName без префикса бренда, иначе buildDeviceId даёт nokia-nokia-2-4."
+    },
+    "releaseYear": 2021,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.15,
+    "sources": [
+      {
+        "url": "https://www.hmd.com/en_int/support/nokia-2-4-user-guide/insert-cards?locale=en-INT",
+        "title": "Nokia 2.4 user guide: Insert the SIM and memory cards — HMD",
+        "checkedAt": "2026-08-24"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-24T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-24T00:00:00.000Z",
+    "updatedAt": "2026-08-24T00:00:00.000Z"
+  }
+]

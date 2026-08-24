@@ -271,7 +271,7 @@
     "query": "Samsung Galaxy Note 20 Ultra",
     "category": "canonical",
     "expectedOutcome": "match",
-    "expectedDeviceId": "samsung-galaxy-note-20-ultra",
+    "expectedDeviceId": "samsung-galaxy-note20-ultra",
     "expectedSlots": {
       "brand": "samsung",
       "family": "galaxy-note",
@@ -282,7 +282,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "ADR-029/фаза C: канон samsung-galaxy-note20-ultra; samsung-galaxy-note-20-ultra — deprecated."
   },
   {
     "id": "canonical-017",
@@ -326,7 +327,7 @@
     "query": "Xiaomi Poco X5 Pro",
     "category": "canonical",
     "expectedOutcome": "match",
-    "expectedDeviceId": "xiaomi-poco-x5-pro",
+    "expectedDeviceId": "poco-x5-pro",
     "expectedSlots": {
       "brand": "xiaomi",
       "family": "poco-x",
@@ -337,7 +338,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Фаза C: канон ADR-029 poco-x5-pro (курируемое ядро по mi.com FAQ); бывший aspirational xiaomi-poco-x5-pro."
   },
   {
     "id": "canonical-020",
@@ -1611,7 +1613,7 @@
     "query": "самсунг note 20 ультра",
     "category": "cyrillic",
     "expectedOutcome": "match",
-    "expectedDeviceId": "samsung-galaxy-note-20-ultra",
+    "expectedDeviceId": "samsung-galaxy-note20-ultra",
     "expectedSlots": {
       "brand": "samsung",
       "family": "note",
@@ -1622,7 +1624,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "ADR-029/фаза C: канон samsung-galaxy-note20-ultra; samsung-galaxy-note-20-ultra — deprecated."
   },
   {
     "id": "cyrillic-028",
@@ -1645,7 +1648,7 @@
     "query": "поко x5 про",
     "category": "cyrillic",
     "expectedOutcome": "match",
-    "expectedDeviceId": "xiaomi-poco-x5-pro",
+    "expectedDeviceId": "poco-x5-pro",
     "expectedSlots": {
       "brand": "poco",
       "family": "x",
@@ -1656,7 +1659,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Фаза C: канон ADR-029 poco-x5-pro (курируемое ядро по mi.com FAQ); бывший aspirational xiaomi-poco-x5-pro."
   },
   {
     "id": "cyrillic-030",
@@ -1982,7 +1986,7 @@
     "query": "note 20 ultra",
     "category": "abbreviations",
     "expectedOutcome": "match",
-    "expectedDeviceId": "samsung-galaxy-note-20-ultra",
+    "expectedDeviceId": "samsung-galaxy-note20-ultra",
     "expectedSlots": {
       "brand": "note",
       "family": "note",
@@ -1993,14 +1997,15 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "ADR-029/фаза C: канон samsung-galaxy-note20-ultra; samsung-galaxy-note-20-ultra — deprecated."
   },
   {
     "id": "abbreviations-017",
     "query": "poco x5 pro",
     "category": "abbreviations",
     "expectedOutcome": "match",
-    "expectedDeviceId": "xiaomi-poco-x5-pro",
+    "expectedDeviceId": "poco-x5-pro",
     "expectedSlots": {
       "brand": "poco",
       "family": "x",
@@ -2011,7 +2016,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Фаза C: канон ADR-029 poco-x5-pro (курируемое ядро по mi.com FAQ); бывший aspirational xiaomi-poco-x5-pro."
   },
   {
     "id": "abbreviations-018",
@@ -2713,7 +2719,7 @@
     "query": "poko x5 pro",
     "category": "typos",
     "expectedOutcome": "match",
-    "expectedDeviceId": "xiaomi-poco-x5-pro",
+    "expectedDeviceId": "poco-x5-pro",
     "expectedSlots": {
       "brand": "poko",
       "family": "x",
@@ -2724,7 +2730,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Фаза C: канон ADR-029 poco-x5-pro (курируемое ядро по mi.com FAQ); бывший aspirational xiaomi-poco-x5-pro."
   },
   {
     "id": "typos-026",
@@ -2768,7 +2775,7 @@
     "query": "samsung noet 20 ultra",
     "category": "typos",
     "expectedOutcome": "match",
-    "expectedDeviceId": "samsung-galaxy-note-20-ultra",
+    "expectedDeviceId": "samsung-galaxy-note20-ultra",
     "expectedSlots": {
       "brand": "samsung",
       "family": "noet",
@@ -2779,7 +2786,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "ADR-029/фаза C: канон samsung-galaxy-note20-ultra; samsung-galaxy-note-20-ultra — deprecated."
   },
   {
     "id": "typos-029",
@@ -3145,7 +3153,7 @@
     "query": "зщсщ x5 pro",
     "category": "wrong-layout",
     "expectedOutcome": "match",
-    "expectedDeviceId": "xiaomi-poco-x5-pro",
+    "expectedDeviceId": "poco-x5-pro",
     "expectedSlots": {
       "brand": "poco",
       "family": "x",
@@ -3156,7 +3164,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Фаза C: канон ADR-029 poco-x5-pro (курируемое ядро по mi.com FAQ); бывший aspirational xiaomi-poco-x5-pro."
   },
   {
     "id": "wrong-layout-018",
@@ -3423,7 +3432,7 @@
     "query": "ыфьыгтп note 20 ultra",
     "category": "wrong-layout",
     "expectedOutcome": "match",
-    "expectedDeviceId": "samsung-galaxy-note-20-ultra",
+    "expectedDeviceId": "samsung-galaxy-note20-ultra",
     "expectedSlots": {
       "brand": "samsung",
       "family": "note",
@@ -3434,7 +3443,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "ADR-029/фаза C: канон samsung-galaxy-note20-ultra; samsung-galaxy-note-20-ultra — deprecated."
   },
   {
     "id": "wrong-layout-034",
@@ -3734,7 +3744,7 @@
     "query": "23090RA98G",
     "category": "model-codes",
     "expectedOutcome": "match",
-    "expectedDeviceId": "xiaomi-poco-x5-pro",
+    "expectedDeviceId": "poco-x5-pro",
     "expectedSlots": {
       "brand": null,
       "family": null,
@@ -3743,7 +3753,8 @@
       "modelCode": "23090RA98G",
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Фаза C: канон ADR-029 poco-x5-pro (курируемое ядро по mi.com FAQ); бывший aspirational xiaomi-poco-x5-pro."
   },
   {
     "id": "model-codes-019",
@@ -5082,7 +5093,7 @@
     "query": "Samsung Galaxy Note 20 Ultra 256gb Dual Sim черный",
     "category": "extra-attributes",
     "expectedOutcome": "match",
-    "expectedDeviceId": "samsung-galaxy-note-20-ultra",
+    "expectedDeviceId": "samsung-galaxy-note20-ultra",
     "expectedSlots": {
       "brand": "samsung",
       "family": "galaxy-note",
@@ -5097,7 +5108,8 @@
         "dualSim": true
       },
       "unparsed": []
-    }
+    },
+    "notes": "ADR-029/фаза C: канон samsung-galaxy-note20-ultra; samsung-galaxy-note-20-ultra — deprecated."
   },
   {
     "id": "extra-attributes-029",
@@ -5125,7 +5137,7 @@
     "query": "Xiaomi Poco X5 Pro 8/256 черный",
     "category": "extra-attributes",
     "expectedOutcome": "match",
-    "expectedDeviceId": "xiaomi-poco-x5-pro",
+    "expectedDeviceId": "poco-x5-pro",
     "expectedSlots": {
       "brand": "xiaomi",
       "family": "poco-x",
@@ -5141,7 +5153,8 @@
         "8",
         "256"
       ]
-    }
+    },
+    "notes": "Фаза C: канон ADR-029 poco-x5-pro (курируемое ядро по mi.com FAQ); бывший aspirational xiaomi-poco-x5-pro."
   },
   {
     "id": "extra-attributes-031",

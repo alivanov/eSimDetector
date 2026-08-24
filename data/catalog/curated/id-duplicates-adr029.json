@@ -1,0 +1,177 @@
+[
+  {
+    "_id": "samsung-galaxy-note20-ultra",
+    "brand": "samsung",
+    "brandTitle": "Samsung",
+    "marketingName": "Galaxy Note20 Ultra",
+    "displayName": "Samsung Galaxy Note20 Ultra",
+    "family": "galaxy-note",
+    "generation": 20,
+    "modifiers": ["ultra"],
+    "modelCodes": ["SM-N986B", "SM-N986", "SM-N985"],
+    "aliases": [
+      "galaxy note20 ultra",
+      "samsung galaxy note20 ultra",
+      "galaxy note 20 ultra",
+      "samsung galaxy note 20 ultra",
+      "note20 ultra",
+      "note 20 ultra"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "10.0",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Канон ADR-029. Коды с параллельной samsung-galaxy-note-20-ultra (SM-N986, SM-N985) перенесены сюда. На странице Samsung eSIM (проверено 2026-08-24) Note20 Ultra в актуальном перечне больше не назван — уровень derived, не verified (ADR-026)."
+    },
+    "releaseYear": 2020,
+    "marketPresenceRu": "official",
+    "popularity": 0.68,
+    "sources": [],
+    "dataConfidence": "derived",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-24T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-24T00:00:00.000Z",
+    "updatedAt": "2026-08-24T00:00:00.000Z"
+  },
+  {
+    "_id": "samsung-galaxy-note-20-ultra",
+    "brand": "samsung",
+    "brandTitle": "Samsung",
+    "marketingName": "Galaxy Note 20 Ultra",
+    "displayName": "Samsung Galaxy Note 20 Ultra (deprecated duplicate)",
+    "family": "galaxy-note",
+    "generation": 20,
+    "modifiers": ["ultra"],
+    "modelCodes": [],
+    "aliases": [],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "supported",
+      "dualSim": "physical+esim",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "ADR-029: параллельный слаг с дефисом в note-20. Канон — samsung-galaxy-note20-ultra. Коды и псевдонимы перенесены на канон; эта запись исключена из индекса сопоставления (status: deprecated)."
+    },
+    "releaseYear": 2020,
+    "marketPresenceRu": "official",
+    "popularity": 0.01,
+    "sources": [],
+    "dataConfidence": "derived",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-24T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "deprecated",
+    "createdAt": "2026-08-24T00:00:00.000Z",
+    "updatedAt": "2026-08-24T00:00:00.000Z"
+  },
+  {
+    "_id": "redmi-redmi-9a",
+    "brand": "redmi",
+    "brandTitle": "Redmi",
+    "marketingName": "Redmi 9A",
+    "displayName": "Redmi 9A",
+    "family": "redmi",
+    "generation": 9,
+    "modifiers": ["a"],
+    "modelCodes": ["M2006C3LG"],
+    "aliases": [
+      "redmi 9a",
+      "xiaomi redmi 9a",
+      "redmi redmi 9a"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "10",
+      "maxVersion": "11"
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Канон ADR-029 (подбренд Redmi). Псевдонимы с параллельной xiaomi-redmi-9a перенесены сюда; вторая запись — deprecated. Статус eSIM и код M2006C3LG сохранены из рабочего снимка; отдельного вендорского FAQ про eSIM для 9A не найдено — derived, не verified (ADR-026)."
+    },
+    "releaseYear": 2020,
+    "marketPresenceRu": "official",
+    "popularity": 0.5,
+    "sources": [],
+    "dataConfidence": "derived",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-24T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-24T00:00:00.000Z",
+    "updatedAt": "2026-08-24T00:00:00.000Z"
+  },
+  {
+    "_id": "xiaomi-redmi-9a",
+    "brand": "xiaomi",
+    "brandTitle": "Xiaomi",
+    "marketingName": "Redmi 9A",
+    "displayName": "Xiaomi Redmi 9A (deprecated duplicate)",
+    "family": "redmi",
+    "generation": 9,
+    "modifiers": ["a"],
+    "modelCodes": [],
+    "aliases": [],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": null,
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "ADR-029: параллельный id с brand Xiaomi. Канон — redmi-redmi-9a. Псевдонимы перенесены на канон; эта запись — deprecated."
+    },
+    "releaseYear": 2020,
+    "marketPresenceRu": "official",
+    "popularity": 0.01,
+    "sources": [],
+    "dataConfidence": "derived",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-24T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "deprecated",
+    "createdAt": "2026-08-24T00:00:00.000Z",
+    "updatedAt": "2026-08-24T00:00:00.000Z"
+  }
+]

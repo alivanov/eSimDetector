@@ -412,15 +412,15 @@ curl -s 'http://localhost:3000/api/v1/devices/search?q=айфон%2013' | jq
 curl -s 'http://localhost:3000/api/v1/devices/search?q=Ыфьыгтп%2023' | jq '.query'
 
 # Автоопределение с эмуляцией сигналов Android
-# код SM-A235F есть в справочнике (samsung-galaxy-a23); SM-S928B отсутствует
-# → "not_supported"
-# → "Samsung Galaxy A23"
+# код SM-S928B есть в справочнике (samsung-galaxy-s24-ultra, курируемое ядро фазы C)
+# → "supported"
+# → "Samsung Galaxy S24 Ultra"
 curl -s -X POST http://localhost:3000/api/v1/detect \
   -H 'Content-Type: application/json' \
-  -d '{"signals":{"uaData":{"platform":"Android","mobile":true,"model":"SM-A235F"}}}' | jq '.status, .device.name'
+  -d '{"signals":{"uaData":{"platform":"Android","mobile":true,"model":"SM-S928B"}}}' | jq '.status, .device.name'
 
-# Актуальность справочника
-# → { "version": "1cb7e5265059", "deviceCount": 1057, "updatedAt": "2026-08-21T11:33:50.334Z" }
+# Актуальность справочника (после фазы C: deviceCount 1068, version 0cf9311056f6)
+# → { "version": "0cf9311056f6", "deviceCount": 1068, "updatedAt": "2026-08-24T07:57:11.581Z" }
 curl -s http://localhost:3000/api/v1/catalog/meta | jq
 ```
 
