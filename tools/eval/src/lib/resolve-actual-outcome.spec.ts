@@ -57,4 +57,37 @@ describe('resolveActualOutcome', () => {
       }),
     ).toBe('not_found');
   });
+
+  it('clarification_required без matches с answer_question → match (группа, общее условие)', () => {
+    expect(
+      resolveActualOutcome({
+        status: 'clarification_required',
+        deviceId: null,
+        matchCount: 0,
+        clarificationKind: 'answer_question',
+      }),
+    ).toBe('match');
+  });
+
+  it('clarification_required без matches с check_on_device → match (группа, гейт достоверности)', () => {
+    expect(
+      resolveActualOutcome({
+        status: 'clarification_required',
+        deviceId: null,
+        matchCount: 0,
+        clarificationKind: 'check_on_device',
+      }),
+    ).toBe('match');
+  });
+
+  it('clarification_required без matches с manual_input → not_found', () => {
+    expect(
+      resolveActualOutcome({
+        status: 'clarification_required',
+        deviceId: null,
+        matchCount: 0,
+        clarificationKind: 'manual_input',
+      }),
+    ).toBe('not_found');
+  });
 });

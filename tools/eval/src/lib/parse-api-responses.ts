@@ -57,13 +57,14 @@ export interface ParsedSearchResponse {
   readonly status: string;
   readonly deviceId: string | null;
   readonly matchCount: number;
+  readonly clarificationKind: string | null;
 }
 
 export function parseSearchResponse(value: unknown, context: string): ParsedSearchResponse {
   if (!isRecord(value)) {
     throw new Error(`${context}: ответ /devices/search — не объект`);
   }
-  const { status, device, matches } = value;
+  const { status, device, matches, clarification } = value;
   if (typeof status !== 'string') {
     throw new Error(`${context}: status не строка`);
   }
@@ -74,9 +75,17 @@ export function parseSearchResponse(value: unknown, context: string): ParsedSear
     }
     deviceId = device['id'];
   }
+  let clarificationKind: string | null = null;
+  if (clarification !== null && clarification !== undefined) {
+    if (!isRecord(clarification) || typeof clarification['kind'] !== 'string') {
+      throw new Error(`${context}: clarification.kind не строка`);
+    }
+    clarificationKind = clarification['kind'];
+  }
   return {
     status,
     deviceId,
     matchCount: Array.isArray(matches) ? matches.length : 0,
+    clarificationKind,
   };
 }

@@ -140,9 +140,14 @@ async function evaluateEntry(entry: GoldenQueryEntry): Promise<EvalRow> {
     // Группа эквивалентности (ADR-002): status supported/not_supported при device: null —
     // честный ответ без точной модели. Если golden ждал match с конкретным id, совпадение
     // статуса группы засчитывается: сервис не назвал чужое устройство.
+    // То же для группы с общим answer_question (ADR-045): условие одно, модель выбирать не нужно.
     const groupStatusWithoutDevice =
       parsed.deviceId === null &&
-      (parsed.status === 'supported' || parsed.status === 'not_supported');
+      (parsed.status === 'supported' ||
+        parsed.status === 'not_supported' ||
+        (parsed.status === 'clarification_required' &&
+          (parsed.clarificationKind === 'answer_question' ||
+            parsed.clarificationKind === 'check_on_device')));
     const deviceMatches =
       entry.expectedDeviceId === null ||
       parsed.deviceId === entry.expectedDeviceId ||

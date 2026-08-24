@@ -28,6 +28,7 @@ import type {
   Presentation,
 } from '../../common/response';
 import { buildPresentation, toDeviceSummary, toMatchSummary } from '../../common/response';
+import { findSharedClarifyingQuestion } from '../detection/ios/build-ios-clarification';
 import { CatalogService } from '../catalog/catalog.service';
 import { ModerationTaskService } from '../moderation/moderation-task.service';
 
@@ -336,6 +337,58 @@ export class MatchingService {
         reasons,
         presentation: buildPresentation({
           status: groupResolution.status,
+          exactModelKnown: false,
+        }),
+      };
+    }
+
+    // ADR-045 / docs/03 §3.7 п.2: единогласное уточнение по одному и тому же условию
+    // (регион/ОС) — задаём этот вопрос, а не список моделей. Иначе «iPhone 15» после
+    // расширения на Pro/Plus считался бы избыточным choose_candidate при том, что статус
+    // eSIM у всех кандидатов разрешается одним ответом.
+    const sharedQuestion = findSharedClarifyingQuestion(live.map(({ device }) => device));
+    if (sharedQuestion !== undefined) {
+      return {
+        query,
+        status: 'clarification_required',
+        confidence: leaderScore,
+        device: null,
+        matches: [],
+        reasons,
+        clarification: {
+          kind: 'answer_question',
+          question: sharedQuestion.question,
+          options: sharedQuestion.options.map((option) => ({
+            id: option.value,
+            label: option.label,
+          })),
+        },
+        presentation: buildPresentation({
+          status: 'clarification_required',
+          exactModelKnown: false,
+          clarificationQuestion: sharedQuestion.question,
+        }),
+      };
+    }
+
+    // Согласие «всем нужно уточнение» без общего clarifyingQuestion (часто гейт unverified
+    // у пары base/Pro) — не список моделей: пользователь не выбирает между недостоверными
+    // записями. Тот же check_on_device, что у одиночной записи без условия.
+    if (reasons.some((reason) => reason.code === 'CANDIDATES_AGREE_ON_CLARIFICATION')) {
+      return {
+        query,
+        status: 'clarification_required',
+        confidence: leaderScore,
+        device: null,
+        matches: [],
+        reasons,
+        clarification: {
+          kind: 'check_on_device',
+          question:
+            'Устройство определено, но данные о поддержке eSIM пока не подтверждены. Проверьте наличие eSIM в настройках устройства.',
+        },
+        presentation: buildPresentation({
+          status: 'clarification_required',
           exactModelKnown: false,
         }),
       };

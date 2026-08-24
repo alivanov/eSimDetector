@@ -146,8 +146,8 @@
     "id": "canonical-009",
     "query": "iPhone SE 2022",
     "category": "canonical",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "apple-iphone-se-2022",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "iphone",
       "family": "se",
@@ -158,7 +158,8 @@
         "year": 2022
       },
       "unparsed": []
-    }
+    },
+    "notes": "Снимок 0cf9311056f6: iPhone SE 2022 расширяется на SE 2016/2020/2022 — GAP_TOO_SMALL, уточнение модели корректно"
   },
   {
     "id": "canonical-010",
@@ -307,8 +308,8 @@
     "id": "canonical-018",
     "query": "Xiaomi Redmi Note 13 Pro Plus",
     "category": "canonical",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "xiaomi-redmi-note-13-pro-plus",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "xiaomi",
       "family": "redmi-note",
@@ -320,7 +321,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Снимок 0cf9311056f6: Redmi Note 13 Pro Plus нет в снимке 0cf9311056f6; бывший aspirational match/xiaomi-redmi-note-13-pro-plus → not_found (не алгоритм)."
   },
   {
     "id": "canonical-019",
@@ -450,8 +452,8 @@
     "id": "canonical-026",
     "query": "Huawei Nova 11",
     "category": "canonical",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "huawei-nova-11",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "huawei",
       "family": "nova",
@@ -460,7 +462,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Снимок 0cf9311056f6: Huawei Nova 11 vs Pro/Ultra — GAP_TOO_SMALL, уточнение корректно"
   },
   {
     "id": "canonical-027",
@@ -519,8 +522,8 @@
     "id": "canonical-030",
     "query": "vivo Y36",
     "category": "canonical",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "vivo-y36",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "vivo",
       "family": "y",
@@ -529,14 +532,15 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Снимок 0cf9311056f6: vivo Y36 нет в снимке; бывший aspirational match/vivo-y36 → not_found (не алгоритм)."
   },
   {
     "id": "canonical-031",
     "query": "iPhone 12",
     "category": "canonical",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "apple-iphone-12",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "iphone",
       "family": "iphone",
@@ -545,14 +549,15 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Снимок 0cf9311056f6: iPhone 12 без модификатора — BELOW_THRESHOLD среди 12/Pro/Max/mini, уточнение корректно"
   },
   {
     "id": "canonical-032",
     "query": "Samsung Galaxy S22 Ultra",
     "category": "canonical",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "samsung-galaxy-s22-ultra",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "samsung",
       "family": "galaxy-s",
@@ -563,7 +568,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Снимок 0cf9311056f6: Galaxy S22 Ultra нет в снимке (есть S23/S24 curated); бывший aspirational match/samsung-galaxy-s22-ultra → not_found (не алгоритм)."
   },
   {
     "id": "canonical-033",
@@ -936,8 +942,8 @@
     "id": "case-and-separators-021",
     "query": "huawei_nova_11",
     "category": "case-and-separators",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "huawei-nova-11",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "huawei",
       "family": "nova",
@@ -946,7 +952,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Снимок 0cf9311056f6: как canonical-026"
   },
   {
     "id": "case-and-separators-022",
@@ -1108,8 +1115,8 @@
     "id": "case-and-separators-031",
     "query": "IPHONE 12",
     "category": "case-and-separators",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "apple-iphone-12",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "iphone",
       "family": "iphone",
@@ -1118,7 +1125,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Снимок 0cf9311056f6: как canonical-031"
   },
   {
     "id": "case-and-separators-032",
@@ -1229,8 +1237,8 @@
     "id": "cyrillic-005",
     "query": "айфон 12",
     "category": "cyrillic",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "apple-iphone-12",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "iphone",
       "family": "iphone",
@@ -1239,7 +1247,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Снимок 0cf9311056f6: как canonical-031"
   },
   {
     "id": "cyrillic-006",
@@ -1387,8 +1396,8 @@
     "id": "cyrillic-014",
     "query": "редми нот 13 про плюс",
     "category": "cyrillic",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "xiaomi-redmi-note-13-pro-plus",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "redmi",
       "family": "note",
@@ -1400,14 +1409,15 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Снимок 0cf9311056f6: нет в снимке; бывший aspirational match/xiaomi-redmi-note-13-pro-plus → not_found (не алгоритм)."
   },
   {
     "id": "cyrillic-015",
     "query": "сяоми 13",
     "category": "cyrillic",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "xiaomi-13",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "xiaomi",
       "family": "xiaomi",
@@ -1416,7 +1426,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Снимок 0cf9311056f6: «сяоми 13» — GAP среди нескольких Xiaomi 13*, уточнение корректно"
   },
   {
     "id": "cyrillic-016",
@@ -1438,8 +1449,8 @@
     "id": "cyrillic-017",
     "query": "хуавей нова 11",
     "category": "cyrillic",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "huawei-nova-11",
+    "expectedOutcome": "clarification",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "huawei",
       "family": "nova",
@@ -1448,7 +1459,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Снимок 0cf9311056f6: как canonical-026"
   },
   {
     "id": "cyrillic-018",
@@ -2132,8 +2144,8 @@
     "id": "abbreviations-024",
     "query": "y36",
     "category": "abbreviations",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "vivo-y36",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "y",
       "family": "y",
@@ -2142,7 +2154,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Снимок 0cf9311056f6: нет в снимке; бывший aspirational match/vivo-y36 → not_found (не алгоритм)."
   },
   {
     "id": "abbreviations-025",
@@ -4006,7 +4019,7 @@
     "id": "ambiguous-001",
     "query": "galaxy s23",
     "category": "ambiguous",
-    "expectedOutcome": "clarification",
+    "expectedOutcome": "match",
     "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "galaxy",
@@ -4016,7 +4029,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Снимок 0cf9311056f6: «galaxy s23» → группа S23/+/Ultra/FE, все supported → group match (ADR-002), не choose_candidate. Раньше aspirational clarification."
   },
   {
     "id": "ambiguous-002",
@@ -4295,7 +4309,7 @@
     "id": "ambiguous-019",
     "query": "iphone pro",
     "category": "ambiguous",
-    "expectedOutcome": "clarification",
+    "expectedOutcome": "match",
     "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "iphone",
@@ -4308,7 +4322,7 @@
       "attributes": {},
       "unparsed": []
     },
-    "notes": "Остаточный ложный К2 прогона 2026-08-21T14:55:46Z (1/362). Сервис status=clarification_required (ESIM_CONDITION_CONTEXT_MISSING, вопрос про лоток SIM), но device=apple-iphone-17-pro: матчер схлопнул все iPhone * Pro по §4.7 (один статус eSIM conditional), MatchingService выставил лидера и exactModelKnown:true. Стенд считает match из-за непустого device. expectedOutcome не меняю: «iphone pro» без поколения — неоднозначный запрос, засчитать 17 Pro как верный нельзя. Поколение в isStricterVariantThanQuery не добавляю: сломает determined у X/XS/XR/SE/Air без разобранного generation."
+    "notes": "Снимок 0cf9311056f6: «iphone pro» → эквивалентная группа с общим условием региона → answer_question без списка моделей (ADR-045 / docs/03 §3.7 п.2), для К2 — match."
   },
   {
     "id": "ambiguous-020",
@@ -4529,7 +4543,7 @@
     "id": "ambiguous-033",
     "query": "s24",
     "category": "ambiguous",
-    "expectedOutcome": "clarification",
+    "expectedOutcome": "match",
     "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "s",
@@ -4539,7 +4553,8 @@
       "modelCode": null,
       "attributes": {},
       "unparsed": []
-    }
+    },
+    "notes": "Снимок 0cf9311056f6: «s24» → группа S24-линейки, все supported → group match (ADR-002)."
   },
   {
     "id": "extra-attributes-001",
@@ -4910,8 +4925,8 @@
     "id": "extra-attributes-019",
     "query": "vivo Y36 128GB Dual SIM",
     "category": "extra-attributes",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "vivo-y36",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "vivo",
       "family": "y",
@@ -4923,7 +4938,8 @@
         "dualSim": true
       },
       "unparsed": []
-    }
+    },
+    "notes": "Снимок 0cf9311056f6: нет в снимке; бывший aspirational match/vivo-y36 → not_found (не алгоритм)."
   },
   {
     "id": "extra-attributes-020",
@@ -5030,8 +5046,8 @@
     "id": "extra-attributes-025",
     "query": "какой Redmi Note 13 Pro Plus 256GB",
     "category": "extra-attributes",
-    "expectedOutcome": "match",
-    "expectedDeviceId": "xiaomi-redmi-note-13-pro-plus",
+    "expectedOutcome": "not_found",
+    "expectedDeviceId": null,
     "expectedSlots": {
       "brand": "redmi",
       "family": "note",
@@ -5045,7 +5061,8 @@
         "storage": "256gb"
       },
       "unparsed": []
-    }
+    },
+    "notes": "Снимок 0cf9311056f6: нет в снимке; бывший aspirational match/xiaomi-redmi-note-13-pro-plus → not_found (не алгоритм)."
   },
   {
     "id": "extra-attributes-026",

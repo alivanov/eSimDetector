@@ -237,14 +237,69 @@ describe('MatchingService.search', () => {
 
     expect(result.status).toBe('clarification_required');
     expect(result.device).toBeNull();
-    expect(result.clarification?.kind).toBe('choose_candidate');
-    expect(result.matches.map((match) => match.id).sort()).toEqual([
-      'apple-iphone-15-pro',
-      'apple-iphone-16-pro',
-    ]);
+    expect(result.clarification?.kind).toBe('answer_question');
+    expect(result.matches).toEqual([]);
     expect(result.presentation.primaryAction?.kind).toBe('clarify');
     expect(
       result.reasons.some((reason) => reason.code === 'DECISION_RESOLVED_BY_EQUIVALENCE'),
+    ).toBe(true);
+    expect(
+      result.reasons.some((reason) => reason.code === 'CANDIDATES_AGREE_ON_CLARIFICATION'),
+    ).toBe(true);
+  });
+
+  it('группа с общим условием eSIM без модификатора → answer_question, не choose_candidate', () => {
+    const iphone15 = buildSampleDevice({
+      _id: 'apple-iphone-15',
+      brand: 'apple',
+      brandTitle: 'Apple',
+      marketingName: 'iPhone 15',
+      displayName: 'Apple iPhone 15',
+      family: 'iphone',
+      generation: 15,
+      modifiers: [],
+      modelCodes: ['A2846'],
+      aliases: ['iphone 15'],
+      esim: {
+        support: 'conditional',
+        dualSim: 'physical+esim',
+        maxProfiles: 8,
+        conditions: [
+          { scope: 'region', value: 'CN', support: 'not_supported', note: 'две nano-SIM' },
+        ],
+        clarifyingQuestion: {
+          kind: 'region',
+          question: 'Лоток для SIM-карты вмещает одну nano-SIM или две?',
+          options: [
+            { value: 'OTHER', label: 'Одну' },
+            { value: 'CN', label: 'Две' },
+          ],
+        },
+        notes: '',
+      },
+    });
+    const iphone15Pro = buildSampleDevice({
+      _id: 'apple-iphone-15-pro',
+      brand: 'apple',
+      brandTitle: 'Apple',
+      marketingName: 'iPhone 15 Pro',
+      displayName: 'Apple iPhone 15 Pro',
+      family: 'iphone',
+      generation: 15,
+      modifiers: ['pro'],
+      modelCodes: ['A2848'],
+      aliases: ['iphone 15 pro'],
+      esim: iphone15.esim,
+    });
+    const service = buildService([iphone15, iphone15Pro]);
+    const result = service.search('iphone 15');
+
+    expect(result.status).toBe('clarification_required');
+    expect(result.device).toBeNull();
+    expect(result.matches).toEqual([]);
+    expect(result.clarification?.kind).toBe('answer_question');
+    expect(
+      result.reasons.some((reason) => reason.code === 'CANDIDATES_AGREE_ON_CLARIFICATION'),
     ).toBe(true);
   });
 
