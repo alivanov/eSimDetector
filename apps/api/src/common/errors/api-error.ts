@@ -9,6 +9,7 @@ export type ApiErrorCode =
   | 'UNAUTHORIZED'
   | 'DEVICE_NOT_FOUND'
   | 'RATE_LIMITED'
+  | 'PAYLOAD_TOO_LARGE'
   | 'CATALOG_UNAVAILABLE'
   | 'INTERNAL_ERROR'
   /**

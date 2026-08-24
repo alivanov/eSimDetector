@@ -101,6 +101,42 @@ describe('ApiExceptionFilter', () => {
     });
   });
 
+  it('мапит PayloadTooLargeError Express (status 413) в PAYLOAD_TOO_LARGE, а не в 500', () => {
+    const { request, response, body } = createRequestAndResponse();
+    requestIdMiddleware(request, response, () => undefined);
+
+    const payloadError = Object.assign(new Error('request entity too large'), {
+      status: HttpStatus.PAYLOAD_TOO_LARGE,
+      type: 'entity.too.large',
+    });
+
+    filter.catch(payloadError, createHost(request, response));
+
+    expect(body()).toMatchObject({
+      status: HttpStatus.PAYLOAD_TOO_LARGE,
+      error: { code: 'PAYLOAD_TOO_LARGE', message: 'request entity too large' },
+    });
+  });
+
+  it('мапит HttpException 413 в PAYLOAD_TOO_LARGE', () => {
+    const { request, response, body } = createRequestAndResponse();
+    requestIdMiddleware(request, response, () => undefined);
+
+    filter.catch(
+      new ApiError(
+        'PAYLOAD_TOO_LARGE',
+        'Тело запроса слишком большое',
+        HttpStatus.PAYLOAD_TOO_LARGE,
+      ),
+      createHost(request, response),
+    );
+
+    expect(body()).toMatchObject({
+      status: HttpStatus.PAYLOAD_TOO_LARGE,
+      error: { code: 'PAYLOAD_TOO_LARGE' },
+    });
+  });
+
   it('включает requestId запроса в тело ошибки', () => {
     const { request, response, body } = createRequestAndResponse();
     request.headers['x-request-id'] = 'from-client';

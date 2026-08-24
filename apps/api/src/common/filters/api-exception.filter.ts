@@ -27,12 +27,28 @@ const DEFAULT_CODE_BY_STATUS: ReadonlyMap<number, ApiErrorCode> = new Map<number
   // ApiError('DEVICE_NOT_FOUND', ...) явно (слот 404 занят им; `TASK_NOT_FOUND`
   // бросается только с явным ApiError в группе /admin).
   [HttpStatus.NOT_FOUND, 'DEVICE_NOT_FOUND'],
+  [HttpStatus.PAYLOAD_TOO_LARGE, 'PAYLOAD_TOO_LARGE'],
   [HttpStatus.TOO_MANY_REQUESTS, 'RATE_LIMITED'],
   [HttpStatus.SERVICE_UNAVAILABLE, 'CATALOG_UNAVAILABLE'],
 ]);
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null;
+}
+
+/** Express `body-parser` / Nest могут отдать 413 как сырой Error со `status`/`statusCode`. */
+function extractStatusFromUnknown(exception: unknown): number | undefined {
+  if (!isRecord(exception)) {
+    return undefined;
+  }
+  const { status, statusCode } = exception;
+  if (typeof status === 'number') {
+    return status;
+  }
+  if (typeof statusCode === 'number') {
+    return statusCode;
+  }
+  return undefined;
 }
 
 function extractMessage(exception: HttpException): string {
@@ -92,6 +108,20 @@ function resolveException(exception: unknown): ResolvedError {
       code: DEFAULT_CODE_BY_STATUS.get(status) ?? 'INTERNAL_ERROR',
       message: extractMessage(exception),
       details: extractDetails(exception),
+    };
+  }
+
+  const rawStatus = extractStatusFromUnknown(exception);
+  if (rawStatus === HttpStatus.PAYLOAD_TOO_LARGE) {
+    const message =
+      exception instanceof Error && exception.message.length > 0
+        ? exception.message
+        : 'Тело запроса слишком большое';
+    return {
+      status: HttpStatus.PAYLOAD_TOO_LARGE,
+      code: 'PAYLOAD_TOO_LARGE',
+      message,
+      details: undefined,
     };
   }
 
