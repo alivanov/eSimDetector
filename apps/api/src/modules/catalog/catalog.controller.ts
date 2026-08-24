@@ -1,5 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+
+import { apiErrorSchema, catalogMetaSchema } from '../../common/swagger/response-schemas';
 
 import { CatalogService } from './catalog.service';
 import type { CatalogMeta } from './catalog.snapshot';
@@ -17,6 +19,9 @@ export class CatalogController {
   public constructor(private readonly catalogService: CatalogService) {}
 
   @Get('meta')
+  @ApiOperation({ summary: 'Метаданные справочника (версия, число записей)' })
+  @ApiResponse({ status: 200, description: 'Метаданные справочника', schema: catalogMetaSchema })
+  @ApiResponse({ status: 503, description: 'CATALOG_UNAVAILABLE', schema: apiErrorSchema })
   public getMeta(): CatalogMeta {
     return this.catalogService.getMeta();
   }

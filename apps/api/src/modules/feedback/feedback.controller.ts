@@ -1,6 +1,8 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ModerationTaskService } from '../moderation/moderation-task.service';
+
+import { apiErrorSchema, feedbackResponseSchema } from '../../common/swagger/response-schemas';
 
 import { FeedbackRequestDto } from './dto/feedback-request.dto';
 
@@ -24,6 +26,13 @@ export class FeedbackController {
 
   @Post()
   @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Сообщение о неверном результате определения' })
+  @ApiResponse({
+    status: 200,
+    description: 'Обращение принято в очередь модерации',
+    schema: feedbackResponseSchema,
+  })
+  @ApiResponse({ status: 400, description: 'VALIDATION_ERROR', schema: apiErrorSchema })
   public async submit(@Body() body: FeedbackRequestDto): Promise<FeedbackResponse> {
     await this.taskService.recordUserFeedback({
       requestId: body.requestId,

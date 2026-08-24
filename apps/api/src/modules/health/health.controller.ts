@@ -1,8 +1,10 @@
 import { Controller, Get, Res } from '@nestjs/common';
 import { InjectConnection } from '@nestjs/mongoose';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import type { Response } from 'express';
 import { ConnectionStates, type Connection } from 'mongoose';
+
+import { healthLiveSchema, healthReadySchema } from '../../common/swagger/response-schemas';
 
 import { CatalogService } from '../catalog/catalog.service';
 
@@ -33,11 +35,20 @@ export class HealthController {
   ) {}
 
   @Get('live')
+  @ApiOperation({ summary: 'Liveness-проверка процесса' })
+  @ApiResponse({ status: 200, description: 'Процесс жив', schema: healthLiveSchema })
   public live(): { status: 'ok' } {
     return { status: 'ok' };
   }
 
   @Get('ready')
+  @ApiOperation({ summary: 'Readiness: MongoDB и прогретый справочник' })
+  @ApiResponse({ status: 200, description: 'Готов обслуживать запросы', schema: healthReadySchema })
+  @ApiResponse({
+    status: 503,
+    description: 'Зависимости не готовы (degraded)',
+    schema: healthReadySchema,
+  })
   public ready(@Res() res: Response): void {
     const isMongoConnected = this.connection.readyState === ConnectionStates.connected;
     const isCatalogReady = this.catalogService.isReady();

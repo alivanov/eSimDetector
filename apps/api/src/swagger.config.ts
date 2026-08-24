@@ -2,10 +2,11 @@ import type { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 /**
- * `GET /api/docs` (Swagger UI) и `GET /api/docs-json` (спецификация OpenAPI 3.1) —
- * docs/06-api-contract.md, преамбула: «машиночитаемая спецификация... доступна на `/api/docs`
- * (Swagger UI) и `/api/docs-json`». Документ строится из уже существующих декораторов
- * контроллеров (`@Controller`/`@Get`/`@Post`/DTO) — без ручного дублирования путей здесь.
+ * `GET /api/docs` (Swagger UI) и `GET /api/docs-json` (спецификация OpenAPI 3.0.0) —
+ * docs/06-api-contract.md, преамбула. `@nestjs/swagger` без `.setOpenAPIVersion()` печатает
+ * 3.0.0 — документ приведён к факту. Спецификация строится из декораторов контроллеров
+ * (`@ApiOperation`/`@ApiResponse`/`@ApiQuery`/`@ApiSecurity`/DTO) — без ручного дублирования
+ * путей здесь.
  *
  * Группа `/api/v1/admin/*` выделена отдельным тегом `admin` (docs/15-moderation.md §15.8:
  * «в спецификации OpenAPI выделена в отдельный тег») — оба контроллера этой группы

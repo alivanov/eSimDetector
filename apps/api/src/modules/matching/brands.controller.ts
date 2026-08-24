@@ -1,5 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+
+import { apiErrorSchema, brandsResponseSchema } from '../../common/swagger/response-schemas';
 
 import { DeviceCatalogQueryService, type BrandSummary } from './device-catalog-query.service';
 
@@ -10,6 +12,9 @@ export class BrandsController {
   public constructor(private readonly deviceCatalogQueryService: DeviceCatalogQueryService) {}
 
   @Get()
+  @ApiOperation({ summary: 'Перечень брендов для ручного выбора' })
+  @ApiResponse({ status: 200, description: 'Список брендов', schema: brandsResponseSchema })
+  @ApiResponse({ status: 503, description: 'CATALOG_UNAVAILABLE', schema: apiErrorSchema })
   public list(): readonly BrandSummary[] {
     return this.deviceCatalogQueryService.listBrands();
   }

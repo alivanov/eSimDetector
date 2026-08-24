@@ -1,8 +1,9 @@
 import { Body, Controller, HttpCode, HttpStatus, Post, Req } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import type { Request } from 'express';
 
 import { getRequestId } from '../../common/middleware/request-id.middleware';
+import { apiErrorSchema, detectResponseSchema } from '../../common/swagger/response-schemas';
 
 import { DetectRequestDto } from './dto/detect-request.dto';
 import type { DetectResponse } from './detect-response';
@@ -42,6 +43,19 @@ export class DetectionController {
 
   @Post()
   @HttpCode(HttpStatus.OK)
+  @ApiOperation({
+    summary: 'Автоматическое определение устройства по сигналам браузера',
+    description:
+      'Все поля signals необязательны. clarification_required — HTTP 200, не ошибка (ADR-008).',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Результат определения (включая clarification_required)',
+    schema: detectResponseSchema,
+  })
+  @ApiResponse({ status: 400, description: 'VALIDATION_ERROR', schema: apiErrorSchema })
+  @ApiResponse({ status: 429, description: 'RATE_LIMITED', schema: apiErrorSchema })
+  @ApiResponse({ status: 503, description: 'CATALOG_UNAVAILABLE', schema: apiErrorSchema })
   public detect(@Body() body: DetectRequestDto, @Req() req: Request): DetectResponse {
     const requestId = getRequestId(req);
     const result = this.detectionService.detect(

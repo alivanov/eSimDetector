@@ -1,0 +1,256 @@
+{
+  "info": {
+    "_postman_id": "esim-detector-api-v1",
+    "name": "eSIM Detector API",
+    "description": "Коллекция эндпоинтов docs/06 §6.2–§6.4. Базовый URL демонстрационного контура — {{baseUrl}}. Рабочие тела проверены на справочнике с SM-A235F / samsung-galaxy-a23.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "deviceId",
+      "value": "samsung-galaxy-a23"
+    }
+  ],
+  "item": [
+    {
+      "name": "§6.2 Detect",
+      "item": [
+        {
+          "name": "POST /api/v1/detect (Android SM-A235F)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Request-Id",
+                "value": "postman-detect-001"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signals\": {\n    \"uaData\": {\n      \"platform\": \"Android\",\n      \"mobile\": true,\n      \"model\": \"SM-A235F\"\n    }\n  }\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/detect",
+            "description": "Автоопределение по Client Hints model. Ожидаемо: not_supported, Samsung Galaxy A23."
+          }
+        },
+        {
+          "name": "POST /api/v1/detect (пустые сигналы)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signals\": {}\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/detect",
+            "description": "Все поля signals необязательны → clarification_required / NO_SIGNALS."
+          }
+        }
+      ]
+    },
+    {
+      "name": "§6.3 Search",
+      "item": [
+        {
+          "name": "GET /api/v1/devices/search?q=айфон 13",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/devices/search?q={{q}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "devices", "search"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "айфон 13"
+                },
+                {
+                  "key": "region",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Поиск по названию. Для iPhone-группы типичен clarification_required."
+          }
+        },
+        {
+          "name": "GET /api/v1/devices/search (неверная раскладка Ыфьыгтп 23)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/devices/search?q=%D0%AB%D1%84%D1%8C%D1%8B%D0%B3%D1%82%D0%BF%2023",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "devices", "search"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "Ыфьыгтп 23"
+                }
+              ]
+            },
+            "description": "query.normalized → samsung 23"
+          }
+        },
+        {
+          "name": "POST /api/v1/devices/search",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"q\": \"айфон 13\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/devices/search",
+            "description": "Алиас GET с телом (ADR-024 п.6)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "§6.4 Прочие",
+      "item": [
+        {
+          "name": "GET /api/v1/devices/suggest",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/devices/suggest?q=galaxy&limit=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "devices", "suggest"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "galaxy"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /api/v1/devices/{id}",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/devices/{{deviceId}}",
+            "description": "Карточка samsung-galaxy-a23 (есть в справочнике стенда)."
+          }
+        },
+        {
+          "name": "GET /api/v1/devices (каталог)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/devices?brand=samsung&page=1&pageSize=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "devices"],
+              "query": [
+                {
+                  "key": "brand",
+                  "value": "samsung"
+                },
+                {
+                  "key": "platform",
+                  "value": "android",
+                  "disabled": true
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "5"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /api/v1/brands",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/brands"
+          }
+        },
+        {
+          "name": "POST /api/v1/feedback",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"postman-feedback-001\",\n  \"reportedStatus\": \"not_supported\",\n  \"deviceId\": \"samsung-galaxy-a23\",\n  \"comment\": \"Проверка коллекции Postman: обращение о результате\"\n}"
+            },
+            "url": "{{baseUrl}}/api/v1/feedback",
+            "description": "Публичный эндпоинт. Ответ 200 { received: true }."
+          }
+        },
+        {
+          "name": "GET /api/v1/catalog/meta",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/catalog/meta",
+            "description": "Версия и число записей справочника."
+          }
+        },
+        {
+          "name": "GET /health/live",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/health/live"
+          }
+        },
+        {
+          "name": "GET /health/ready",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/health/ready"
+          }
+        },
+        {
+          "name": "GET /api/docs-json",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/docs-json",
+            "description": "Спецификация OpenAPI 3.0.0."
+          }
+        },
+        {
+          "name": "GET /api/docs",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/docs",
+            "description": "Swagger UI."
+          }
+        }
+      ]
+    }
+  ]
+}
