@@ -198,6 +198,8 @@ API как есть, включая список кандидатов на iOS �
 | https://esimdetector.onrender.com      | Демонстрационное приложение, `/debug`, `/admin`, виджет |
 | https://esim-detector-api.onrender.com | API (`/health/ready`, `/api/docs`, `/api/v1/…`)         |
 
+Оба Web Service на бесплатном тарифе **засыпают через 15 минут без входящих запросов**. Пробуждение занимает около минуты: первый запрос после сна не ошибка сервиса. Перед демонстрацией откройте [https://esim-detector-api.onrender.com/health/live](https://esim-detector-api.onrender.com/health/live) и дождитесь `{"status":"ok"}`, затем — адрес приложения. Спящий сервис не тратит бесплатные часы Render (лимит 750 часов в месяц на аккаунт). Как обновлять стенд и что делать, если первый заход обрывается — [16-deployment.md](./16-deployment.md) §16.2, §16.6, §16.8.
+
 ## 7.7. Локальная разработка без Docker
 
 ```bash
