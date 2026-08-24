@@ -163,24 +163,41 @@ function searchResponseToResult(response: SearchResponse): ResultState {
 }
 
 /**
- * Действие `kind: 'continue'` — точка `esim:action` для интегратора (docs/07 §7.2). Без
- * `onPrimaryAction` кнопка на экране мертва: не показываем её, тексты API не трогаем.
+ * Фильтр действий карточки для нашего виджета (тексты API в `presentation` не меняем):
+ * - `continue` без `onPrimaryAction` — мёртвая кнопка (docs/07 §7.2);
+ * - `clarify`, когда блок `clarification` уже на экране — дубль: варианты уже в ClarificationScreen.
+ * Действие «Уточнить модель» при `exactModelKnown: false` без clarification остаётся — оно
+ * раскрывает `candidates[]`.
  */
-function presentationWithoutDeadContinue(
+function presentationForWidgetDisplay(
   presentation: Presentation,
-  hasPrimaryActionHandler: boolean,
+  options: {
+    readonly hasPrimaryActionHandler: boolean;
+    readonly clarificationVisible: boolean;
+  },
 ): Presentation {
-  if (hasPrimaryActionHandler) {
-    return presentation;
+  function keepAction(
+    action: Presentation['primaryAction'],
+  ): action is NonNullable<Presentation['primaryAction']> {
+    if (action === undefined) {
+      return false;
+    }
+    if (action.kind === 'continue' && !options.hasPrimaryActionHandler) {
+      return false;
+    }
+    if (action.kind === 'clarify' && options.clarificationVisible) {
+      return false;
+    }
+    return true;
   }
+
   return {
     title: presentation.title,
     description: presentation.description,
-    ...(presentation.primaryAction !== undefined && presentation.primaryAction.kind !== 'continue'
+    ...(keepAction(presentation.primaryAction)
       ? { primaryAction: presentation.primaryAction }
       : {}),
-    ...(presentation.secondaryAction !== undefined &&
-    presentation.secondaryAction.kind !== 'continue'
+    ...(keepAction(presentation.secondaryAction)
       ? { secondaryAction: presentation.secondaryAction }
       : {}),
   };
@@ -485,10 +502,10 @@ export function EsimChecker({
           <>
             <ResultCard
               status={screen.result.status}
-              presentation={presentationWithoutDeadContinue(
-                screen.result.presentation,
-                onPrimaryAction !== undefined,
-              )}
+              presentation={presentationForWidgetDisplay(screen.result.presentation, {
+                hasPrimaryActionHandler: onPrimaryAction !== undefined,
+                clarificationVisible: screen.result.clarification !== undefined,
+              })}
               deviceTypeNotice={findDeviceTypeNotice(screen.result.reasons)}
               deviceTypeLabel={
                 screen.result.deviceType !== undefined

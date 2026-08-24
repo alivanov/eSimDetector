@@ -56,7 +56,14 @@ export function installFetchMock(handler: FakeFetch): void {
       const body = isFetchInitLike(init) && typeof init.body === 'string' ? init.body : undefined;
       const method =
         isFetchInitLike(init) && typeof init.method === 'string' ? init.method : undefined;
-      return handler(String(input), body, method !== undefined ? { method, body } : { body });
+      const fakeInit: FakeFetchInit | undefined =
+        method === undefined && body === undefined
+          ? undefined
+          : {
+              ...(method !== undefined ? { method } : {}),
+              ...(body !== undefined ? { body } : {}),
+            };
+      return handler(String(input), body, fakeInit);
     },
     writable: true,
     configurable: true,

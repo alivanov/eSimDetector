@@ -22,6 +22,7 @@ const response = {
   },
   candidates: [],
   reasons: [{ code: 'CATALOG_EXACT_MATCH' }],
+  clarification: undefined,
   presentation: {
     title: 'Ваше устройство поддерживает eSIM',
     description: 'ok',

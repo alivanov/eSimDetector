@@ -235,6 +235,8 @@ describe('EsimChecker — три статуса результата', () => {
     ).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'iPhone X' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'iPhone XS' })).toBeInTheDocument();
+    // «Выбрать модель» из presentation.kind clarify — дубль уже открытого ClarificationScreen.
+    expect(screen.queryByRole('button', { name: 'Выбрать модель' })).not.toBeInTheDocument();
   });
 
   it('onResult вызывается с итоговым статусом, deviceId, confidence, exactModelKnown', async () => {
