@@ -14,7 +14,7 @@ import {
   type ResolveTaskBody,
   type TaskSuggestions,
 } from './admin-api';
-import { adminTexts } from './texts';
+import { adminTexts, moderationTaskKindLabels, moderationTaskStatusLabels } from './texts';
 
 const KINDS: readonly ModerationTaskKind[] = [
   'unknown_model_code',
@@ -107,7 +107,7 @@ export function TasksTab({ session }: TasksTabProps) {
             <option value="">{adminTexts.queueFilterAllOption}</option>
             {KINDS.map((kind) => (
               <option key={kind} value={kind}>
-                {kind}
+                {moderationTaskKindLabels[kind]}
               </option>
             ))}
           </select>
@@ -123,7 +123,7 @@ export function TasksTab({ session }: TasksTabProps) {
           >
             {STATUSES.map((status) => (
               <option key={status} value={status}>
-                {status}
+                {moderationTaskStatusLabels[status]}
               </option>
             ))}
           </select>
@@ -139,6 +139,7 @@ export function TasksTab({ session }: TasksTabProps) {
               <th>{adminTexts.queueOccurrencesColumn}</th>
               <th>{adminTexts.queueKindColumn}</th>
               <th>{adminTexts.queueSummaryColumn}</th>
+              <th>{adminTexts.queueWhenColumn}</th>
               <th>{adminTexts.queueStatusColumn}</th>
             </tr>
           </thead>
@@ -152,9 +153,10 @@ export function TasksTab({ session }: TasksTabProps) {
                 }}
               >
                 <td>{task.occurrences}</td>
-                <td>{task.kind}</td>
+                <td>{moderationTaskKindLabels[task.kind]}</td>
                 <td>{taskSummary(task)}</td>
-                <td>{task.status}</td>
+                <td>{new Date(task.lastSeenAt).toLocaleString('ru-RU')}</td>
+                <td>{moderationTaskStatusLabels[task.status]}</td>
               </tr>
             ))}
           </tbody>
@@ -283,7 +285,7 @@ function TaskDetail({ session, taskId, onBack }: TaskDetailProps) {
         {adminTexts.taskDetailBack}
       </button>
       <h2>
-        {adminTexts.taskDetailTitle}: {task.kind}
+        {adminTexts.taskDetailTitle}: {moderationTaskKindLabels[task.kind]}
       </h2>
       <pre className={styles.jsonBlock}>{JSON.stringify(task.payload, null, 2)}</pre>
 

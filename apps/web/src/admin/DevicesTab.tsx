@@ -68,27 +68,32 @@ export function DevicesTab({ session }: DevicesTabProps) {
 
   return (
     <section className={styles.section}>
-      <div className={styles.buttonRow}>
-        <input
-          className={styles.input}
-          placeholder={adminTexts.deviceSearchPlaceholder}
-          value={query}
-          onChange={(event) => {
-            setQuery(event.target.value);
-          }}
-        />
-        <button type="button" className={styles.primaryButton} onClick={handleSearch}>
-          {adminTexts.deviceSearchButton}
-        </button>
-        <button
-          type="button"
-          className={styles.secondaryButton}
-          onClick={() => {
-            setShowCreateForm(true);
-          }}
-        >
-          {adminTexts.deviceCreateTitle}
-        </button>
+      <div className={styles.formGrid}>
+        <label className={styles.fieldLabel}>
+          {adminTexts.deviceSearchLabel}
+          <input
+            className={styles.input}
+            placeholder={adminTexts.deviceSearchPlaceholder}
+            value={query}
+            onChange={(event) => {
+              setQuery(event.target.value);
+            }}
+          />
+        </label>
+        <div className={styles.formActions}>
+          <button type="button" className={styles.primaryButton} onClick={handleSearch}>
+            {adminTexts.deviceSearchButton}
+          </button>
+          <button
+            type="button"
+            className={styles.secondaryButton}
+            onClick={() => {
+              setShowCreateForm(true);
+            }}
+          >
+            {adminTexts.deviceCreateTitle}
+          </button>
+        </div>
       </div>
 
       {devices.length === 0 ? (
@@ -270,7 +275,7 @@ function DeviceEditForm({ session, device, onBack }: DeviceEditFormProps) {
         </div>
       </form>
 
-      <div className={styles.buttonRow}>
+      <div className={styles.formGrid}>
         <label className={styles.fieldLabel}>
           {adminTexts.deviceEditAddAliasLabel}
           <input
@@ -281,9 +286,11 @@ function DeviceEditForm({ session, device, onBack }: DeviceEditFormProps) {
             }}
           />
         </label>
-        <button type="button" className={styles.secondaryButton} onClick={handleAddAlias}>
-          {adminTexts.deviceEditAddAliasButton}
-        </button>
+        <div className={styles.formActions}>
+          <button type="button" className={styles.secondaryButton} onClick={handleAddAlias}>
+            {adminTexts.deviceEditAddAliasButton}
+          </button>
+        </div>
       </div>
 
       {message !== undefined ? <p className={styles.successMessage}>{message}</p> : null}

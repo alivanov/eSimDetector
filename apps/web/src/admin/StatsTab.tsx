@@ -25,6 +25,9 @@ export function StatsTab({ session }: StatsTabProps) {
   useEffect(refresh, [session.token]);
 
   function handleReload() {
+    if (!window.confirm(adminTexts.reloadConfirm)) {
+      return;
+    }
     void reloadCatalog(session.token).then((outcome) => {
       if (outcome.kind === 'success') {
         setReloadMessage(`${adminTexts.reloadSuccess} (${outcome.data.deviceCount} устройств)`);
@@ -67,6 +70,9 @@ export function StatsTab({ session }: StatsTabProps) {
 
       <h3>{adminTexts.statsByConfidence}</h3>
       <pre className={styles.jsonBlock}>{JSON.stringify(stats.byDataConfidence, null, 2)}</pre>
+
+      <h3>{adminTexts.statsSeedTitle}</h3>
+      <p className={styles.seedHint}>{adminTexts.statsSeedBody}</p>
 
       <div className={styles.buttonRow}>
         <button type="button" className={styles.primaryButton} onClick={handleReload}>

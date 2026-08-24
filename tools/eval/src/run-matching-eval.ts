@@ -1,7 +1,13 @@
-import goldenQueriesJson from '../../../data/fixtures/queries.golden.json';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
+import {
+  resolveEvalCliOptions,
+  resolveEvalOptions,
+  type EvalSuiteOptions,
+} from './lib/eval-options';
 import { getJson } from './lib/http-json';
-import { EVAL_REQUEST_INTERVAL_MS, sleep } from './lib/pace';
+import { sleep } from './lib/pace';
 import { parseSearchResponse } from './lib/parse-api-responses';
 import { resolveActualOutcome } from './lib/resolve-actual-outcome';
 import {
@@ -90,6 +96,12 @@ function parseGoldenQueries(value: unknown): { entries: GoldenQueryEntry[]; erro
   return { entries, errors };
 }
 
+function loadQueriesGoldenJson(): unknown {
+  const path = join(__dirname, '../../../data/fixtures/queries.golden.json');
+  const parsed: unknown = JSON.parse(readFileSync(path, 'utf-8'));
+  return parsed;
+}
+
 interface EvalRow {
   readonly entry: GoldenQueryEntry;
   readonly ok: boolean;
@@ -115,9 +127,12 @@ function isEmptyQueryValidationError(entry: GoldenQueryEntry, error: unknown): b
   );
 }
 
-async function evaluateEntry(entry: GoldenQueryEntry): Promise<EvalRow> {
+async function evaluateEntry(
+  entry: GoldenQueryEntry,
+  http: { readonly baseUrl: string; readonly headers: Readonly<Record<string, string>> },
+): Promise<EvalRow> {
   try {
-    const raw = await getJson(`/api/v1/devices/search?q=${encodeURIComponent(entry.query)}`);
+    const raw = await getJson(`/api/v1/devices/search?q=${encodeURIComponent(entry.query)}`, http);
     const parsed = parseSearchResponse(raw, entry.id);
     const actualOutcome = resolveActualOutcome(parsed);
 
@@ -209,21 +224,42 @@ function buildCategoryRows(rows: readonly EvalRow[]): CategoryRow[] {
     }));
 }
 
-export async function runMatchingEval(): Promise<{ readonly falsePositives: number }> {
-  const { entries, errors: parseErrors } = parseGoldenQueries(goldenQueriesJson);
+export interface MatchingEvalResult {
+  readonly falsePositives: number;
+  readonly total: number;
+  readonly reportMarkdown: string;
+}
+
+export async function runMatchingEval(options: EvalSuiteOptions = {}): Promise<MatchingEvalResult> {
+  const resolved = resolveEvalOptions(options);
+  const { entries, errors: parseErrors } = parseGoldenQueries(loadQueriesGoldenJson());
   if (entries.length === 0) {
     throw new Error(
       `data/fixtures/queries.golden.json не содержит валидных записей: ${parseErrors.join('; ')}`,
     );
   }
 
+  const http = { baseUrl: resolved.baseUrl, headers: resolved.headers };
   const results: EvalRow[] = [];
   // Последовательно, с паузой (`lib/pace.ts`), а не `Promise.all`: 362 записи против одного
   // HTTP-сервера — параллельный залп рискует упереться в `RateLimitGuard` (docs/07 §7.8,
   // `RATE_LIMIT_RPM`), который стенд обязан застать в работе, а не отключать ради своего прогона.
-  for (const entry of entries) {
-    results.push(await evaluateEntry(entry));
-    await sleep(EVAL_REQUEST_INTERVAL_MS);
+  for (let index = 0; index < entries.length; index += 1) {
+    const entry = entries[index];
+    if (entry === undefined) {
+      continue;
+    }
+    results.push(await evaluateEntry(entry, http));
+    if (resolved.onProgress !== undefined) {
+      await resolved.onProgress({
+        phase: 'matching',
+        completed: index + 1,
+        total: entries.length,
+      });
+    }
+    if (resolved.intervalMs > 0) {
+      await sleep(resolved.intervalMs);
+    }
   }
 
   const runtimeErrors = results
@@ -231,9 +267,10 @@ export async function runMatchingEval(): Promise<{ readonly falsePositives: numb
     .map((row) => `${row.entry.id}: ${row.error ?? 'неизвестная ошибка'}`);
 
   const rows = buildCategoryRows(results);
+  const generatedAt = new Date().toISOString();
   const summary = {
     title: 'Стенд оценки качества — обработка ввода (К2, queries.golden.json)',
-    generatedAt: new Date().toISOString(),
+    generatedAt,
     total: results.length,
     rows,
     errors: [...parseErrors, ...runtimeErrors],
@@ -241,20 +278,33 @@ export async function runMatchingEval(): Promise<{ readonly falsePositives: numb
   };
 
   const report = renderReport(summary);
-  printSummaryToConsole({ ...summary, title: 'Обработка ввода (К2)' });
 
-  const path = writeReportFile(`eval-matching-${new Date().toISOString().slice(0, 10)}.md`, report);
-  console.log(`Отчёт записан: ${path}`);
+  if (resolved.writeToDisk) {
+    printSummaryToConsole({ ...summary, title: 'Обработка ввода (К2)' });
+    const path = writeReportFile(
+      `eval-matching-${new Date().toISOString().slice(0, 10)}.md`,
+      report,
+    );
+    console.log(`Отчёт записан: ${path}`);
+  }
 
-  return { falsePositives: results.filter((row) => row.falsePositive).length };
+  if (resolved.onReport !== undefined) {
+    await resolved.onReport(`eval-matching-${new Date().toISOString().slice(0, 10)}.md`, report);
+  }
+
+  return {
+    falsePositives: results.filter((row) => row.falsePositive).length,
+    total: results.length,
+    reportMarkdown: report,
+  };
 }
 
 if (require.main === module) {
-  runMatchingEval()
+  runMatchingEval(resolveEvalCliOptions())
     .then(({ falsePositives }) => {
       if (falsePositives > 0) {
         console.error(
-          `Обнаружены ложные определения: ${falsePositives} — целевое значение по К1/К2 равно нулю`,
+          `Обнаружены ложные определения: ${falsePositives} — целевое значение по К2 равно нулю`,
         );
         process.exitCode = 1;
       }

@@ -30,9 +30,11 @@
 .fieldLabel {
   font-size: var(--esim-typography-font-size-sm);
   font-weight: var(--esim-typography-font-weight-medium);
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  /* Подпись ≈ две строки — поля и кнопки в сетке не прыгают из‑за длины текста. */
+  grid-template-rows: minmax(calc(2 * 1.25em), auto) auto;
   gap: 0.25rem;
+  align-content: end;
 }
 
 .input {
@@ -145,6 +147,47 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
   gap: var(--esim-spacing-sm);
+  align-items: end;
+}
+
+.formActions {
+  display: flex;
+  gap: var(--esim-spacing-sm);
+  flex-wrap: wrap;
+  align-items: end;
+}
+
+.helpProse {
+  line-height: 1.5;
+}
+
+.helpProse h2 {
+  margin: var(--esim-spacing-md) 0 var(--esim-spacing-xs);
+  font-size: var(--esim-typography-font-size-lg);
+  font-weight: var(--esim-typography-font-weight-bold);
+}
+
+.helpProse h2:first-child {
+  margin-top: 0;
+}
+
+.helpProse p,
+.helpProse ul {
+  margin: 0;
+}
+
+.helpProse ul {
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-xs);
+}
+
+.seedHint {
+  margin: 0;
+  font-size: var(--esim-typography-font-size-sm);
+  color: var(--esim-colors-text-secondary);
+  line-height: 1.45;
 }
 
 .jsonBlock {

@@ -17,7 +17,11 @@ export type ApiErrorCode =
    * входивший в реестр docs/06 §6.5 на момент его написания. `TASK_NOT_FOUND` симметричен
    * `DEVICE_NOT_FOUND` выше (тот же 404, другая сущность).
    */
-  | 'TASK_NOT_FOUND';
+  | 'TASK_NOT_FOUND'
+  /** Повторный `POST /admin/eval/runs`, пока уже идёт прогон (409). */
+  | 'EVAL_RUN_IN_PROGRESS'
+  /** Неизвестный идентификатор прогона стенда оценки (404). */
+  | 'EVAL_RUN_NOT_FOUND';
 
 export interface ApiErrorDetail {
   readonly field?: string;

@@ -26,8 +26,9 @@ function isExemptPath(path: string): boolean {
 
 /**
  * Ограничение частоты запросов по IP и по ключу API (docs/06-api-contract.md §6.1: «при
- * превышении — `429` с `Retry-After`»; docs/07-integration.md §7.8: `RATE_LIMIT_RPM`, объявлена
- * с этапа 5, но не была подключена ни к одному эндпоинту — задача этого этапа).
+ * превышении — `429` с `Retry-After`»; docs/07-integration.md §7.8: `RATE_LIMIT_RPM`).
+ * Запрос с валидным `X-Admin-Token` (совпал с непустым `ADMIN_TOKEN`) не учитывается в квоте
+ * (ADR-049) — иначе стенд оценки из `/admin` упирался бы в собственный лимит.
  *
  * Реализован как глобальный `CanActivate` (`APP_GUARD` в `app.module.ts`), а не как «сырой»
  * Express-`middleware`: гварды — часть конвейера Nest, поэтому брошенный `ApiError` перехватывается
@@ -49,6 +50,18 @@ export class RateLimitGuard implements CanActivate {
   public canActivate(context: ExecutionContext): boolean {
     const request = context.switchToHttp().getRequest<Request>();
     if (isExemptPath(request.path)) {
+      return true;
+    }
+
+    // Стенд оценки и админ-клиент с валидным токеном не должны упираться в RATE_LIMIT_RPM
+    // (план «Админка и главная» §1.3): публичные /detect и /search без токена — с лимитом.
+    const adminToken = this.configService.get('ADMIN_TOKEN', { infer: true });
+    const providedAdminToken = request.headers['x-admin-token'];
+    if (
+      adminToken.length > 0 &&
+      typeof providedAdminToken === 'string' &&
+      providedAdminToken === adminToken
+    ) {
       return true;
     }
 

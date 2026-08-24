@@ -14,23 +14,36 @@ export interface FakeFetchResponse {
   readonly ok: boolean;
   readonly status: number;
   json(): Promise<unknown>;
+  text(): Promise<string>;
 }
 
 export function buildFakeResponse({
   status = 200,
   body,
 }: FakeFetchResponseInit): FakeFetchResponse {
+  const jsonBody = body;
   return {
     ok: status >= 200 && status < 300,
     status,
-    json: () => Promise.resolve(body),
+    json: () => Promise.resolve(jsonBody),
+    text: () => Promise.resolve(typeof jsonBody === 'string' ? jsonBody : JSON.stringify(jsonBody)),
   };
 }
 
-export type FakeFetch = (input: string, body: string | undefined) => Promise<FakeFetchResponse>;
+export interface FakeFetchInit {
+  readonly method?: string;
+  readonly body?: string;
+}
+
+export type FakeFetch = (
+  input: string,
+  body: string | undefined,
+  init?: FakeFetchInit,
+) => Promise<FakeFetchResponse | Response>;
 
 interface FetchInitLike {
   readonly body?: unknown;
+  readonly method?: unknown;
 }
 
 function isFetchInitLike(value: unknown): value is FetchInitLike {
@@ -41,7 +54,9 @@ export function installFetchMock(handler: FakeFetch): void {
   Object.defineProperty(globalThis, 'fetch', {
     value: (input: unknown, init: unknown) => {
       const body = isFetchInitLike(init) && typeof init.body === 'string' ? init.body : undefined;
-      return handler(String(input), body);
+      const method =
+        isFetchInitLike(init) && typeof init.method === 'string' ? init.method : undefined;
+      return handler(String(input), body, method !== undefined ? { method, body } : { body });
     },
     writable: true,
     configurable: true,

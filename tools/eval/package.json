@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "description": "Стенд оценки качества автоопределения и обработки ввода на эталонных выборках (docs/08-testing-and-quality.md, раздел 8.6)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "jest",
     "eval": "ts-node -T src/run-eval.ts",

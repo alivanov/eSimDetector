@@ -17,6 +17,7 @@ const config: Config = {
     '^@esim-detector/fuzzy-matcher$': '<rootDir>/../../packages/fuzzy-matcher/src/index.ts',
     '^@esim-detector/text-normalizer$': '<rootDir>/../../packages/text-normalizer/src/index.ts',
     '^@esim-detector/esim-rules$': '<rootDir>/../../packages/esim-rules/src/index.ts',
+    '^@esim-detector/tools-eval$': '<rootDir>/../../tools/eval/src/index.ts',
   },
   // isolatedModules задан в tsconfig.json пакета (наследуется из tsconfig.base.json),
   // а не здесь: с ts-jest v30 опция в transform устарела.

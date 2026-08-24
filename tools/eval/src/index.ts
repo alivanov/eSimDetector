@@ -20,3 +20,13 @@ export type {
   SignalsGoldenParseResult,
 } from './signals-golden';
 export { SIGNALS_GOLDEN_CATEGORIES, parseSignalsGolden } from './signals-golden';
+
+export type { EvalProgress, EvalSuiteOptions } from './lib/eval-options';
+export { resolveEvalCliOptions, resolveEvalOptions } from './lib/eval-options';
+export { EVAL_REQUEST_INTERVAL_MS } from './lib/pace';
+export type { DetectionEvalResult } from './run-detection-eval';
+export { runDetectionEval } from './run-detection-eval';
+export type { MatchingEvalResult } from './run-matching-eval';
+export { runMatchingEval } from './run-matching-eval';
+export type { EvalSuiteResult } from './run-eval-suite';
+export { runEvalSuite } from './run-eval-suite';

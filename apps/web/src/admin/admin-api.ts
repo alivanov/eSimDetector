@@ -390,3 +390,130 @@ export function getStats(token: string): Promise<AdminApiOutcome<CatalogStats>> 
 export function reloadCatalog(token: string): Promise<AdminApiOutcome<ReloadResult>> {
   return request(token, '/api/v1/admin/catalog/reload', parseReloadResult, { method: 'POST' });
 }
+
+export type EvalRunStatus = 'running' | 'completed' | 'failed';
+export type EvalRunPhase = 'detection' | 'matching';
+
+export interface EvalRunSummary {
+  readonly detectionFalsePositives: number;
+  readonly matchingFalsePositives: number;
+  readonly detectionTotal: number;
+  readonly matchingTotal: number;
+  readonly falsePositives: number;
+}
+
+export interface EvalRun {
+  readonly id: string;
+  readonly status: EvalRunStatus;
+  readonly progress: {
+    readonly completed: number;
+    readonly total: number;
+    readonly phase: EvalRunPhase | null;
+  };
+  readonly summary: EvalRunSummary | null;
+  readonly errorMessage: string | null;
+  readonly startedAt: string;
+  readonly finishedAt: string | null;
+  readonly createdAt: string;
+  readonly hasReport: boolean;
+}
+
+function parseEvalRun(body: unknown): EvalRun | undefined {
+  if (!isRecord(body) || typeof body['id'] !== 'string' || typeof body['status'] !== 'string') {
+    return undefined;
+  }
+  const status = body['status'];
+  if (status !== 'running' && status !== 'completed' && status !== 'failed') {
+    return undefined;
+  }
+  const progressRaw = body['progress'];
+  if (!isRecord(progressRaw)) {
+    return undefined;
+  }
+  const phaseRaw = progressRaw['phase'];
+  const phase = phaseRaw === 'detection' || phaseRaw === 'matching' ? phaseRaw : null;
+  let summary: EvalRunSummary | null = null;
+  const summaryRaw = body['summary'];
+  if (isRecord(summaryRaw)) {
+    summary = {
+      detectionFalsePositives: readNumber(summaryRaw['detectionFalsePositives']),
+      matchingFalsePositives: readNumber(summaryRaw['matchingFalsePositives']),
+      detectionTotal: readNumber(summaryRaw['detectionTotal']),
+      matchingTotal: readNumber(summaryRaw['matchingTotal']),
+      falsePositives: readNumber(summaryRaw['falsePositives']),
+    };
+  }
+  return {
+    id: body['id'],
+    status,
+    progress: {
+      completed: readNumber(progressRaw['completed']),
+      total: readNumber(progressRaw['total']),
+      phase,
+    },
+    summary,
+    errorMessage: typeof body['errorMessage'] === 'string' ? body['errorMessage'] : null,
+    startedAt: typeof body['startedAt'] === 'string' ? body['startedAt'] : '',
+    finishedAt: typeof body['finishedAt'] === 'string' ? body['finishedAt'] : null,
+    createdAt: typeof body['createdAt'] === 'string' ? body['createdAt'] : '',
+    hasReport: body['hasReport'] === true,
+  };
+}
+
+function parseEvalRunList(body: unknown): { readonly items: readonly EvalRun[] } | undefined {
+  if (!isRecord(body) || !Array.isArray(body['items'])) {
+    return undefined;
+  }
+  const items: EvalRun[] = [];
+  for (const item of body['items']) {
+    const parsed = parseEvalRun(item);
+    if (parsed === undefined) {
+      return undefined;
+    }
+    items.push(parsed);
+  }
+  return { items };
+}
+
+export function listEvalRuns(
+  token: string,
+): Promise<AdminApiOutcome<{ readonly items: readonly EvalRun[] }>> {
+  return request(token, '/api/v1/admin/eval/runs', parseEvalRunList);
+}
+
+export function getEvalRun(token: string, id: string): Promise<AdminApiOutcome<EvalRun>> {
+  return request(token, `/api/v1/admin/eval/runs/${id}`, parseEvalRun);
+}
+
+export function startEvalRun(token: string): Promise<AdminApiOutcome<EvalRun>> {
+  return request(token, '/api/v1/admin/eval/runs', parseEvalRun, { method: 'POST' });
+}
+
+export async function downloadEvalReport(
+  token: string,
+  id: string,
+): Promise<AdminApiOutcome<string>> {
+  let response: Response;
+  try {
+    response = await fetch(`${API_BASE}/api/v1/admin/eval/runs/${id}/report`, {
+      headers: { [ADMIN_TOKEN_HEADER]: token },
+    });
+  } catch {
+    return { kind: 'network-error' };
+  }
+  if (!response.ok) {
+    let body: unknown;
+    try {
+      body = await response.json();
+    } catch {
+      body = undefined;
+    }
+    const errorBody = parseApiErrorBody(body);
+    if (errorBody === undefined) {
+      return { kind: 'network-error' };
+    }
+    return { kind: 'error', error: errorBody };
+  }
+  const markdown = await response.text();
+  return { kind: 'success', data: markdown };
+}

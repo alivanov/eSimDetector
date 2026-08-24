@@ -74,6 +74,9 @@ importers:
       '@esim-detector/text-normalizer':
         specifier: workspace:*
         version: link:../../packages/text-normalizer
+      '@esim-detector/tools-eval':
+        specifier: workspace:*
+        version: link:../../tools/eval
       '@nestjs/common':
         specifier: 11.2.1
         version: 11.2.1(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)

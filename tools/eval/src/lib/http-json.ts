@@ -10,14 +10,24 @@ export function resolveApiBaseUrl(): string {
   return process.env['EVAL_API_BASE_URL'] ?? 'http://localhost:3000';
 }
 
+export interface EvalHttpRequestOptions {
+  readonly baseUrl: string;
+  readonly headers?: Readonly<Record<string, string>>;
+}
+
 export async function postJson(
   path: string,
   requestBody: unknown,
-  headers?: Record<string, string>,
+  options: EvalHttpRequestOptions,
+  extraHeaders?: Readonly<Record<string, string>>,
 ): Promise<unknown> {
-  const response = await fetch(`${resolveApiBaseUrl()}${path}`, {
+  const response = await fetch(`${options.baseUrl}${path}`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', ...(headers ?? {}) },
+    headers: {
+      'Content-Type': 'application/json',
+      ...(options.headers ?? {}),
+      ...(extraHeaders ?? {}),
+    },
     body: JSON.stringify(requestBody),
   });
   if (!response.ok) {
@@ -27,8 +37,10 @@ export async function postJson(
   return responseBody;
 }
 
-export async function getJson(path: string): Promise<unknown> {
-  const response = await fetch(`${resolveApiBaseUrl()}${path}`);
+export async function getJson(path: string, options: EvalHttpRequestOptions): Promise<unknown> {
+  const response = await fetch(`${options.baseUrl}${path}`, {
+    headers: { ...(options.headers ?? {}) },
+  });
   if (!response.ok) {
     throw new Error(`GET ${path} → HTTP ${response.status}`);
   }

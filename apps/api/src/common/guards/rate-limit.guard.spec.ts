@@ -24,14 +24,25 @@ function buildContext(
   return { context, setHeader };
 }
 
-function buildConfigService(rateLimitRpm: number): ConfigService<EnvConfig, true> {
-  return { get: () => rateLimitRpm } as unknown as ConfigService<EnvConfig, true>;
+function buildConfigService(rateLimitRpm: number, adminToken = ''): ConfigService<EnvConfig, true> {
+  return {
+    get: (key: keyof EnvConfig) => {
+      if (key === 'RATE_LIMIT_RPM') {
+        return rateLimitRpm;
+      }
+      if (key === 'ADMIN_TOKEN') {
+        return adminToken;
+      }
+      return undefined;
+    },
+  } as unknown as ConfigService<EnvConfig, true>;
 }
 
 /**
  * `RateLimitGuard` (docs/06-api-contract.md §6.1, docs/07-integration.md §7.8: `RATE_LIMIT_RPM`,
  * объявлена конфигурацией с этапа 5, но не была подключена ни к одному эндпоинту) — окно
  * фиксировано на 60 секунд, счётчики — в памяти процесса, по ключу `X-Api-Key` либо IP.
+ * Валидный `X-Admin-Token` обходит лимит (план «Админка и главная» §1.3).
  */
 describe('RateLimitGuard', () => {
   it('пропускает запросы, пока их число не превышает лимит за минуту', () => {
@@ -81,5 +92,30 @@ describe('RateLimitGuard', () => {
     for (let i = 0; i < 10; i += 1) {
       expect(guard.canActivate(context)).toBe(true);
     }
+  });
+
+  it('пропускает запрос с валидным X-Admin-Token без учёта RATE_LIMIT_RPM', () => {
+    const guard = new RateLimitGuard(buildConfigService(1, 'secret-admin'));
+    const { context } = buildContext('/api/v1/detect', { 'x-admin-token': 'secret-admin' });
+
+    for (let i = 0; i < 20; i += 1) {
+      expect(guard.canActivate(context)).toBe(true);
+    }
+  });
+
+  it('неверный X-Admin-Token не обходит лимит', () => {
+    const guard = new RateLimitGuard(buildConfigService(1, 'secret-admin'));
+    const { context } = buildContext('/api/v1/detect', { 'x-admin-token': 'wrong' });
+
+    expect(guard.canActivate(context)).toBe(true);
+    expect(() => guard.canActivate(context)).toThrow('Превышена частота запросов');
+  });
+
+  it('пустой ADMIN_TOKEN на сервере не даёт обхода даже при совпадающем заголовке', () => {
+    const guard = new RateLimitGuard(buildConfigService(1, ''));
+    const { context } = buildContext('/api/v1/detect', { 'x-admin-token': '' });
+
+    expect(guard.canActivate(context)).toBe(true);
+    expect(() => guard.canActivate(context)).toThrow('Превышена частота запросов');
   });
 });

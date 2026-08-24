@@ -1,3 +1,4 @@
+import { resolveEvalCliOptions } from './lib/eval-options';
 import { runDetectionEval } from './run-detection-eval';
 import { runMatchingEval } from './run-matching-eval';
 
@@ -7,11 +8,12 @@ import { runMatchingEval } from './run-matching-eval';
  * `reports/eval-matching-*.md`); здесь — только объединённый код возврата для CI/консоли.
  */
 async function main(): Promise<void> {
+  const options = resolveEvalCliOptions();
   console.log('=== Стенд оценки качества: автоопределение (К1) ===');
-  const detection = await runDetectionEval();
+  const detection = await runDetectionEval(options);
 
   console.log('\n=== Стенд оценки качества: обработка ввода (К2) ===');
-  const matching = await runMatchingEval();
+  const matching = await runMatchingEval(options);
 
   const totalFalsePositives = detection.falsePositives + matching.falsePositives;
   if (totalFalsePositives > 0) {
