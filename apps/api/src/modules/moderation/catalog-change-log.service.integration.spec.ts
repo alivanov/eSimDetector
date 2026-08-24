@@ -14,7 +14,7 @@ import {
  * `CatalogChangeLogService` (docs/15-moderation.md §15.6) — журнал изменений только для чтения.
  * Отдельный тест на изолированной базе (ADR-017): до этого файла сервис проверялся только
  * косвенно через `CatalogWriteService`/контроллер, поэтому фильтр по `deviceId` в `list()` не
- * был покрыт обеими ветками (docs/09-decisions.md ADR-047 п.10 — доведение покрытия `moderation`
+ * был покрыт обеими ветками (docs/09-decisions.md ADR-047 п.9 — доведение покрытия `moderation`
  * до документированного значения docs/08 §8.2).
  */
 describe('CatalogChangeLogService (интеграция, withTestDatabase)', () => {
