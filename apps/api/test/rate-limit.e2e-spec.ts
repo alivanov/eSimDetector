@@ -8,20 +8,24 @@ type SupertestApp = Parameters<typeof request>[0];
 /**
  * Ограничение частоты (docs/06-api-contract.md §6.1, docs/07-integration.md §7.8:
  * `RATE_LIMIT_RPM`) — сквозная проверка через реальный HTTP-конвейер, а не только модульный тест
- * гварда (`common/guards/rate-limit.guard.spec.ts`). `RATE_LIMIT_RPM` выставлен в переменную
- * окружения ДО динамического импорта `AppModule` — тот же порядок, что и у `MONGODB_URI`
- * (docs/08-testing-and-quality.md §8.3): `ConfigModule.forRoot()` читает `process.env` синхронно
- * в момент первой загрузки модуля.
+ * гварда (`common/guards/rate-limit.guard.spec.ts`). `RATE_LIMIT_RPM` и `ADMIN_TOKEN` выставлены
+ * в переменные окружения ДО динамического импорта `AppModule` — тот же порядок, что и у
+ * `MONGODB_URI` (docs/08-testing-and-quality.md §8.3): `ConfigModule.forRoot()` читает
+ * `process.env` синхронно в момент первой загрузки модуля.
+ *
+ * Обход по валидному `X-Admin-Token` — ADR-049 / docs/08 §8.6.
  */
 describe('Rate limit (e2e)', () => {
   let app: INestApplication;
   let db: TestDatabaseHandle;
   let httpServer: SupertestApp;
+  const adminToken = 'e2e-admin-rate-limit-token';
 
   beforeAll(async () => {
     db = await withTestDatabase('api-rate-limit-e2e');
     process.env['MONGODB_URI'] = db.uri;
     process.env['RATE_LIMIT_RPM'] = '3';
+    process.env['ADMIN_TOKEN'] = adminToken;
 
     const { AppModule } = await import('../src/app.module');
     const { configureApp } = await import('../src/configure-app');
@@ -36,9 +40,20 @@ describe('Rate limit (e2e)', () => {
     await app.close();
     await db.close();
     delete process.env['RATE_LIMIT_RPM'];
+    delete process.env['ADMIN_TOKEN'];
   });
 
-  it('первые RATE_LIMIT_RPM запросов проходят, следующий отвечает 429 RATE_LIMITED с Retry-After', async () => {
+  it('валидный X-Admin-Token не расходует квоту RATE_LIMIT_RPM', async () => {
+    for (let i = 0; i < 8; i += 1) {
+      const ok = await request(httpServer)
+        .post('/api/v1/detect')
+        .set('X-Admin-Token', adminToken)
+        .send({});
+      expect(ok.status).toBe(200);
+    }
+  });
+
+  it('первые RATE_LIMIT_RPM запросов без токена проходят, следующий отвечает 429 RATE_LIMITED с Retry-After', async () => {
     for (let i = 0; i < 3; i += 1) {
       const ok = await request(httpServer).post('/api/v1/detect').send({});
       expect(ok.status).toBe(200);
@@ -55,5 +70,13 @@ describe('Rate limit (e2e)', () => {
     const response = await request(httpServer).get('/health/ready');
 
     expect(response.status).toBe(200);
+  });
+
+  it('после исчерпания квоты запрос с валидным X-Admin-Token всё ещё проходит', async () => {
+    const ok = await request(httpServer)
+      .post('/api/v1/detect')
+      .set('X-Admin-Token', adminToken)
+      .send({});
+    expect(ok.status).toBe(200);
   });
 });

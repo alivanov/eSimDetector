@@ -298,6 +298,8 @@ pnpm eval:matching     # только обработка ввода
 
 **Запуск из `/admin` и обход `RATE_LIMIT`.** Тот же конвейер (`tools/eval`, параметризованный `intervalMs`/заголовками/приёмником отчёта) вызывается из API на `127.0.0.1:${PORT}` с `X-Admin-Token` (ADR-049). При непустом совпавшем `ADMIN_TOKEN` `RateLimitGuard` не считает запрос в квоту — иначе ~483 запроса стенда упёрлись бы в `RATE_LIMIT_RPM`. CLI `pnpm eval` при заданном `ADMIN_TOKEN` тоже шлёт токен и может идти без паузы 700 мс; без токена поведение прежнее (пауза). Отчёты прогонов из админки хранятся в MongoDB (`eval_runs`), не на диске контейнера.
 
+Покрытие (план «Админка и главная», to-do docs-tests): модульный `RateLimitGuard` + валидный/неверный/пустой `X-Admin-Token` (`apps/api/src/common/guards/rate-limit.guard.spec.ts`); сквозной e2e обхода лимита (`apps/api/test/rate-limit.e2e-spec.ts`); `EvalRunService` через `withTestDatabase()` (`eval-run.service.integration.spec.ts`); UI `/admin` — справка, колонка «Когда», подтверждение reload/запуска стенда (`apps/web/src/admin/AdminPage.spec.tsx`); виджет без `continue` без обработчика и без дубля ссылки ручного ввода (`EsimChecker.spec.tsx`); аккордеон на демо (`App.spec.tsx`); e2e демо не ждёт «Подключить eSIM» без `onPrimaryAction` (`apps/e2e/test/support/scenarios.ts`).
+
 | Метрика                     | Смысл                                          | Целевое значение                  |
 | --------------------------- | ---------------------------------------------- | --------------------------------- |
 | Доля верных определений     | Ответ совпал с ожидаемым                       | ≥ 0,95                            |

@@ -959,6 +959,6 @@
 
 **Альтернативы.** Писать отчёты на диск контейнера — отвергнуто (Render). Отключать `RATE_LIMIT` глобально на время прогона — отвергнуто (окно для злоупотреблений публичным API). Вызывать detection/matching in-process — отвергнуто (стенд обязан измерять реальный HTTP-контур, docs/08 §8.6).
 
-**Последствия.** Вкладка «Стенд оценки» в `/admin`; коды `EVAL_RUN_IN_PROGRESS` / `EVAL_RUN_NOT_FOUND` в реестре docs/06 §6.5; `tools/eval` экспортирует `runEvalSuite` для API и CLI.
+**Последствия.** Вкладка «Стенд оценки» в `/admin`; коды `EVAL_RUN_IN_PROGRESS` / `EVAL_RUN_NOT_FOUND` в реестре docs/06 §6.5; `tools/eval` экспортирует `runEvalSuite` для API и CLI. Обход лимита отражён в docs/06 §6.1, docs/07 §7.8 (`RATE_LIMIT_RPM`), docs/08 §8.6; эндпоинты — docs/15 §15.8. Виджет скрывает `continue` без обработчика — docs/07 §7.2/§7.3 (демо `/` без `onPrimaryAction`).
 
 ---

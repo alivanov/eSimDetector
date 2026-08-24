@@ -65,6 +65,8 @@ document.querySelector('#esim-checker').addEventListener('esim:result', (e) => {
 
 `Platform`/`DeviceType`/`ResultStatus`/`ClarificationKind` — те же перечисляемые значения границы API, что в docs/06-api-contract.md §6.1/§6.2 (клиент виджета объявляет их копией у себя, `apps/widget/src/api/enums.ts`, `.../api/clarification.ts` — ADR-037/ADR-039). `code` события `esim:error` — `'NETWORK'` (сеть недоступна/CORS), `'PARSE_ERROR'` (ответ не разобран) либо код ошибки из реестра §6.5 (`CATALOG_UNAVAILABLE`, `RATE_LIMITED` и т. д.).
 
+**Действие `kind: 'continue'` («Подключить eSIM») и обработчик.** API по-прежнему отдаёт `presentation.primaryAction` с `kind: 'continue'` в теле ответа (docs/06 §6.2) — тексты контракта для интегратора не меняются. Виджет и React-компонент **не рисуют** эту кнопку, пока интегратор не передал обработчик: у Web Component он есть всегда (публикуется `esim:action`), у `EsimChecker` — проп `onPrimaryAction`. Демонстрационная страница `/` обработчик намеренно не передаёт: сценария подключения eSIM на стенде нет, мёртвая кнопка не показывается. Ссылка «Указать устройство вручную» внизу виджета скрывается, если на экране уже есть переход к ручному вводу (`clarification.kind === 'manual_input'` или действие `manual_search`).
+
 ## 7.3. Уровень 2: компонент React
 
 ```tsx
@@ -74,8 +76,13 @@ import { EsimChecker } from '@sbermobile/esim-detector-react';
   apiBase="https://esim-detector.example.ru/api/v1"
   channel="lk-web"
   onResult={(r) => analytics.track('esim_check', r)}
+  onPrimaryAction={(action) => {
+    // переход в сценарий подключения eSIM заказчика
+  }}
 />;
 ```
+
+Без `onPrimaryAction` кнопка «Подключить eSIM» не отображается (§7.2 выше) — это ожидаемое поведение, а не дефект ответа API.
 
 ## 7.4. Уровень 3: прямое использование API
 
@@ -147,10 +154,10 @@ API через тот же origin, что и сама страница, поэт
 значения `CORS_ORIGINS` (адрес API — переменная окружения `API_UPSTREAM`, по умолчанию `api:3000`,
 без файла `.env`, ADR-027). Та же сборка копирует `widget/v1/esim-widget.js` и статическую
 страницу-пример (`apps/widget/example/index.html`, этап 6.3) в образ `web`, поэтому оба адреса
-выше открываются без отдельного сервиса. Маршрутизация двух страниц демонстрационного приложения
-(`/` и `/debug`) — по `location.pathname` в самом React-коде (`apps/web/src/main.tsx`), без
-библиотеки-роутера: приложение состоит ровно из двух страниц, третьей не предвидится. nginx (и
-`vite dev` при локальной разработке) отдают `index.html` на любой путь без физического файла.
+выше открываются без отдельного сервиса. Маршрутизация страниц демонстрационного приложения
+(`/`, `/debug`, `/admin`) — по `location.pathname` в самом React-коде (`apps/web/src/main.tsx`), без
+библиотеки-роутера. nginx (и `vite dev` при локальной разработке) отдают `index.html` на любой путь
+без физического файла.
 
 Отдельно предусмотрен режим отладки на стенде: страница `http://localhost:8080/debug` (docs/03
 §3.10, ADR-010) позволяет подать произвольный набор сигналов (в текстовом поле в формате поля
