@@ -259,6 +259,8 @@ pnpm seed rebuild-signatures
 
 Render сам пересобирает сервис при `git push` в ветку `main`, если при создании сервиса не выключали _Auto-Deploy_ (по умолчанию включено). Отдельная «кнопка выкладки» после каждого коммита не нужна.
 
+Вход в панель Render через GitHub (OAuth) **не** включает автодеплой. Нужно отдельно установить GitHub App: [github.com/apps/render](https://github.com/apps/render) → _Install_ → доступ к репозиторию `eSimDetector`. Пока в GitHub → Settings → Applications → _Installed GitHub Apps_ нет карточки Render, пуш до Render не доходит; тогда **Manual Deploy → Deploy latest commit**.
+
 ### Изменился только код (API, веб, виджет)
 
 1. Проверьте локально: `pnpm test`, при правках интерфейса — `docker compose up -d` и сценарий руками.
@@ -321,6 +323,7 @@ pnpm seed rebuild-signatures
 | Первый заход с телефона крутится минуту и обрывается                                   | API спал; откройте `/health/live` API и повторите. Если падает стабильно — смотрите логи API (OOM → Starter)                                                                                                                        |
 | `/admin` сразу «раздел закрыт»                                                         | `ADMIN_TOKEN` пустой или не тот, что вводите в форму                                                                                                                                                                                |
 | Render пишет, что кончились Free instance hours                                        | До 1-го числа сервисы на Free стоят. Демо в этом месяце — поднимите API на Starter или подождите сброса квоты                                                                                                                       |
+| Пуш в `main` есть, в Events Render деплоя нет                                          | Не установлен GitHub App Render (OAuth-входа недостаточно). Установка — §16.6; запасной путь — Manual Deploy                                                                                                                        |
 
 Логи: страница сервиса → _Logs_. Это обычный текст запуска контейнера, тот же, что `docker compose logs`.
 
