@@ -3,6 +3,7 @@ import goldenQueriesJson from '../../../data/fixtures/queries.golden.json';
 import { getJson } from './lib/http-json';
 import { EVAL_REQUEST_INTERVAL_MS, sleep } from './lib/pace';
 import { parseSearchResponse } from './lib/parse-api-responses';
+import { resolveActualOutcome } from './lib/resolve-actual-outcome';
 import {
   printSummaryToConsole,
   renderReport,
@@ -115,20 +116,6 @@ interface EvalRow {
   readonly error?: string;
 }
 
-function resolveActualOutcome(parsed: {
-  readonly status: string;
-  readonly deviceId: string | null;
-  readonly matchCount: number;
-}): ExpectedOutcome {
-  if (parsed.deviceId !== null) {
-    return 'match';
-  }
-  if (parsed.status === 'clarification_required' && parsed.matchCount > 0) {
-    return 'clarification';
-  }
-  return 'not_found';
-}
-
 /**
  * Пустой запрос (категория `foreign-input`, docs/08 §8.4: «пустая строка») никогда не достигает
  * матчера: граница API отклоняет его на уровне DTO (`q` обязателен, 1–100 символов,
@@ -150,14 +137,23 @@ async function evaluateEntry(entry: GoldenQueryEntry): Promise<EvalRow> {
     const actualOutcome = resolveActualOutcome(parsed);
 
     const outcomeMatches = actualOutcome === entry.expectedOutcome;
+    // Группа эквивалентности (ADR-002): status supported/not_supported при device: null —
+    // честный ответ без точной модели. Если golden ждал match с конкретным id, совпадение
+    // статуса группы засчитывается: сервис не назвал чужое устройство.
+    const groupStatusWithoutDevice =
+      parsed.deviceId === null &&
+      (parsed.status === 'supported' || parsed.status === 'not_supported');
     const deviceMatches =
-      entry.expectedDeviceId === null || parsed.deviceId === entry.expectedDeviceId;
+      entry.expectedDeviceId === null ||
+      parsed.deviceId === entry.expectedDeviceId ||
+      (groupStatusWithoutDevice && entry.expectedOutcome === 'match');
     const correct = outcomeMatches && deviceMatches;
 
     const automatic = actualOutcome === 'match';
-    // Ложное определение К2 — сервис уверенно назвал устройство (match), но не то, что ожидалось,
-    // либо назвал устройство там, где ожидался отказ/уточнение (AGENTS.md, правило 1).
-    const falsePositive = actualOutcome === 'match' && !correct;
+    // Ложное определение К2 — сервис уверенно НАЗВАЛ устройство (непустой deviceId), но не то,
+    // что ожидалось, либо назвал устройство там, где ожидался отказ/уточнение (AGENTS.md,
+    // правило 1). Ответ группы без device — не ложное имя модели.
+    const falsePositive = actualOutcome === 'match' && parsed.deviceId !== null && !correct;
     const correctClarification =
       entry.expectedOutcome === 'clarification' && actualOutcome === 'clarification';
     const excessClarification =

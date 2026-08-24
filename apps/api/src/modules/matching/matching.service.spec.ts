@@ -175,12 +175,74 @@ describe('MatchingService.search', () => {
     expect(result.clarification?.options?.some((option) => option.id === '__other__')).toBe(true);
   });
 
-  it('запрос без модификатора при ОДИНАКОВОМ статусе кандидатов → determined через эквивалентность (docs/04 §4.7)', () => {
+  it('запрос без модификатора при ОДИНАКОВОМ статусе кандидатов → статус группы без device (ADR-002)', () => {
     const service = buildService([redmi13, redmi13Pro]);
     const result = service.search('xiaomi redmi 13');
 
     expect(result.status).toBe('supported');
-    expect(result.device).not.toBeNull();
+    expect(result.device).toBeNull();
+    expect(result.matches).toEqual([]);
+    expect(result.presentation.secondaryAction?.kind).toBe('clarify');
+    expect(
+      result.reasons.some((reason) => reason.code === 'DECISION_RESOLVED_BY_EQUIVALENCE'),
+    ).toBe(true);
+    expect(result.reasons.some((reason) => reason.code === 'CANDIDATES_AGREE_ON_ESIM')).toBe(true);
+  });
+
+  it('группа iPhone Pro (эквивалентность) → device null, без лидера как точной модели', () => {
+    const iphone15Pro = buildSampleDevice({
+      _id: 'apple-iphone-15-pro',
+      brand: 'apple',
+      brandTitle: 'Apple',
+      marketingName: 'iPhone 15 Pro',
+      displayName: 'Apple iPhone 15 Pro',
+      family: 'iphone',
+      generation: 15,
+      modifiers: ['pro'],
+      modelCodes: ['A2848'],
+      aliases: ['iphone 15 pro'],
+      esim: {
+        support: 'conditional',
+        dualSim: 'physical+esim',
+        maxProfiles: 8,
+        conditions: [
+          { scope: 'region', value: 'CN', support: 'not_supported', note: 'две nano-SIM' },
+        ],
+        clarifyingQuestion: {
+          kind: 'region',
+          question: 'Лоток для SIM-карты вмещает одну nano-SIM или две?',
+          options: [
+            { value: 'OTHER', label: 'Одну' },
+            { value: 'CN', label: 'Две' },
+          ],
+        },
+        notes: '',
+      },
+    });
+    const iphone16Pro = buildSampleDevice({
+      _id: 'apple-iphone-16-pro',
+      brand: 'apple',
+      brandTitle: 'Apple',
+      marketingName: 'iPhone 16 Pro',
+      displayName: 'Apple iPhone 16 Pro',
+      family: 'iphone',
+      generation: 16,
+      modifiers: ['pro'],
+      modelCodes: ['A3293'],
+      aliases: ['iphone 16 pro'],
+      esim: iphone15Pro.esim,
+    });
+    const service = buildService([iphone15Pro, iphone16Pro]);
+    const result = service.search('iphone pro');
+
+    expect(result.status).toBe('clarification_required');
+    expect(result.device).toBeNull();
+    expect(result.clarification?.kind).toBe('choose_candidate');
+    expect(result.matches.map((match) => match.id).sort()).toEqual([
+      'apple-iphone-15-pro',
+      'apple-iphone-16-pro',
+    ]);
+    expect(result.presentation.primaryAction?.kind).toBe('clarify');
     expect(
       result.reasons.some((reason) => reason.code === 'DECISION_RESOLVED_BY_EQUIVALENCE'),
     ).toBe(true);

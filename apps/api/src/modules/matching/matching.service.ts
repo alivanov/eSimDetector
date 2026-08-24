@@ -6,7 +6,10 @@ import type {
   EsimResolutionContext,
   ResultStatus,
 } from '@esim-detector/contracts';
-import { resolveDeviceEsimStatus } from '@esim-detector/esim-rules';
+import {
+  resolveCandidateGroupEsimStatus,
+  resolveDeviceEsimStatus,
+} from '@esim-detector/esim-rules';
 import type {
   DecisionThresholds,
   MatchDecision,
@@ -196,9 +199,41 @@ export class MatchingService {
     matchReasons: readonly ApiReason[],
     esimContext: EsimResolutionContext,
   ): SearchResult {
-    const leader = candidates[0];
-    const leaderDevice = leader === undefined ? undefined : devices.get(leader.device.id);
+    const live: { readonly candidate: ScoredCandidate; readonly device: Device }[] = [];
+    for (const candidate of candidates) {
+      const device = devices.get(candidate.device.id);
+      if (device !== undefined) {
+        live.push({ candidate, device });
+      }
+    }
 
+    if (live.length === 0) {
+      return {
+        query,
+        status: 'clarification_required',
+        confidence: 0,
+        device: null,
+        matches: [],
+        reasons: matchReasons,
+        clarification: {
+          kind: 'manual_input',
+          question: 'Не удалось найти устройство по названию. Выберите модель из каталога вручную.',
+        },
+        presentation: buildPresentation({
+          status: 'clarification_required',
+          exactModelKnown: false,
+        }),
+      };
+    }
+
+    // Группа эквивалентности (ADR-002, docs/04 §4.7): статус eSIM общий, точная модель —
+    // нет. Не выбираем лидера как device с exactModelKnown:true (иначе «iphone pro» → 17 Pro).
+    if (live.length > 1) {
+      return this.buildGroupDeterminedResult(query, live, policy, matchReasons, esimContext);
+    }
+
+    const leader = live[0]?.candidate;
+    const leaderDevice = live[0]?.device;
     if (leader === undefined || leaderDevice === undefined) {
       return {
         query,
@@ -263,6 +298,55 @@ export class MatchingService {
           : {}),
       }),
     };
+  }
+
+  /**
+   * Ответ при `decision.status === 'determined'` и нескольких живых кандидатах
+   * (`DECISION_RESOLVED_BY_EQUIVALENCE`): статус группы — только при согласии всех записей;
+   * `device` всегда `null`, `exactModelKnown: false` (как группа iOS, ADR-002).
+   */
+  private buildGroupDeterminedResult(
+    query: { readonly raw: string; readonly normalized: string },
+    live: readonly { readonly candidate: ScoredCandidate; readonly device: Device }[],
+    policy: CatalogAnswerPolicy,
+    matchReasons: readonly ApiReason[],
+    esimContext: EsimResolutionContext,
+  ): SearchResult {
+    const groupResolution = resolveCandidateGroupEsimStatus(
+      live.map(({ device }) => ({
+        esim: device.esim,
+        dataConfidence: device.dataConfidence,
+      })),
+      esimContext,
+      policy,
+    );
+    const reasons: ApiReason[] = [
+      ...matchReasons,
+      ...groupResolution.reasons.map((reason) => ({ ...reason })),
+    ];
+    const leaderScore = live[0]?.candidate.score ?? 0;
+
+    if (groupResolution.status === 'supported' || groupResolution.status === 'not_supported') {
+      return {
+        query,
+        status: groupResolution.status,
+        confidence: leaderScore,
+        device: null,
+        matches: [],
+        reasons,
+        presentation: buildPresentation({
+          status: groupResolution.status,
+          exactModelKnown: false,
+        }),
+      };
+    }
+
+    return this.buildAmbiguousResult(
+      query,
+      live.map(({ candidate }) => candidate),
+      new Map(live.map(({ device }) => [device._id, device])),
+      reasons,
+    );
   }
 
   private buildAmbiguousResult(
