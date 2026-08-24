@@ -222,9 +222,21 @@ export function matchQuery(
  * `rejectCandidate` не исключает Ultra/Pro/11R, когда запрос их не назвал — иначе «galaxy s23»
  * потерял бы варианты для уточнения. Но `determined` с таким лидером — догадка более узкой
  * модели (правило 1). Опускаем статус до уточнения, кандидатов оставляем.
+ *
+ * Исключение: `DECISION_RESOLVED_BY_EQUIVALENCE` при нескольких кандидатах — ответ группы
+ * (docs/04 §4.7, ADR-002), а не выбор Ultra. Популярность часто ставит Ultra выше базы, и без
+ * этого исключения эквивалентность снова превращалась бы в избыточное уточнение.
+ * Один кандидат через эквивалентность (ниже порога) по-прежнему понижается — иначе «galaxy s23»
+ * молча стал бы единственным Ultra в справочнике.
  */
 function downgradeOverspecifiedLeader(slots: QuerySlots, decision: Decision): Decision {
   if (decision.status !== 'determined') {
+    return decision;
+  }
+  if (
+    decision.reasons.includes('DECISION_RESOLVED_BY_EQUIVALENCE') &&
+    decision.candidates.length > 1
+  ) {
     return decision;
   }
   const leader = decision.candidates[0];

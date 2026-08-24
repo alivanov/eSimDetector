@@ -197,6 +197,45 @@ describe('rejectCandidate — бренд (docs/04 §4.2: жёсткий филь
       rejectCandidate(slots, device, { knownBrands: new Set(['xiaomi', 'redmi']) }),
     ).toBeNull();
   });
+
+  it('не отклоняет «Xiaomi Poco X5 Pro» к poco — схожесть xiaomi↔poco ниже порога, но подбренд назван', () => {
+    const slots = buildSlots({
+      brand: 'xiaomi',
+      family: 'poco-x',
+      generation: 5,
+      modifiers: ['pro'],
+    });
+    const device = buildDevice({
+      brand: 'poco',
+      family: 'poco-x',
+      generation: 5,
+      modifiers: ['pro'],
+    });
+
+    expect(jaroWinklerSimilarity('xiaomi', 'poco')).toBeLessThan(0.5);
+    expect(
+      rejectCandidate(slots, device, { knownBrands: new Set(['xiaomi', 'poco', 'oppo']) }),
+    ).toBeNull();
+  });
+
+  it('отклоняет голый бренд xiaomi к устройству poco — подбренд в запросе не назван', () => {
+    const slots = buildSlots({
+      brand: 'xiaomi',
+      family: undefined,
+      generation: 5,
+      modifiers: ['pro'],
+    });
+    const device = buildDevice({
+      brand: 'poco',
+      family: 'poco-x',
+      generation: 5,
+      modifiers: ['pro'],
+    });
+
+    expect(rejectCandidate(slots, device, { knownBrands: new Set(['xiaomi', 'poco']) })?.code).toBe(
+      'REJECT_BRAND_MISMATCH',
+    );
+  });
 });
 
 describe('computeBrandSimilarity', () => {

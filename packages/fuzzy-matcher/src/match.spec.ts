@@ -312,6 +312,82 @@ describe('matchQuery — правило разрыва (docs/04 §4.7)', () => {
     expect(result.status).toBe('determined');
     expect(result.reasons).toContain('DECISION_RESOLVED_BY_EQUIVALENCE');
   });
+
+  it('эквивалентная группа с Ultra-лидером (популярность) остаётся determined, а не GAP_TOO_SMALL', () => {
+    const base = buildDevice({
+      id: 's24',
+      brand: 'samsung',
+      family: 'galaxy-s',
+      generation: 24,
+      modifiers: [],
+      popularity: 0.8,
+    });
+    const plus = buildDevice({
+      id: 's24-plus',
+      brand: 'samsung',
+      family: 'galaxy-s',
+      generation: 24,
+      modifiers: ['plus'],
+      popularity: 0.75,
+    });
+    const ultra = buildDevice({
+      id: 's24-ultra',
+      brand: 'samsung',
+      family: 'galaxy-s',
+      generation: 24,
+      modifiers: ['ultra'],
+      popularity: 0.85,
+    });
+    const fe = buildDevice({
+      id: 's24-fe',
+      brand: 'samsung',
+      family: 'galaxy-s',
+      generation: 24,
+      modifiers: ['fe'],
+      popularity: 0.6,
+    });
+    const index = buildMatchIndex([base, plus, ultra, fe]);
+    const slots: QuerySlots = {
+      brand: 'galaxy',
+      family: 's',
+      generation: 24,
+      modifiers: [],
+      attributes: {},
+      unparsed: [],
+    };
+
+    const result = matchQuery(slots, index, { resolveEquivalenceKey: () => 'supported' });
+
+    expect(result.status).toBe('determined');
+    expect(result.reasons).toContain('DECISION_RESOLVED_BY_EQUIVALENCE');
+    expect(result.candidates.length).toBeGreaterThan(1);
+    expect(result.candidates[0]?.device.id).toBe('s24-ultra');
+  });
+
+  it('единственный Ultra без эквивалентной группы по-прежнему не становится determined для запроса без модификатора', () => {
+    const ultra = buildDevice({
+      id: 's24-ultra',
+      brand: 'samsung',
+      family: 'galaxy-s',
+      generation: 24,
+      modifiers: ['ultra'],
+      popularity: 0.85,
+    });
+    const index = buildMatchIndex([ultra]);
+    const slots: QuerySlots = {
+      brand: 'galaxy',
+      family: 's',
+      generation: 24,
+      modifiers: [],
+      attributes: {},
+      unparsed: [],
+    };
+
+    const result = matchQuery(slots, index, { resolveEquivalenceKey: () => 'supported' });
+
+    expect(result.status).toBe('clarification_required');
+    expect(result.reasons).toContain('DECISION_GAP_TOO_SMALL');
+  });
 });
 
 describe('matchQuery — однозначный запрос (docs/04 §4.7: determined)', () => {

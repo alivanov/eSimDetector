@@ -43,8 +43,10 @@ export interface ConstraintOptions {
    * пропускает Find X5 Pro на запрос «poco x5 pro». Опечатка неизвестного токена (`oneplu`,
    * `samsng`) по-прежнему идёт через нечёткий порог. Запрос `iphone` не является слагом бренда
    * (`apple`) — проверка не срабатывает, остаётся сравнение с `device.family`. Запрос
-   * `xiaomi redmi` называет подбренд в `family` — тоже не отклоняется. Множество передаёт
-   * вызывающая сторона из снимка справочника: пакет не читает каталог сам.
+   * `xiaomi redmi` / `xiaomi poco` называет подбренд в `family` — не отклоняется ни как пара
+   * разных известных брендов, ни по низкой схожести родителя с подбрендом (`xiaomi`↔`poco`
+   * ≈ 0.47). Множество передаёт вызывающая сторона из снимка справочника: пакет не читает
+   * каталог сам.
    */
   readonly knownBrands?: ReadonlySet<string>;
 }
@@ -132,6 +134,13 @@ function checkBrand(
 ): ConstraintRejection | null {
   const similarity = computeBrandSimilarity(slots, device);
   if (similarity === undefined) {
+    return null;
+  }
+  // «Xiaomi Poco …» / «Xiaomi Redmi …»: родительский бренд в slots.brand слабо похож на
+  // подбренд устройства (xiaomi↔poco ≈ 0.47 < 0.5), хотя запрос уже назвал подбренд в family.
+  // Без этой развилки кандидат отсекается по схожести, даже когда known-brands-исключение
+  // (queryNamesDeviceBrand) уже сняло REJECT по паре разных известных слагов.
+  if (queryNamesDeviceBrand(slots, device)) {
     return null;
   }
   if (knownBrands !== undefined && isKnownDistinctBrand(slots, device, knownBrands)) {

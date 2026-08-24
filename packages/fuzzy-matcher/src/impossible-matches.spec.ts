@@ -627,8 +627,13 @@ describe('ЗАПРЕЩЕНО: отсутствующая базовая моде
 
     const result = matchQuery(slots, index, { resolveEquivalenceKey: () => 'same' });
 
+    // Эквивалентная группа (общий статус eSIM) — допустимый determined без точной модели
+    // (docs/04 §4.7, ADR-002); лидер ранжирования может быть 11R из‑за популярности.
+    // Запрещено только одиночное determined на 11R как «точную» модель запроса без «R».
     if (result.status === 'determined') {
-      expect(result.candidates[0]?.device.id).toBe('oneplus-11');
+      expect(result.reasons).toContain('DECISION_RESOLVED_BY_EQUIVALENCE');
+      expect(result.candidates.length).toBeGreaterThan(1);
+      expect(result.candidates.map((candidate) => candidate.device.id)).toContain('oneplus-11');
     } else {
       expect(result.status).toBe('clarification_required');
     }
