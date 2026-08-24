@@ -30,13 +30,12 @@ export interface CatalogInvariantViolation {
   readonly code: CatalogInvariantCode;
   readonly deviceId?: string;
   /**
-   * Все устройства, затронутые ПАРНЫМ нарушением (инварианты 2 и 3 — один код/псевдоним у
-   * нескольких разных записей): заполнено для `DUPLICATE_MODEL_CODE`/`CONFLICTING_ALIAS`, чтобы
-   * вызывающая сторона могла отправить в карантин ОБЕ (или все) записи пары, а не только одну
-   * (docs/09-decisions.md ADR-029: "нарушение инварианта карантинит запись, а не отменяет
-   * справочник целиком" — карантин обеих сторон конфликта, симметрично `CODE_COLLISION`,
-   * docs/14-catalog-ingestion.md §14.3). Для остальных инвариантов (одно устройство на нарушение)
-   * не заполняется — достаточно `deviceId`.
+   * Все устройства, затронутые нарушением без одного «главного» `deviceId`:
+   * - инварианты 2 и 3 (`DUPLICATE_MODEL_CODE` / `CONFLICTING_ALIAS`) — пара/группа владельцев
+   *   одного кода или псевдонима, чтобы карантин мог затронуть ОБЕ стороны (ADR-029, docs/14 §14.3);
+   * - инвариант 7 (`SCREEN_SIGNATURE_CONSENSUS_MISMATCH`) — `record.candidates`, иначе фильтр
+   *   `assertNoNewInvariantViolations` в модерации никогда не видит это нарушение.
+   * Для остальных инвариантов достаточно одиночного `deviceId`.
    */
   readonly deviceIds?: readonly string[];
   readonly message: string;
@@ -262,6 +261,7 @@ function checkScreenSignatureConsensus(
       violations.push({
         invariant: 7,
         code: 'SCREEN_SIGNATURE_CONSENSUS_MISMATCH',
+        deviceIds: record.candidates,
         message: `Сигнатура "${record.signature}": заявлено "${record.esimConsensus}", по кандидатам ожидается "${expectedConsensus}"`,
       });
     }

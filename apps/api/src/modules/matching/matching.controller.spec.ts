@@ -106,7 +106,7 @@ describe('MatchingController', () => {
   it('getById делегирует DeviceCatalogQueryService.getByIdOrThrow (docs/06 §6.4)', () => {
     const card: DeviceCard = {
       id: 'apple-iphone-15',
-      brand: 'Apple',
+      brand: 'apple',
       brandTitle: 'Apple',
       marketingName: 'iPhone 15',
       name: 'Apple iPhone 15',

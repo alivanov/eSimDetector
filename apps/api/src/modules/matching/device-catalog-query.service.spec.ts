@@ -106,4 +106,39 @@ describe('DeviceCatalogQueryService', () => {
       { brand: 'samsung', brandTitle: 'Samsung', deviceCount: 2 },
     ]);
   });
+
+  it('значение brand из listBrands принимается фильтром list (карточка отдаёт слаг, не brandTitle)', () => {
+    const devices = [
+      buildSampleDevice({
+        _id: 'samsung-galaxy-s24-ultra',
+        brand: 'samsung',
+        brandTitle: 'Samsung',
+      }),
+      buildSampleDevice({
+        _id: 'apple-iphone-15',
+        brand: 'apple',
+        brandTitle: 'Apple',
+        platform: 'ios',
+        displayName: 'Apple iPhone 15',
+      }),
+    ];
+    const service = new DeviceCatalogQueryService(buildFakeCatalogService(devices));
+
+    const brands = service.listBrands();
+    const samsungEntry = brands.find((entry) => entry.brandTitle === 'Samsung');
+    expect(samsungEntry).toBeDefined();
+    if (samsungEntry === undefined) {
+      throw new Error('ожидался бренд Samsung в listBrands');
+    }
+
+    const listed = service.list({ brand: samsungEntry.brand, page: 1, pageSize: 20 });
+    expect(listed.total).toBe(1);
+    expect(listed.items[0]?.id).toBe('samsung-galaxy-s24-ultra');
+    expect(listed.items[0]?.brand).toBe(samsungEntry.brand);
+    expect(listed.items[0]?.brandTitle).toBe('Samsung');
+
+    const card = service.getByIdOrThrow('samsung-galaxy-s24-ultra');
+    expect(card.brand).toBe(samsungEntry.brand);
+    expect(card.brandTitle).toBe('Samsung');
+  });
 });

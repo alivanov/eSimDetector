@@ -37,7 +37,9 @@ export interface DeviceCard {
 export function toDeviceCard(device: Device): DeviceCard {
   return {
     id: device._id,
-    brand: device.brandTitle,
+    // Слаг бренда (как в `GET /brands` и фильтре `GET /devices?brand=`), а не `brandTitle`:
+    // иначе значение из перечня брендов нельзя подставить в фильтр каталога (docs/06 §6.4).
+    brand: device.brand,
     brandTitle: device.brandTitle,
     marketingName: device.marketingName,
     name: device.displayName,

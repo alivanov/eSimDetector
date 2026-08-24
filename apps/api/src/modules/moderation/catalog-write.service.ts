@@ -174,11 +174,9 @@ export class CatalogWriteService {
   private assertNoNewInvariantViolations(
     candidateDeviceId: string,
     candidateDevices: readonly Device[],
+    screenSignatures: readonly ScreenSignatureRecord[] = this.screenSignatureService.entries(),
   ): void {
-    const { violations } = validateCatalogInvariants(
-      candidateDevices,
-      this.screenSignatureService.entries(),
-    );
+    const { violations } = validateCatalogInvariants(candidateDevices, screenSignatures);
     const affecting = violations.filter(
       (violation) =>
         violation.deviceId === candidateDeviceId ||
@@ -197,6 +195,45 @@ export class CatalogWriteService {
       `Решение нарушает инвариант(ы) справочника (docs/05-data-model.md §5.8) — ${detail}`,
       HttpStatus.BAD_REQUEST,
     );
+  }
+
+  /**
+   * Проекция `screen_signatures.esimConsensus` на снимок устройств ПОСЛЕ патча, но ДО записи:
+   * иначе `assertNoNewInvariantViolations` с заполненным `deviceIds` у
+   * `SCREEN_SIGNATURE_CONSENSUS_MISMATCH` отклонил бы законную смену статуса eSIM (инвариант 7
+   * сравнивает живые `esim.support` кандидатов со старым `esimConsensus` в кэше). После записи
+   * `applyPatch` пересобирает затронутые записи через `rebuildSingleScreenSignature`.
+   */
+  private projectScreenSignaturesForDevices(
+    candidateDevices: readonly Device[],
+  ): readonly ScreenSignatureRecord[] {
+    const devicesById = new Map(candidateDevices.map((device) => [device._id, device]));
+    return this.screenSignatureService.entries().map((record) => {
+      const matches = record.candidates.flatMap((candidateId) => {
+        const device = devicesById.get(candidateId);
+        return device === undefined ? [] : [device];
+      });
+      if (matches.length === 0) {
+        return record;
+      }
+      return {
+        ...record,
+        esimConsensus: computeScreenSignatureConsensus(matches),
+      };
+    });
+  }
+
+  /**
+   * Сигнатуры, которые могла затронуть смена статуса eSIM у `deviceId`: и явные
+   * `device.screenSignatures`, и записи кэша, где устройство уже числится кандидатом.
+   */
+  private signatureStringsAffectedByDevice(device: Device): readonly string[] {
+    const fromDevice = device.screenSignatures.map((entry) => buildSignatureString(entry));
+    const fromCache = this.screenSignatureService
+      .entries()
+      .filter((record) => record.candidates.includes(device._id))
+      .map((record) => record.signature);
+    return [...new Set([...fromDevice, ...fromCache])];
   }
 
   /**
@@ -243,7 +280,15 @@ export class CatalogWriteService {
     const candidateDevices = [...snapshot.devices.values()].map((existing) =>
       existing._id === input.deviceId ? candidateDevice : existing,
     );
-    this.assertNoNewInvariantViolations(input.deviceId, candidateDevices);
+    const esimTouched = input.patch.esim !== undefined;
+    const screenSignaturesForAssert = esimTouched
+      ? this.projectScreenSignaturesForDevices(candidateDevices)
+      : this.screenSignatureService.entries();
+    this.assertNoNewInvariantViolations(
+      input.deviceId,
+      candidateDevices,
+      screenSignaturesForAssert,
+    );
 
     /**
      * Разбирается ДОКУМЕНТ ЦЕЛИКОМ, а не только `patch`: `catalog_overrides` читается обратно
@@ -287,6 +332,12 @@ export class CatalogWriteService {
 
     await this.catalogService.reload();
     const updatedDevice = this.requireDevice(input.deviceId);
+
+    if (esimTouched) {
+      for (const signatureString of this.signatureStringsAffectedByDevice(updatedDevice)) {
+        await this.rebuildSingleScreenSignature(signatureString);
+      }
+    }
 
     await this.changeLog.append({
       deviceId: input.deviceId,

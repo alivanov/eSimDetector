@@ -1,4 +1,10 @@
-import { buildSampleDevice, type CatalogOverride, type Device } from '@esim-detector/contracts';
+import {
+  buildSampleDevice,
+  validateCatalogInvariants,
+  type CatalogOverride,
+  type Device,
+  type ScreenSignatureRecord,
+} from '@esim-detector/contracts';
 import { withTestDatabase, type TestDatabaseHandle } from '@esim-detector/test-utils';
 import { getModelToken, MongooseModule } from '@nestjs/mongoose';
 import { Test, type TestingModule } from '@nestjs/testing';
@@ -8,6 +14,7 @@ import { AppConfigModule } from '../../config/config.module';
 import { CatalogService } from '../catalog/catalog.service';
 import { CATALOG_OVERRIDE_MODEL_NAME } from '../catalog/schemas/catalog-override.schema';
 import { DEVICE_MODEL_NAME } from '../catalog/schemas/device.schema';
+import { SCREEN_SIGNATURE_MODEL_NAME } from '../catalog/schemas/screen-signature.schema';
 import { ScreenSignatureService } from '../detection/ios/screen-signature.service';
 
 import { CatalogWriteService } from './catalog-write.service';
@@ -26,6 +33,7 @@ describe('CatalogWriteService (интеграция, withTestDatabase)', () => {
   let screenSignatureService: ScreenSignatureService;
   let deviceModel: Model<Device>;
   let overrideModel: Model<CatalogOverride>;
+  let screenSignatureModel: Model<ScreenSignatureRecord>;
 
   beforeAll(async () => {
     db = await withTestDatabase('catalog-write-service');
@@ -39,6 +47,9 @@ describe('CatalogWriteService (интеграция, withTestDatabase)', () => {
     deviceModel = moduleRef.get<Model<Device>>(getModelToken(DEVICE_MODEL_NAME));
     overrideModel = moduleRef.get<Model<CatalogOverride>>(
       getModelToken(CATALOG_OVERRIDE_MODEL_NAME),
+    );
+    screenSignatureModel = moduleRef.get<Model<ScreenSignatureRecord>>(
+      getModelToken(SCREEN_SIGNATURE_MODEL_NAME),
     );
   });
 
@@ -409,5 +420,135 @@ describe('CatalogWriteService (интеграция, withTestDatabase)', () => {
     );
 
     expect(updated.deviceType).toBe('tablet');
+  });
+
+  it('SCREEN_SIGNATURE_CONSENSUS_MISMATCH ловится assertNoNewInvariantViolations через deviceIds', async () => {
+    const signature = { cssWidth: 393, cssHeight: 852, dpr: 3, zoomed: false };
+    await deviceModel.create(
+      buildSampleDevice({
+        _id: 'apple-iphone-15',
+        brand: 'apple',
+        brandTitle: 'Apple',
+        marketingName: 'iPhone 15',
+        displayName: 'Apple iPhone 15',
+        family: 'iphone',
+        generation: 15,
+        modifiers: [],
+        platform: 'ios',
+        modelCodes: [],
+        aliases: [],
+        screenSignatures: [signature],
+        os: { minVersion: '17.0', maxVersion: '18.5' },
+        esim: {
+          support: 'supported',
+          dualSim: 'physical+esim',
+          maxProfiles: 8,
+          conditions: [],
+          clarifyingQuestion: null,
+          notes: '',
+        },
+      }),
+    );
+    await screenSignatureModel.create({
+      signature: '393x852@3',
+      zoomed: false,
+      candidates: ['apple-iphone-15'],
+      // Намеренно устаревшее согласие: устройство supported, запись говорит иначе.
+      esimConsensus: 'not_supported',
+    });
+    await catalogService.reload();
+    await screenSignatureService.reload();
+
+    await expect(
+      service.addAlias('apple-iphone-15', 'айфон 15', 'частая форма записи', 'moderator-1'),
+    ).rejects.toThrow('SCREEN_SIGNATURE_CONSENSUS_MISMATCH');
+  });
+
+  it('changeEsimStatus у кандидата сигнатуры пересобирает esimConsensus и оставляет справочник валидным', async () => {
+    const signature = { cssWidth: 393, cssHeight: 852, dpr: 3, zoomed: false };
+    await deviceModel.create([
+      buildSampleDevice({
+        _id: 'apple-iphone-14-pro',
+        brand: 'apple',
+        brandTitle: 'Apple',
+        marketingName: 'iPhone 14 Pro',
+        displayName: 'Apple iPhone 14 Pro',
+        family: 'iphone',
+        generation: 14,
+        modifiers: ['pro'],
+        platform: 'ios',
+        modelCodes: [],
+        aliases: [],
+        screenSignatures: [signature],
+        os: { minVersion: '16.0', maxVersion: '18.5' },
+        sources: [VENDOR_SOURCE],
+        dataConfidence: 'verified',
+        esim: {
+          support: 'supported',
+          dualSim: 'physical+esim',
+          maxProfiles: 8,
+          conditions: [],
+          clarifyingQuestion: null,
+          notes: '',
+        },
+      }),
+      buildSampleDevice({
+        _id: 'apple-iphone-15',
+        brand: 'apple',
+        brandTitle: 'Apple',
+        marketingName: 'iPhone 15',
+        displayName: 'Apple iPhone 15',
+        family: 'iphone',
+        generation: 15,
+        modifiers: [],
+        platform: 'ios',
+        modelCodes: [],
+        aliases: [],
+        screenSignatures: [signature],
+        os: { minVersion: '17.0', maxVersion: '18.5' },
+        sources: [VENDOR_SOURCE],
+        dataConfidence: 'verified',
+        esim: {
+          support: 'supported',
+          dualSim: 'physical+esim',
+          maxProfiles: 8,
+          conditions: [],
+          clarifyingQuestion: null,
+          notes: '',
+        },
+      }),
+    ]);
+    await screenSignatureModel.create({
+      signature: '393x852@3',
+      zoomed: false,
+      candidates: ['apple-iphone-14-pro', 'apple-iphone-15'],
+      esimConsensus: 'supported',
+    });
+    await catalogService.reload();
+    await screenSignatureService.reload();
+
+    await service.changeEsimStatus(
+      'apple-iphone-15',
+      { support: 'not_supported' },
+      'verified',
+      [VENDOR_SOURCE],
+      'проверка пересборки сигнатуры после смены статуса eSIM',
+      'moderator-1',
+      null,
+    );
+
+    const record = screenSignatureService.getBySignature('393x852@3');
+    expect(record?.esimConsensus).toBe('mixed');
+
+    const validation = validateCatalogInvariants(
+      [...catalogService.getSnapshot().devices.values()],
+      screenSignatureService.entries(),
+    );
+    expect(validation.valid).toBe(true);
+    expect(
+      validation.violations.filter(
+        (violation) => violation.code === 'SCREEN_SIGNATURE_CONSENSUS_MISMATCH',
+      ),
+    ).toHaveLength(0);
   });
 });

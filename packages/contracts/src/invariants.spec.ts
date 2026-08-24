@@ -278,7 +278,9 @@ describe('validateCatalogInvariants', () => {
     const result = validateCatalogInvariants([supportedDevice, notSupportedDevice], [signature]);
 
     expect(result.valid).toBe(false);
-    expect(violationsOf('SCREEN_SIGNATURE_CONSENSUS_MISMATCH', result)).toHaveLength(1);
+    const mismatches = violationsOf('SCREEN_SIGNATURE_CONSENSUS_MISMATCH', result);
+    expect(mismatches).toHaveLength(1);
+    expect(mismatches[0]?.deviceIds).toEqual(['apple-iphone-15', 'apple-iphone-x']);
   });
 
   it('инвариант 7: esimConsensus "mixed" при реально расходящихся кандидатах — не нарушение', () => {
