@@ -21,7 +21,7 @@ FROM nginx:1.27-alpine AS runtime
 # Переменная окружения по образцу существующих сервисов docker-compose.yml (задача этапа 6.4,
 # п.4) — рабочее значение по умолчанию без файла .env (docs/07 §7.6): совпадает с именем сервиса
 # api в docker-compose.yml. Шаблон подставляет её в конфиг nginx при старте контейнера.
-ENV API_UPSTREAM=api:3000
+ENV API_UPSTREAM=http://api:3000
 
 COPY apps/web/nginx.conf.template /etc/nginx/templates/default.conf.template
 
@@ -29,6 +29,12 @@ COPY --from=build /workspace/apps/web/dist /usr/share/nginx/html
 COPY --from=build /workspace/apps/widget/dist/widget /usr/share/nginx/html/widget
 # Страница-пример подключения виджета одним тегом <script> (apps/widget/example/index.html,
 # этап 6.3) — адрес docs/07 §7.6 обновлён этим агентом на /widget-example/.
+# Исходник примера намеренно ходит на http://localhost:3000 — так e2e проверяет
+# кросс-доменный CORS с отдельного порта (apps/e2e, сценарий 4). В образе
+# демонстрационного контура запросы идут через тот же origin и nginx-прокси,
+# иначе на публичном стенде `localhost` — это телефон проверяющего.
 COPY --from=build /workspace/apps/widget/example/index.html /usr/share/nginx/html/widget-example/index.html
+RUN sed -i 's|data-api-base="http://localhost:3000"|data-api-base=""|' \
+    /usr/share/nginx/html/widget-example/index.html
 
 EXPOSE 8080

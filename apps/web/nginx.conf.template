@@ -14,11 +14,22 @@ server {
     # origin, что и сама страница (8080), а не к порту API напрямую — тот же приём, что `apps/web/
     # vite.config.ts` уже применяет в разработке через `server.proxy`.
     location /api/ {
-        proxy_pass http://${API_UPSTREAM}/api/;
-        proxy_set_header Host $host;
+        # Полный URL со схемой: локально `http://api:3000`, на Render —
+        # публичный `https://…onrender.com` (бесплатные Web Service не принимают
+        # трафик по внутренней сети, docs/16-deployment.md, дополнение ADR-027).
+        proxy_pass ${API_UPSTREAM}/api/;
+        # Host берётся из URL апстрима (`$proxy_host`), а не из запроса браузера:
+        # на Render маршрутизация идёт по Host, и подмена на адрес веб-сервиса
+        # отправила бы запрос не туда.
+        proxy_set_header Host $proxy_host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
+        # Бесплатный API на Render просыпается ~минуту; без запаса первый запрос
+        # после простоя обрывается штатным таймаутом nginx (60 с).
+        proxy_connect_timeout 75s;
+        proxy_send_timeout 75s;
+        proxy_read_timeout 75s;
     }
 
     # /widget/v1/esim-widget.js (тот же путь, что docs/07 §7.2) и /widget-example/ (статическая

@@ -46,7 +46,7 @@ services:
     depends_on:
       - api
     environment:
-      API_UPSTREAM: ${API_UPSTREAM:-api:3000}
+      API_UPSTREAM: ${API_UPSTREAM:-http://api:3000}
     ports:
       - '8080:8080'
 

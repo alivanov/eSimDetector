@@ -20,6 +20,50 @@ pnpm install
 
 `pnpm install` также ставит git-хук `pre-commit` (husky) — он прогоняет Prettier и ESLint только по файлам, попавшим в коммит (`lint-staged`), и останавливает коммит при неисправимых ошибках. Это защита от повторяющегося падения шага «Форматирование (Prettier)» в CI: несогласованный со стилем файл просто не попадёт в коммит.
 
+## Быстрый старт (локальный демонстрационный контур)
+
+Из корня репозитория, после `pnpm install`:
+
+```bash
+docker compose up -d
+MONGODB_URI=mongodb://localhost:27017/esim pnpm seed load
+MONGODB_URI=mongodb://localhost:27017/esim pnpm seed rebuild-signatures
+docker compose restart api
+```
+
+После этого `http://localhost:8080` — интерфейс, `http://localhost:3000/health/ready` — готовность API. Справочник сам при `docker compose up` не загружается (ADR-015). Подробности и таблица адресов — [docs/07-integration.md](./docs/07-integration.md) §7.6.
+
+### Пересборка образов
+
+```bash
+docker compose build api && docker compose up -d api    # только API
+docker compose build web && docker compose up -d web    # только веб (виджет входит в этот образ)
+docker compose build && docker compose up -d            # оба образа
+```
+
+После пересборки API, если справочник уже в базе, повторный `seed` не нужен — достаточно `docker compose up -d api` (новый контейнер читает базу при старте). Если менялись файлы в `data/catalog/`, снова выполните обе команды `pnpm seed` и `docker compose restart api`.
+
+### Тесты
+
+```bash
+pnpm test          # модульные и e2e API — без Docker, без MongoDB, без .env (ADR-017)
+pnpm test:e2e      # e2e интерфейса в браузере; нужен уже поднятый контур
+```
+
+`pnpm test` специально **не** гоняется внутри контейнеров приложения: тесты поднимают свою MongoDB в памяти процесса (`mongodb-memory-server`) и не имеют права видеть базу демонстрационного контура. «Тесты в контейнерах» в этом проекте — это e2e против уже запущенного `docker compose`:
+
+```bash
+docker compose up -d
+npx playwright install chromium    # один раз на машину
+pnpm test:e2e
+```
+
+Сборка образов как проверка, что Docker-файлы не сломаны (то же делает CI):
+
+```bash
+docker compose build
+```
+
 ## Команды
 
 Выполняются из корня репозитория и применяются рекурсивно ко всем пакетам рабочего пространства (pnpm workspaces).
@@ -37,6 +81,7 @@ pnpm install
 | `pnpm seed load`                    | Наполнение справочника устройств в поднятой базе. Требует `MONGODB_URI=mongodb://localhost:27017/esim`: по умолчанию используется хост `mongo` из сети Docker, с машины разработчика он не резолвится                                                                                                                          |
 | `pnpm seed rebuild-signatures`      | Построение сигнатур экранов из загруженных устройств; запускается ПОСЛЕ `pnpm seed load` и с той же переменной. Пропуск не даёт ошибки, но лишает ветку iOS сужения по геометрии экрана — docs/07-integration.md §7.6                                                                                                          |
 | `docker compose restart api`        | Обязателен после наполнения при уже запущенном контуре: справочник и сигнатуры читаются один раз при старте API, перечитывания по сигналу нет (docs/07-integration.md §7.6 и §7.9)                                                                                                                                             |
+| `docker compose build api` / `web`  | Пересборка одного образа; после сборки поднимите его `docker compose up -d api` или `… web`                                                                                                                                                                                                                                    |
 | `docker compose down`               | Останавливает и удаляет контейнеры демонстрационного контура                                                                                                                                                                                                                                                                   |
 | `pnpm test:e2e`                     | e2e-тесты интерфейса в настоящем браузере (Playwright, `apps/e2e`, docs/08 §8.3). НЕ входит в `pnpm test` (docs/08 §8.7 — не блокирует сборку): требует поднятого `docker compose up -d` и `npx playwright install chromium`                                                                                                   |
 
@@ -44,7 +89,9 @@ pnpm install
 
 ## Публичный стенд
 
-Помимо локального запуска, предусмотрен публичный стенд на Render (render.com) — решение [ADR-027](./docs/09-decisions.md), топология и требования доступа подробно в [docs/07-integration.md](./docs/07-integration.md), раздел 7.6а: API — Web Service из `apps/api/Dockerfile`, `apps/web` — Static Site, база — MongoDB Atlas (у Render нет собственной управляемой MongoDB). Интерфейс собран (этап 6), фактическое развёртывание на Render выполняется отдельным агентом после этапа интерфейса; публичный адрес появится в этом разделе после развёртывания.
+Помимо локального запуска, предусмотрен публичный стенд на Render (render.com) — [ADR-027](./docs/09-decisions.md) с дополнением: API и веб — два Web Service из тех же Docker-образов, что `docker compose`, база — MongoDB Atlas. Пошаговая инструкция первого деплоя и обновления (для человека без опыта DevOps) — [docs/16-deployment.md](./docs/16-deployment.md). Краткая топология — [docs/07-integration.md](./docs/07-integration.md) §7.6а. Публичные адреса `onrender.com` появятся в §7.6а и здесь после выкладки.
+
+Captcha на демонстрационном стенде не подключается: достаточно `RATE_LIMIT_RPM`, `CORS_ORIGINS` и `ADMIN_TOKEN` (обоснование — docs/16 §16.3).
 
 ## Структура репозитория
 

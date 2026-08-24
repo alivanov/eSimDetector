@@ -108,7 +108,7 @@
 
 **Решение.** Публичный адрес нужен, площадка — Render (render.com).
 
-**Как это учтено.** Зафиксировано как ADR-025 (пункт 2) в [09-decisions.md](./09-decisions.md); топология развёртывания — отдельным решением ADR-027 (Render не имеет управляемой MongoDB, поэтому база — MongoDB Atlas, API — Web Service из `apps/api/Dockerfile`, `apps/web` — Static Site), отражена в [docs/07-integration.md](./07-integration.md) §7.6а и README.md. Локальный запуск через Docker Compose остаётся основным путём для разработки и CI и не отменяется публичным стендом.
+**Как это учтено.** Зафиксировано как ADR-025 (пункт 2) в [09-decisions.md](./09-decisions.md); топология — ADR-027 с дополнением этапа публикации: база — MongoDB Atlas, API и веб — два Web Service из существующих Dockerfile (веб не Static Site). Инструкция — [docs/16-deployment.md](./16-deployment.md), краткая топология — [docs/07-integration.md](./07-integration.md) §7.6а. Локальный запуск через Docker Compose остаётся основным путём для разработки и CI и не отменяется публичным стендом.
 
 ---
 
