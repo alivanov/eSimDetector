@@ -23,7 +23,8 @@ export async function expectAutoDetectSupported(page: Page): Promise<void> {
   await page.goto('/');
 
   await expect(page.getByRole('heading', { name: presentationTexts.supportedTitle })).toBeVisible();
-  await expect(page.getByRole('button', { name: presentationTexts.continueAction })).toBeVisible();
+  // Демо не передаёт `onPrimaryAction` — «Подключить eSIM» скрыта (план §3.2).
+  await expect(page.getByRole('button', { name: presentationTexts.continueAction })).toHaveCount(0);
   await expect(
     page.getByRole('button', { name: presentationTexts.manualSearchAction }),
   ).toBeVisible();
@@ -102,15 +103,18 @@ export async function expectManualSearchTypoFlow(page: Page): Promise<void> {
       .first(),
   ).toBeVisible();
 
-  // На настольном профиле автоопределение может завершиться уточнением `manual_input`
-  // (`PLATFORM_NOT_MOBILE`, docs/09 ADR-034), у которого кнопка отказа буквально совпадает по
-  // тексту с постоянной ссылкой экрана проверки (`checkScreenTexts.manualSearchLink`) — известная
-  // визуальная избыточность `ClarificationScreen` (найдена агентом 6.3, docs/11 §11.2б, строка
-  // 6.3). `.last()` — постоянная ссылка, она есть на любом экране, кроме самого ручного поиска.
-  await page
-    .getByRole('button', { name: checkScreenTexts.manualSearchLink, exact: true })
-    .last()
-    .click();
+  // Переход к ручному поиску: либо единственная кнопка `manual_input` / нижняя ссылка
+  // («Указать устройство вручную»), либо действие `manual_search` карточки («Это не моё
+  // устройство»). Дубль ссылки при уже видимом переходе скрыт (план §3.1).
+  const manualByName = page.getByRole('button', {
+    name: checkScreenTexts.manualSearchLink,
+    exact: true,
+  });
+  if ((await manualByName.count()) > 0) {
+    await manualByName.click();
+  } else {
+    await page.getByRole('button', { name: presentationTexts.manualSearchAction }).click();
+  }
 
   const field = page.getByLabel(manualSearchTexts.fieldLabel);
   await expect(field).toBeVisible();
@@ -133,7 +137,8 @@ export async function expectKeyboardAutoDetectFlow(page: Page): Promise<void> {
   await expect(page.getByRole('heading', { name: presentationTexts.supportedTitle })).toBeVisible();
   await expect(liveRegion).toContainText(presentationTexts.supportedTitle);
 
-  await tabUntilFocused(page, presentationTexts.continueAction);
+  // На демо нет «Подключить eSIM» — фокус клавиатуры на вторичном действии карточки.
+  await tabUntilFocused(page, presentationTexts.manualSearchAction);
   expect(await hasVisibleFocusIndicator(page)).toBe(true);
 }
 

@@ -272,16 +272,17 @@ describe('EsimDetectorWidgetElement', () => {
     // (диспетчеризация происходит внутри обработчика `onResult`, синхронно перед `setScreen`,
     // а сам коммит React планируется отдельно) — поэтому дальнейшие запросы к разметке дожидаются
     // её появления через `waitFor`, а не читают DOM немедленно после `await` события.
-    const manualLink = await waitFor(() => {
+    // При `manual_search` в presentation нижняя ссылка скрыта — переход через действие карточки.
+    const notMine = await waitFor(() => {
       const found = buttons().find(
-        (candidate) => candidate.textContent === 'Указать устройство вручную',
+        (candidate) => candidate.textContent === 'Это не моё устройство',
       );
       if (found === undefined) {
-        throw new Error('Ссылка «Указать устройство вручную» пока не отрисована');
+        throw new Error('Кнопка «Это не моё устройство» пока не отрисована');
       }
       return found;
     });
-    fireEvent.click(manualLink);
+    fireEvent.click(notMine);
 
     const input = await waitFor(() => {
       const found = element.shadowRoot?.querySelector('input');

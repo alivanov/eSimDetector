@@ -185,11 +185,24 @@ describe('EsimChecker — три статуса результата', () => {
     jest.restoreAllMocks();
   });
 
-  it('supported: показывает заголовок, пояснение и оба действия', async () => {
+  it('supported без onPrimaryAction: «Подключить eSIM» скрыта, вторичное действие на месте', async () => {
     const fetchMock = installFetchMock();
     fetchMock.mockResolvedValueOnce(buildFakeResponse({ body: supportedResponse }));
 
     render(<EsimChecker apiBase={API_BASE} />);
+
+    expect(
+      await screen.findByRole('heading', { name: 'Ваше устройство поддерживает eSIM' }),
+    ).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Подключить eSIM' })).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Это не моё устройство' })).toBeInTheDocument();
+  });
+
+  it('supported с onPrimaryAction: оба действия на месте', async () => {
+    const fetchMock = installFetchMock();
+    fetchMock.mockResolvedValueOnce(buildFakeResponse({ body: supportedResponse }));
+
+    render(<EsimChecker apiBase={API_BASE} onPrimaryAction={jest.fn()} />);
 
     expect(
       await screen.findByRole('heading', { name: 'Ваше устройство поддерживает eSIM' }),
@@ -501,9 +514,9 @@ describe('EsimChecker — answer_question для результата /devices/s
     fetchMock.mockResolvedValueOnce(buildFakeResponse({ body: searchSupportedResponse }));
 
     render(<EsimChecker apiBase={API_BASE} />);
-    await screen.findByRole('button', { name: 'Указать устройство вручную' });
+    await screen.findByRole('button', { name: 'Это не моё устройство' });
 
-    fireEvent.click(screen.getByRole('button', { name: 'Указать устройство вручную' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Это не моё устройство' }));
     fireEvent.change(screen.getByRole('combobox', { name: 'Название устройства' }), {
       target: { value: 'iPhone 13' },
     });
@@ -533,7 +546,7 @@ describe('EsimChecker — переход к ручному поиску', () => 
     jest.restoreAllMocks();
   });
 
-  it('ссылка «Указать устройство вручную» доступна на экране результата', async () => {
+  it('при действии manual_search нижняя ссылка скрыта; переход — через действие карточки', async () => {
     const fetchMock = installFetchMock();
     fetchMock.mockResolvedValueOnce(buildFakeResponse({ body: supportedResponse }));
     fetchMock.mockResolvedValueOnce(buildFakeResponse({ body: searchSupportedResponse }));
@@ -541,7 +554,11 @@ describe('EsimChecker — переход к ручному поиску', () => 
     render(<EsimChecker apiBase={API_BASE} />);
     await screen.findByRole('heading', { name: 'Ваше устройство поддерживает eSIM' });
 
-    fireEvent.click(screen.getByRole('button', { name: 'Указать устройство вручную' }));
+    expect(
+      screen.queryByRole('button', { name: 'Указать устройство вручную' }),
+    ).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Это не моё устройство' }));
     expect(screen.getByRole('button', { name: 'Найти' })).toBeInTheDocument();
 
     fireEvent.change(screen.getByRole('combobox', { name: 'Название устройства' }), {
@@ -553,5 +570,51 @@ describe('EsimChecker — переход к ручному поиску', () => 
       await screen.findByText('iPhone XS может использовать eSIM вместе с физической SIM-картой.'),
     ).toBeInTheDocument();
     expect(callUrl(fetchMock, 1)).toBe(`${API_BASE}/api/v1/devices/search`);
+  });
+
+  it('при уточнении manual_input нет дубля «Указать устройство вручную»', async () => {
+    const fetchMock = installFetchMock();
+    fetchMock.mockResolvedValueOnce(
+      buildFakeResponse({
+        body: {
+          requestId: 'r-manual',
+          status: 'clarification_required',
+          confidence: 0.2,
+          detection: {
+            method: 'fallback',
+            platform: 'other',
+            exactModelKnown: false,
+            deviceType: 'phone',
+          },
+          device: null,
+          candidates: [],
+          reasons: [{ code: 'PLATFORM_NOT_MOBILE' }],
+          clarification: {
+            kind: 'manual_input',
+            question: 'Укажите модель вашего устройства',
+          },
+          presentation: {
+            title: 'Нужно уточнить модель устройства',
+            description: 'Укажите модель вашего устройства',
+            primaryAction: { label: 'Выбрать модель', kind: 'clarify' },
+          },
+        },
+      }),
+    );
+
+    render(<EsimChecker apiBase={API_BASE} />);
+    await screen.findByRole('heading', { name: 'Нужно уточнить модель устройства' });
+
+    expect(screen.getAllByRole('button', { name: 'Указать устройство вручную' })).toHaveLength(1);
+  });
+
+  it('без manual_search и без manual_input нижняя ссылка остаётся', async () => {
+    const fetchMock = installFetchMock();
+    fetchMock.mockResolvedValueOnce(buildFakeResponse({ body: chooseCandidateResponse }));
+
+    render(<EsimChecker apiBase={API_BASE} />);
+    await screen.findByRole('heading', { name: 'Нужно уточнить модель устройства' });
+
+    expect(screen.getByRole('button', { name: 'Указать устройство вручную' })).toBeInTheDocument();
   });
 });

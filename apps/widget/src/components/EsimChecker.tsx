@@ -163,6 +163,41 @@ function searchResponseToResult(response: SearchResponse): ResultState {
 }
 
 /**
+ * Действие `kind: 'continue'` — точка `esim:action` для интегратора (docs/07 §7.2). Без
+ * `onPrimaryAction` кнопка на экране мертва: не показываем её, тексты API не трогаем.
+ */
+function presentationWithoutDeadContinue(
+  presentation: Presentation,
+  hasPrimaryActionHandler: boolean,
+): Presentation {
+  if (hasPrimaryActionHandler) {
+    return presentation;
+  }
+  return {
+    title: presentation.title,
+    description: presentation.description,
+    ...(presentation.primaryAction !== undefined && presentation.primaryAction.kind !== 'continue'
+      ? { primaryAction: presentation.primaryAction }
+      : {}),
+    ...(presentation.secondaryAction !== undefined &&
+    presentation.secondaryAction.kind !== 'continue'
+      ? { secondaryAction: presentation.secondaryAction }
+      : {}),
+  };
+}
+
+/** Нижняя ссылка дублирует переход, уже доступный через `manual_input` или действие `manual_search`. */
+function hasInlineManualSearchEntry(result: ResultState): boolean {
+  if (result.clarification?.kind === 'manual_input') {
+    return true;
+  }
+  return (
+    result.presentation.primaryAction?.kind === 'manual_search' ||
+    result.presentation.secondaryAction?.kind === 'manual_search'
+  );
+}
+
+/**
  * Корневой компонент интерфейса (docs/13-branding.md §13.4/§13.6, ADR-038/ADR-039) — единственный
  * исходник для `apps/web` и будущего Web Component (этап 6.3). Владеет состоянием сценария:
  * автоопределение → один из трёх статусов → (при необходимости) уточнение → ручной поиск.
@@ -434,6 +469,11 @@ export function EsimChecker({
     });
   }
 
+  const showFooterManualLink =
+    screen.kind !== 'manual-search' &&
+    screen.kind !== 'loading' &&
+    !(screen.kind === 'result' && hasInlineManualSearchEntry(screen.result));
+
   return (
     <section className={styles.root} aria-label={checkScreenTexts.title}>
       <h1 className={styles.heading}>{checkScreenTexts.title}</h1>
@@ -445,7 +485,10 @@ export function EsimChecker({
           <>
             <ResultCard
               status={screen.result.status}
-              presentation={screen.result.presentation}
+              presentation={presentationWithoutDeadContinue(
+                screen.result.presentation,
+                onPrimaryAction !== undefined,
+              )}
               deviceTypeNotice={findDeviceTypeNotice(screen.result.reasons)}
               deviceTypeLabel={
                 screen.result.deviceType !== undefined
@@ -519,7 +562,7 @@ export function EsimChecker({
         ) : null}
       </div>
 
-      {screen.kind !== 'manual-search' && screen.kind !== 'loading' ? (
+      {showFooterManualLink ? (
         <button
           type="button"
           className={styles.manualLink}

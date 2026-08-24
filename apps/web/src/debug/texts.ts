@@ -68,7 +68,7 @@ export const debugAuxTexts = {
   goldenExportNotesLabel: 'Заметки (необязательно)',
   goldenExportExpectedTitle: 'Ожидаемый результат (expected)',
   goldenExportExpectedWarning:
-    'Черновик: значения предзаполнены ответом сервиса и НЕ проверены человеком. Перед сохранением в signals.golden.json проверьте каждое поле по правилам docs/03 — иначе выборка перестанет обнаруживать ошибки этого же ответа.',
+    'Черновик: значения подставлены из ответа сервиса и не проверены. Перед копированием сверьте каждое поле с тем, что видите на устройстве, и с ожидаемым статусом eSIM. Если оставить черновик как есть, выборка перестанет ловить такую же ошибку.',
   goldenExportExpectedPlatformLabel: 'platform',
   goldenExportExpectedDeviceTypeLabel: 'deviceType',
   goldenExportExpectedStatusLabel: 'status',
