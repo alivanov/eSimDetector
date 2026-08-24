@@ -43,6 +43,31 @@ function findOrFirst<T extends string>(options: readonly T[], value: string): T 
   throw new Error('findOrFirst: пустой список опций');
 }
 
+function FieldLabel({
+  htmlFor,
+  children,
+  required,
+}: {
+  readonly htmlFor: string;
+  readonly children: string;
+  readonly required?: boolean;
+}) {
+  return (
+    <label className={styles.label} htmlFor={htmlFor}>
+      {children}
+      {required === true ? (
+        <>
+          {' '}
+          <span className={styles.requiredMark} aria-hidden="true">
+            *
+          </span>
+          <span className={styles.requiredText}>({debugAuxTexts.goldenExportRequiredMark})</span>
+        </>
+      ) : null}
+    </label>
+  );
+}
+
 export function GoldenExportForm({ response, sentSignals, region }: GoldenExportFormProps) {
   const [category, setCategory] = useState<SignalsGoldenCategory>(
     GOLDEN_CATEGORY_OPTIONS[0]?.value ?? 'ambiguous-signature',
@@ -55,6 +80,7 @@ export function GoldenExportForm({ response, sentSignals, region }: GoldenExport
   const [expected, setExpected] = useState<GoldenExpectedOutcome | undefined>(undefined);
   const [lastPreparedRequestId, setLastPreparedRequestId] = useState<string | undefined>(undefined);
   const [copied, setCopied] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
 
   useEffect(() => {
     if (response !== undefined && response.requestId !== lastPreparedRequestId) {
@@ -67,6 +93,7 @@ export function GoldenExportForm({ response, sentSignals, region }: GoldenExport
     return <p className={styles.unavailable}>{debugAuxTexts.goldenExportUnavailable}</p>;
   }
 
+  const descriptionReady = description.trim().length > 0;
   const draft = buildGoldenDraft({
     category,
     source,
@@ -80,10 +107,34 @@ export function GoldenExportForm({ response, sentSignals, region }: GoldenExport
 
   return (
     <div className={styles.form}>
+      <p className={styles.intro}>{debugAuxTexts.goldenExportIntro}</p>
+
+      <div className={styles.help}>
+        <button
+          type="button"
+          className={styles.helpToggle}
+          aria-expanded={helpOpen}
+          onClick={() => {
+            setHelpOpen((current) => !current);
+          }}
+        >
+          {debugAuxTexts.goldenExportHelpToggle}
+        </button>
+        {helpOpen ? (
+          <div className={styles.helpBody}>
+            <ol className={styles.helpList}>
+              {debugAuxTexts.goldenExportHelpSteps.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ol>
+            <p className={styles.helpExampleTitle}>{debugAuxTexts.goldenExportHelpExampleTitle}</p>
+            <pre className={styles.helpExample}>{debugAuxTexts.goldenExportHelpExampleBody}</pre>
+          </div>
+        ) : null}
+      </div>
+
       <div className={styles.fieldWrapper}>
-        <label className={styles.label} htmlFor="golden-category">
-          {debugAuxTexts.goldenExportCategoryLabel}
-        </label>
+        <FieldLabel htmlFor="golden-category">{debugAuxTexts.goldenExportCategoryLabel}</FieldLabel>
         <select
           id="golden-category"
           className={styles.select}
@@ -106,9 +157,7 @@ export function GoldenExportForm({ response, sentSignals, region }: GoldenExport
       </div>
 
       <div className={styles.fieldWrapper}>
-        <label className={styles.label} htmlFor="golden-source">
-          {debugAuxTexts.goldenExportSourceLabel}
-        </label>
+        <FieldLabel htmlFor="golden-source">{debugAuxTexts.goldenExportSourceLabel}</FieldLabel>
         <select
           id="golden-source"
           className={styles.select}
@@ -131,14 +180,16 @@ export function GoldenExportForm({ response, sentSignals, region }: GoldenExport
       </div>
 
       <div className={styles.fieldWrapper}>
-        <label className={styles.label} htmlFor="golden-description">
+        <FieldLabel htmlFor="golden-description" required>
           {debugAuxTexts.goldenExportDescriptionLabel}
-        </label>
+        </FieldLabel>
         <input
           id="golden-description"
           type="text"
           className={styles.input}
           value={description}
+          required
+          aria-required="true"
           placeholder={debugAuxTexts.goldenExportDescriptionPlaceholder}
           onChange={(event) => {
             setDescription(event.target.value);
@@ -151,9 +202,9 @@ export function GoldenExportForm({ response, sentSignals, region }: GoldenExport
         <p className={styles.label}>{debugAuxTexts.goldenExportExpectedTitle}</p>
         <div className={styles.expectedGrid}>
           <div className={styles.fieldWrapper}>
-            <label className={styles.label} htmlFor="golden-expected-platform">
+            <FieldLabel htmlFor="golden-expected-platform">
               {debugAuxTexts.goldenExportExpectedPlatformLabel}
-            </label>
+            </FieldLabel>
             <select
               id="golden-expected-platform"
               className={styles.select}
@@ -175,9 +226,9 @@ export function GoldenExportForm({ response, sentSignals, region }: GoldenExport
           </div>
 
           <div className={styles.fieldWrapper}>
-            <label className={styles.label} htmlFor="golden-expected-device-type">
+            <FieldLabel htmlFor="golden-expected-device-type">
               {debugAuxTexts.goldenExportExpectedDeviceTypeLabel}
-            </label>
+            </FieldLabel>
             <select
               id="golden-expected-device-type"
               className={styles.select}
@@ -199,9 +250,9 @@ export function GoldenExportForm({ response, sentSignals, region }: GoldenExport
           </div>
 
           <div className={styles.fieldWrapper}>
-            <label className={styles.label} htmlFor="golden-expected-status">
+            <FieldLabel htmlFor="golden-expected-status">
               {debugAuxTexts.goldenExportExpectedStatusLabel}
-            </label>
+            </FieldLabel>
             <select
               id="golden-expected-status"
               className={styles.select}
@@ -220,9 +271,9 @@ export function GoldenExportForm({ response, sentSignals, region }: GoldenExport
           </div>
 
           <div className={styles.fieldWrapper}>
-            <label className={styles.label} htmlFor="golden-expected-device-id">
+            <FieldLabel htmlFor="golden-expected-device-id">
               {debugAuxTexts.goldenExportExpectedDeviceIdLabel}
-            </label>
+            </FieldLabel>
             <input
               id="golden-expected-device-id"
               type="text"
@@ -253,7 +304,8 @@ export function GoldenExportForm({ response, sentSignals, region }: GoldenExport
 
       <div className={styles.fieldWrapper}>
         <label className={styles.label} htmlFor="golden-notes">
-          {debugAuxTexts.goldenExportNotesLabel}
+          {debugAuxTexts.goldenExportNotesLabel}{' '}
+          <span className={styles.optionalText}>({debugAuxTexts.goldenExportOptionalMark})</span>
         </label>
         <textarea
           id="golden-notes"
@@ -272,7 +324,7 @@ export function GoldenExportForm({ response, sentSignals, region }: GoldenExport
       <button
         type="button"
         className={styles.copyButton}
-        disabled={description.trim().length === 0}
+        disabled={!descriptionReady}
         onClick={() => {
           void copyToClipboard(preview).then((ok) => {
             setCopied(ok);
@@ -286,6 +338,9 @@ export function GoldenExportForm({ response, sentSignals, region }: GoldenExport
       >
         {debugTexts.copyGoldenEntryButton}
       </button>
+      {!descriptionReady ? (
+        <p className={styles.copyHint}>{debugAuxTexts.goldenExportCopyDisabledHint}</p>
+      ) : null}
       {copied ? <p className={styles.status}>{debugAuxTexts.copiedStatus}</p> : null}
     </div>
   );

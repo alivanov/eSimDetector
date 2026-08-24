@@ -13,10 +13,13 @@ export function ConfidenceBlock({ confidence }: ConfidenceBlockProps) {
   const percent = Math.max(0, Math.min(1, confidence)) * 100;
   return (
     <div className={styles.wrapper}>
-      <span className={styles.value}>{confidence.toFixed(2)}</span>
-      <div className={styles.track} role="presentation">
-        <div className={styles.fill} style={{ width: `${String(percent)}%` }} />
+      <div className={styles.row}>
+        <span className={styles.value}>{confidence.toFixed(2)}</span>
+        <div className={styles.track} role="presentation">
+          <div className={styles.fill} style={{ width: `${String(percent)}%` }} />
+        </div>
       </div>
+      {confidence === 0 ? <p className={styles.hint}>{debugAuxTexts.confidenceZeroHint}</p> : null}
     </div>
   );
 }

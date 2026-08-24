@@ -31,6 +31,8 @@ export const debugAuxTexts = {
   catalogNotAvailable: 'Недоступно',
   statusLabel: 'Статус',
   confidenceNoResponse: 'Отправьте сигналы, чтобы увидеть уверенность ответа.',
+  confidenceZeroHint:
+    'Это значение из ответа API, а не сбой экрана. На компьютере или при почти пустых сигналах сервис часто возвращает 0 — смотрите блок «Сработавшие правила» (например, PLATFORM_NOT_MOBILE).',
   noResponseYet: 'Отправьте сигналы, чтобы увидеть ответ сервиса.',
   noReasonsYet: 'Нет данных — отправьте сигналы.',
   reasonsEmpty: 'Правила не сработали.',
@@ -61,11 +63,26 @@ export const debugAuxTexts = {
   goldenExportSectionTitle: 'Экспорт записи эталонной выборки',
   goldenExportUnavailable:
     'Сначала получите ответ сервиса — запись формируется из последнего ответа на `/detect`.',
+  goldenExportIntro:
+    'Соберите JSON-запись для эталонной выборки сигналов: после копирования вставьте её в data/fixtures/signals.golden.json. Кнопка копирования включается, когда заполнено обязательное описание.',
+  goldenExportHelpToggle: 'Как заполнять поля — с примерами',
+  goldenExportHelpSteps: [
+    'Категория — к какому сценарию относится случай (например, «iPhone разных поколений» или «Десктопные браузеры»).',
+    'Канал сбора — откуда взяты сигналы: реальное устройство, эмуляция в браузере или открытая база User-Agent.',
+    'Описание (обязательно) — коротко, что это за устройство и браузер. Пример: «iPhone 13 mini, iOS 18.5, Safari» или «Pixel 7, Chrome 131, Android 15».',
+    'Ожидаемый результат (expected) — черновик из ответа сервиса. Сверьте platform, status и deviceId с тем, что должно быть по правилам определения, а не с тем, что «удобно тесту».',
+    'Заметки — необязательно; сюда можно написать, почему кейс важен или что уже проверено вручную.',
+  ],
+  goldenExportHelpExampleTitle: 'Пример описания и expected',
+  goldenExportHelpExampleBody:
+    'description: «Samsung Galaxy S24 Ultra, Chrome 131, Android 15»\nexpected.platform: android\nexpected.deviceType: phone\nexpected.status: supported\nexpected.exactModelKnown: true\nexpected.deviceId: samsung-galaxy-s24-ultra',
+  goldenExportRequiredMark: 'обязательно',
+  goldenExportOptionalMark: 'необязательно',
   goldenExportCategoryLabel: 'Категория',
   goldenExportSourceLabel: 'Канал сбора',
   goldenExportDescriptionLabel: 'Описание устройства/браузера',
   goldenExportDescriptionPlaceholder: 'Например: iPhone 13 mini, iOS 18.5, Safari',
-  goldenExportNotesLabel: 'Заметки (необязательно)',
+  goldenExportNotesLabel: 'Заметки',
   goldenExportExpectedTitle: 'Ожидаемый результат (expected)',
   goldenExportExpectedWarning:
     'Черновик: значения подставлены из ответа сервиса и не проверены. Перед копированием сверьте каждое поле с тем, что видите на устройстве, и с ожидаемым статусом eSIM. Если оставить черновик как есть, выборка перестанет ловить такую же ошибку.',
@@ -75,4 +92,6 @@ export const debugAuxTexts = {
   goldenExportExpectedExactModelKnownLabel: 'exactModelKnown',
   goldenExportExpectedDeviceIdLabel: 'deviceId',
   goldenExportPreviewTitle: 'Предпросмотр записи',
+  goldenExportCopyDisabledHint:
+    'Чтобы скопировать запись, заполните обязательное поле «Описание устройства/браузера».',
 } as const;

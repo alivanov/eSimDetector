@@ -4,6 +4,72 @@
   gap: var(--esim-spacing-sm);
 }
 
+.intro {
+  margin: 0;
+  color: var(--esim-colors-text-secondary);
+  font-size: var(--esim-typography-font-size-sm);
+  line-height: var(--esim-typography-line-height-md);
+}
+
+.help {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-xs);
+}
+
+.helpToggle {
+  align-self: flex-start;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--esim-components-button-text-foreground);
+  font-family: inherit;
+  font-size: var(--esim-typography-font-size-sm);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.helpToggle:focus-visible {
+  outline: var(--esim-states-focus-outline-width) solid var(--esim-states-focus-outline-color);
+  outline-offset: var(--esim-states-focus-outline-offset);
+}
+
+.helpBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-sm);
+  padding: var(--esim-spacing-sm);
+  border-radius: var(--esim-shape-radius-md);
+  background: var(--esim-colors-background);
+}
+
+.helpList {
+  margin: 0;
+  padding-left: var(--esim-spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-xs);
+  color: var(--esim-colors-text-secondary);
+  font-size: var(--esim-typography-font-size-sm);
+  line-height: var(--esim-typography-line-height-md);
+}
+
+.helpExampleTitle {
+  margin: 0;
+  font-size: var(--esim-typography-font-size-sm);
+  font-weight: var(--esim-typography-font-weight-medium);
+}
+
+.helpExample {
+  margin: 0;
+  padding: var(--esim-spacing-sm);
+  border-radius: var(--esim-shape-radius-md);
+  background: var(--esim-colors-surface);
+  font-family: monospace;
+  font-size: var(--esim-typography-font-size-xs);
+  white-space: pre-wrap;
+}
+
 .fieldWrapper {
   display: flex;
   flex-direction: column;
@@ -14,6 +80,16 @@
   font-size: var(--esim-typography-font-size-sm);
   font-weight: var(--esim-typography-font-weight-medium);
   color: var(--esim-colors-text-primary);
+}
+
+.requiredMark {
+  color: var(--esim-colors-state-error);
+}
+
+.requiredText,
+.optionalText {
+  font-weight: var(--esim-typography-font-weight-regular);
+  color: var(--esim-colors-text-secondary);
 }
 
 .input,
@@ -74,6 +150,12 @@
 .copyButton:focus-visible {
   outline: var(--esim-states-focus-outline-width) solid var(--esim-states-focus-outline-color);
   outline-offset: var(--esim-states-focus-outline-offset);
+}
+
+.copyHint {
+  margin: 0;
+  color: var(--esim-colors-text-secondary);
+  font-size: var(--esim-typography-font-size-sm);
 }
 
 .status {

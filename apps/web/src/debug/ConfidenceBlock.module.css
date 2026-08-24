@@ -1,5 +1,11 @@
 .wrapper {
   display: flex;
+  flex-direction: column;
+  gap: var(--esim-spacing-sm);
+}
+
+.row {
+  display: flex;
   align-items: center;
   gap: var(--esim-spacing-md);
 }
@@ -14,7 +20,6 @@
   flex: 1;
   height: var(--esim-spacing-xs);
   border-radius: var(--esim-shape-radius-full);
-  background: var(--esim-states-focus-outline-color, var(--esim-colors-border));
   background: var(--esim-colors-border);
   overflow: hidden;
 }
@@ -22,6 +27,13 @@
 .fill {
   height: 100%;
   background: var(--esim-colors-state-info);
+}
+
+.hint {
+  margin: 0;
+  color: var(--esim-colors-text-secondary);
+  font-size: var(--esim-typography-font-size-sm);
+  line-height: var(--esim-typography-line-height-md);
 }
 
 .emptyState {
