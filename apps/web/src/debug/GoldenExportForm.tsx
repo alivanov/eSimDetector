@@ -21,6 +21,8 @@ import {
   buildExpectedDraft,
   buildGoldenDraft,
   stringifyGoldenDraft,
+  suggestGoldenCategory,
+  suggestGoldenSource,
 } from './golden-export';
 import { debugAuxTexts, debugTexts } from './texts';
 
@@ -81,13 +83,21 @@ export function GoldenExportForm({ response, sentSignals, region }: GoldenExport
   const [lastPreparedRequestId, setLastPreparedRequestId] = useState<string | undefined>(undefined);
   const [copied, setCopied] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
+  const [categoryHint, setCategoryHint] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     if (response !== undefined && response.requestId !== lastPreparedRequestId) {
       setExpected(buildExpectedDraft(response));
+      const suggestion = suggestGoldenCategory(sentSignals);
+      setCategory(suggestion.category);
+      setCategoryHint(suggestion.reason);
+      const sourceSuggestion = suggestGoldenSource(sentSignals);
+      if (sourceSuggestion !== undefined) {
+        setSource(sourceSuggestion);
+      }
       setLastPreparedRequestId(response.requestId);
     }
-  }, [response, lastPreparedRequestId]);
+  }, [response, lastPreparedRequestId, sentSignals]);
 
   if (response === undefined || expected === undefined) {
     return <p className={styles.unavailable}>{debugAuxTexts.goldenExportUnavailable}</p>;
@@ -154,6 +164,12 @@ export function GoldenExportForm({ response, sentSignals, region }: GoldenExport
             </option>
           ))}
         </select>
+        {categoryHint !== undefined ? (
+          <p className={styles.hint}>
+            {debugAuxTexts.goldenExportCategoryHintPrefix}: {categoryHint}.{' '}
+            {debugAuxTexts.goldenExportCategoryHintSuffix}
+          </p>
+        ) : null}
       </div>
 
       <div className={styles.fieldWrapper}>

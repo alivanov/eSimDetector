@@ -7,7 +7,9 @@
 .row {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: var(--esim-spacing-md);
+  min-width: 0;
 }
 
 .value {
@@ -17,7 +19,8 @@
 }
 
 .track {
-  flex: 1;
+  flex: 1 1 8rem;
+  min-width: 0;
   height: var(--esim-spacing-xs);
   border-radius: var(--esim-shape-radius-full);
   background: var(--esim-colors-border);

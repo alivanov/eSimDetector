@@ -74,6 +74,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--esim-spacing-xxs);
+  min-width: 0;
 }
 
 .label {
@@ -95,12 +96,22 @@
 .input,
 .select,
 .textarea {
+  width: 100%;
+  min-width: 0;
   padding: var(--esim-spacing-xs) var(--esim-spacing-sm);
   border-radius: var(--esim-components-input-radius);
   border: var(--esim-shape-border-width-thin) solid var(--esim-components-input-border);
   background: var(--esim-components-input-background);
   color: var(--esim-colors-text-primary);
+  font-size: var(--esim-typography-font-size-md);
+}
+
+.hint {
+  margin: 0;
+  color: var(--esim-colors-text-secondary);
   font-size: var(--esim-typography-font-size-sm);
+  line-height: var(--esim-typography-line-height-md);
+  overflow-wrap: anywhere;
 }
 
 .expectedBlock {
@@ -120,7 +131,7 @@
 
 .expectedGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(12rem, 100%), 1fr));
   gap: var(--esim-spacing-sm);
 }
 
@@ -131,7 +142,7 @@
 }
 
 .copyButton {
-  align-self: flex-start;
+  align-self: stretch;
   padding: var(--esim-spacing-xs) var(--esim-spacing-md);
   border-radius: var(--esim-components-button-primary-radius);
   border: var(--esim-shape-border-width-thin) solid var(--esim-components-button-primary-border);
@@ -173,6 +184,13 @@
   font-family: monospace;
   font-size: var(--esim-typography-font-size-xs);
   white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 40rem) {
+  .copyButton {
+    align-self: flex-start;
+  }
 }
 
 .unavailable {

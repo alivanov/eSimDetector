@@ -1,12 +1,16 @@
 .page {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: var(--esim-colors-background);
   color: var(--esim-colors-text-primary);
   font-family: var(--esim-typography-font-family);
-  padding: var(--esim-spacing-lg);
+  padding: max(var(--esim-spacing-lg), env(safe-area-inset-top))
+    max(var(--esim-spacing-lg), env(safe-area-inset-right))
+    max(var(--esim-spacing-lg), env(safe-area-inset-bottom))
+    max(var(--esim-spacing-lg), env(safe-area-inset-left));
 }
 
 .stack {
@@ -15,14 +19,37 @@
   gap: var(--esim-spacing-lg);
   max-width: 32rem;
   width: 100%;
+  min-width: 0;
 }
 
 .card {
   width: 100%;
+  min-width: 0;
   background: var(--esim-colors-surface);
   border-radius: var(--esim-shape-radius-lg);
   padding: var(--esim-spacing-xl);
   box-shadow: var(--esim-shape-shadow-lg);
+}
+
+@media (max-width: 40rem) {
+  .page {
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: max(var(--esim-spacing-sm), env(safe-area-inset-top))
+      max(var(--esim-spacing-sm), env(safe-area-inset-right))
+      max(var(--esim-spacing-sm), env(safe-area-inset-bottom))
+      max(var(--esim-spacing-sm), env(safe-area-inset-left));
+  }
+
+  .stack {
+    gap: var(--esim-spacing-md);
+  }
+
+  .card {
+    padding: var(--esim-spacing-md);
+    border-radius: var(--esim-shape-radius-md);
+    box-shadow: var(--esim-shape-shadow-sm);
+  }
 }
 
 .feedback {

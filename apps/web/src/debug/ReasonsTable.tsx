@@ -19,21 +19,23 @@ export function ReasonsTable({ reasons }: ReasonsTableProps) {
     return <p className={styles.empty}>{debugAuxTexts.reasonsEmpty}</p>;
   }
   return (
-    <table className={styles.table}>
-      <thead>
-        <tr>
-          <th scope="col">{debugAuxTexts.reasonCodeColumn}</th>
-          <th scope="col">{debugAuxTexts.reasonDetailColumn}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {reasons.map((reason, index) => (
-          <tr key={`${reason.code}-${String(index)}`}>
-            <td className={styles.code}>{reason.code}</td>
-            <td>{reason.detail ?? ''}</td>
+    <div className={styles.scroll}>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th scope="col">{debugAuxTexts.reasonCodeColumn}</th>
+            <th scope="col">{debugAuxTexts.reasonDetailColumn}</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {reasons.map((reason, index) => (
+            <tr key={`${reason.code}-${String(index)}`}>
+              <td className={styles.code}>{reason.code}</td>
+              <td>{reason.detail ?? ''}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }

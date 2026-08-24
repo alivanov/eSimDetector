@@ -7,8 +7,10 @@
 .requestIdRow {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: var(--esim-spacing-sm);
   font-size: var(--esim-typography-font-size-sm);
+  min-width: 0;
 }
 
 .requestIdLabel {
@@ -17,6 +19,7 @@
 
 .requestIdValue {
   font-family: monospace;
+  overflow-wrap: anywhere;
 }
 
 .statusValue {
@@ -26,7 +29,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: max-content 1fr;
+  grid-template-columns: max-content minmax(0, 1fr);
   gap: var(--esim-spacing-xxs) var(--esim-spacing-md);
   font-size: var(--esim-typography-font-size-sm);
 }
@@ -37,6 +40,7 @@
 
 .grid dd {
   margin: 0;
+  overflow-wrap: anywhere;
 }
 
 .subheading {
@@ -86,6 +90,17 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--esim-spacing-xs);
+}
+
+@media (max-width: 40rem) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .optionButton {
+    width: 100%;
+    min-height: 2.75rem;
+  }
 }
 
 .hint {

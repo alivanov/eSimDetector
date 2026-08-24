@@ -12,12 +12,14 @@
   font-weight: var(--esim-typography-font-weight-bold);
   text-transform: var(--esim-typography-heading-text-transform);
   letter-spacing: var(--esim-typography-heading-letter-spacing);
+  overflow-wrap: anywhere;
 }
 
 .subtitle {
   margin: 0;
   font-size: var(--esim-typography-font-size-md);
   color: var(--esim-colors-text-secondary);
+  overflow-wrap: anywhere;
 }
 
 .liveRegion {
@@ -70,4 +72,15 @@
 .manualLink:focus-visible {
   outline: var(--esim-states-focus-outline-width) solid var(--esim-states-focus-outline-color);
   outline-offset: var(--esim-states-focus-outline-offset);
+}
+
+@media (max-width: 40rem) {
+  .heading {
+    font-size: var(--esim-typography-font-size-lg);
+  }
+
+  .retryButton {
+    width: 100%;
+    min-height: 2.75rem;
+  }
 }

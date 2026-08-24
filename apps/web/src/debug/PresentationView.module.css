@@ -17,6 +17,7 @@
 
 .actions {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--esim-spacing-md);
   font-size: var(--esim-typography-font-size-sm);
   color: var(--esim-colors-text-secondary);

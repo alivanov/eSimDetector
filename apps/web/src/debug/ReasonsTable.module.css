@@ -1,3 +1,8 @@
+.scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -10,6 +15,7 @@
   padding: var(--esim-spacing-xs) var(--esim-spacing-sm);
   border-bottom: var(--esim-shape-border-width-thin) solid var(--esim-colors-border);
   vertical-align: top;
+  overflow-wrap: anywhere;
 }
 
 .table th {

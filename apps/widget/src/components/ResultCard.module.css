@@ -28,6 +28,7 @@
   font-size: var(--esim-typography-font-size-lg);
   font-weight: var(--esim-typography-font-weight-bold);
   line-height: var(--esim-typography-line-height-tight);
+  overflow-wrap: anywhere;
 }
 
 .description {
@@ -35,6 +36,7 @@
   font-size: var(--esim-typography-font-size-md);
   line-height: var(--esim-typography-line-height-normal);
   color: var(--esim-colors-text-secondary);
+  overflow-wrap: anywhere;
 }
 
 .notice {
@@ -101,4 +103,20 @@
 .secondaryButton:focus-visible {
   outline: var(--esim-states-focus-outline-width) solid var(--esim-states-focus-outline-color);
   outline-offset: var(--esim-states-focus-outline-offset);
+}
+
+@media (max-width: 40rem) {
+  .card {
+    padding: var(--esim-spacing-md);
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    min-height: 2.75rem;
+  }
 }

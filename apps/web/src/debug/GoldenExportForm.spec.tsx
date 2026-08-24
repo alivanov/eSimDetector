@@ -64,6 +64,26 @@ describe('GoldenExportForm', () => {
     expect(screen.queryByText(debugAuxTexts.goldenExportCopyDisabledHint)).not.toBeInTheDocument();
   });
 
+  it('подставляет категорию Android с UA-CH по сигналам, а не оставляет iPhone', () => {
+    render(
+      <GoldenExportForm
+        response={response}
+        sentSignals={{
+          userAgent:
+            'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 Chrome/143.0.0.0 Mobile',
+          uaData: { platform: 'Android', mobile: true, model: 'SM-S928B' },
+        }}
+        region={undefined}
+      />,
+    );
+
+    const category = screen.getByLabelText(debugAuxTexts.goldenExportCategoryLabel);
+    expect(category).toHaveValue('android-vendor-ua-ch');
+    expect(
+      screen.getByText(/Предложено по сигналам: в uaData.model пришло «SM-S928B»/),
+    ).toBeInTheDocument();
+  });
+
   it('аккордеон «Как заполнять» раскрывает шаги и пример', () => {
     render(<GoldenExportForm response={response} sentSignals={{}} region={undefined} />);
 

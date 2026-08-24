@@ -129,3 +129,276 @@ export function buildGoldenDraft(input: GoldenDraftInput): GoldenDraftEntry {
 export function stringifyGoldenDraft(entry: GoldenDraftEntry): string {
   return JSON.stringify(entry, null, 2);
 }
+
+export interface GoldenCategorySuggestion {
+  readonly category: SignalsGoldenCategory;
+  readonly reason: string;
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+function readOptionalString(value: unknown): string | undefined {
+  return typeof value === 'string' ? value : undefined;
+}
+
+function readOptionalBoolean(value: unknown): boolean | undefined {
+  return typeof value === 'boolean' ? value : undefined;
+}
+
+function readOptionalNumber(value: unknown): number | undefined {
+  return typeof value === 'number' && Number.isFinite(value) ? value : undefined;
+}
+
+interface ParsedCategorySignals {
+  readonly userAgent: string;
+  readonly uaPlatform: string | undefined;
+  readonly uaMobile: boolean | undefined;
+  readonly uaModel: string | undefined;
+  readonly brands: readonly string[];
+  readonly maxTouchPoints: number | undefined;
+  readonly webglRenderer: string | undefined;
+  readonly minCssSide: number | undefined;
+}
+
+/**
+ * Разбор тела `signals` без утверждения `as` (ADR-016): нужны только поля, по которым
+ * выбирается категория выборки, а не полный тип запроса `/detect`.
+ */
+function parseSignalsForCategory(signals: unknown): ParsedCategorySignals {
+  if (!isRecord(signals)) {
+    return {
+      userAgent: '',
+      uaPlatform: undefined,
+      uaMobile: undefined,
+      uaModel: undefined,
+      brands: [],
+      maxTouchPoints: undefined,
+      webglRenderer: undefined,
+      minCssSide: undefined,
+    };
+  }
+
+  const uaData = isRecord(signals.uaData) ? signals.uaData : undefined;
+  const hardware = isRecord(signals.hardware) ? signals.hardware : undefined;
+  const webgl = isRecord(signals.webgl) ? signals.webgl : undefined;
+  const screen = isRecord(signals.screen) ? signals.screen : undefined;
+
+  const brands: string[] = [];
+  if (uaData !== undefined && Array.isArray(uaData.brands)) {
+    for (const item of uaData.brands) {
+      if (!isRecord(item)) {
+        continue;
+      }
+      const brand = readOptionalString(item.brand);
+      if (brand !== undefined) {
+        brands.push(brand);
+      }
+    }
+  }
+
+  const width = screen !== undefined ? readOptionalNumber(screen.width) : undefined;
+  const height = screen !== undefined ? readOptionalNumber(screen.height) : undefined;
+  const minCssSide =
+    width !== undefined && height !== undefined ? Math.min(width, height) : undefined;
+
+  return {
+    userAgent: readOptionalString(signals.userAgent) ?? '',
+    uaPlatform: uaData !== undefined ? readOptionalString(uaData.platform) : undefined,
+    uaMobile: uaData !== undefined ? readOptionalBoolean(uaData.mobile) : undefined,
+    uaModel: uaData !== undefined ? readOptionalString(uaData.model) : undefined,
+    brands,
+    maxTouchPoints:
+      hardware !== undefined ? readOptionalNumber(hardware.maxTouchPoints) : undefined,
+    webglRenderer: webgl !== undefined ? readOptionalString(webgl.renderer) : undefined,
+    minCssSide,
+  };
+}
+
+type SuggestedPlatform = 'ios' | 'android' | 'harmonyos' | 'other';
+
+/**
+ * Упрощённая классификация платформы по тем же приоритетам, что `classify-platform.ts`
+ * (docs/03 §3.3): только чтобы выбрать корзину выборки, не чтобы повторить ответ `/detect`.
+ */
+function suggestPlatform(parsed: ParsedCategorySignals): SuggestedPlatform {
+  const { userAgent, uaPlatform, maxTouchPoints } = parsed;
+  if (/iphone|ipad|ipod|cpu (?:iphone )?os \d/i.test(userAgent)) {
+    return 'ios';
+  }
+  if (/harmonyos|openharmony/i.test(userAgent)) {
+    return 'harmonyos';
+  }
+  if (/android/i.test(userAgent)) {
+    return 'android';
+  }
+  if (/macintosh/i.test(userAgent) && maxTouchPoints !== undefined && maxTouchPoints > 0) {
+    return 'ios';
+  }
+  const normalized = uaPlatform?.trim().toLowerCase();
+  if (normalized === 'android') {
+    return 'android';
+  }
+  if (normalized === 'harmonyos') {
+    return 'harmonyos';
+  }
+  if (normalized === 'ios' || normalized === 'ipados') {
+    return 'ios';
+  }
+  return 'other';
+}
+
+const DESKTOP_OR_SOFTWARE_GPU_MARKERS: readonly string[] = [
+  'swiftshader',
+  'llvmpipe',
+  'microsoft basic render',
+  'direct3d11 vs_5_0',
+  'direct3d9',
+  'mesa',
+  'angle (intel',
+  'angle (nvidia',
+  'angle (amd',
+  'vmware',
+  'virtualbox',
+];
+
+function looksLikeEmulation(parsed: ParsedCategorySignals, platform: SuggestedPlatform): boolean {
+  if (platform !== 'ios' && platform !== 'android' && platform !== 'harmonyos') {
+    return false;
+  }
+  if (parsed.maxTouchPoints === 0) {
+    return true;
+  }
+  const renderer = parsed.webglRenderer?.toLowerCase();
+  if (renderer === undefined) {
+    return false;
+  }
+  return DESKTOP_OR_SOFTWARE_GPU_MARKERS.some((marker) => renderer.includes(marker));
+}
+
+function hasUaChModel(model: string | undefined): model is string {
+  const trimmed = model?.trim();
+  return trimmed !== undefined && trimmed.length > 0 && trimmed.toLowerCase() !== 'k';
+}
+
+function looksLikeTablet(parsed: ParsedCategorySignals, platform: SuggestedPlatform): boolean {
+  if (/ipad/i.test(parsed.userAgent)) {
+    return true;
+  }
+  if (
+    /macintosh/i.test(parsed.userAgent) &&
+    parsed.maxTouchPoints !== undefined &&
+    parsed.maxTouchPoints > 0
+  ) {
+    return true;
+  }
+  if (platform !== 'android' && platform !== 'harmonyos') {
+    return false;
+  }
+  if (parsed.uaMobile === false) {
+    return true;
+  }
+  return parsed.uaMobile !== true && parsed.minCssSide !== undefined && parsed.minCssSide >= 600;
+}
+
+function looksLikeNonStandardBrowser(parsed: ParsedCategorySignals): boolean {
+  const ua = parsed.userAgent;
+  if (/firefox/i.test(ua) || /fxios/i.test(ua)) {
+    return true;
+  }
+  if (/samsungbrowser/i.test(ua) || /ucbrowser/i.test(ua) || /opr\/|opera/i.test(ua)) {
+    return true;
+  }
+  if (/yabrowser/i.test(ua) || /edga\//i.test(ua)) {
+    return true;
+  }
+  const brandNames = parsed.brands.map((brand) => brand.toLowerCase());
+  if (brandNames.length === 0) {
+    return false;
+  }
+  const chromiumFamily = brandNames.some(
+    (brand) => brand.includes('chrome') || brand.includes('chromium') || brand.includes('edge'),
+  );
+  return !chromiumFamily;
+}
+
+/**
+ * Предлагает категорию эталонной выборки по отправленным сигналам, а не по ответу `/detect`.
+ * `expected` по-прежнему черновик из ответа (ADR-041/ADR-042); категория — свойство набора
+ * сигналов, его нельзя списывать с `detection.method`, иначе выборка повторит ошибку сервиса.
+ */
+export function suggestGoldenCategory(signals: unknown): GoldenCategorySuggestion {
+  const parsed = parseSignalsForCategory(signals);
+  const platform = suggestPlatform(parsed);
+
+  if (/; wv\)/i.test(parsed.userAgent) || /webview/i.test(parsed.userAgent)) {
+    return { category: 'webview', reason: 'в User-Agent есть признак WebView' };
+  }
+
+  if (looksLikeEmulation(parsed, platform)) {
+    return {
+      category: 'devtools-emulation',
+      reason: 'мобильный User-Agent при признаках эмуляции (нет касаний или десктопный GPU)',
+    };
+  }
+
+  const macWithoutTouch =
+    /macintosh/i.test(parsed.userAgent) &&
+    parsed.maxTouchPoints === undefined &&
+    platform === 'other';
+  if (macWithoutTouch) {
+    return {
+      category: 'ambiguous-signature',
+      reason: 'Mac-подобный User-Agent без maxTouchPoints — iPad и компьютер неразличимы',
+    };
+  }
+
+  if (looksLikeTablet(parsed, platform)) {
+    return { category: 'tablet', reason: 'сигналы указывают на планшет' };
+  }
+
+  if (platform === 'ios') {
+    return { category: 'iphone-generations', reason: 'в User-Agent есть iPhone' };
+  }
+
+  if ((platform === 'android' || platform === 'harmonyos') && hasUaChModel(parsed.uaModel)) {
+    return {
+      category: 'android-vendor-ua-ch',
+      reason: `в uaData.model пришло «${parsed.uaModel.trim()}»`,
+    };
+  }
+
+  if (looksLikeNonStandardBrowser(parsed)) {
+    return {
+      category: 'non-standard-browser',
+      reason: 'браузер не Chrome и не Safari',
+    };
+  }
+
+  if (platform === 'android' || platform === 'harmonyos') {
+    return {
+      category: 'android-no-ua-ch',
+      reason: 'uaData.model пуст или равен K — модель ищется в User-Agent',
+    };
+  }
+
+  if (platform === 'other' && parsed.userAgent.length > 0) {
+    return { category: 'desktop-browser', reason: 'платформа не мобильная' };
+  }
+
+  return {
+    category: 'ambiguous-signature',
+    reason: 'по сигналам категорию однозначно не выбрать — проверьте вручную',
+  };
+}
+
+/** Канал сбора угадывается только при явной эмуляции; иначе оператор оставляет значение сам. */
+export function suggestGoldenSource(signals: unknown): SignalsGoldenSource | undefined {
+  const parsed = parseSignalsForCategory(signals);
+  const platform = suggestPlatform(parsed);
+  if (looksLikeEmulation(parsed, platform)) {
+    return 'browser-emulation';
+  }
+  return undefined;
+}

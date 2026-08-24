@@ -67,7 +67,7 @@ export const debugAuxTexts = {
     'Соберите JSON-запись для эталонной выборки сигналов: после копирования вставьте её в data/fixtures/signals.golden.json. Кнопка копирования включается, когда заполнено обязательное описание.',
   goldenExportHelpToggle: 'Как заполнять поля — с примерами',
   goldenExportHelpSteps: [
-    'Категория — к какому сценарию относится случай (например, «iPhone разных поколений» или «Десктопные браузеры»).',
+    'Категория подставляется по отправленным сигналам (не по ответу сервиса). Проверьте подсказку под полем и смените, если корзина другая.',
     'Канал сбора — откуда взяты сигналы: реальное устройство, эмуляция в браузере или открытая база User-Agent.',
     'Описание (обязательно) — коротко, что это за устройство и браузер. Пример: «iPhone 13 mini, iOS 18.5, Safari» или «Pixel 7, Chrome 131, Android 15».',
     'Ожидаемый результат (expected) — черновик из ответа сервиса. Сверьте platform, status и deviceId с тем, что должно быть по правилам определения, а не с тем, что «удобно тесту».',
@@ -79,6 +79,8 @@ export const debugAuxTexts = {
   goldenExportRequiredMark: 'обязательно',
   goldenExportOptionalMark: 'необязательно',
   goldenExportCategoryLabel: 'Категория',
+  goldenExportCategoryHintPrefix: 'Предложено по сигналам',
+  goldenExportCategoryHintSuffix: 'Можно сменить.',
   goldenExportSourceLabel: 'Канал сбора',
   goldenExportDescriptionLabel: 'Описание устройства/браузера',
   goldenExportDescriptionPlaceholder: 'Например: iPhone 13 mini, iOS 18.5, Safari',

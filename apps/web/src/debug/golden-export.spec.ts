@@ -1,6 +1,12 @@
 import { parseSignalsGolden } from '@esim-detector/tools-eval';
 
-import { buildExpectedDraft, buildGoldenDraft, stringifyGoldenDraft } from './golden-export';
+import {
+  buildExpectedDraft,
+  buildGoldenDraft,
+  stringifyGoldenDraft,
+  suggestGoldenCategory,
+  suggestGoldenSource,
+} from './golden-export';
 
 /**
  * Проверка «фактически, а не по коду» (критерий готовности этапа 6.4): запись, которую строит
@@ -91,5 +97,92 @@ describe('стенд отладки → запись signals.golden.json', () =>
     const roundTripped = JSON.parse(text);
     const { errors } = parseSignalsGolden([roundTripped]);
     expect(errors).toEqual([]);
+  });
+});
+
+describe('suggestGoldenCategory', () => {
+  it('Android с заполненным uaData.model — android-vendor-ua-ch', () => {
+    const suggestion = suggestGoldenCategory({
+      userAgent: 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 Chrome/143.0.0.0 Mobile',
+      uaData: { platform: 'Android', mobile: true, model: 'SM-S928B' },
+    });
+    expect(suggestion.category).toBe('android-vendor-ua-ch');
+    expect(suggestion.reason).toContain('SM-S928B');
+    expect(
+      suggestGoldenSource({
+        userAgent: 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 Chrome/143.0.0.0 Mobile',
+        uaData: { platform: 'Android', mobile: true, model: 'SM-S928B' },
+      }),
+    ).toBeUndefined();
+  });
+
+  it('модель K или пустая — android-no-ua-ch, не догадка по вендору', () => {
+    expect(
+      suggestGoldenCategory({
+        userAgent:
+          'Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 Chrome/131.0.0.0 Mobile',
+        uaData: { platform: 'Android', mobile: true, model: '' },
+      }).category,
+    ).toBe('android-no-ua-ch');
+    expect(
+      suggestGoldenCategory({
+        userAgent: 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 Chrome/143.0.0.0 Mobile',
+        uaData: { platform: 'Android', mobile: true, model: 'K' },
+      }).category,
+    ).toBe('android-no-ua-ch');
+  });
+
+  it('iPhone — iphone-generations; iPad — tablet', () => {
+    expect(
+      suggestGoldenCategory({
+        userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X)',
+      }).category,
+    ).toBe('iphone-generations');
+    expect(
+      suggestGoldenCategory({
+        userAgent: 'Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X)',
+      }).category,
+    ).toBe('tablet');
+  });
+
+  it('WebView, десктоп, эмуляция и неоднозначный Mac выбираются по сигналам', () => {
+    expect(
+      suggestGoldenCategory({
+        userAgent:
+          'Mozilla/5.0 (Linux; Android 13; SM-A536B; wv) AppleWebKit/537.36 Chrome/120.0.0.0 Mobile',
+      }).category,
+    ).toBe('webview');
+    expect(
+      suggestGoldenCategory({
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/131.0.0.0',
+      }).category,
+    ).toBe('desktop-browser');
+    expect(
+      suggestGoldenCategory({
+        userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X)',
+        hardware: { maxTouchPoints: 0 },
+      }).category,
+    ).toBe('devtools-emulation');
+    expect(
+      suggestGoldenSource({
+        userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X)',
+        hardware: { maxTouchPoints: 0 },
+      }),
+    ).toBe('browser-emulation');
+    expect(
+      suggestGoldenCategory({
+        userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15',
+      }).category,
+    ).toBe('ambiguous-signature');
+    expect(
+      suggestGoldenCategory({
+        userAgent: 'Mozilla/5.0 (Android 14; Mobile; rv:128.0) Gecko/128.0 Firefox/128.0',
+      }).category,
+    ).toBe('non-standard-browser');
+  });
+
+  it('не берёт категорию из посторонних полей и не падает на мусоре', () => {
+    expect(suggestGoldenCategory(null).category).toBe('ambiguous-signature');
+    expect(suggestGoldenCategory('не объект').category).toBe('ambiguous-signature');
   });
 });

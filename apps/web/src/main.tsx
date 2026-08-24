@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 
 import { App } from './App';
 import { DebugPage } from './debug/DebugPage';
+import './global.css';
 
 /**
  * `AdminPage` подключён ДИНАМИЧЕСКИМ импортом, а не статическим, как две другие страницы

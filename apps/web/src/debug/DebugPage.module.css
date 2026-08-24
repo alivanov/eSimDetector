@@ -1,9 +1,15 @@
 .page {
   min-height: 100vh;
+  min-height: 100dvh;
+  min-width: 0;
+  overflow-x: hidden;
   background-color: var(--esim-colors-background);
   color: var(--esim-colors-text-primary);
   font-family: var(--esim-typography-font-family);
-  padding: var(--esim-spacing-lg);
+  padding: max(var(--esim-spacing-lg), env(safe-area-inset-top))
+    max(var(--esim-spacing-lg), env(safe-area-inset-right))
+    max(var(--esim-spacing-lg), env(safe-area-inset-bottom))
+    max(var(--esim-spacing-lg), env(safe-area-inset-left));
   display: flex;
   flex-direction: column;
   gap: var(--esim-spacing-lg);
@@ -15,6 +21,7 @@
   margin: 0;
   font-size: var(--esim-typography-font-size-xl);
   font-weight: var(--esim-typography-font-weight-bold);
+  overflow-wrap: anywhere;
 }
 
 .catalogInfo {
@@ -29,6 +36,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--esim-spacing-sm);
+  min-width: 0;
   background: var(--esim-colors-surface);
   border-radius: var(--esim-shape-radius-lg);
   padding: var(--esim-spacing-lg);
@@ -48,6 +56,7 @@
 
 .textarea {
   width: 100%;
+  min-width: 0;
   min-height: 12rem;
   padding: var(--esim-spacing-sm);
   border-radius: var(--esim-components-input-radius);
@@ -57,6 +66,7 @@
   font-family: monospace;
   font-size: var(--esim-typography-font-size-sm);
   resize: vertical;
+  overflow-wrap: anywhere;
 }
 
 .textareaError {
@@ -120,4 +130,38 @@
 .secondaryButton:focus-visible {
   outline: var(--esim-states-focus-outline-width) solid var(--esim-states-focus-outline-color);
   outline-offset: var(--esim-states-focus-outline-offset);
+}
+
+@media (max-width: 40rem) {
+  .page {
+    gap: var(--esim-spacing-md);
+    padding: max(var(--esim-spacing-sm), env(safe-area-inset-top))
+      max(var(--esim-spacing-sm), env(safe-area-inset-right))
+      max(var(--esim-spacing-sm), env(safe-area-inset-bottom))
+      max(var(--esim-spacing-sm), env(safe-area-inset-left));
+  }
+
+  .heading {
+    font-size: var(--esim-typography-font-size-lg);
+  }
+
+  .section {
+    padding: var(--esim-spacing-md);
+    border-radius: var(--esim-shape-radius-md);
+  }
+
+  .buttonRow {
+    flex-direction: column;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    min-height: 2.75rem;
+  }
+
+  .textarea {
+    min-height: 10rem;
+    font-size: var(--esim-typography-font-size-md);
+  }
 }
