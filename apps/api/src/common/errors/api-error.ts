@@ -6,19 +6,15 @@ import { HttpException, type HttpStatus } from '@nestjs/common';
  */
 export type ApiErrorCode =
   | 'VALIDATION_ERROR'
-  | 'UNSUPPORTED_MEDIA_TYPE'
   | 'UNAUTHORIZED'
-  | 'FORBIDDEN_ORIGIN'
   | 'DEVICE_NOT_FOUND'
-  | 'REQUEST_NOT_FOUND'
-  | 'PAYLOAD_TOO_LARGE'
   | 'RATE_LIMITED'
   | 'CATALOG_UNAVAILABLE'
   | 'INTERNAL_ERROR'
   /**
    * Группа `/api/v1/admin/*` (docs/15-moderation.md §15.8, этап 7) — отдельный тег API, не
    * входивший в реестр docs/06 §6.5 на момент его написания. `TASK_NOT_FOUND` симметричен
-   * `DEVICE_NOT_FOUND`/`REQUEST_NOT_FOUND` выше (тот же 404, другая сущность).
+   * `DEVICE_NOT_FOUND` выше (тот же 404, другая сущность).
    */
   | 'TASK_NOT_FOUND';
 

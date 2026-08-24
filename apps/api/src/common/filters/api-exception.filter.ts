@@ -21,14 +21,12 @@ interface ResolvedError {
 const DEFAULT_CODE_BY_STATUS: ReadonlyMap<number, ApiErrorCode> = new Map<number, ApiErrorCode>([
   [HttpStatus.BAD_REQUEST, 'VALIDATION_ERROR'],
   [HttpStatus.UNAUTHORIZED, 'UNAUTHORIZED'],
-  [HttpStatus.FORBIDDEN, 'FORBIDDEN_ORIGIN'],
   // Без явного ApiError с точным кодом сработавший маршрут неизвестен, поэтому
   // при обычном 404 используется код из реестра, ближе всего описывающий
   // "ресурс не найден" в текущем контракте. Доменные модули должны бросать
-  // ApiError('DEVICE_NOT_FOUND' | 'REQUEST_NOT_FOUND', ...) явно.
+  // ApiError('DEVICE_NOT_FOUND', ...) явно (слот 404 занят им; `TASK_NOT_FOUND`
+  // бросается только с явным ApiError в группе /admin).
   [HttpStatus.NOT_FOUND, 'DEVICE_NOT_FOUND'],
-  [HttpStatus.UNSUPPORTED_MEDIA_TYPE, 'UNSUPPORTED_MEDIA_TYPE'],
-  [HttpStatus.PAYLOAD_TOO_LARGE, 'PAYLOAD_TOO_LARGE'],
   [HttpStatus.TOO_MANY_REQUESTS, 'RATE_LIMITED'],
   [HttpStatus.SERVICE_UNAVAILABLE, 'CATALOG_UNAVAILABLE'],
 ]);
