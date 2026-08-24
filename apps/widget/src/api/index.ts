@@ -33,3 +33,9 @@ export { suggestDevices, parseSuggestResponse, MAX_SUGGEST_LIMIT } from './sugge
 
 export type { CatalogMeta } from './catalog-meta';
 export { getCatalogMeta, parseCatalogMeta } from './catalog-meta';
+
+export type { DeviceCard, DeviceCardEsim } from './device-card';
+export { getDeviceById, parseDeviceCard } from './device-card';
+
+export type { DeviceCardResultView } from './result-from-device-card';
+export { buildExactModelPresentation, resultViewFromDeviceCard } from './result-from-device-card';

@@ -297,10 +297,37 @@ describe('EsimChecker — сценарий уточнения choose_candidate (
     jest.restoreAllMocks();
   });
 
-  it('клик по варианту отправляет POST /devices/search с q, равным его подписи', async () => {
+  it('клик по варианту запрашивает GET /devices/{id} и показывает статус карточки', async () => {
     const fetchMock = installFetchMock();
     fetchMock.mockResolvedValueOnce(buildFakeResponse({ body: chooseCandidateResponse }));
-    fetchMock.mockResolvedValueOnce(buildFakeResponse({ body: searchSupportedResponse }));
+    fetchMock.mockResolvedValueOnce(
+      buildFakeResponse({
+        body: {
+          id: 'apple-iphone-xs',
+          brand: 'apple',
+          brandTitle: 'Apple',
+          marketingName: 'iPhone XS',
+          name: 'Apple iPhone XS',
+          family: 'iphone-xs',
+          generation: null,
+          modifiers: [],
+          modelCodes: [],
+          platform: 'ios',
+          deviceType: 'phone',
+          esim: {
+            support: 'supported',
+            dualSim: 'physical+esim',
+            maxProfiles: 8,
+            conditions: [],
+            clarifyingQuestion: null,
+            notes: '',
+          },
+          releaseYear: 2018,
+          sources: [],
+          dataConfidence: 'verified',
+        },
+      }),
+    );
 
     render(<EsimChecker apiBase={API_BASE} />);
     await screen.findByRole('button', { name: 'iPhone XS' });
@@ -310,11 +337,12 @@ describe('EsimChecker — сценарий уточнения choose_candidate (
     await waitFor(() => {
       expect(fetchMock).toHaveBeenCalledTimes(2);
     });
-    expect(callUrl(fetchMock, 1)).toBe(`${API_BASE}/api/v1/devices/search`);
-    expect(parsedBody(fetchMock, 1)).toEqual({ q: 'iPhone XS' });
+    expect(callUrl(fetchMock, 1)).toBe(`${API_BASE}/api/v1/devices/apple-iphone-xs`);
 
     expect(
-      await screen.findByText('iPhone XS может использовать eSIM вместе с физической SIM-картой.'),
+      await screen.findByText(
+        'Apple iPhone XS может использовать eSIM вместе с физической SIM-картой.',
+      ),
     ).toBeInTheDocument();
   });
 
@@ -333,7 +361,34 @@ describe('EsimChecker — сценарий уточнения choose_candidate (
   it('группа iOS с определённым статусом: «Уточнить модель» раскрывает список кандидатов + «Другая модель»', async () => {
     const fetchMock = installFetchMock();
     fetchMock.mockResolvedValueOnce(buildFakeResponse({ body: iosGroupSupportedResponse }));
-    fetchMock.mockResolvedValueOnce(buildFakeResponse({ body: searchSupportedResponse }));
+    fetchMock.mockResolvedValueOnce(
+      buildFakeResponse({
+        body: {
+          id: 'apple-iphone-14-pro',
+          brand: 'apple',
+          brandTitle: 'Apple',
+          marketingName: 'iPhone 14 Pro',
+          name: 'Apple iPhone 14 Pro',
+          family: 'iphone',
+          generation: 14,
+          modifiers: ['pro'],
+          modelCodes: [],
+          platform: 'ios',
+          deviceType: 'phone',
+          esim: {
+            support: 'supported',
+            dualSim: 'physical+esim',
+            maxProfiles: 8,
+            conditions: [],
+            clarifyingQuestion: null,
+            notes: '',
+          },
+          releaseYear: 2022,
+          sources: [],
+          dataConfidence: 'verified',
+        },
+      }),
+    );
 
     render(<EsimChecker apiBase={API_BASE} />);
     await screen.findByRole('button', { name: 'Уточнить модель' });
@@ -348,7 +403,7 @@ describe('EsimChecker — сценарий уточнения choose_candidate (
     await waitFor(() => {
       expect(fetchMock).toHaveBeenCalledTimes(2);
     });
-    expect(parsedBody(fetchMock, 1)).toEqual({ q: 'iPhone 14 Pro' });
+    expect(callUrl(fetchMock, 1)).toBe(`${API_BASE}/api/v1/devices/apple-iphone-14-pro`);
   });
 });
 

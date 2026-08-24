@@ -52,8 +52,9 @@ const CHOSEN_CANDIDATE_LABEL = 'Apple iPhone XS';
  * Сценарий 2: `clarification.kind === 'choose_candidate'` → клик по варианту → доведённый до конца
  * результат (docs/08 §8.3). Конкретный вариант выбирается по ТЕКСТУ кнопки (ограничение промпта
  * этапа — `getByRole`, не индекс/структура разметки); `Apple iPhone XS` присутствует в списке
- * кандидатов на обоих профилях этого этапа (проверено фактическим запросом к `/api/v1/detect`) и
- * при прямом поиске по названию сразу даёт `supported` без дальнейших уточнений.
+ * кандидатов на обоих профилях этого этапа. После выбора UI запрашивает `GET /devices/{id}`
+ * (docs/06 §6.4) и показывает статус карточки — не повторный `/devices/search` по подписи
+ * (поиск «Apple iPhone XS» даёт повторное уточнение XS vs XS Max из‑за `DECISION_GAP_TOO_SMALL`).
  */
 export async function expectClarificationCandidateFlow(page: Page): Promise<void> {
   await page.goto('/');
@@ -88,6 +89,18 @@ const TYPO_EXPECTED_DEVICE_NAME = 'Google Pixel 7a';
  */
 export async function expectManualSearchTypoFlow(page: Page): Promise<void> {
   await page.goto('/');
+
+  // Дождаться завершения автоопределения: ссылка «Указать устройство вручную» видна уже на
+  // экране загрузки, и ранний клик сбрасывается последующим `setScreen(result)` из `/detect`.
+  await expect(
+    page
+      .getByRole('heading', {
+        name: new RegExp(
+          `${presentationTexts.supportedTitle}|${presentationTexts.notSupportedTitle}|${presentationTexts.clarificationTitle}`,
+        ),
+      })
+      .first(),
+  ).toBeVisible();
 
   // На настольном профиле автоопределение может завершиться уточнением `manual_input`
   // (`PLATFORM_NOT_MOBILE`, docs/09 ADR-034), у которого кнопка отказа буквально совпадает по

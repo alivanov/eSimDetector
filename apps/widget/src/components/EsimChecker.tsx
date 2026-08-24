@@ -9,6 +9,8 @@ import type { PresentationAction, Presentation } from '../api/presentation';
 import type { Clarification } from '../api/clarification';
 import type { CandidateSummary } from '../api/device-summary';
 import type { ApiReason } from '../api/reason';
+import { getDeviceById } from '../api/device-card';
+import { resultViewFromDeviceCard } from '../api/result-from-device-card';
 import type { SearchResponse } from '../api/search';
 import { searchDevices } from '../api/search';
 import { findDeviceTypeLabel, findDeviceTypeNotice } from '../device-type';
@@ -28,6 +30,7 @@ import styles from './EsimChecker.module.css';
 import { LoadingIndicator } from './LoadingIndicator';
 import { ManualSearch } from './ManualSearch';
 import { ResultCard } from './ResultCard';
+import type { OptionLike } from './CandidateOptionsList';
 
 export interface EsimCheckerResult {
   readonly status: ResultStatus;
@@ -48,14 +51,15 @@ export interface EsimCheckerProps {
   /**
    * Ответ `/detect` получен и разобран — независимо от того, требуется ли после этого уточнение
    * (событие `esim:detected`, docs/07 §7.2, ADR-040). НЕ вызывается для результатов
-   * `/devices/search` (ручной поиск/выбор варианта уточнения): событие про автоматическое
-   * определение по сигналам браузера, а не про ручной ввод.
+   * `/devices/search` и `GET /devices/{id}` (ручной поиск / выбор варианта уточнения): событие про
+   * автоматическое определение по сигналам браузера, а не про ручной ввод.
    */
   readonly onDetected?: (detection: DetectionInfo) => void;
   /**
-   * Ответ (от `/detect` либо `/devices/search`) содержит блок `clarification` — вызывается
-   * ДОПОЛНИТЕЛЬНО к `onResult`, поскольку форма результата фиксирована документом и не включает
-   * подробности уточнения (событие `esim:clarification`, docs/07 §7.2, ADR-040).
+   * Ответ (от `/detect`, `/devices/search` или карточки `GET /devices/{id}`) содержит блок
+   * `clarification` — вызывается ДОПОЛНИТЕЛЬНО к `onResult`, поскольку форма результата
+   * фиксирована документом и не включает подробности уточнения (событие `esim:clarification`,
+   * docs/07 §7.2, ADR-040).
    */
   readonly onClarification?: (clarification: Clarification) => void;
   /** Показан экран ошибки взаимодействия — сеть или ответ сервиса кодом 4xx/5xx (событие `esim:error`, docs/07 §7.2, ADR-040). */
@@ -212,7 +216,12 @@ export function EsimChecker({
         confidence: result.confidence,
         exactModelKnown: result.exactModelKnown,
       });
-      setScreen({ kind: 'result', result, showCandidatesPicker: false });
+      // Не перезаписывать ручной поиск, если пользователь ушёл с загрузки до ответа `/detect`.
+      setScreen((current) =>
+        current.kind === 'manual-search'
+          ? current
+          : { kind: 'result', result, showCandidatesPicker: false },
+      );
     },
     [onClarification, onDetected, onResult],
   );
@@ -306,17 +315,66 @@ export function EsimChecker({
     [apiBase, applySearchResult, onError],
   );
 
-  const searchByLabel = useCallback(
-    (label: string) => {
-      searchByQuery(label);
+  /**
+   * Выбор кандидата уточнения: `GET /devices/{id}` по id варианта (ADR-047 п.11), а не повторный
+   * `/devices/search` по подписи. После ужесточения согласия кандидатов (этап 6 сдача п.1–2) поиск
+   * по короткой подписи вроде «Apple iPhone XS» снова даёт `choose_candidate` (XS vs XS Max) —
+   * пользователь, уже выбравший id, не должен попадать в тот же цикл.
+   */
+  const resolveChosenCandidate = useCallback(
+    (option: OptionLike) => {
+      setScreen({ kind: 'loading', label: checkScreenTexts.loading });
+      void getDeviceById(apiBase, option.id)
+        .then((card) => {
+          const view = resultViewFromDeviceCard(card);
+          // Для `conditional` ответ на вопрос идёт повторным `/devices/search` с именем и region —
+          // запоминаем имя как «последний поисковый запрос».
+          lastSearchQueryRef.current = view.deviceName;
+          if (view.clarification !== undefined) {
+            onClarification?.(view.clarification);
+          }
+          onResult?.({
+            status: view.status,
+            deviceId: view.deviceId,
+            confidence: view.confidence,
+            exactModelKnown: true,
+          });
+          setScreen({
+            kind: 'result',
+            result: {
+              status: view.status,
+              presentation: view.presentation,
+              clarification: view.clarification,
+              candidates: [],
+              deviceType: card.deviceType,
+              reasons: [{ code: 'CATALOG_EXACT_MATCH' }],
+              deviceId: view.deviceId,
+              exactModelKnown: true,
+              confidence: view.confidence,
+              source: 'search',
+            },
+            showCandidatesPicker: false,
+          });
+        })
+        .catch((error: unknown) => {
+          onError?.({ code: resolveErrorCode(error), message: resolveErrorMessage(error) });
+          setScreen({
+            kind: 'error',
+            message: resolveErrorMessage(error),
+            onRetry: () => {
+              resolveChosenCandidate(option);
+            },
+          });
+        });
     },
-    [searchByQuery],
+    [apiBase, onClarification, onError, onResult],
   );
 
   /**
    * Ответ на `answer_question` для результата, полученного `/devices/search` (docs/06 §6.3) —
    * тот же запрос повторно, теперь с `region`. Используется тот же приём, что и `followupDetect`
    * для результатов `/detect`: клиент не хранит состояние сессии сам, а присылает всё заново.
+   * Тот же путь — после выбора `conditional`-кандидата через `GET /devices/{id}`.
    */
   const answerSearchQuestion = useCallback(
     (region: string) => {
@@ -402,7 +460,7 @@ export function EsimChecker({
               <ClarificationScreen
                 clarification={screen.result.clarification}
                 onChooseCandidate={(option) => {
-                  searchByLabel(option.label);
+                  resolveChosenCandidate(option);
                 }}
                 onAnswerQuestion={(optionId) => {
                   if (screen.result.source === 'detect') {
@@ -432,7 +490,7 @@ export function EsimChecker({
                   if (option.id === otherCandidateOptionId) {
                     setScreen({ kind: 'manual-search' });
                   } else {
-                    searchByLabel(option.label);
+                    resolveChosenCandidate(option);
                   }
                 }}
               />
@@ -461,7 +519,7 @@ export function EsimChecker({
         ) : null}
       </div>
 
-      {screen.kind !== 'manual-search' ? (
+      {screen.kind !== 'manual-search' && screen.kind !== 'loading' ? (
         <button
           type="button"
           className={styles.manualLink}
