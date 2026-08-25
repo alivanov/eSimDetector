@@ -435,6 +435,11 @@
     "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — прямо в перечне поддерживающих eSIM устройств (раздел «Galaxy devices that support eSIM», Last Update date: Aug 15, 2026 — проверено 2026-08-24, фаза C)"
   },
   {
+    "id": "samsung-galaxy-s24-sm-s9210",
+    "esimSupport": "no",
+    "note": "https://www.phonemore.com/specs/samsung/galaxy-s24/sm-s9210-512gb/ — SM-S9210: 2× nano-SIM, China/Hong Kong; eSIM нет (полевое подтверждение 2026-08-25; не смешивать с SM-S921B/U/U1)"
+  },
+  {
     "id": "samsung-galaxy-s24-plus",
     "esimSupport": "yes",
     "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — Galaxy S24+ в перечне (проверено 2026-08-24, фаза C); id с Plus, не «+» (docs/10 О-8)"

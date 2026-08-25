@@ -274,7 +274,7 @@
       "maxProfiles": null,
       "conditions": [],
       "clarifyingQuestion": null,
-      "notes": "В перечне Galaxy devices that support eSIM. База SM-S921 — Model numbers; B — doc.samsungmobile.com/sm-s921b/ и samsung.com/uk/support/model/SM-S921BZKGEUB/; U/U1 — code-suffixes.json (пример SM-S928U/U1 на той же схеме)."
+      "notes": "В перечне Galaxy devices that support eSIM. База SM-S921 — Model numbers; B — doc.samsungmobile.com/sm-s921b/ и samsung.com/uk/support/model/SM-S921BZKGEUB/; U/U1 — code-suffixes.json (пример SM-S928U/U1 на той же схеме). Суффикс 0 (SM-S9210, CN/HK dual nano-SIM без eSIM) НЕ включать — отдельная запись samsung-galaxy-s24-sm-s9210."
     },
     "releaseYear": 2024,
     "marketPresenceRu": "parallel-import",

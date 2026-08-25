@@ -1,0 +1,54 @@
+[
+  {
+    "_id": "samsung-galaxy-s24-sm-s9210",
+    "brand": "samsung",
+    "brandTitle": "Samsung",
+    "marketingName": "Galaxy S24 SM-S9210",
+    "displayName": "Samsung Galaxy S24 (SM-S9210)",
+    "family": "galaxy-s",
+    "generation": 24,
+    "modifiers": [],
+    "modelCodes": ["SM-S9210"],
+    "aliases": ["sm-s9210", "galaxy s24 sm-s9210", "samsung galaxy s24 sm-s9210"],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "14",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Региональный код с суффиксом 0 (материковый Китай / HK по схеме code-suffixes.json): два физических nano-SIM, без eSIM. Не смешивать с samsung-galaxy-s24 (SM-S921B/U/U1, supported). Полевой сбор 2026-08-25: в настройках нет пунктов eSIM, поиск «esim» не даёт диспетчера eSIM. Не обобщать «любой CN → нет eSIM» (ADR-037)."
+    },
+    "releaseYear": 2024,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.35,
+    "sources": [
+      {
+        "url": "https://www.phonemore.com/specs/samsung/galaxy-s24/sm-s9210-512gb/",
+        "title": "Samsung Galaxy S24 (SM-S9210) — PhoneMore: 2× nano-SIM, China/Hong Kong",
+        "checkedAt": "2026-08-25"
+      },
+      {
+        "url": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/",
+        "title": "Galaxy eSIM and supported network carriers — Samsung (перечень eSIM без регионального SM-S9210)",
+        "checkedAt": "2026-08-25"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-25T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-25T00:00:00.000Z",
+    "updatedAt": "2026-08-25T00:00:00.000Z"
+  }
+]

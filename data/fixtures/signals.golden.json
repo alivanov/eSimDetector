@@ -6610,6 +6610,76 @@
     "notes": "Полевой сбор 2026-08-25: uaData.model «SM-S938B» с живого Яндекс.Браузера (не составная запись). На момент съёмки /debug возвращал clarification_required — код отсутствовал в рабочем справочнике (курируемое ядро закрывало только S23/S24). Заведена data/catalog/curated/samsung-galaxy-s25-ultra.json (verified, SM-S938B/U/U1). Ground truth: настройки «Galaxy S25 Ultra» / SM-S938B/DS, в диспетчере SIM есть «Добавление eSIM». expected — после появления записи в справочнике."
   },
   {
+    "id": "android-vendor-ua-ch-029",
+    "category": "android-vendor-ua-ch",
+    "description": "Samsung Galaxy S24 (SM-S9210), Яндекс.Браузер 26.8, Android 16 — живое устройство, стенд /debug",
+    "source": "real-device",
+    "signals": {
+      "userAgent": "Mozilla/5.0 (Linux; arm_64; Android 16; SM-S9210) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.7871.308 YaBrowser/26.8.0.308.00 Mobile Safari/537.36",
+      "uaData": {
+        "platform": "Android",
+        "mobile": true,
+        "brands": [
+          {
+            "brand": "Not;A=Brand",
+            "version": "8"
+          },
+          {
+            "brand": "Chromium",
+            "version": "150"
+          },
+          {
+            "brand": "Yandex",
+            "version": "26"
+          }
+        ],
+        "model": "SM-S9210",
+        "platformVersion": "16.0.0",
+        "fullVersionList": [
+          {
+            "brand": "Not;A=Brand",
+            "version": "8.0.0.0"
+          },
+          {
+            "brand": "Chromium",
+            "version": "150.0.7871.308"
+          },
+          {
+            "brand": "Yandex",
+            "version": "26.8.0.308"
+          }
+        ],
+        "architecture": "",
+        "bitness": ""
+      },
+      "screen": {
+        "width": 360,
+        "height": 780,
+        "availWidth": 360,
+        "availHeight": 780,
+        "dpr": 3,
+        "orientation": "portrait-primary"
+      },
+      "hardware": {
+        "maxTouchPoints": 5,
+        "hardwareConcurrency": 8,
+        "deviceMemory": 8
+      },
+      "webgl": {
+        "vendor": "Google Inc. (Qualcomm)",
+        "renderer": "ANGLE (Qualcomm, Adreno (TM) 750, OpenGL ES 3.2)"
+      }
+    },
+    "expected": {
+      "platform": "android",
+      "deviceType": "phone",
+      "status": "not_supported",
+      "exactModelKnown": true,
+      "deviceId": "samsung-galaxy-s24-sm-s9210"
+    },
+    "notes": "Полевой сбор 2026-08-25 (Вадим): uaData.model «SM-S9210» с живого Яндекс.Браузера. Ground truth: «Сведения о телефоне» — Galaxy S24 / SM-S9210; поиск «esim» в настройках без пунктов eSIM; два сигнала сотовой сети (dual physical). До правки каталога /detect давал clarification_required (CATALOG_MODEL_CODE_UNKNOWN). Заведена отдельная курируемая запись samsung-galaxy-s24-sm-s9210 (not_supported) — код НЕ добавлять к samsung-galaxy-s24 (SM-S921B/U/U1, supported): иначе ложный positive по К1."
+  },
+  {
     "id": "ambiguous-signature-005",
     "category": "ambiguous-signature",
     "description": "Firefox для Android без Client Hints на планшете с шириной экрана значительно выше границы 600 CSS px",
