@@ -6750,6 +6750,76 @@
     "notes": "Полевой сбор 2026-08-25 (Алексей): uaData.model «23117RA68G» с живого Chrome (редуцированный UA Android 10; K). Ground truth: «О телефоне» — Redmi Note 13 Pro; SIM — два физических слота, без пунктов eSIM. До правки /detect → clarification_required (CATALOG_MODEL_CODE_UNKNOWN). Курируемая xiaomi-redmi-note-13-pro (verified, mi.com FAQ KA-537134). Коды 5G (2312DRA50G и др.) сюда не включать."
   },
   {
+    "id": "android-vendor-ua-ch-031",
+    "category": "android-vendor-ua-ch",
+    "description": "Xiaomi Redmi Note 9 Pro (M2003J6B2G), Chrome 151, Android 12 — живое устройство, стенд /debug",
+    "source": "real-device",
+    "signals": {
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36",
+      "uaData": {
+        "platform": "Android",
+        "mobile": true,
+        "brands": [
+          {
+            "brand": "Not=A?Brand",
+            "version": "99"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "151"
+          },
+          {
+            "brand": "Chromium",
+            "version": "151"
+          }
+        ],
+        "model": "Redmi Note 9 Pro",
+        "platformVersion": "12.0.0",
+        "fullVersionList": [
+          {
+            "brand": "Not=A?Brand",
+            "version": "99.0.0.0"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "151.0.7922.169"
+          },
+          {
+            "brand": "Chromium",
+            "version": "151.0.7922.169"
+          }
+        ],
+        "architecture": "",
+        "bitness": ""
+      },
+      "screen": {
+        "width": 393,
+        "height": 873,
+        "availWidth": 393,
+        "availHeight": 873,
+        "dpr": 2.75,
+        "orientation": "portrait-primary"
+      },
+      "hardware": {
+        "maxTouchPoints": 5,
+        "hardwareConcurrency": 8,
+        "deviceMemory": 4
+      },
+      "webgl": {
+        "vendor": "Google Inc. (Qualcomm)",
+        "renderer": "ANGLE (Qualcomm, Adreno (TM) 618, OpenGL ES 3.2)"
+      }
+    },
+    "expected": {
+      "platform": "android",
+      "deviceType": "phone",
+      "status": "not_supported",
+      "exactModelKnown": true,
+      "deviceId": "xiaomi-redmi-note-9-pro"
+    },
+    "notes": "Полевой сбор 2026-08-25 (Малахов): uaData.model — маркетинговое «Redmi Note 9 Pro» (не сервисный код); на экране «О телефоне» — M2003J6B2G; dual physical SIM без eSIM. Автоответ стенда уже был not_supported по импортной записи; курируемое ядро поднимает до verified (mi.com FAQ KA-07707). Ценность для К1: живой путь Android по marketing name в Sec-CH-UA-Model."
+  },
+  {
     "id": "ambiguous-signature-005",
     "category": "ambiguous-signature",
     "description": "Firefox для Android без Client Hints на планшете с шириной экрана значительно выше границы 600 CSS px",

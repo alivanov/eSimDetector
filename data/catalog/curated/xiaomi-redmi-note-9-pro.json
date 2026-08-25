@@ -1,0 +1,60 @@
+[
+  {
+    "_id": "xiaomi-redmi-note-9-pro",
+    "brand": "xiaomi",
+    "brandTitle": "Xiaomi",
+    "marketingName": "Redmi Note 9 Pro",
+    "displayName": "Xiaomi Redmi Note 9 Pro",
+    "family": "redmi-note",
+    "generation": 9,
+    "modifiers": ["pro"],
+    "modelCodes": ["M2003J6B2G", "M2003J6E1C"],
+    "aliases": [
+      "redmi note 9 pro",
+      "xiaomi redmi note 9 pro",
+      "note 9 pro",
+      "редми ноут 9 про",
+      "m2003j6b2g"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "10",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "FAQ Xiaomi: слот Nano-SIM + Nano-SIM + Micro SD, eSIM не упоминается и не поддерживается. Коды M2003J6B2G (global) / M2003J6E1C (CN). Не путать с Redmi Note 9 Pro 5G (M2007J17C) и Note 9 Pro Max. Полевой сбор 2026-08-25: uaData.model «Redmi Note 9 Pro» (маркетинговое имя), M2003J6B2G на экране «О телефоне», dual physical SIM без пунктов eSIM."
+    },
+    "releaseYear": 2020,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.45,
+    "sources": [
+      {
+        "url": "https://www.mi.com/sg/support/faq/details/KA-07707/",
+        "title": "Redmi Note 9 Pro FAQ — Nano SIM + Nano SIM + Micro SD — Xiaomi",
+        "checkedAt": "2026-08-25"
+      },
+      {
+        "url": "https://www.mi.com/uk/redmi-note-9-pro/specs",
+        "title": "Redmi Note 9 Pro specs — nano-SIM + nano-SIM + microSD — Xiaomi UK",
+        "checkedAt": "2026-08-25"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-25T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-25T00:00:00.000Z",
+    "updatedAt": "2026-08-25T00:00:00.000Z"
+  }
+]
