@@ -1,0 +1,55 @@
+[
+  {
+    "_id": "xiaomi-redmi-note-13-pro",
+    "brand": "xiaomi",
+    "brandTitle": "Xiaomi",
+    "marketingName": "Redmi Note 13 Pro",
+    "displayName": "Xiaomi Redmi Note 13 Pro",
+    "family": "redmi-note",
+    "generation": 13,
+    "modifiers": ["pro"],
+    "modelCodes": ["23117RA68G"],
+    "aliases": [
+      "redmi note 13 pro",
+      "xiaomi redmi note 13 pro",
+      "note 13 pro",
+      "редми ноут 13 про",
+      "23117ra68g"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "13",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "4G-SKU 23117RA68G: официальный FAQ Xiaomi — eSIM не поддерживается. Не путать с Redmi Note 13 Pro 5G / Pro+ 5G (другие коды, напр. 2312DRA50G / 23090RA98G) — их в эту запись не включать. Полевой сбор 2026-08-25: dual physical SIM, пунктов eSIM в настройках нет."
+    },
+    "releaseYear": 2024,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.55,
+    "sources": [
+      {
+        "url": "https://www.mi.com/global/support/faq/details/KA-537134/",
+        "title": "Does the Redmi Note 13 Pro support the use of two eSIM cards simultaneously? — Xiaomi (eSIM не поддерживается)",
+        "checkedAt": "2026-08-25"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-25T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-25T00:00:00.000Z",
+    "updatedAt": "2026-08-25T00:00:00.000Z"
+  }
+]

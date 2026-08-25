@@ -6680,6 +6680,76 @@
     "notes": "Полевой сбор 2026-08-25 (Вадим): uaData.model «SM-S9210» с живого Яндекс.Браузера. Ground truth: «Сведения о телефоне» — Galaxy S24 / SM-S9210; поиск «esim» в настройках без пунктов eSIM; два сигнала сотовой сети (dual physical). До правки каталога /detect давал clarification_required (CATALOG_MODEL_CODE_UNKNOWN). Заведена отдельная курируемая запись samsung-galaxy-s24-sm-s9210 (not_supported) — код НЕ добавлять к samsung-galaxy-s24 (SM-S921B/U/U1, supported): иначе ложный positive по К1."
   },
   {
+    "id": "android-vendor-ua-ch-030",
+    "category": "android-vendor-ua-ch",
+    "description": "Xiaomi Redmi Note 13 Pro (23117RA68G), Chrome 152, Android 16 — живое устройство, стенд /debug",
+    "source": "real-device",
+    "signals": {
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Mobile Safari/537.36",
+      "uaData": {
+        "platform": "Android",
+        "mobile": true,
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "152"
+          },
+          {
+            "brand": "Not?A_Brand",
+            "version": "24"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "152"
+          }
+        ],
+        "model": "23117RA68G",
+        "platformVersion": "16.0.0",
+        "fullVersionList": [
+          {
+            "brand": "Chromium",
+            "version": "152.0.7977.42"
+          },
+          {
+            "brand": "Not?A_Brand",
+            "version": "24.0.0.0"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "152.0.7977.42"
+          }
+        ],
+        "architecture": "",
+        "bitness": ""
+      },
+      "screen": {
+        "width": 393,
+        "height": 873,
+        "availWidth": 393,
+        "availHeight": 873,
+        "dpr": 2.75,
+        "orientation": "portrait-primary"
+      },
+      "hardware": {
+        "maxTouchPoints": 5,
+        "hardwareConcurrency": 8,
+        "deviceMemory": 8
+      },
+      "webgl": {
+        "vendor": "Google Inc. (ARM)",
+        "renderer": "ANGLE (ARM, Mali-G57 MC2, OpenGL ES 3.2)"
+      }
+    },
+    "expected": {
+      "platform": "android",
+      "deviceType": "phone",
+      "status": "not_supported",
+      "exactModelKnown": true,
+      "deviceId": "xiaomi-redmi-note-13-pro"
+    },
+    "notes": "Полевой сбор 2026-08-25 (Алексей): uaData.model «23117RA68G» с живого Chrome (редуцированный UA Android 10; K). Ground truth: «О телефоне» — Redmi Note 13 Pro; SIM — два физических слота, без пунктов eSIM. До правки /detect → clarification_required (CATALOG_MODEL_CODE_UNKNOWN). Курируемая xiaomi-redmi-note-13-pro (verified, mi.com FAQ KA-537134). Коды 5G (2312DRA50G и др.) сюда не включать."
+  },
+  {
     "id": "ambiguous-signature-005",
     "category": "ambiguous-signature",
     "description": "Firefox для Android без Client Hints на планшете с шириной экрана значительно выше границы 600 CSS px",

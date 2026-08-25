@@ -440,6 +440,11 @@
     "note": "https://www.phonemore.com/specs/samsung/galaxy-s24/sm-s9210-512gb/ — SM-S9210: 2× nano-SIM, China/Hong Kong; eSIM нет (полевое подтверждение 2026-08-25; не смешивать с SM-S921B/U/U1)"
   },
   {
+    "id": "xiaomi-redmi-note-13-pro",
+    "esimSupport": "no",
+    "note": "https://www.mi.com/global/support/faq/details/KA-537134/ — Redmi Note 13 Pro без eSIM; код 23117RA68G (полевое 2026-08-25; не смешивать с Note 13 Pro 5G)"
+  },
+  {
     "id": "samsung-galaxy-s24-plus",
     "esimSupport": "yes",
     "note": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/ — Galaxy S24+ в перечне (проверено 2026-08-24, фаза C); id с Plus, не «+» (docs/10 О-8)"
