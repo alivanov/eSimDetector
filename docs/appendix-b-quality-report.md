@@ -17,7 +17,7 @@
 
 ## Б.1. Контур К1 — автоопределение (`signals.golden.json`)
 
-121 запись на дату канонического прогона (2026-08-24). К1 сохранён (стоп-кран цепочки): ложных 0, верных ≥ 96,7%. После прогона в выборку добавлены записи `real-device` (Pixel 9; Galaxy S25 Ultra; Galaxy S24 SM-S9210; Redmi Note 13 Pro; Redmi Note 9 Pro; Galaxy A21s SM-A217F; Galaxy A10 SM-A105F; iPhone 14 Pro Max / Яндекс.Браузер; iPhone 12 Pro Max / Safari; iPhone 12 Pro Max / YaApp_iOS; iPhone 11 / Chrome CriOS) — актуальный объём фикстуры **132**; повторный полный `pnpm eval:detection` под эту дельту не входит в каноническую пару ниже.
+121 запись на дату канонического прогона (2026-08-24). К1 сохранён (стоп-кран цепочки): ложных 0, верных ≥ 96,7%. После прогона в выборку добавлены записи `real-device` (Pixel 9; Galaxy S25 Ultra; Galaxy S24 SM-S9210; Redmi Note 13 Pro; Redmi Note 9 Pro; Galaxy A21s SM-A217F; Galaxy A10 SM-A105F; Mi 8 Pro / Яндекс.Браузер; iPhone 14 Pro Max / Яндекс.Браузер; iPhone 12 Pro Max / Safari; iPhone 12 Pro Max / YaApp_iOS; iPhone 11 / Chrome CriOS) — актуальный объём фикстуры **133**; повторный полный `pnpm eval:detection` под эту дельту не входит в каноническую пару ниже.
 
 | Метрика                                                            | Значение | Целевое    |
 | ------------------------------------------------------------------ | -------- | ---------- |

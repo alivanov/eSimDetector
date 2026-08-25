@@ -1,0 +1,61 @@
+[
+  {
+    "_id": "xiaomi-mi-8-pro",
+    "brand": "xiaomi",
+    "brandTitle": "Xiaomi",
+    "marketingName": "Mi 8 Pro",
+    "displayName": "Xiaomi Mi 8 Pro",
+    "family": "mi",
+    "generation": 8,
+    "modifiers": ["pro"],
+    "modelCodes": ["M1807E8A"],
+    "aliases": [
+      "mi 8 pro",
+      "mi8 pro",
+      "xiaomi mi 8 pro",
+      "xiaomi mi8 pro",
+      "ми 8 про",
+      "m1807e8a"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "8.1",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Официальные specs Xiaomi UK: dual nano-SIM, eSIM не упоминается. Руководство пользователя Mi 8 Pro: лоток Nano-SIM + Nano-SIM. Не путать с Mi 8 / Mi 8 Explorer Edition (M1807E8S, codename ursa) — другие коды. Полевой сбор 2026-08-25: uaData.model «MI 8 Pro» (маркетинговое имя в Client Hints), поиск «esim» в настройках — только «Статус SIM-карты»."
+    },
+    "releaseYear": 2018,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.2,
+    "sources": [
+      {
+        "url": "https://www.mi.com/uk/mi-8-pro/specs/",
+        "title": "Mi 8 Pro specs — Supports dual nano-SIM cards — Xiaomi UK",
+        "checkedAt": "2026-08-25"
+      },
+      {
+        "url": "https://ams-go.buy.mi.com/es/servicecenter/file/Mi_8_Pro_es/?binaryId=12922&namespaceId=2&publicationId=16859",
+        "title": "Mi 8 Pro user guide — Dual Nano-SIM tray (без eSIM) — Xiaomi",
+        "checkedAt": "2026-08-25"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-25T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-25T00:00:00.000Z",
+    "updatedAt": "2026-08-25T00:00:00.000Z"
+  }
+]
