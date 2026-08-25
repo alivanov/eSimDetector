@@ -7097,6 +7097,77 @@
     "notes": "Полевой сбор 2026-08-25: uaData.model «MI 8 Pro» и тот же токен в UA (Яндекс.Браузер 24.6, не урезанный K). Ground truth: «О телефоне» — MI 8 Pro, MIUI Global 12.0.2.0(QECMIXM); поиск «esim» — только «Статус SIM-карты». До правки /detect → clarification_required (модель вне справочника). Закрыто curated xiaomi-mi-8-pro (verified, mi.com/uk specs dual nano-SIM + user guide Dual Nano-SIM). Скрин ручного ответа «Redmi Note 8 Pro» — шум инструкций, в golden не входит."
   },
   {
+    "id": "android-vendor-ua-ch-035",
+    "category": "android-vendor-ua-ch",
+    "description": "realme 14 Pro+ 5G (RMX5051), Chrome 151, Android 15 — живое устройство, стенд /debug",
+    "source": "real-device",
+    "signals": {
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36",
+      "uaData": {
+        "platform": "Android",
+        "mobile": true,
+        "brands": [
+          {
+            "brand": "Not=A?Brand",
+            "version": "99"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "151"
+          },
+          {
+            "brand": "Chromium",
+            "version": "151"
+          }
+        ],
+        "model": "RMX5051",
+        "platformVersion": "15.0.0",
+        "fullVersionList": [
+          {
+            "brand": "Not=A?Brand",
+            "version": "99.0.0.0"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "151.0.7922.169"
+          },
+          {
+            "brand": "Chromium",
+            "version": "151.0.7922.169"
+          }
+        ],
+        "architecture": "",
+        "bitness": ""
+      },
+      "screen": {
+        "width": 364,
+        "height": 801,
+        "availWidth": 364,
+        "availHeight": 801,
+        "dpr": 3.5,
+        "orientation": "portrait-primary"
+      },
+      "hardware": {
+        "maxTouchPoints": 5,
+        "hardwareConcurrency": 8,
+        "deviceMemory": 8
+      },
+      "webgl": {
+        "vendor": "Google Inc. (Qualcomm)",
+        "renderer": "ANGLE (Qualcomm, Adreno (TM) 810, OpenGL ES 3.2)"
+      }
+    },
+    "region": "IN",
+    "expected": {
+      "platform": "android",
+      "deviceType": "phone",
+      "status": "not_supported",
+      "exactModelKnown": true,
+      "deviceId": "realme-14-pro-plus"
+    },
+    "notes": "Полевой сбор 2026-08-25: uaData.model «RMX5051» с живого Chrome (редуцированный UA Android 10; K; platformVersion 15). Ground truth: «Об устройстве» — realme 14 Pro+ 5G, RMX5051; «Мобильная сеть» — только SIM 1/SIM 2, пунктов eSIM нет. До правки /detect → clarification_required (CATALOG_MODEL_CODE_UNKNOWN). Курируемое realme-14-pro-plus — conditional (ЕС specs: eSIM; IN/global: dual nano). region=IN — рынок вне ЕС (по факту тестера); без региона — clarification_required с вопросом «Где было куплено устройство?» (не «есть ли eSIM»). Не путать с 14 Pro (RMX5008) и ошибочным CSV-кодом RMX5009."
+  },
+  {
     "id": "ambiguous-signature-005",
     "category": "ambiguous-signature",
     "description": "Firefox для Android без Client Hints на планшете с шириной экрана значительно выше границы 600 CSS px",

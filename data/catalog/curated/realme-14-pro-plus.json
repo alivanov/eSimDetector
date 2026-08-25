@@ -1,0 +1,88 @@
+[
+  {
+    "_id": "realme-14-pro-plus",
+    "brand": "realme",
+    "brandTitle": "realme",
+    "marketingName": "14 Pro Plus",
+    "displayName": "realme 14 Pro+",
+    "family": "realme",
+    "generation": 14,
+    "modifiers": ["pro", "plus"],
+    "modelCodes": ["RMX5051"],
+    "aliases": [
+      "14 pro+",
+      "14 pro plus",
+      "realme 14 pro+",
+      "realme 14 pro plus",
+      "14 pro+ 5g",
+      "realme 14 pro+ 5g",
+      "риалми 14 про плюс",
+      "rmx5051"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "15",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "conditional",
+      "dualSim": "physical+esim",
+      "maxProfiles": 1,
+      "conditions": [
+        {
+          "scope": "region",
+          "value": "IN",
+          "support": "not_supported",
+          "note": "Индия и большинство рынков вне ЕС: официальные specs — 2 Nano SIM Card Slots, eSIM не указан (realme.com/in, realme.com/global, realme.com/ph). Тот же сервисный код RMX5051."
+        }
+      ],
+      "clarifyingQuestion": {
+        "kind": "region",
+        "question": "Где было куплено устройство?",
+        "options": [
+          {
+            "value": "EU",
+            "label": "В Европейском союзе (официальная EU-версия)"
+          },
+          {
+            "value": "IN",
+            "label": "В Индии или на другом рынке вне ЕС"
+          }
+        ]
+      },
+      "notes": "marketingName со словом Plus (не «+»), иначе id схлопнется с 14 Pro (docs/10 О-8). ЕС (realme.com/es|/it|/fr): Compatible eSIM / Supporta eSim. Вне ЕС — dual nano без eSIM. Код один (RMX5051) — без уточнения рынка продажи однозначный ответ запрещён (К1). Вопрос — про место покупки (прокси региона), не «есть ли eSIM в меню». Полевой сбор 2026-08-25: «Мобильная сеть» — только SIM 1/SIM 2, eSIM нет (рынок вне ЕС)."
+    },
+    "releaseYear": 2025,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.4,
+    "sources": [
+      {
+        "url": "https://www.realme.com/es/realme-14-pro-plus-5g/specs",
+        "title": "realme 14 Pro+ 5G specs — Compatible eSIM — realme Spain",
+        "checkedAt": "2026-08-25"
+      },
+      {
+        "url": "https://www.realme.com/global/realme-14-pro-plus-5g/specs",
+        "title": "realme 14 Pro+ 5G specs — 2 Nano SIM Card Slots (без eSIM) — realme Global",
+        "checkedAt": "2026-08-25"
+      },
+      {
+        "url": "https://www.realme.com/in/realme-14-pro-plus-5g/specs",
+        "title": "realme 14 Pro+ 5G specs — India (dual Nano-SIM, eSIM не указан)",
+        "checkedAt": "2026-08-25"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-25T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-25T00:00:00.000Z",
+    "updatedAt": "2026-08-25T00:00:00.000Z"
+  }
+]
