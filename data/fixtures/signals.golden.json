@@ -2450,6 +2450,40 @@
     "notes": "Ожидание выведено правилом docs/03 §3.5 шаг 1: при этой версии iOS правило по версии ОС само по себе не сужает круг кандидатов до единого статуса (в списке смешаны not_supported/supported/conditional-без-региона). По дизайну (§3.5 шаг 2) сигнатура экрана должна сузить группу дальше, но коллекция screen_signatures пуста в этом контуре (rebuild-signatures не запускался на полной выгрузке) — реестр reasons ответа показывает SCREEN_SIGNATURE_UNKNOWN, а не SCREEN_SIGNATURE_MATCHED. Это дефект развёртывания/данных, а не отсутствие правила: см. отчёт этапа 6.6."
   },
   {
+    "id": "iphone-generations-036",
+    "category": "iphone-generations",
+    "description": "Apple iPhone 14 Pro Max, Яндекс.Браузер 26.8, iOS 26.6 — живое устройство, стенд /debug",
+    "source": "real-device",
+    "signals": {
+      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_6_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 YaBrowser/26.8.2.826.10 SA/3 Mobile/15E148 Safari/604.1",
+      "screen": {
+        "width": 430,
+        "height": 932,
+        "availWidth": 430,
+        "availHeight": 932,
+        "dpr": 3,
+        "orientation": "portrait-primary"
+      },
+      "hardware": {
+        "maxTouchPoints": 5,
+        "hardwareConcurrency": 4
+      },
+      "webgl": {
+        "vendor": "Apple Inc.",
+        "renderer": "Apple GPU"
+      }
+    },
+    "region": "OTHER",
+    "expected": {
+      "platform": "ios",
+      "deviceType": "phone",
+      "status": "supported",
+      "exactModelKnown": false,
+      "deviceId": null
+    },
+    "notes": "Живой WebKit (Яндекс.Браузер на iPhone), не Chromium-эмуляция: нет uaData и deviceMemory — типично для Safari/WebKit. Экран 430×932@3 совпадает с сигнатурой apple-iphone-14-pro-max в курируемом ядре. Черновик с /debug содержал противоречие exactModelKnown=true при deviceId=null (инвариант выборки) — отброшен: из браузера точная модель iPhone недоступна (AGENTS.md, правило 3). region=OTHER — ответ «одна nano-SIM» по скринам настроек (номер модели MQC23ZD/A, есть EID и IMEI2) и подтверждению тестера, что eSIM определён верно. Без context.region те же сигналы дают clarification_required (вопрос про лоток). В виджете тестер дошёл до карточки с именем «Apple iPhone 14 Pro Max» через уточнение модели — это не исход одного /detect по сигналам."
+  },
+  {
     "id": "ambiguous-signature-001",
     "category": "ambiguous-signature",
     "description": "Apple iPhone 14 Pro, эмуляция Playwright, iOS 16.0 — 23 кандидата с разным статусом eSIM",
