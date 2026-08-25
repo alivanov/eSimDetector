@@ -2518,6 +2518,73 @@
     "notes": "Живой Safari на iPhone (не Chromium-эмуляция): нет uaData и deviceMemory. Экран 428×926@3 — сигнатура группы 12 Pro Max / 13 Pro Max / 14 Plus (docs/03 §3.5). Черновик /debug без context.region давал clarification_required (вопрос про лоток) — корректный первый ответ; region=OTHER по скринам настроек (MG9T3LL/A, не CN/HK/MO) и подтверждению тестера, что eSIM определён верно. exactModelKnown=false: точная модель из браузера недоступна (AGENTS.md, правило 3); в description — ground truth с экрана «Об этом устройстве»."
   },
   {
+    "id": "iphone-generations-038",
+    "category": "iphone-generations",
+    "description": "Apple iPhone 12 Pro Max, приложение Яндекс 26.8.2 (YaApp_iOS), iOS 18.7 — живое устройство, стенд /debug",
+    "source": "real-device",
+    "signals": {
+      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 YaBrowser/26.8.2.812.10 YaApp_iOS/2608.2 YaApp_iOS_Browser/2608.2 Safari/604.1 SA/3 Version/27.0",
+      "screen": {
+        "width": 428,
+        "height": 926,
+        "availWidth": 428,
+        "availHeight": 926,
+        "dpr": 3,
+        "orientation": "portrait-primary"
+      },
+      "hardware": {
+        "maxTouchPoints": 5,
+        "hardwareConcurrency": 4
+      },
+      "webgl": {
+        "vendor": "Apple Inc.",
+        "renderer": "Apple GPU"
+      }
+    },
+    "region": "OTHER",
+    "expected": {
+      "platform": "ios",
+      "deviceType": "phone",
+      "status": "supported",
+      "exactModelKnown": false,
+      "deviceId": null
+    },
+    "notes": "Полевой сбор 2026-08-25: живой WebKit во встроенном браузере приложения «Яндекс» (маркеры YaApp_iOS / YaApp_iOS_Browser в UA), не standalone YaBrowser (см. 036) и не Safari (см. 037). Экран 428×926@3 — та же группа 12 Pro Max / 13 Pro Max / 14 Plus, что у 037. iOS 18.7 + region=OTHER → supported (docs/03 §3.5); без региона — clarification_required (вопрос про лоток). exactModelKnown=false (AGENTS.md, правило 3). Ground truth слабее 037: скрин только «О приложении» Яндекса 26.8.2 сб.812 + подтверждение тестера «eSIM есть»; в description — заявленная модель тестера. Curated не требуется."
+  },
+  {
+    "id": "iphone-generations-039",
+    "category": "iphone-generations",
+    "description": "Apple iPhone 11, Chrome (CriOS) 113, iOS 18.1 — живое устройство, стенд /debug",
+    "source": "real-device",
+    "signals": {
+      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/113.0.5672.121 Mobile/15E148 Safari/604.1",
+      "screen": {
+        "width": 414,
+        "height": 896,
+        "availWidth": 414,
+        "availHeight": 896,
+        "dpr": 2
+      },
+      "hardware": {
+        "maxTouchPoints": 5,
+        "hardwareConcurrency": 4
+      },
+      "webgl": {
+        "vendor": "Apple Inc.",
+        "renderer": "Apple GPU"
+      }
+    },
+    "region": "OTHER",
+    "expected": {
+      "platform": "ios",
+      "deviceType": "phone",
+      "status": "supported",
+      "exactModelKnown": false,
+      "deviceId": null
+    },
+    "notes": "Полевой сбор 2026-08-25: живой Chrome на iOS (CriOS/113.0.5672.121), не Safari и не Яндекс. Экран 414×896@2 — группа XR / 11 (docs/03 §3.5), статус conditional по региону. Без region черновик /debug давал clarification_required (вопрос про лоток) — корректно; region=OTHER → supported. Ground truth: «Об этом устройстве» — iPhone 11, MWLV2RU/A, iOS 18.1.1 (в UA минор урезан до 18_1); «Сотовая связь» — пункт «Добавить eSIM»; RU-номер модели не CN/HK/MO. exactModelKnown=false (AGENTS.md, правило 3). Curated не требуется."
+  },
+  {
     "id": "ambiguous-signature-001",
     "category": "ambiguous-signature",
     "description": "Apple iPhone 14 Pro, эмуляция Playwright, iOS 16.0 — 23 кандидата с разным статусом eSIM",
@@ -6818,6 +6885,146 @@
       "deviceId": "xiaomi-redmi-note-9-pro"
     },
     "notes": "Полевой сбор 2026-08-25 (Малахов): uaData.model — маркетинговое «Redmi Note 9 Pro» (не сервисный код); на экране «О телефоне» — M2003J6B2G; dual physical SIM без eSIM. Автоответ стенда уже был not_supported по импортной записи; курируемое ядро поднимает до verified (mi.com FAQ KA-07707). Ценность для К1: живой путь Android по marketing name в Sec-CH-UA-Model."
+  },
+  {
+    "id": "android-vendor-ua-ch-032",
+    "category": "android-vendor-ua-ch",
+    "description": "Samsung Galaxy A21s (SM-A217F), Chrome 148, Android 11 — живое устройство, стенд /debug",
+    "source": "real-device",
+    "signals": {
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Mobile Safari/537.36",
+      "uaData": {
+        "platform": "Android",
+        "mobile": true,
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "148"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "148"
+          },
+          {
+            "brand": "Not/A)Brand",
+            "version": "99"
+          }
+        ],
+        "model": "SM-A217F",
+        "platformVersion": "11.0.0",
+        "fullVersionList": [
+          {
+            "brand": "Chromium",
+            "version": "148.0.7778.178"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "148.0.7778.178"
+          },
+          {
+            "brand": "Not/A)Brand",
+            "version": "99.0.0.0"
+          }
+        ],
+        "architecture": "",
+        "bitness": ""
+      },
+      "screen": {
+        "width": 412,
+        "height": 915,
+        "availWidth": 412,
+        "availHeight": 915,
+        "dpr": 1.75,
+        "orientation": "portrait-primary"
+      },
+      "hardware": {
+        "maxTouchPoints": 5,
+        "hardwareConcurrency": 8,
+        "deviceMemory": 4
+      },
+      "webgl": {
+        "vendor": "Google Inc. (ARM)",
+        "renderer": "ANGLE (ARM, Mali-G52, OpenGL ES 3.2)"
+      }
+    },
+    "expected": {
+      "platform": "android",
+      "deviceType": "phone",
+      "status": "not_supported",
+      "exactModelKnown": true,
+      "deviceId": "samsung-galaxy-a21s"
+    },
+    "notes": "Полевой сбор 2026-08-25: uaData.model «SM-A217F» с живого Chrome (редуцированный UA Android 10; K; platformVersion 11). Ground truth: «Сведения о телефоне» — Galaxy A21s, SM-A217F/DSN; «Диспетчер SIM-карт» — два физических слота, пункта «Добавить eSIM» нет. До правки /detect → clarification_required (CATALOG_MODEL_CODE_UNKNOWN): в CSV gemini код SM-A217F ошибочно висел и на A21, и на A21s → CODE_COLLISION/карантин. Закрыто curated samsung-galaxy-a21s (verified, samsung.com eSIM list + карточка SM-A217F)."
+  },
+  {
+    "id": "android-vendor-ua-ch-033",
+    "category": "android-vendor-ua-ch",
+    "description": "Samsung Galaxy A10 (SM-A105F), Chrome 151, Android 11 — живое устройство, стенд /debug",
+    "source": "real-device",
+    "signals": {
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36",
+      "uaData": {
+        "platform": "Android",
+        "mobile": true,
+        "brands": [
+          {
+            "brand": "Not=A?Brand",
+            "version": "99"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "151"
+          },
+          {
+            "brand": "Chromium",
+            "version": "151"
+          }
+        ],
+        "model": "SM-A105F",
+        "platformVersion": "11.0.0",
+        "fullVersionList": [
+          {
+            "brand": "Not=A?Brand",
+            "version": "99.0.0.0"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "151.0.7922.169"
+          },
+          {
+            "brand": "Chromium",
+            "version": "151.0.7922.169"
+          }
+        ],
+        "architecture": "",
+        "bitness": ""
+      },
+      "screen": {
+        "width": 412,
+        "height": 869,
+        "availWidth": 412,
+        "availHeight": 869,
+        "dpr": 1.75,
+        "orientation": "portrait-primary"
+      },
+      "hardware": {
+        "maxTouchPoints": 5,
+        "hardwareConcurrency": 8,
+        "deviceMemory": 2
+      },
+      "webgl": {
+        "vendor": "Google Inc. (ARM)",
+        "renderer": "ANGLE (ARM, Mali-G71, OpenGL ES 3.2)"
+      }
+    },
+    "expected": {
+      "platform": "android",
+      "deviceType": "phone",
+      "status": "not_supported",
+      "exactModelKnown": true,
+      "deviceId": "samsung-galaxy-a10"
+    },
+    "notes": "Полевой сбор 2026-08-25: uaData.model «SM-A105F» с живого Chrome (редуцированный UA Android 10; K; platformVersion 11). Ground truth: «Сведения о телефоне» — Galaxy A10, SM-A105F/DS, два IMEI (гнездо 1/2); eSIM нет. До правки /detect → clarification_required (CATALOG_MODEL_CODE_UNKNOWN): A10 (2019) почти не попал в LLM-выгрузки с кодами. Закрыто curated samsung-galaxy-a10 (verified, samsung.com eSIM list + карточка SM-A105F Dual-SIM)."
   },
   {
     "id": "ambiguous-signature-005",

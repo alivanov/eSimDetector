@@ -1,0 +1,59 @@
+[
+  {
+    "_id": "samsung-galaxy-a21s",
+    "brand": "samsung",
+    "brandTitle": "Samsung",
+    "marketingName": "Galaxy A21s",
+    "displayName": "Samsung Galaxy A21s",
+    "family": "galaxy-s",
+    "generation": 21,
+    "modifiers": ["a"],
+    "modelCodes": ["SM-A217F"],
+    "aliases": [
+      "galaxy a21s",
+      "samsung galaxy a21s",
+      "a21s",
+      "sm-a217f"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "10",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Не входит в перечень Galaxy devices that support eSIM (samsung.com/sg/…). Карточка SM-A217F: Dual-SIM, Nano-SIM, слот SIM 1 + SIM 2 + MicroSD, eSIM не описан. family/modifiers — как даёт parseMarketingNameSlots для «Galaxy A21s» (после splitLettersAndDigits: family galaxy-s, modifiers [a]). Код SM-A217F только у A21s: у LLM gemini один код ошибочно висел и на A21, и на A21s (CODE_COLLISION) — A21 использует линейку SM-A215*, сюда не включать. Полевой сбор 2026-08-25: SM-A217F/DSN, два физических слота, пункта «Добавить eSIM» нет."
+    },
+    "releaseYear": 2020,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.25,
+    "sources": [
+      {
+        "url": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/",
+        "title": "Galaxy eSIM and supported network carriers — Samsung (перечень eSIM без Galaxy A21s)",
+        "checkedAt": "2026-08-25"
+      },
+      {
+        "url": "https://www.samsung.com/sa_en/smartphones/galaxy-a/galaxy-a21s-silver-128gb-sm-a217fzsjksa/",
+        "title": "Galaxy A21s (SM-A217F) — Dual-SIM, Nano-SIM, SIM 1 + SIM 2 + MicroSD — Samsung",
+        "checkedAt": "2026-08-25"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-25T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-25T00:00:00.000Z",
+    "updatedAt": "2026-08-25T00:00:00.000Z"
+  }
+]
