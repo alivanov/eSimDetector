@@ -2484,6 +2484,40 @@
     "notes": "Живой WebKit (Яндекс.Браузер на iPhone), не Chromium-эмуляция: нет uaData и deviceMemory — типично для Safari/WebKit. Экран 430×932@3 совпадает с сигнатурой apple-iphone-14-pro-max в курируемом ядре. Черновик с /debug содержал противоречие exactModelKnown=true при deviceId=null (инвариант выборки) — отброшен: из браузера точная модель iPhone недоступна (AGENTS.md, правило 3). region=OTHER — ответ «одна nano-SIM» по скринам настроек (номер модели MQC23ZD/A, есть EID и IMEI2) и подтверждению тестера, что eSIM определён верно. Без context.region те же сигналы дают clarification_required (вопрос про лоток). В виджете тестер дошёл до карточки с именем «Apple iPhone 14 Pro Max» через уточнение модели — это не исход одного /detect по сигналам."
   },
   {
+    "id": "iphone-generations-037",
+    "category": "iphone-generations",
+    "description": "Apple iPhone 12 Pro Max, Safari 27, iOS 18.7 — живое устройство, стенд /debug",
+    "source": "real-device",
+    "signals": {
+      "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.0 Mobile/15E148 Safari/604.1",
+      "screen": {
+        "width": 428,
+        "height": 926,
+        "availWidth": 428,
+        "availHeight": 926,
+        "dpr": 3,
+        "orientation": "portrait-primary"
+      },
+      "hardware": {
+        "maxTouchPoints": 5,
+        "hardwareConcurrency": 4
+      },
+      "webgl": {
+        "vendor": "Apple Inc.",
+        "renderer": "Apple GPU"
+      }
+    },
+    "region": "OTHER",
+    "expected": {
+      "platform": "ios",
+      "deviceType": "phone",
+      "status": "supported",
+      "exactModelKnown": false,
+      "deviceId": null
+    },
+    "notes": "Живой Safari на iPhone (не Chromium-эмуляция): нет uaData и deviceMemory. Экран 428×926@3 — сигнатура группы 12 Pro Max / 13 Pro Max / 14 Plus (docs/03 §3.5). Черновик /debug без context.region давал clarification_required (вопрос про лоток) — корректный первый ответ; region=OTHER по скринам настроек (MG9T3LL/A, не CN/HK/MO) и подтверждению тестера, что eSIM определён верно. exactModelKnown=false: точная модель из браузера недоступна (AGENTS.md, правило 3); в description — ground truth с экрана «Об этом устройстве»."
+  },
+  {
     "id": "ambiguous-signature-001",
     "category": "ambiguous-signature",
     "description": "Apple iPhone 14 Pro, эмуляция Playwright, iOS 16.0 — 23 кандидата с разным статусом eSIM",
