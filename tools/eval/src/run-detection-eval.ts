@@ -19,7 +19,7 @@ import { parseSignalsGolden, type SignalsGoldenEntry } from './signals-golden';
 
 /**
  * `pnpm eval:detection` (docs/08-testing-and-quality.md §8.6) — прогоняет `signals.golden.json`
- * (121 запись, все девять групп, docs/08 §8.4) через `POST /api/v1/detect` РАБОТАЮЩЕГО контура
+ * (122 записи, все девять групп, docs/08 §8.4) через `POST /api/v1/detect` РАБОТАЮЩЕГО контура
  * и сверяет ответ с `expected`. Требует поднятого и наполненного контура (`docker compose up -d`
  * + `pnpm seed load && pnpm seed rebuild-signatures`, docs/07 §7.6) — без второй команды
  * наполнения ветка iOS деградирует до правила версии ОС, и доля уточнений искусственно растёт.
@@ -139,7 +139,7 @@ export async function runDetectionEval(
   }
 
   const http = { baseUrl: resolved.baseUrl, headers: resolved.headers };
-  // Последовательно, с паузой (`lib/pace.ts`) — не «залпом» `Promise.all`: 121 запрос без пауз
+  // Последовательно, с паузой (`lib/pace.ts`) — не «залпом» `Promise.all`: ~122 запроса без пауз
   // рискует упереться в собственный `RateLimitGuard` сервиса (docs/07 §7.8) и дать ложные ошибки
   // прогона вместо результата определения. Пауза 0 допустима, если запросы идут с админ-токеном.
   const results: EvalRow[] = [];

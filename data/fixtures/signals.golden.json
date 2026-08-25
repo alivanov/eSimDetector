@@ -6402,6 +6402,76 @@
     "notes": "СОСТАВНАЯ запись, а не наблюдённая целиком (промпт этапа 6.6, группа android-vendor-ua-ch): Playwright не может подставить настоящий Sec-CH-UA-Model (getHighEntropyValues(['model']) в Chromium/Playwright всегда пуст — находка агента 6.5), поэтому userAgent — реальная официально документированная строка редуцированного Chrome для Android (MDN \"User-Agent reduction\", developer.mozilla.org/en-US/docs/Web/HTTP/Guides/User-agent_reduction), а signals.uaData.model — сервисный код/маркетинговое название из курируемого ядра data/catalog/curated/google-pixel.json (уровень verified, ссылка support.google.com/pixelphone, дата сверки 2026-08-19). Ожидание — esim.support записи google-pixel-9 (курируемое ядро), безусловный supported."
   },
   {
+    "id": "android-vendor-ua-ch-027",
+    "category": "android-vendor-ua-ch",
+    "description": "Google Pixel 9, Chrome 151, Android (platformVersion 17.0.0) — живое устройство, стенд /debug",
+    "source": "real-device",
+    "signals": {
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36",
+      "uaData": {
+        "platform": "Android",
+        "mobile": true,
+        "brands": [
+          {
+            "brand": "Not=A?Brand",
+            "version": "99"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "151"
+          },
+          {
+            "brand": "Chromium",
+            "version": "151"
+          }
+        ],
+        "model": "Pixel 9",
+        "platformVersion": "17.0.0",
+        "fullVersionList": [
+          {
+            "brand": "Not=A?Brand",
+            "version": "99.0.0.0"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "151.0.7922.169"
+          },
+          {
+            "brand": "Chromium",
+            "version": "151.0.7922.169"
+          }
+        ],
+        "architecture": "",
+        "bitness": ""
+      },
+      "screen": {
+        "width": 412,
+        "height": 924,
+        "availWidth": 412,
+        "availHeight": 835,
+        "dpr": 2.625,
+        "orientation": "portrait-primary"
+      },
+      "hardware": {
+        "maxTouchPoints": 5,
+        "hardwareConcurrency": 8,
+        "deviceMemory": 8
+      },
+      "webgl": {
+        "vendor": "Google Inc. (ARM)",
+        "renderer": "ANGLE (ARM, Mali-G715, OpenGL ES 3.2)"
+      }
+    },
+    "expected": {
+      "platform": "android",
+      "deviceType": "phone",
+      "status": "supported",
+      "exactModelKnown": true,
+      "deviceId": "google-pixel-9"
+    },
+    "notes": "Первая цельная запись real-device в группе android-vendor-ua-ch: сигналы сняты сборщиком packages/signals-collector на живом Pixel 9 через /debug (тестирование 2026-08-24). uaData.model «Pixel 9» пришёл из navigator.userAgentData.getHighEntropyValues, не подставлен. User-Agent редуцирован (Android 10; K). expected сверен со справочником google-pixel-9 (verified, безусловный supported) и подтверждён тестером («eSIM определился правильно»). В отличие от android-vendor-ua-ch-026 (составная) здесь экран, hardware и WebGL наблюдены целиком."
+  },
+  {
     "id": "ambiguous-signature-005",
     "category": "ambiguous-signature",
     "description": "Firefox для Android без Client Hints на планшете с шириной экрана значительно выше границы 600 CSS px",
