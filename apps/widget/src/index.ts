@@ -2,6 +2,8 @@
 // (docs/07-integration.md, ADR-038, ADR-039, ADR-040).
 export type { EsimCheckerProps, EsimCheckerResult } from './components/EsimChecker';
 export { EsimChecker } from './components/EsimChecker';
+export type { LoadingIndicatorProps } from './components/LoadingIndicator';
+export { LoadingIndicator } from './components/LoadingIndicator';
 
 export { injectDesignTokensStyle } from './styles/inject-tokens';
 

@@ -96,7 +96,7 @@ docker compose build
 | https://esimdetector.onrender.com      | Демонстрационное приложение |
 | https://esim-detector-api.onrender.com | API                         |
 
-Бесплатные сервисы Render **засыпают через 15 минут без запросов**. Первый заход после сна занимает около минуты: страница может долго грузиться — это не поломка. Перед показом комиссии сначала откройте [https://esim-detector-api.onrender.com/health/live](https://esim-detector-api.onrender.com/health/live) и дождитесь `{"status":"ok"}`, затем открывайте приложение. Подробности и обновление стенда — [docs/16-deployment.md](./docs/16-deployment.md) §16.2 и §16.6.
+Бесплатные сервисы Render **засыпают через 15 минут без запросов**. Первый заход после сна может занять около минуты: на главной странице показывается «Сервис просыпается…», пока приложение ждёт ответ API. При необходимости можно вручную открыть [https://esim-detector-api.onrender.com/health/live](https://esim-detector-api.onrender.com/health/live). Подробности — [docs/16-deployment.md](./docs/16-deployment.md) §16.2 и §16.6.
 
 Captcha на демонстрационном стенде не подключается: достаточно `RATE_LIMIT_RPM`, `CORS_ORIGINS` и `ADMIN_TOKEN` (обоснование — docs/16 §16.3).
 

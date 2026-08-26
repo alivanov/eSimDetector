@@ -1,14 +1,20 @@
 import { EsimChecker } from '@esim-detector/widget';
 
+import { ApiWakeGate } from './ApiWakeGate';
 import styles from './App.module.css';
 import { FeedbackImprove } from './FeedbackImprove';
+
+const DEMO_API_BASE = '';
 
 /**
  * Демонстрационное приложение — тонкая обёртка над `EsimChecker` из `@esim-detector/widget`
  * (docs/02-architecture.md §2.1, ADR-038/ADR-039): собственной бизнес-логики здесь нет, только
- * подключение компонента и адрес API. В разработке Vite проксирует `/api` на сервер, поднятый
- * на порту 3000 (`vite.config.ts`, `server.proxy`) — поэтому `apiBase` пустой (относительный путь
- * `/api/v1/...` уходит через тот же порт 8080, что и сама страница).
+ * подключение компонента и адрес API. В разработке Vite проксирует `/api` и `/health` на сервер,
+ * поднятый на порту 3000 (`vite.config.ts`, `server.proxy`) — поэтому `apiBase` пустой
+ * (относительные пути уходят через тот же порт 8080, что и сама страница).
+ *
+ * `ApiWakeGate` перед виджетом опрашивает `/health/live`, чтобы разбудить API на Free Render
+ * (docs/16-deployment.md §16.2) — иначе первый `POST /detect` часто получает 429 на крае площадки.
  *
  * `onPrimaryAction` намеренно не передаётся: на демо нет сценария подключения eSIM, кнопка
  * «Подключить eSIM» скрывается виджетом. Аккордеон «Хочу улучшить приложение» — только здесь.
@@ -18,7 +24,9 @@ export function App() {
     <main className={styles.page}>
       <div className={styles.stack}>
         <div className={styles.card}>
-          <EsimChecker apiBase="" channel="web-lk" locale="ru-RU" />
+          <ApiWakeGate apiBase={DEMO_API_BASE}>
+            <EsimChecker apiBase={DEMO_API_BASE} channel="web-lk" locale="ru-RU" />
+          </ApiWakeGate>
         </div>
         <FeedbackImprove />
       </div>

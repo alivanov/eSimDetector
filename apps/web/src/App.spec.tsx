@@ -3,6 +3,10 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { App } from './App';
 import { homeFeedbackTexts } from './homeTexts';
 
+jest.mock('./wait-for-api-ready', () => ({
+  waitForApiReady: jest.fn().mockResolvedValue(undefined),
+}));
+
 describe('App', () => {
   it('подключает EsimChecker (docs/02-architecture.md §2.1) без собственной бизнес-логики', async () => {
     render(<App />);

@@ -13,6 +13,21 @@ server {
     # контур работает независимо от значения CORS_ORIGINS, поскольку браузер обращается к тому же
     # origin, что и сама страница (8080), а не к порту API напрямую — тот же приём, что `apps/web/
     # vite.config.ts` уже применяет в разработке через `server.proxy`.
+    # Liveness API для пробуждения Free Render до первого POST /detect (docs/16-deployment.md §16.2).
+    # В dev тот же путь проксирует Vite (`apps/web/vite.config.ts`).
+    location /health/ {
+        proxy_pass ${API_UPSTREAM}/health/;
+        proxy_set_header Host $proxy_host;
+        proxy_ssl_server_name on;
+        proxy_ssl_name $proxy_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_connect_timeout 75s;
+        proxy_send_timeout 75s;
+        proxy_read_timeout 75s;
+    }
+
     location /api/ {
         # Полный URL со схемой: локально `http://api:3000`, на Render —
         # публичный `https://…onrender.com` (бесплатные Web Service не принимают
