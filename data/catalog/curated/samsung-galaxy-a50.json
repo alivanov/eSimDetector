@@ -1,0 +1,65 @@
+[
+  {
+    "_id": "samsung-galaxy-a50",
+    "brand": "samsung",
+    "brandTitle": "Samsung",
+    "marketingName": "Galaxy A50",
+    "displayName": "Samsung Galaxy A50",
+    "family": "galaxy",
+    "generation": 50,
+    "modifiers": ["a"],
+    "modelCodes": ["SM-A505FN", "SM-A505F"],
+    "aliases": [
+      "galaxy a50",
+      "samsung galaxy a50",
+      "a50",
+      "sm-a505fn",
+      "sm-a505f"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "9",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Не входит в перечень Galaxy devices that support eSIM (samsung.com/sg/… — A-серия с eSIM с A54). Карточка A50: Dual-SIM, Nano-SIM, SIM 1 + SIM 2 + MicroSD, eSIM не описан. Полевой сбор 2026-08-26: SM-A505FN/DS, два IMEI; поиск «esim» в настройках — «Ничего не найдено». Не путать с A50s (SM-A507*) — другой код."
+    },
+    "releaseYear": 2019,
+    "marketPresenceRu": "official",
+    "popularity": 0.35,
+    "sources": [
+      {
+        "url": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/",
+        "title": "Galaxy eSIM and supported network carriers — Samsung (перечень eSIM без Galaxy A50)",
+        "checkedAt": "2026-08-26"
+      },
+      {
+        "url": "https://www.samsung.com/sa_en/smartphones/galaxy-a/samsung-galaxy-a50-black-128gb-sm-a505fzkcksa/",
+        "title": "Galaxy A50 — Dual-SIM, Nano-SIM, SIM 1 + SIM 2 + MicroSD — Samsung",
+        "checkedAt": "2026-08-26"
+      },
+      {
+        "url": "https://www.samsung.com/uk/support/model/SM-A505FZBSVOD/",
+        "title": "SM-A505FN/DS — Samsung Support UK",
+        "checkedAt": "2026-08-26"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-26T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-26T00:00:00.000Z",
+    "updatedAt": "2026-08-26T00:00:00.000Z"
+  }
+]
