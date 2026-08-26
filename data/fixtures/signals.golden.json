@@ -7238,6 +7238,76 @@
     "notes": "Полевой сбор 2026-08-26: uaData.model «SM-A505FN» и тот же код в UA (Chrome 105 ещё не урезает до K). Ground truth: «Сведения о телефоне» — Galaxy A50, SM-A505FN/DS, два IMEI; поиск «esim» — «Ничего не найдено». Тестер: авто не определил; ручной ввод тоже (модели не было в справочнике — CSV «до 2020» вне scope). Закрыто curated samsung-galaxy-a50 (verified, samsung.com eSIM list без A50 + карточка Dual-SIM). Не путать с A50s."
   },
   {
+    "id": "android-vendor-ua-ch-037",
+    "category": "android-vendor-ua-ch",
+    "description": "Honor 8 Lite (PRA-TL10), Яндекс.Браузер 22.11, Android 8.0 — живое устройство, стенд /debug",
+    "source": "real-device",
+    "signals": {
+      "userAgent": "Mozilla/5.0 (Linux; arm_64; Android 8.0.0; PRA-TL10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 YaBrowser/22.11.6.41.00 SA/3 Mobile Safari/537.36",
+      "uaData": {
+        "platform": "Android",
+        "mobile": true,
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "106"
+          },
+          {
+            "brand": "Yandex",
+            "version": "22"
+          },
+          {
+            "brand": "Not;A=Brand",
+            "version": "99"
+          }
+        ],
+        "model": "PRA-TL10",
+        "platformVersion": "8.0.0",
+        "fullVersionList": [
+          {
+            "brand": "Chromium",
+            "version": "106.0.5249.199"
+          },
+          {
+            "brand": "Yandex",
+            "version": "22.11.6.41"
+          },
+          {
+            "brand": "Not;A=Brand",
+            "version": "99.0.0.0"
+          }
+        ],
+        "architecture": "",
+        "bitness": ""
+      },
+      "screen": {
+        "width": 360,
+        "height": 640,
+        "availWidth": 360,
+        "availHeight": 640,
+        "dpr": 3,
+        "orientation": "portrait-primary"
+      },
+      "hardware": {
+        "maxTouchPoints": 5,
+        "hardwareConcurrency": 8,
+        "deviceMemory": 4
+      },
+      "webgl": {
+        "vendor": "ARM",
+        "renderer": "Mali-T830"
+      }
+    },
+    "expected": {
+      "platform": "android",
+      "deviceType": "phone",
+      "status": "not_supported",
+      "exactModelKnown": true,
+      "deviceId": "honor-8-lite"
+    },
+    "notes": "Полевой сбор 2026-08-26: uaData.model «PRA-TL10» и тот же код в UA (Яндекс.Браузер 22.11). Ground truth: «О телефоне» — Honor 8 Lite, PRA-TL10, два IMEI; поиск «esim» — «Нет результатов». Тестер: авто и ручной ввод не определили (модель вне CSV Honor ~2020+). Закрыто curated honor-8-lite (verified, MobileModels PRA-TL10 + GSMchoice Dual SIM без eSIM). Не путать с Honor 8A и Huawei P8 Lite 2017."
+  },
+  {
     "id": "ambiguous-signature-005",
     "category": "ambiguous-signature",
     "description": "Firefox для Android без Client Hints на планшете с шириной экрана значительно выше границы 600 CSS px",

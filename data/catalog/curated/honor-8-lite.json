@@ -1,0 +1,61 @@
+[
+  {
+    "_id": "honor-8-lite",
+    "brand": "honor",
+    "brandTitle": "Honor",
+    "marketingName": "8 Lite",
+    "displayName": "Honor 8 Lite",
+    "family": "honor",
+    "generation": 8,
+    "modifiers": ["lite"],
+    "modelCodes": ["PRA-TL10"],
+    "aliases": [
+      "honor 8 lite",
+      "хонор 8 лайт",
+      "huawei honor 8 lite",
+      "8 lite",
+      "pra-tl10",
+      "荣耀8青春版"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "7.0",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Китайское маркетинговое имя — 荣耀8青春版; PRA-TL10 — версия China Mobile (移动定制版) по MobileModels. Карточки Dual SIM: два nano-SIM / hybrid nano-SIM+microSD, eSIM не описан. Полевой сбор 2026-08-26: «О телефоне» — Honor 8 Lite, PRA-TL10, два IMEI; поиск «esim» в настройках — «Нет результатов». Не путать с Honor 8A (другое поколение/модификатор) и с Huawei P8 Lite 2017 (другие коды PRA-LX*/PRA-LA*). В modelCodes только наблюдённый PRA-TL10."
+    },
+    "releaseYear": 2017,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.15,
+    "sources": [
+      {
+        "url": "https://khwang9883.github.io/MobileModels/brands/honor_cn.html",
+        "title": "MobileModels — Honor CN: PRA-TL10 = 荣耀 8 青春版 移动定制版",
+        "checkedAt": "2026-08-26"
+      },
+      {
+        "url": "https://www.gsmchoice.com/en/catalogue/honor/8litedualsim/",
+        "title": "Honor 8 Lite Dual SIM (PRA-AL00 / PRA-TL10) — nanoSIM + hybrid nanoSIM/microSD, без eSIM — GSMchoice",
+        "checkedAt": "2026-08-26"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-26T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-26T00:00:00.000Z",
+    "updatedAt": "2026-08-26T00:00:00.000Z"
+  }
+]
