@@ -3,32 +3,51 @@ import { useCallback, useEffect, useState, type ReactNode } from 'react';
 
 import styles from './ApiWakeGate.module.css';
 import { homeWakeTexts } from './homeTexts';
+import { loadRuntimeConfig } from './runtime-config';
 import { waitForApiReady } from './wait-for-api-ready';
+
+export type ApiWakePhase = 'waiting' | 'ready' | 'failed';
 
 export interface ApiWakeGateProps {
   readonly apiBase: string;
   readonly children: ReactNode;
+  /** Состояние пробуждения: демо скрывает «Хочу улучшить приложение», пока не `ready`. */
+  readonly onPhaseChange?: (phase: ApiWakePhase) => void;
 }
-
-type WakePhase = 'waiting' | 'ready' | 'failed';
 
 /**
  * На демо-стенде Render API засыпает отдельно от веб-сервиса. Перед монтированием виджета
- * дожидаемся `GET /health/live` и показываем спиннер (docs/16-deployment.md §16.2).
+ * будим API прямым `GET {apiOrigin}/health/live` (как ручной curl), а не через nginx-прокси
+ * веб→API: прокси на спящий Free часто сразу получает `hibernate-rate-limited`
+ * (docs/16-deployment.md §16.2).
  */
-export function ApiWakeGate({ apiBase, children }: ApiWakeGateProps) {
-  const [phase, setPhase] = useState<WakePhase>('waiting');
+export function ApiWakeGate({ apiBase, children, onPhaseChange }: ApiWakeGateProps) {
+  const [phase, setPhase] = useState<ApiWakePhase>('waiting');
+
+  const setWakePhase = useCallback(
+    (next: ApiWakePhase) => {
+      setPhase(next);
+      onPhaseChange?.(next);
+    },
+    [onPhaseChange],
+  );
 
   const runWake = useCallback(() => {
-    setPhase('waiting');
-    void waitForApiReady({ apiBase })
+    setWakePhase('waiting');
+    void loadRuntimeConfig()
+      .then((config) =>
+        waitForApiReady({
+          apiBase,
+          ...(config.apiOrigin !== undefined ? { wakeOrigin: config.apiOrigin } : {}),
+        }),
+      )
       .then(() => {
-        setPhase('ready');
+        setWakePhase('ready');
       })
       .catch(() => {
-        setPhase('failed');
+        setWakePhase('failed');
       });
-  }, [apiBase]);
+  }, [apiBase, setWakePhase]);
 
   useEffect(() => {
     runWake();

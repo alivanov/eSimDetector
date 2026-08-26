@@ -3,30 +3,47 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--esim-space-4);
+  gap: var(--esim-spacing-md);
   min-height: 12rem;
-  padding: var(--esim-space-6);
+  padding: var(--esim-spacing-lg);
   text-align: center;
 }
 
 .message {
   margin: 0;
-  color: var(--esim-color-text-secondary);
-  font-size: var(--esim-font-size-body);
-  line-height: var(--esim-line-height-body);
+  max-width: 28rem;
+  color: var(--esim-colors-text-secondary);
+  font-size: var(--esim-typography-font-size-md);
+  line-height: var(--esim-typography-line-height-md);
 }
 
+/* Primary CTA как у ResultCard — единственное явное действие при недоступности. */
 .retryButton {
-  border: 1px solid var(--esim-color-border-strong);
-  border-radius: var(--esim-radius-button);
-  background: var(--esim-color-surface);
-  color: var(--esim-color-text-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 12rem;
+  margin-top: var(--esim-spacing-sm);
+  padding: var(--esim-spacing-sm) var(--esim-spacing-lg);
+  border-radius: var(--esim-components-button-primary-radius);
+  border: var(--esim-shape-border-width-thin) solid var(--esim-components-button-primary-border);
+  background: var(--esim-components-button-primary-background);
+  color: var(--esim-components-button-primary-foreground);
   cursor: pointer;
   font: inherit;
-  padding: var(--esim-space-2) var(--esim-space-4);
+  font-size: var(--esim-typography-font-size-md);
+  font-weight: var(--esim-typography-font-weight-medium);
+}
+
+.retryButton:hover {
+  opacity: var(--esim-states-hover-opacity);
+}
+
+.retryButton:active {
+  opacity: var(--esim-states-pressed-opacity);
 }
 
 .retryButton:focus-visible {
-  outline: 2px solid var(--esim-color-focus-ring);
+  outline: 2px solid var(--esim-colors-focus, #2b6cb0);
   outline-offset: 2px;
 }

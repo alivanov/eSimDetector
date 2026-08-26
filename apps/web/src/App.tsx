@@ -1,6 +1,7 @@
 import { EsimChecker } from '@esim-detector/widget';
+import { useCallback, useState } from 'react';
 
-import { ApiWakeGate } from './ApiWakeGate';
+import { ApiWakeGate, type ApiWakePhase } from './ApiWakeGate';
 import styles from './App.module.css';
 import { FeedbackImprove } from './FeedbackImprove';
 
@@ -13,22 +14,28 @@ const DEMO_API_BASE = '';
  * поднятый на порту 3000 (`vite.config.ts`, `server.proxy`) — поэтому `apiBase` пустой
  * (относительные пути уходят через тот же порт 8080, что и сама страница).
  *
- * `ApiWakeGate` перед виджетом опрашивает `/health/live`, чтобы разбудить API на Free Render
- * (docs/16-deployment.md §16.2) — иначе первый `POST /detect` часто получает 429 на крае площадки.
+ * `ApiWakeGate` перед виджетом будит API прямым `/health/live` (docs/16-deployment.md §16.2).
+ * Аккордеон «Хочу улучшить приложение» показывается только когда API готов — иначе отвлекает
+ * от спиннера пробуждения или кнопки «Повторить».
  *
  * `onPrimaryAction` намеренно не передаётся: на демо нет сценария подключения eSIM, кнопка
- * «Подключить eSIM» скрывается виджетом. Аккордеон «Хочу улучшить приложение» — только здесь.
+ * «Подключить eSIM» скрывается виджетом.
  */
 export function App() {
+  const [wakePhase, setWakePhase] = useState<ApiWakePhase>('waiting');
+  const handlePhaseChange = useCallback((phase: ApiWakePhase) => {
+    setWakePhase(phase);
+  }, []);
+
   return (
     <main className={styles.page}>
       <div className={styles.stack}>
         <div className={styles.card}>
-          <ApiWakeGate apiBase={DEMO_API_BASE}>
+          <ApiWakeGate apiBase={DEMO_API_BASE} onPhaseChange={handlePhaseChange}>
             <EsimChecker apiBase={DEMO_API_BASE} channel="web-lk" locale="ru-RU" />
           </ApiWakeGate>
         </div>
-        <FeedbackImprove />
+        {wakePhase === 'ready' ? <FeedbackImprove /> : null}
       </div>
     </main>
   );

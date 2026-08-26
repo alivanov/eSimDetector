@@ -200,7 +200,7 @@ API как есть, включая список кандидатов на iOS �
 | https://esimdetector.onrender.com      | Демонстрационное приложение, `/debug`, `/admin`, виджет |
 | https://esim-detector-api.onrender.com | API (`/health/ready`, `/api/docs`, `/api/v1/…`)         |
 
-Оба Web Service на бесплатном тарифе **засыпают через 15 минут без входящих запросов**. Пробуждение занимает около минуты. Главная демо-страница перед автоопределением опрашивает `GET /health/live` (через прокси веб-сервиса, `ApiWakeGate` в `apps/web`) и показывает «Сервис просыпается…». Запасной путь — вручную [https://esim-detector-api.onrender.com/health/live](https://esim-detector-api.onrender.com/health/live). Спящий сервис не тратит бесплатные часы Render (лимит 750 часов в месяц на аккаунт). Подробности — [16-deployment.md](./16-deployment.md) §16.2, §16.6, §16.8.
+Оба Web Service на бесплатном тарифе **засыпают через 15 минут без входящих запросов**. Пробуждение занимает около минуты. Главная демо-страница перед автоопределением будит API прямым `GET` на публичный адрес API (`/health/live`, origin из `/runtime-config.json` / `API_UPSTREAM`) и показывает «Сервис просыпается…» — не через nginx-прокси веб→API (на спящем Free тот часто сразу даёт `hibernate-rate-limited`). Запасной путь — вручную [https://esim-detector-api.onrender.com/health/live](https://esim-detector-api.onrender.com/health/live). Спящий сервис не тратит бесплатные часы Render (лимит 750 часов в месяц на аккаунт). Подробности — [16-deployment.md](./16-deployment.md) §16.2, §16.6, §16.8.
 
 ## 7.7. Локальная разработка без Docker
 

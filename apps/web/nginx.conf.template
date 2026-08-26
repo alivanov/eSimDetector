@@ -13,8 +13,18 @@ server {
     # контур работает независимо от значения CORS_ORIGINS, поскольку браузер обращается к тому же
     # origin, что и сама страница (8080), а не к порту API напрямую — тот же приём, что `apps/web/
     # vite.config.ts` уже применяет в разработке через `server.proxy`.
-    # Liveness API для пробуждения Free Render до первого POST /detect (docs/16-deployment.md §16.2).
-    # В dev тот же путь проксирует Vite (`apps/web/vite.config.ts`).
+    #
+    # Публичный origin API для пробуждения с браузера (ApiWakeGate): на Free Render запрос
+    # веб→прокси→спящий API часто получает `hibernate-rate-limited`, а прямой GET с клиента на
+    # `…-api.onrender.com/health/live` — тот же путь, что ручной curl (docs/16 §16.2).
+    # envsubst подставит API_UPSTREAM при старте контейнера.
+    location = /runtime-config.json {
+        default_type application/json;
+        add_header Cache-Control "no-store";
+        return 200 '{"apiOrigin":"${API_UPSTREAM}"}';
+    }
+
+    # Запасной same-origin путь (локальный docker / Vite). На Render wake идёт напрямую на apiOrigin.
     location /health/ {
         proxy_pass ${API_UPSTREAM}/health/;
         proxy_set_header Host $proxy_host;
