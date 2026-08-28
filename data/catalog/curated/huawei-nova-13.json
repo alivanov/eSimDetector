@@ -1,0 +1,54 @@
+[
+  {
+    "_id": "huawei-nova-13",
+    "brand": "huawei",
+    "brandTitle": "Huawei",
+    "marketingName": "nova 13",
+    "displayName": "Huawei nova 13",
+    "family": "nova",
+    "generation": 13,
+    "modifiers": [],
+    "modelCodes": ["BLK-LX9"],
+    "aliases": [
+      "nova 13",
+      "huawei nova 13",
+      "huawei-nova-13",
+      "blk-lx9"
+    ],
+    "platform": "harmonyos",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "12",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "MobileModels: BLK-LX9 — глобальный nova 13 (Blake). Полевой сбор 2026-08-28: «О телефоне» — HUAWEI nova 13, BLK-LX9, EMUI 14.2.0.177(C10E3R2P1), два IMEI; поиск «esim» в настройках — «Нет результатов»; тестер подтвердил отсутствие eSIM. В modelCodes только наблюдённый BLK-LX9 (не LKL-AL00 из gemini — CN-код без полевого подтверждения). CSV-консенсус по Nova 13 шёл без сервисного кода или с чужим LKL-* — без BLK-LX9 /detect давал clarification_required."
+    },
+    "releaseYear": 2024,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.45,
+    "sources": [
+      {
+        "url": "https://khwang9883.github.io/MobileModels/brands/huawei_global_en.html",
+        "title": "MobileModels — HUAWEI Global: BLK-LX9 = HUAWEI nova 13",
+        "checkedAt": "2026-08-28"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-28T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-28T00:00:00.000Z",
+    "updatedAt": "2026-08-28T00:00:00.000Z"
+  }
+]

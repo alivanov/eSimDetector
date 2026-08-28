@@ -7518,6 +7518,76 @@
     "notes": "Полевой сбор 2026-08-28: uaData.model «ADY-LX9», UA с тем же кодом (YaSearchBrowser/YaSearchApp 26.62). Ground truth: «О телефоне» — HUAWEI Pura 70, ADY-LX9, EMUI 14.2 C10, два IMEI; поиск «esim» — «Нет результатов»; тестер: eSIM нет. До правки /detect → clarification_required (код отброшен: CSV qwen склеил ADY-* через «;», парсер ждал только «|»; в индексе остался ложный HMY-LX9 от gemini). Закрыто curated huawei-pura-70 (verified, not_supported) + split model_codes по «;»/«|». platform=android — классификация по сигналам (токен Android 12), запись справочника platform=harmonyos."
   },
   {
+    "id": "android-vendor-ua-ch-041",
+    "category": "android-vendor-ua-ch",
+    "description": "Huawei nova 13 (BLK-LX9), Яндекс.Браузер 26.6, EMUI/Android 12 — живое устройство, стенд /debug",
+    "source": "real-device",
+    "signals": {
+      "userAgent": "Mozilla/5.0 (Linux; arm_64; Android 12; BLK-LX9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.7778.117 YaBrowser/26.6.2.117.00 Mobile Safari/537.36",
+      "uaData": {
+        "platform": "Android",
+        "mobile": true,
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "148"
+          },
+          {
+            "brand": "Yandex",
+            "version": "26"
+          },
+          {
+            "brand": "Not/A)Brand",
+            "version": "99"
+          }
+        ],
+        "model": "BLK-LX9",
+        "platformVersion": "12.0.0",
+        "fullVersionList": [
+          {
+            "brand": "Chromium",
+            "version": "148.0.7778.117"
+          },
+          {
+            "brand": "Yandex",
+            "version": "26.6.2.117"
+          },
+          {
+            "brand": "Not/A)Brand",
+            "version": "99.0.0.0"
+          }
+        ],
+        "architecture": "",
+        "bitness": ""
+      },
+      "screen": {
+        "width": 362,
+        "height": 804,
+        "availWidth": 362,
+        "availHeight": 804,
+        "dpr": 1.800431489944458,
+        "orientation": "portrait-primary"
+      },
+      "hardware": {
+        "maxTouchPoints": 5,
+        "hardwareConcurrency": 8,
+        "deviceMemory": 8
+      },
+      "webgl": {
+        "vendor": "ARM",
+        "renderer": "Mali-G610"
+      }
+    },
+    "expected": {
+      "platform": "android",
+      "deviceType": "phone",
+      "status": "not_supported",
+      "exactModelKnown": true,
+      "deviceId": "huawei-nova-13"
+    },
+    "notes": "Полевой сбор 2026-08-28: uaData.model «BLK-LX9», UA с тем же кодом (Яндекс.Браузер 26.6.2). Ground truth: «О телефоне» — HUAWEI nova 13, BLK-LX9, EMUI 14.2.0.177(C10E3R2P1), два IMEI; поиск «esim» — «Нет результатов»; тестер: eSIM нет. До правки /detect → clarification_required (код отсутствовал в справочнике; CSV gemini давал LKL-AL00 без BLK-LX9). Закрыто curated huawei-nova-13 (verified, not_supported). platform=android — классификация по сигналам (токен Android 12), запись справочника platform=harmonyos."
+  },
+  {
     "id": "ambiguous-signature-005",
     "category": "ambiguous-signature",
     "description": "Firefox для Android без Client Hints на планшете с шириной экрана значительно выше границы 600 CSS px",
