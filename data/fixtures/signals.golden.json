@@ -7448,6 +7448,76 @@
     "notes": "Полевой сбор 2026-08-28: uaData.model «SM-S911N», UA редуцирован (Android 10; K), Chrome 151 / Android 16. Ground truth: «Сведения о телефоне» — Galaxy S23, SM-S911N; поиск «esim» — «Добавление eSIM» / «Удалить все eSIM». До правки /detect → clarification_required (в curated были только B/U/U1). Закрыто добавлением SM-S911N в modelCodes samsung-galaxy-s23 (тот же supported, не отдельная запись как SM-S9210/CN)."
   },
   {
+    "id": "android-vendor-ua-ch-040",
+    "category": "android-vendor-ua-ch",
+    "description": "Huawei Pura 70 (ADY-LX9), Яндекс 26.62 (YaSearchBrowser), EMUI/Android 12 — живое устройство, стенд /debug",
+    "source": "real-device",
+    "signals": {
+      "userAgent": "Mozilla/5.0 (Linux; arm_64; Android 12; ADY-LX9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.7778.69 YaSearchBrowser/26.62.1 BroPP/1.0 YaSearchApp/26.62.1 webOmni Mobile Safari/537.36",
+      "uaData": {
+        "platform": "Android",
+        "mobile": true,
+        "brands": [
+          {
+            "brand": "Chromium",
+            "version": "148"
+          },
+          {
+            "brand": "Yandex",
+            "version": "26"
+          },
+          {
+            "brand": "Not/A)Brand",
+            "version": "99"
+          }
+        ],
+        "model": "ADY-LX9",
+        "platformVersion": "12.0.0",
+        "fullVersionList": [
+          {
+            "brand": "Chromium",
+            "version": "148.0.7778.69"
+          },
+          {
+            "brand": "Yandex",
+            "version": "26.6.2.69"
+          },
+          {
+            "brand": "Not/A)Brand",
+            "version": "99.0.0.0"
+          }
+        ],
+        "architecture": "",
+        "bitness": ""
+      },
+      "screen": {
+        "width": 373,
+        "height": 818,
+        "availWidth": 373,
+        "availHeight": 818,
+        "dpr": 3.375,
+        "orientation": "portrait-primary"
+      },
+      "hardware": {
+        "maxTouchPoints": 5,
+        "hardwareConcurrency": 8,
+        "deviceMemory": 8
+      },
+      "webgl": {
+        "vendor": "HUAWEI",
+        "renderer": "Maleoon 910"
+      }
+    },
+    "expected": {
+      "platform": "android",
+      "deviceType": "phone",
+      "status": "not_supported",
+      "exactModelKnown": true,
+      "deviceId": "huawei-pura-70"
+    },
+    "notes": "Полевой сбор 2026-08-28: uaData.model «ADY-LX9», UA с тем же кодом (YaSearchBrowser/YaSearchApp 26.62). Ground truth: «О телефоне» — HUAWEI Pura 70, ADY-LX9, EMUI 14.2 C10, два IMEI; поиск «esim» — «Нет результатов»; тестер: eSIM нет. До правки /detect → clarification_required (код отброшен: CSV qwen склеил ADY-* через «;», парсер ждал только «|»; в индексе остался ложный HMY-LX9 от gemini). Закрыто curated huawei-pura-70 (verified, not_supported) + split model_codes по «;»/«|». platform=android — классификация по сигналам (токен Android 12), запись справочника platform=harmonyos."
+  },
+  {
     "id": "ambiguous-signature-005",
     "category": "ambiguous-signature",
     "description": "Firefox для Android без Client Hints на планшете с шириной экрана значительно выше границы 600 CSS px",

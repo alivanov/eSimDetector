@@ -206,10 +206,13 @@ export function validateRow(row: DevicesCsvRow, context: ValidateRowContext): Va
   const notices: RowNotice[] = [];
   const id = buildDeviceId(resolvedBrand.brand, row.marketingName, context.dictionary);
 
+  // Канонический разделитель в приложении А — `|`; фактические выгрузки LLM часто
+  // ставят `;` (то же, что для пар esim_conditions). Оба принимаются — иначе вся
+  // склейка «ADY-AL00;ADY-LX9» отбрасывается целиком как один CODE_PATTERN_INVALID.
   const rawCodes =
     row.modelCodes !== undefined
       ? row.modelCodes
-          .split('|')
+          .split(/[|;]/)
           .map((code) => code.trim())
           .filter((code) => code.length > 0)
       : [];

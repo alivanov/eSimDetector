@@ -1,0 +1,54 @@
+[
+  {
+    "_id": "huawei-pura-70",
+    "brand": "huawei",
+    "brandTitle": "Huawei",
+    "marketingName": "Pura 70",
+    "displayName": "Huawei Pura 70",
+    "family": "pura",
+    "generation": 70,
+    "modifiers": [],
+    "modelCodes": ["ADY-LX9"],
+    "aliases": [
+      "pura 70",
+      "huawei pura 70",
+      "huawei-pura-70",
+      "ady-lx9"
+    ],
+    "platform": "harmonyos",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "12",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "MobileModels: ADY-LX9 — глобальный Pura 70 (Audrey); ADY-AL00/AL10 — CN. Полевой сбор 2026-08-28: «О телефоне» — HUAWEI Pura 70, ADY-LX9, EMUI 14.2.0.245(C10E2R5P1), два IMEI; поиск «esim» в настройках — «Нет результатов»; тестер подтвердил отсутствие eSIM. В modelCodes только наблюдённый ADY-LX9 (не AL*/ошибочный HMY-LX9 из gemini). CSV-консенсус давал conditional region:CN=yes и без кода из‑за разделителя «;» в model_codes — для этого SKU полевой образец C10 важнее маркетинговых списков travel-eSIM, утверждающих eSIM у «global» Pura 70 (К1)."
+    },
+    "releaseYear": 2024,
+    "marketPresenceRu": "parallel-import",
+    "popularity": 0.55,
+    "sources": [
+      {
+        "url": "https://khwang9883.github.io/MobileModels/brands/huawei_global_en.html",
+        "title": "MobileModels — HUAWEI Global: ADY-LX9 = HUAWEI Pura 70",
+        "checkedAt": "2026-08-28"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-28T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-28T00:00:00.000Z",
+    "updatedAt": "2026-08-28T00:00:00.000Z"
+  }
+]

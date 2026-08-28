@@ -298,6 +298,27 @@ describe('validateRow', () => {
     expect(result.notices).toEqual([expect.objectContaining({ code: 'CODE_PATTERN_INVALID' })]);
   });
 
+  it('разбирает несколько сервисных кодов через «;» так же, как через «|» (дефект выгрузок LLM)', () => {
+    const huaweiPatterns = parseCodePatterns({
+      huawei: '^[A-Z]{3}-[A-Z0-9]{2,6}$',
+    }).patterns;
+    const result = validateRow(
+      {
+        brand: 'Huawei',
+        marketingName: 'Pura 70',
+        modelCodes: 'ADY-AL00;ADY-AL20;ADY-LX9',
+        platform: 'harmonyos',
+        deviceType: 'phone',
+        releaseYear: '2024',
+        esimSupport: 'no',
+      },
+      context({ codePatterns: huaweiPatterns }),
+    );
+    expect(result.quarantine).toBeUndefined();
+    expect(result.candidate?.modelCodes).toEqual(['ADY-AL00', 'ADY-AL20', 'ADY-LX9']);
+    expect(result.notices).toEqual([]);
+  });
+
   it('не проверяет код бренда без шаблона в code-patterns.json (документированный пробел)', () => {
     const result = validateRow(
       {
