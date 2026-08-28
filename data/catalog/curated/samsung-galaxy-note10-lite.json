@@ -1,0 +1,62 @@
+[
+  {
+    "_id": "samsung-galaxy-note10-lite",
+    "brand": "samsung",
+    "brandTitle": "Samsung",
+    "marketingName": "Galaxy Note10 Lite",
+    "displayName": "Samsung Galaxy Note10 Lite",
+    "family": "galaxy-note",
+    "generation": 10,
+    "modifiers": ["lite"],
+    "modelCodes": ["SM-N770F"],
+    "aliases": [
+      "galaxy note10 lite",
+      "samsung galaxy note10 lite",
+      "galaxy note 10 lite",
+      "samsung galaxy note 10 lite",
+      "note10 lite",
+      "note 10 lite",
+      "sm-n770f"
+    ],
+    "platform": "android",
+    "deviceType": "phone",
+    "os": {
+      "minVersion": "10",
+      "maxVersion": null
+    },
+    "screenSignatures": [],
+    "esim": {
+      "support": "not_supported",
+      "dualSim": "none",
+      "maxProfiles": null,
+      "conditions": [],
+      "clarifyingQuestion": null,
+      "notes": "Не входит в перечень Galaxy devices that support eSIM (samsung.com/sg/… — Note-линейка в перечне отсутствует). Карточка SM-N770F: Dual-SIM, Nano-SIM, SIM 1 + Hybrid (SIM or MicroSD), eSIM не описан. Полевой сбор 2026-08-28: SM-N770F/DSM, два IMEI, EID нет; поиск «esim» — только SIM 1/2. Не путать с Galaxy Note10 / Note10+ (SM-N970*/SM-N975*) — другие коды."
+    },
+    "releaseYear": 2020,
+    "marketPresenceRu": "official",
+    "popularity": 0.3,
+    "sources": [
+      {
+        "url": "https://www.samsung.com/sg/support/mobile-devices/galaxy-esim-and-supported-network-carriers/",
+        "title": "Galaxy eSIM and supported network carriers — Samsung (перечень eSIM без Galaxy Note10 Lite)",
+        "checkedAt": "2026-08-28"
+      },
+      {
+        "url": "https://www.samsung.com/lb/business/smartphones/galaxy-note/galaxy-note10-lite-n770-sm-n770fzrgmid/",
+        "title": "Galaxy Note10 Lite (SM-N770F) — Dual-SIM, Nano-SIM, SIM 1 + Hybrid — Samsung",
+        "checkedAt": "2026-08-28"
+      }
+    ],
+    "dataConfidence": "verified",
+    "provenance": {
+      "source": "curated",
+      "batchId": null,
+      "importedAt": "2026-08-28T00:00:00.000Z",
+      "agreementCount": null
+    },
+    "status": "active",
+    "createdAt": "2026-08-28T00:00:00.000Z",
+    "updatedAt": "2026-08-28T00:00:00.000Z"
+  }
+]

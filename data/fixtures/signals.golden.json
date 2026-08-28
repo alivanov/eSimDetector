@@ -7308,6 +7308,76 @@
     "notes": "Полевой сбор 2026-08-26: uaData.model «PRA-TL10» и тот же код в UA (Яндекс.Браузер 22.11). Ground truth: «О телефоне» — Honor 8 Lite, PRA-TL10, два IMEI; поиск «esim» — «Нет результатов». Тестер: авто и ручной ввод не определили (модель вне CSV Honor ~2020+). Закрыто curated honor-8-lite (verified, MobileModels PRA-TL10 + GSMchoice Dual SIM без eSIM). Не путать с Honor 8A и Huawei P8 Lite 2017."
   },
   {
+    "id": "android-vendor-ua-ch-038",
+    "category": "android-vendor-ua-ch",
+    "description": "Samsung Galaxy Note10 Lite (SM-N770F), Chrome 145, Android 13 — живое устройство, стенд /debug",
+    "source": "real-device",
+    "signals": {
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Mobile Safari/537.36",
+      "uaData": {
+        "platform": "Android",
+        "mobile": true,
+        "brands": [
+          {
+            "brand": "Not:A-Brand",
+            "version": "99"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "145"
+          },
+          {
+            "brand": "Chromium",
+            "version": "145"
+          }
+        ],
+        "model": "SM-N770F",
+        "platformVersion": "13.0.0",
+        "fullVersionList": [
+          {
+            "brand": "Not:A-Brand",
+            "version": "99.0.0.0"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "145.0.7632.122"
+          },
+          {
+            "brand": "Chromium",
+            "version": "145.0.7632.122"
+          }
+        ],
+        "architecture": "",
+        "bitness": ""
+      },
+      "screen": {
+        "width": 412,
+        "height": 915,
+        "availWidth": 412,
+        "availHeight": 915,
+        "dpr": 2.625,
+        "orientation": "portrait-primary"
+      },
+      "hardware": {
+        "maxTouchPoints": 5,
+        "hardwareConcurrency": 8,
+        "deviceMemory": 4
+      },
+      "webgl": {
+        "vendor": "ARM",
+        "renderer": "Mali-G72"
+      }
+    },
+    "expected": {
+      "platform": "android",
+      "deviceType": "phone",
+      "status": "not_supported",
+      "exactModelKnown": true,
+      "deviceId": "samsung-galaxy-note10-lite"
+    },
+    "notes": "Полевой сбор 2026-08-28: uaData.model «SM-N770F», UA редуцирован (Android 10; K), Chrome 145. Ground truth: «Сведения о телефоне» — Galaxy Note10 Lite, SM-N770F/DSM, два IMEI, EID нет; поиск «esim» — только SIM 1/2. До правки /detect → clarification_required (код отсутствовал). Закрыто curated samsung-galaxy-note10-lite (verified, samsung.com eSIM list без Note10 Lite + карточка Dual-SIM Hybrid). Не путать с Note10 / Note10+ (SM-N970*/SM-N975*)."
+  },
+  {
     "id": "ambiguous-signature-005",
     "category": "ambiguous-signature",
     "description": "Firefox для Android без Client Hints на планшете с шириной экрана значительно выше границы 600 CSS px",
