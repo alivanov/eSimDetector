@@ -8,11 +8,12 @@
     "family": "galaxy-s",
     "generation": 23,
     "modifiers": [],
-    "modelCodes": ["SM-S911B", "SM-S911U", "SM-S911U1"],
+    "modelCodes": ["SM-S911B", "SM-S911U", "SM-S911U1", "SM-S911N"],
     "aliases": [
       "galaxy s23",
       "samsung galaxy s23",
-      "s23"
+      "s23",
+      "sm-s911n"
     ],
     "platform": "android",
     "deviceType": "phone",
@@ -27,7 +28,7 @@
       "maxProfiles": null,
       "conditions": [],
       "clarifyingQuestion": null,
-      "notes": "В перечне Galaxy devices that support eSIM (samsung.com/sg/support/.../galaxy-esim-and-supported-network-carriers/). База кодов SM-S911 — раздел Model numbers (en.wikipedia.org/wiki/Samsung_Galaxy); суффикс B — doc.samsungmobile.com/sm-s911b/; U/U1 — принятая таблица data/catalog/code-suffixes.json. Суффикс 0 (CN) намеренно не включается: на той же вендорской странице оговорено, что eSIM зависит от страны происхождения."
+      "notes": "В перечне Galaxy devices that support eSIM (samsung.com/sg/support/.../galaxy-esim-and-supported-network-carriers/). База кодов SM-S911 — раздел Model numbers (en.wikipedia.org/wiki/Samsung_Galaxy); суффикс B — doc.samsungmobile.com/sm-s911b/; U/U1 — принятая таблица data/catalog/code-suffixes.json; N — корейский рынок (полевое подтверждение eSIM 2026-08-28). Суффикс 0 (CN) намеренно не включается: на той же вендорской странице оговорено, что eSIM зависит от страны происхождения."
     },
     "releaseYear": 2023,
     "marketPresenceRu": "parallel-import",
@@ -58,7 +59,7 @@
     },
     "status": "active",
     "createdAt": "2026-08-24T00:00:00.000Z",
-    "updatedAt": "2026-08-24T00:00:00.000Z"
+    "updatedAt": "2026-08-28T00:00:00.000Z"
   },
   {
     "_id": "samsung-galaxy-s23-plus",

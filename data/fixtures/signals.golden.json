@@ -7378,6 +7378,76 @@
     "notes": "Полевой сбор 2026-08-28: uaData.model «SM-N770F», UA редуцирован (Android 10; K), Chrome 145. Ground truth: «Сведения о телефоне» — Galaxy Note10 Lite, SM-N770F/DSM, два IMEI, EID нет; поиск «esim» — только SIM 1/2. До правки /detect → clarification_required (код отсутствовал). Закрыто curated samsung-galaxy-note10-lite (verified, samsung.com eSIM list без Note10 Lite + карточка Dual-SIM Hybrid). Не путать с Note10 / Note10+ (SM-N970*/SM-N975*)."
   },
   {
+    "id": "android-vendor-ua-ch-039",
+    "category": "android-vendor-ua-ch",
+    "description": "Samsung Galaxy S23 (SM-S911N, Корея), Chrome 151, Android 16 — живое устройство, стенд /debug",
+    "source": "real-device",
+    "signals": {
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36",
+      "uaData": {
+        "platform": "Android",
+        "mobile": true,
+        "brands": [
+          {
+            "brand": "Not=A?Brand",
+            "version": "99"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "151"
+          },
+          {
+            "brand": "Chromium",
+            "version": "151"
+          }
+        ],
+        "model": "SM-S911N",
+        "platformVersion": "16.0.0",
+        "fullVersionList": [
+          {
+            "brand": "Not=A?Brand",
+            "version": "99.0.0.0"
+          },
+          {
+            "brand": "Google Chrome",
+            "version": "151.0.7922.173"
+          },
+          {
+            "brand": "Chromium",
+            "version": "151.0.7922.173"
+          }
+        ],
+        "architecture": "",
+        "bitness": ""
+      },
+      "screen": {
+        "width": 360,
+        "height": 780,
+        "availWidth": 360,
+        "availHeight": 705,
+        "dpr": 3,
+        "orientation": "portrait-primary"
+      },
+      "hardware": {
+        "maxTouchPoints": 5,
+        "hardwareConcurrency": 8,
+        "deviceMemory": 8
+      },
+      "webgl": {
+        "vendor": "Google Inc. (Qualcomm)",
+        "renderer": "ANGLE (Qualcomm, Adreno (TM) 740, OpenGL ES 3.2)"
+      }
+    },
+    "expected": {
+      "platform": "android",
+      "deviceType": "phone",
+      "status": "supported",
+      "exactModelKnown": true,
+      "deviceId": "samsung-galaxy-s23"
+    },
+    "notes": "Полевой сбор 2026-08-28: uaData.model «SM-S911N», UA редуцирован (Android 10; K), Chrome 151 / Android 16. Ground truth: «Сведения о телефоне» — Galaxy S23, SM-S911N; поиск «esim» — «Добавление eSIM» / «Удалить все eSIM». До правки /detect → clarification_required (в curated были только B/U/U1). Закрыто добавлением SM-S911N в modelCodes samsung-galaxy-s23 (тот же supported, не отдельная запись как SM-S9210/CN)."
+  },
+  {
     "id": "ambiguous-signature-005",
     "category": "ambiguous-signature",
     "description": "Firefox для Android без Client Hints на планшете с шириной экрана значительно выше границы 600 CSS px",
